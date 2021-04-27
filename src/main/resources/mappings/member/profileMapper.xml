@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="profileMapper">
+	<resultMap type="profileVO" id="profileResult">
+	<id property="profile_id" column="PROFILE_ID" />
+	<result property="email" column="EMAIL" />
+	<result property="profile_name" column="PROFILE_NAME"/>
+	<result property="horror" column="HORROR" />
+	<result property="comic" column="COMIC"/>
+	<result property="action" column="ACTION"/>
+</resultMap>
+
+<!-- 프로파일 가져오기 -->
+<select id="getProfileList" resultType="profileVO">
+	SELECT * FROM PROFILE
+	WHERE email = 'jch7931@naver.com' order by profile_id asc
+</select>
+
+<select id="getProfile" resultType="profileVO">
+	SELECT * FROM PROFILE
+	WHERE profile_id = #{profile_id} order by profile_id asc
+</select>
+
+<select id="profileAdd">
+	INSERT INTO PROFILE( 
+	PROFILE_ID
+	, EMAIL
+	, PROFILE_NAME
+	, HORROR
+	, COMIC
+	, ACTION 
+	, PROFILE_IMG
+	, KIDS)
+	VALUES( 6
+	, 'jch7931@naver.com'
+	, #{profile_name}
+	, 0
+	, 0
+	, 0
+	, 'http://yonom.duckdns.org/images/profile/Netflix-avatar.png'
+	, #{kids}
+	)
+</select>
+
+<select id="updateProfile">
+	UPDATE profile SET 
+	PROFILE_NAME = #{profile_name},
+	PROFILE_IMG = #{profile_img},
+	KIDS = #{kids}
+	WHERE PROFILE_ID = #{profile_id}
+</select>
+
+</mapper>

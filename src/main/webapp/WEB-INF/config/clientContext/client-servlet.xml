@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<context:component-scan	base-package="com.main.nowflix.client"></context:component-scan>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<mvc:annotation-driven>
+
+		<!-- messageConvertert -->
+
+		<mvc:message-converters>
+
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+
+				<property name="supportedMediaTypes">
+
+					<list>
+
+						<value>text/html; charset=UTF-8</value>
+
+					</list>
+
+				</property>
+
+			</bean>
+
+
+
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+
+				<property name="supportedMediaTypes">
+
+					<list>
+
+						<value>application/json; charset=UTF-8</value>
+
+					</list>
+
+				</property>
+
+			</bean>
+
+
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
+
+	<!-- oauth2 login -->
+	<bean id="naverClientID" class="java.lang.String">
+		<constructor-arg value="cbcF9402OmCaVqqmW_oO" />
+	</bean>
+	<bean id="naverClientSecret" class="java.lang.String">
+		<constructor-arg value="eYwdIpFkRc" />
+	</bean>
+	<bean id="naverRedirectUrl" class="java.lang.String">
+		<constructor-arg
+			value="http://localhost:8080/nowflix/callbackNaver.do" />
+	</bean>
+
+	<bean id="naverSns" class="com.main.nowflix.client.login.auth.SnsValue">
+		<constructor-arg value="naver" />
+		<constructor-arg ref="naverClientID" />
+		<constructor-arg ref="naverClientSecret" />
+		<constructor-arg ref="naverRedirectUrl" />
+	</bean>
+
+	<bean id="googleClientID" class="java.lang.String">
+		<constructor-arg
+			value="634582439332-oua4973ao0i2kurvaknootigasnhei1e.apps.googleusercontent.com" />
+	</bean>
+	<bean id="googleClientSecret" class="java.lang.String">
+		<constructor-arg value="0BsNJUDsyrpYIGwm1LGkQqDU" />
+	</bean>
+	<bean id="googleRedirectUrl" class="java.lang.String">
+		<constructor-arg
+			value="http://localhost:8080/nowflix/callbackGoogle.do" />
+	</bean>
+
+	<bean id="googleSns" class="com.main.nowflix.client.login.auth.SnsValue">
+		<constructor-arg value="google" />
+		<constructor-arg ref="googleClientID" />
+		<constructor-arg ref="googleClientSecret" />
+		<constructor-arg ref="googleRedirectUrl" />
+	</bean>
+
+	<bean id="googleConnectionFactory"
+		class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<constructor-arg ref="googleClientID" />
+		<constructor-arg ref="googleClientSecret" />
+	</bean>
+
+	<bean id="googleOAuth2Parameters"
+		class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope"
+			value="https://www.googleapis.com/auth/userinfo.email" />
+		<!-- <beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" 
+			/> -->
+		<property name="redirectUri" ref="googleRedirectUrl" />
+	</bean>
+
+
+</beans>

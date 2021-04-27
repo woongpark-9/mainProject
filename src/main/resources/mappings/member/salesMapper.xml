@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="salesMapper" >
+	<resultMap type="salesVO" id="salesResult">
+		<id property="sales_id" column="SALES_ID" />
+		<result property="cid" column="CID" />
+		<result property="tid" column="TID" />
+		<result property="email" column="EMAIL" />
+		<result property="ticket_id" column="TICKET_ID" />
+		<result property="sales_status" column="SALES_STATUS" />
+		<result property="payment_date" column="PAYMENT_DATE" />
+		<result property="expiry_date" column="EXPIRY_DATE" />
+		<result property="payment_method_type" column="PAYMENT_METHOD_TYPE" />
+		<result property="card_name" column="CARD_NAME" />
+		
+	</resultMap>
+	
+	
+	<!-- 결제정보 입력  -->
+	
+	<insert id="insertSalesInfo">
+	    INSERT INTO SALES(   SALES_ID 
+	   					       , CID 
+	   					       , TID
+	   					       ,EMAIL
+	   					       ,TICKET_ID
+	   					       ,SALES_STATUS
+	   					       ,PAYMENT_DATE
+	   					       ,EXPIRY_DATE
+	   					       ,PAYMENT_METHOD_TYPE
+	   					       ,CARD_NAME
+	   					        	)
+	                  VALUES(    #{sales_id} 
+	                 		   , #{cid}
+	                 		   , #{tid}
+	                 		   , #{email}
+	                 		   , #{ticket_id}
+	                 		   , #{sales_status}
+	                 		   , #{payment_date}
+	                 		   , #{expiry_date}
+	                 		   , #{payment_method_type}
+	                 		   , #{card_name}
+	                 		 
+	                 		   
+	                 		   
+	                 		   )
+   						
+    </insert>
+	
+	</mapper>

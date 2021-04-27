@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMovieDAO">
+	<resultMap type="adminmovie" id="movieResult">
+		<id property="seq" column="seq" />
+		<result property="movie_path" column="movie_path" />
+		<result property="title" column="title" />
+		<result property="director" column="director" />
+		<result property="actor" column="actor" />
+		<result property="genre1" column="genre1" />
+		<result property="genre2" column="genre2" />
+		<result property="movie_runningtime" column="movie_runningtime" />
+		<result property="movie_release_date" column="movie_release_date" />
+		<result property="movie_rating" column="movie_rating" />
+		<result property="summary" column="summary" />
+		<result property="country" column="country" />
+		<result property="teaser_path" column="teaser_path" />
+		<result property="poster_path" column="poster_path" />
+		<result property="is_active" column="is_active" />
+		<result property="is_main" column="is_main" />
+		<result property="subtitle" column="subtitle" />
+	</resultMap>
+	
+	<select id="getMovieList" resultMap="movieResult">
+		select seq, poster_path, title, director, genre1, genre2, movie_runningtime, movie_release_date from movie order by seq desc
+	</select>
+	
+	<delete id="deleteMovie" parameterType="adminmovie">
+		delete from movie where seq = #{seq}
+	</delete>
+	
+	<insert id="insertMovie" parameterType="adminmovie">
+		insert into movie(title, movie_rating, summary, director, genre1, genre2, country, movie_release_date, poster_path, teaser_path, movie_path, movie_runningtime, is_active, is_main, subtitle, actor)
+		values(#{title}, #{movie_rating}, #{summary}, 
+		#{director}, #{genre1}, #{genre2}, #{country}, #{movie_release_date}, #{poster_path}, #{teaser_path}, 
+		#{movie_path}, #{movie_runningtime}, #{is_active}, #{is_main}, #{subtitle}, #{actor})
+	</insert>
+	
+	<select id="getMovieModifyInfo" resultType="adminmovie">
+		select seq, title, movie_rating, summary, director, genre1, genre2, country, movie_release_date, poster_path, teaser_path, movie_path, movie_runningtime, is_active, is_main, subtitle, actor	
+		from movie where seq = #{seq}
+	</select>
+	
+	<update id="modifyMovie" parameterType="adminmovie">
+		update movie set title = #{title}, movie_rating = #{movie_rating}, summary = #{summary}, director = #{director}, genre1 = #{genre1}, genre2 = #{genre2}, country = #{country}, 
+		movie_release_date = #{movie_release_date}, poster_path = #{poster_path}, teaser_path = #{teaser_path}, movie_path = #{movie_path}, movie_runningtime = #{movie_runningtime}, 
+		is_active = #{is_active}, is_main = #{is_main}, subtitle = #{subtitle}, actor = #{actor}
+		where seq = #{seq}
+	</update>
+</mapper>

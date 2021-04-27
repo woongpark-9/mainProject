@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+body{
+/* 		background-color: rgb(20, 20, 20); */
+	margin:0;
+	background-color: rgb(20, 20, 20);
+	
+
+}
+
+  
+.root{
+	width:100%;
+	height: 100%;
+/* 	background-color: rgb(20, 20, 20); */
+
+		
+}
+.ticket-body{
+	
+	height:100%;
+	background-color: rgb(20, 20, 20);
+}
+.logo{
+	margin:10px 0 0 0;
+	width:92.5px;
+	height:31px;
+	line-height: 20px;
+}
+.header{
+	padding: 0 4%;
+}
+.stepMessage{
+	color: white;
+}
+.selectText{
+	    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.63px;
+    line-height: 30px;
+    margin: 0px 0px 3px;
+}
+.stepText{
+	color: rgba(255, 255, 255, 0.6);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.4px;
+    line-height: 18px;
+    margin: 0px 0px 29px;
+}
+.premium-button{
+	position: relative;
+    background: rgb(25, 26, 28);
+    color: rgba(255, 255, 255, 0.14);
+    text-align: center;
+    width: 100%;
+    padding: 11px 0px 13px;
+   
+}
+.basic-button{
+	position: relative;
+    background: rgb(25, 26, 28);
+    color: rgba(255, 255, 255, 0.14);
+    text-align: center;
+    width: 100%;
+    padding: 11px 0px 13px;
+/*     border: 1px solid red; */
+}
+
+.messageText{
+	    font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: white;
+	font-size: 50px;
+	max-width: 640px;
+    margin: 0 auto;
+    font-weight: bold;
+    margin-bottom: 4%;
+    margin-top:17%;
+    
+    
+}
+.explanation{
+	    font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: white;
+	font-size: 25px;
+	max-width: 640px;
+    margin: 0 auto;
+    
+    
+    margin-bottom: 15%;
+}
+.plantable ul{
+   list-style:none;
+   }
+   
+.plantable ul li{
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}   
+.plantable{
+	display: flex;
+	color:white;
+	font-size: 20px;
+	align-items: center;
+	margin: 52px 0 0 0;
+	margin-left: 5px;
+	  font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	
+
+	   
+	
+}
+.first-line-first{
+	height: 40px;
+}
+.first-line{
+	font-weight: 500;
+	line-height: 38px;
+	padding:0px;
+	margin: 25px 0 20px 0;
+	width: 200px;
+	color: rgba(255, 255, 255, 0.84);
+}
+.second-line{
+line-height: 40px;
+ padding:5px;
+ width: 150px;
+text-align: center;
+cursor: pointer;
+	
+}
+.second-line-second{
+
+
+}
+
+.showcase-top img {
+    width: 140px;
+   	margin: 20px 0 0 56px;
+}
+.third-line{
+	line-height: 40px;
+	padding:5px;
+	justify-content: center;
+	 width: 150px;
+	 text-align: center;
+	 cursor: pointer;
+}
+
+.left-ticket-body{
+	padding: 50px 0px 0px 104px;
+
+}
+.overlay{	 background: rgba(0, 0, 0, 0.9);
+	border-bottom: 8px solid #222;
+    box-shadow: 150px 150px 300px  #000000, inset -80px 100px 150px   #000000 , 150px 100px  #000000 , inset 60px -200px 150px    #000000 ;
+	padding: 0 0 75px 0;
+}
+.overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    background: rgba(0, 0, 0, 0.1);
+}
+.right-banner{
+	    margin: 80px 0px 42px;
+}
+.title-text-first{
+	color: rgba(255, 255, 255, 0.84);
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 24px;
+}
+.title-text-second{
+	color: rgba(255, 255, 255, 0.61);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.24px;
+    line-height: 18px;
+    margin: 5px 0px 0px;
+}
+.title-list{
+	background: url(http://yonom.duckdns.org/images/member/download.svg) left 0px top 4px / 22px 22px no-repeat;
+	width:400px;
+}
+.title-item{
+	
+}
+.right-banner ul{
+	list-style: none;
+}
+.css-61jffl{
+	color: rgb(18, 18, 18);
+    font-size: 12px;
+    letter-spacing: -0.2px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 0px 156px 0px 0px;
+    margin: 0px 0px 0px 4px;
+}
+.right-ticket-body{
+	padding: 0px 0px 0px 330px;
+}
+.css-wzmjfs{
+	display: flex;
+    color: rgba(255, 255, 255, 0.24);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: -0.22px;
+    line-height: 13px;
+    text-align: left;
+    margin: 5px 0px;
+}
+.css-ty0gcz {
+    text-align: center;
+    margin: 81px 0px 56px;
+    background-color: rgb(20, 20, 20);
+}
+.css-z6cg4t {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.43px;
+    line-height: 24px;
+    width: 266px;
+    padding: 11px 0px 13px;
+    background: red;
+    border: 0px none transparent;
+    cursor: pointer;
+}
+
