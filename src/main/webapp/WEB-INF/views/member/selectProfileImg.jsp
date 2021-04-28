@@ -38,7 +38,7 @@
 						id = ${profile.profile_id};
 						name = '${profile.profile_name}';
 						kids = '${profile.kids}';
-						tag += "<div class='m-1'><a href='#' class='profile' onclick=\"acyncMovePage3('" + url + "'," + id + ",'" + name + "','" + imgSrc + "','" + kids + "')\"><img class='img-responsive img-rounded' src=" + imgSrc + "></a></div>";
+						tag += "<div class='m-1'><a href='#' class='profile' onclick=\"acyncMovePage3('" + url + "'," + id + ",'" + name + "','" + imgSrc + "','" + kids + "')\"><img class='img-responsive img-rounded profileImg' src=" + imgSrc + "></a></div>";
 					}
 					$("#imgList").append(tag);
 				</script>

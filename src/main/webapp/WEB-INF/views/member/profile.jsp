@@ -32,10 +32,10 @@
 		<c:forEach var="profile" items="${profile }">
 			<div class="ml-3 mr-3 proImg">
 				<a href="#" class="profile" onclick="">
-					<img class="img-responsive img-rounded" src="${profile.profile_img }">
+					<img class="img-responsive img-rounded profileImg" src="${profile.profile_img }">
 					<br>${profile.profile_name }
 					<c:if test="${profile.kids  == 'Y'}">
-						<img class="kids" src="http://yonom.duckdns.org/images/profile/kids.png">
+						<img class="img-responsive kids" src="http://yonom.duckdns.org/images/profile/kids.png">
 					</c:if>
 				</a>
 			</div>

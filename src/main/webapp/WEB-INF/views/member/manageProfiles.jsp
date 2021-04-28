@@ -30,11 +30,11 @@
 		<c:forEach var="profile" items="${profile }" varStatus="i">
 			<div class="ml-3 mr-3 proImg">
 				<a href="#" class="profile" onclick="acyncMovePage3('http://localhost:8080/nowflix/profileEdit.do', ${profile.profile_id}, '${profile.profile_name }', '${profile.profile_img }', '${profile.kids }')">
-					<img class="img-responsive editPro" src="${profile.profile_img }">
+					<img class="img-responsive profileImg editPro" src="${profile.profile_img }">
 					<br>${profile.profile_name }
 					<i class="far fa-edit"></i>
 					<c:if test="${profile.kids  == 'Y'}">
-						<img class="kidsEdit" src="http://yonom.duckdns.org/images/profile/kids.png">
+						<img class="img-responsive kidsEdit" src="http://yonom.duckdns.org/images/profile/kids.png">
 					</c:if>
 				</a>
 			</div>

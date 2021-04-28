@@ -7,9 +7,9 @@
 			<div class="row position-relative" style="height: 65%; width: 100%; padding: 0px;">
 				<div class="proImg" style="height: 100%; width: 30%;">
 					<a href="#" class="profileEdit" onclick="acyncMovePage3('http://localhost:8080/nowflix/selectProfileImg.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', kidhidden.value)">
-						<img class="img-responsive img-rounded" src="${selectProfile.profile_img }">
+						<img class="img-responsive img-rounded profileImg" src="${selectProfile.profile_img }">
 						<c:if test="${selectProfile.kids  == 'Y'}">
-							<img class="kids2" src="http://yonom.duckdns.org/images/profile/kids.png">
+							<img class="img-responsive kids2" src="http://yonom.duckdns.org/images/profile/kids.png">
 						</c:if>
 					</a>
 					

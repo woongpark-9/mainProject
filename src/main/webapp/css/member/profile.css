@@ -40,7 +40,7 @@
 	content: url('http://yonom.duckdns.org/images/profile/add4.png');
 }
 
- .img-responsive {
+ .profileImg {
  	border-radius: 0.2vw;
  	width: 10vw; 
  	height: auto;
@@ -165,6 +165,8 @@
 
 .kids {
 	position: absolute;
+	width: 2.2vw;
+	height: auto;
 	top: 73%;
 	left: 85%;
 	transform: translate( -50%, -50% );
@@ -174,6 +176,8 @@
 
 .kids2 {
 	position: absolute;
+	width: 2.2vw;
+	height: auto;
 	top: 26%;
 	left: 82%;
 	transform: translate( -50%, -50% );
@@ -183,6 +187,8 @@
 
 .kidsEdit{
 	position: absolute;
+	width: 2.2vw;
+	height: auto;
 	filter: brightness(50%);
 	top: 73%;
 	left: 85%;

@@ -6,7 +6,7 @@
 	<form action="createProfile.do" method="post">
 	<div class="row justify-content-center" align="center">
 		
-		<img class="img-responsive" src="http://yonom.duckdns.org/images/profile/Netflix-avatar0.png">
+		<img class="img-responsive profileImg" src="http://yonom.duckdns.org/images/profile/Netflix-avatar0.png">
 		<div class="align-self-center">
 			<input type="text" placeholder=" 이름" class="profile_name" name="profile_name" style="font-size: 1.5vw;">
 			<input type="checkbox" id="kidBox">
