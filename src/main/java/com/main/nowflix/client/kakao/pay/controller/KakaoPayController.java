@@ -47,6 +47,7 @@ public class KakaoPayController {
 	
 	private MemberVO member;
 	
+	private  SalesVO sales;
 	
 	// /kakaoPay get방식
 	@GetMapping("/kakaoPay.do")
@@ -95,10 +96,16 @@ public class KakaoPayController {
 		 }
 		 Date date = format.parse(format.format(cal.getTime()));
 		 // 결제내역 vo
-		SalesVO vo = new SalesVO(kakaoPayApprovalVO.getPartner_order_id(),kakaoPayApprovalVO.getCid(),kakaoPayApprovalVO.getTid(),kakaoPayApprovalVO.getPartner_user_id(),ticket_id,"SUCCESS",new Date(),date,kakaoPayApprovalVO.getPayment_method_type(),kakaoPayApprovalVO.getCard_info().getPurchase_corp());
-
+		 if(kakaoPayApprovalVO.getCard_info() != null) {
+			 sales = new SalesVO(kakaoPayApprovalVO.getPartner_order_id(),kakaoPayApprovalVO.getCid(),kakaoPayApprovalVO.getTid(),kakaoPayApprovalVO.getPartner_user_id(),ticket_id,"SUCCESS",new Date(),date,kakaoPayApprovalVO.getPayment_method_type(),kakaoPayApprovalVO.getCard_info().getPurchase_corp());
+			 
+		 }else if(kakaoPayApprovalVO.getCard_info() == null) {
+			 sales = new SalesVO(kakaoPayApprovalVO.getPartner_order_id(),kakaoPayApprovalVO.getCid(),kakaoPayApprovalVO.getTid(),kakaoPayApprovalVO.getPartner_user_id(),ticket_id,"SUCCESS",new Date(),date,kakaoPayApprovalVO.getPayment_method_type());
+		
+		 }
+ 
 		// db에 결제 내역 저장
-		service.insertSalesInfo(vo);
+		service.insertSalesInfo(sales);
 		
 		
 		// 해당사용자 member테이블에 이용권 추가해야됨

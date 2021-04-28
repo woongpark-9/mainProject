@@ -26,6 +26,22 @@ public class SalesVO {
 		this.card_name = card_name;
 	}
 
+	public SalesVO(String sales_id, String cid, String tid, String email, String ticket_id, String sales_status,
+			Date payment_date, Date expiry_date, String payment_method_type) {
+
+		this.sales_id = sales_id;
+		this.cid = cid;
+		this.tid = tid; 
+		this.email = email;
+		this.ticket_id = ticket_id;
+		this.sales_status = sales_status;
+		this.payment_date = payment_date;
+		this.expiry_date = expiry_date;
+		this.payment_method_type = payment_method_type;
+	
+	}
+	
+	
 	private String sales_id;
 	private String cid;
 	private String tid;
