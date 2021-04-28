@@ -111,6 +111,7 @@ public class MemberController  {
 				// 이메일 인증을 하지않았다면
 				if(!result.equals("Y")) {
 					page = "redirect:/certCheckFail.do";
+					return page;
 					
 				}
 				// 이메일 인증을 했다면 이용권이 있는지 확인
