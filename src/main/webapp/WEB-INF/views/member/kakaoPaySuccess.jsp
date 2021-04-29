@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="refresh" content="5; url=http://localhost:8080/nowflix/index.do">
+<meta http-equiv="refresh" content="5; url=http://localhost:8080/nowflix/favorite.do">
 <link rel="stylesheet" href="http://yonom.duckdns.org/css/emailCheck/style.css">
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

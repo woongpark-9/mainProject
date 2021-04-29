@@ -135,14 +135,14 @@ public class MemberController  {
 				// 장르를 선택했는지 확인
 				
 				String genreCheck = service.genreCheck(login);
-				if(genreCheck.equals("N")) {
-					System.out.println("장르페이지로 이동합니다");
-					page = "views/member/favorite_genre";
-					return page;
-				}
-				// 장르를 선택했다면 프로필 페이지로
-				page = "redirect:index.do";
-				return page;
+	            if(genreCheck.equals("N")) {
+	               System.out.println("장르페이지로 이동합니다");
+	               page = "redirect:favorite.do";
+	               return page;
+	            }
+	            // 장르를 선택했다면 프로필 페이지로
+	            page = "redirect:index.do";
+	            return page;
 				
 			
 			}else {

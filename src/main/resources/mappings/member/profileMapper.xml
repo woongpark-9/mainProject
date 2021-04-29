@@ -7,61 +7,77 @@
 
 
 <mapper namespace="profileMapper">
-	<resultMap type="profileVO" id="profileResult">
-	<id property="profile_id" column="PROFILE_ID" />
-	<result property="email" column="EMAIL" />
-	<result property="profile_name" column="PROFILE_NAME"/>
-	<result property="horror" column="HORROR" />
-	<result property="comic" column="COMIC"/>
-	<result property="action" column="ACTION"/>
-	<result property="profile_img" column="PROFILE_IMG" />
-	<result property="kids" column="KIDS" />
-	<result property="thriller" column="THRILLER" />
-	<result property="sf" column="SF" />
-	<result property="adventure" column="ADVENTURE" />
-	<result property="drama" column="DRAMA" />
-	<result property="animation" column="ANIMATION" />
-	<result property="crime" column="CRIME" />
-	<result property="familyg" column="FAMILYG" />
-	<result property="fantasy" column="FANTASY" />
-	<result property="mystery" column="MYSTERY" />
-	<result property="romance" column="ROMANCE" />
-	<result property="melodrama" column="MELODRAMA" />
-	<result property="a_historical_drama" column="A_HISTORICAL_DRAMA" />
+   <resultMap type="profileVO" id="profileResult">
+   <id property="profile_id" column="PROFILE_ID" />
+   <result property="email" column="EMAIL" />
+   <result property="profile_name" column="PROFILE_NAME"/>
+   <result property="horror" column="HORROR" />
+   <result property="comic" column="COMIC"/>
+   <result property="action" column="ACTION"/>
+   <result property="thriller" column="thriller"/>
+   <result property="profile_img" column="profile_img"/>
+   <result property="sf" column="sf"/>
+   <result property="adventure" column="adventure"/>
+   <result property="drama" column="drama"/>
+   <result property="animation" column="animation"/>
+   <result property="crime" column="crime"/>
+   <result property="familyg" column="familyg"/>
+   <result property="fantasy" column="fantasy"/>
+   <result property="mystery" column="mystery"/>
+   <result property="romance" column="romance"/>
+   <result property="melodrama" column="melodrama"/>
+   <result property="a_historical_drama" column="a_historical_drama"/>
+   
+   
+   
+   
 </resultMap>
 
 <!-- 프로파일 가져오기 -->
 <select id="getProfileList" resultType="profileVO">
-	SELECT * FROM PROFILE
-	WHERE email = 'jch7931@naver.com' order by profile_id asc
+   SELECT * FROM PROFILE
+   WHERE email = 'jch7931@naver.com' order by profile_id asc
 </select>
 
 <select id="getProfile" resultType="profileVO">
-	SELECT * FROM PROFILE
-	WHERE profile_id = #{profile_id} order by profile_id asc
+   SELECT * FROM PROFILE
+   WHERE profile_id = #{profile_id} order by profile_id asc
 </select>
 
 <select id="profileAdd">
-	INSERT INTO PROFILE( 
-	PROFILE_ID
-	, EMAIL
-	, PROFILE_NAME
-	, PROFILE_IMG
-	, KIDS)
-	VALUES( 6
-	, 'jch7931@naver.com'
-	, #{profile_name}
-	, 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
-	, #{kids}
-	)
+   INSERT INTO PROFILE( 
+   PROFILE_ID
+   , EMAIL
+   , PROFILE_NAME
+   , HORROR
+   , COMIC
+   , ACTION 
+   , PROFILE_IMG
+   , KIDS)
+   VALUES( 6
+   , 'jch7931@naver.com'
+   , #{profile_name}
+   , 0
+   , 0
+   , 0
+   , 'http://yonom.duckdns.org/images/profile/Netflix-avatar.png'
+   , #{kids}
+   )
 </select>
 
 <select id="updateProfile">
-	UPDATE profile SET 
-	PROFILE_NAME = #{profile_name},
-	PROFILE_IMG = #{profile_img},
-	KIDS = #{kids}
-	WHERE PROFILE_ID = #{profile_id}
+   UPDATE profile SET 
+   PROFILE_NAME = #{profile_name},
+   PROFILE_IMG = #{profile_img},
+   KIDS = #{kids}
+   WHERE PROFILE_ID = #{profile_id}
 </select>
+
+<insert id="setProfile">
+   
+insert into profile(email, profile_name, horror,comic,action,profile_img, kids, thriller, sf, adventure, drama, animation, crime, familyg, fantasy, mystery, romance, melodrama, a_historical_drama )
+values(#{email}, #{profile_name} , #{horror}, #{comic}, #{action}, #{profile_img}, #{kids} , #{thriller}, #{sf}, #{adventure}, #{drama}, #{animation}, #{crime}, #{familyg}, #{fantasy}, #{mystery}, #{romance}, #{melodrama}, #{a_historical_drama});
+</insert>
+
 
 </mapper>

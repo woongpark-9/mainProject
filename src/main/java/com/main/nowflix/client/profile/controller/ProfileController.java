@@ -1,16 +1,22 @@
 package com.main.nowflix.client.profile.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.profile.service.ProfileService;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 
+
+
+@SessionAttributes("member")
 @Controller
 public class ProfileController {
 	
@@ -60,15 +66,28 @@ public class ProfileController {
 		return "/views/member/selectProfileImg";
 	}	
 	
-	@RequestMapping("setGenre.do")
-	public String setgenre(HttpServletRequest request, Model model, MovieVO movieVO, ProfileVO profileVO)throws Exception{
-		System.out.println("setGenre.do 실행");
-		String[] arr= request.getParameterValues("checkbox");
-		
-		service.setProfile(arr);
+	//HttpSession session을 매개변수로 입력하면 접속한 사람의 memberVO를 가져올수잇다.
+	   @RequestMapping("setGenre.do")
+	   public String setgenre(HttpServletRequest request, Model model, MovieVO movieVO, ProfileVO profileVO,HttpSession session)throws Exception{
+	      System.out.println("setGenre.do 실행");
+	      
+	      MemberVO member =   (MemberVO)session.getAttribute("member");
+	      String[] arr= request.getParameterValues("checkbox");
+	      System.out.println(arr[0]);
+	      System.out.println(member.getNickname());
+	      
+	      
+	      
+	      service.setProfile(arr, member);
+	      
+	      
+	      return "redirect:profile.do";
+	   }
 	
-		
-		
-		return "redirect:profile.do";
-	}
+	
+	
+	
+	
+	
+	
 }
