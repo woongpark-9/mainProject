@@ -1,10 +1,15 @@
 package com.main.nowflix.client.profile.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.profile.service.ProfileService;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 
@@ -56,4 +61,16 @@ public class ProfileController {
 		model.addAttribute("profile", vo);
 		return "/views/member/selectProfileImg";
 	}	
+	
+	@RequestMapping("setGenre.do")
+	public String setgenre(HttpServletRequest request, Model model, MovieVO movieVO, ProfileVO profileVO)throws Exception{
+		System.out.println("setGenre.do ½ÇÇà");
+		String[] arr= request.getParameterValues("checkbox");
+		
+		service.setProfile(arr);
+	
+		
+		
+		return "redirect:profile.do";
+	}
 }

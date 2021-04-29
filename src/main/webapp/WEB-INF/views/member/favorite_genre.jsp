@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,8 @@
 </script>
 
 <body>
+<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
+
 	<div class="whole">
 
 		<div class="full-header">
@@ -44,7 +47,7 @@
 			</div>
 		</div>
 
-		<form>
+		<form action="setGenre.do" method="post">
 			<div class="info-box">
 				<div id="number" class="select-count">
 					<h3>선호하는 작품을 선택해주세요.</h3>
@@ -53,11 +56,26 @@
 					<h3>최대 선택 개수는 3개 입니다.</h3>
 				</div>
 				<div class="progressbar"></div>
-				<input type="submit" class="next-button" value="제출하기">
+				<input type="submit" class="next-button" value="제출하기" >
 			</div>
 
 			<div class="wrapper-poster-list">
 				<div class="container">
+				
+				<c:forEach var="movieList" items="${movieList }">
+					<label class="option_item"> <input type="checkbox"
+						name="checkbox" onclick="return myfun()" class="checkbox" value="${movieList.genre_name}">
+						<div class="option_inner">
+							<div class="tickmark"></div>
+							<div class="icon">
+								<img style="height: 260px;" alt="돈의맛"
+									src="${prefixAddr }${movieList.movie_path }/poster2.png">
+							</div>
+						</div>
+					</label> 
+				</c:forEach>
+					
+					
 					<label class="option_item"> <input type="checkbox"
 						name="checkbox" onclick="return myfun()" class="checkbox">
 						<div class="option_inner">
@@ -67,70 +85,9 @@
 									src="images/member/testOfMoney.png">
 							</div>
 						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label> <label class="option_item"> <input type="checkbox"
-						name="checkbox" onclick="return myfun()" class="checkbox">
-						<div class="option_inner">
-							<div class="tickmark"></div>
-							<div class="icon">
-								<img style="height: 260px;" alt="돈의맛"
-									src="images/member/testOfMoney.png">
-							</div>
-						</div>
-					</label>
+					</label> 
+					
+					
 				</div>
 			</div>
 		</form>

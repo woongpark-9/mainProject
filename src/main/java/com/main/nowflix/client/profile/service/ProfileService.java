@@ -9,4 +9,6 @@ public interface ProfileService {
 	public ProfileVO getProfile(ProfileVO vo) throws Exception;
 	public void createProfile(ProfileVO vo) throws Exception;
 	public void updateProfile(ProfileVO vo) throws Exception;
+	public void setProfile(String[] arr)throws Exception;
+	
 }

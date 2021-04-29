@@ -37,4 +37,9 @@ public class ProfileDAO {
 	public void updateProfile(ProfileVO vo) {
 		sqlSessionTemplate.update("profileMapper.updateProfile", vo);
 	}
+	
+	public void setProfile(ProfileVO vo) {
+		sqlSessionTemplate.update("profileMapper.setProfile", vo);
+	}
+	
 }

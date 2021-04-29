@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.profile.dao.ProfileDAO;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 
@@ -35,6 +36,14 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public void updateProfile(ProfileVO vo) throws Exception {
 		profileDAO.updateProfile(vo);
+	}
+
+	@Override
+	public void setProfile(String[] arr) throws Exception {
+		for(int i=0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
 	}
 	
 	
