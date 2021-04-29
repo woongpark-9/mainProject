@@ -36,6 +36,13 @@
 	color: grey;	
 	text-decoration: none solid gery;
 }
+
+.addProfileImg {
+	border-radius: 0.2vw;
+ 	width: 10vw; 
+ 	height: auto;
+ 	z-index: 1;
+}
 .addProfileImg:hover {
 	content: url('http://yonom.duckdns.org/images/profile/add4.png');
 }
