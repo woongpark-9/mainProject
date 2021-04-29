@@ -1,7 +1,5 @@
 package com.main.nowflix.client.profile.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +44,7 @@ public class ProfileController {
 	public String createProfile(Model model, ProfileVO vo) throws Exception {
 		service.createProfile(vo);
 		model.addAttribute("profile", service.getProfileList(vo));
-		return "/views/member/profile";
+		return "redirect:profile.do";
 	}
 	
 	@RequestMapping(value="/updateProfile.do")

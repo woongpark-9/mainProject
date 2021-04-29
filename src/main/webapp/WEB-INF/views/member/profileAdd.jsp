@@ -5,13 +5,25 @@
 	<br>
 	<form action="createProfile.do" method="post">
 	<div class="row justify-content-center" align="center">
-		
-		<img class="img-responsive profileImg" src="http://yonom.duckdns.org/images/profile/Netflix-avatar0.png">
+		<div class="kidAdd" style="position: relative;">
+			<img class="img-responsive profileImg" src="http://yonom.duckdns.org/images/profile/Netflix-avatar0.png">
+		</div>
 		<div class="align-self-center">
 			<input type="text" placeholder=" 이름" class="profile_name" name="profile_name" style="font-size: 1.5vw;">
-			<input type="checkbox" id="kidBox">
+			<input type="checkbox" id="kids" name="kids" value="Y">
 			<label for="kidBox"></label> 
 			<span class="kidBox" role="checkbox" aria-checked="false" tabindex="0" style="font-size: 1vw; color: white;">어린이인가요?</span>
+			<script>
+				$(document).ready(function(){
+					$("#kids").change(function(){
+						if($("#kids").is(":checked")){
+							$(".kidAdd").append("<img class='kids3' src='http://yonom.duckdns.org/images/profile/kids.png'>");
+						}else{
+							$(".kids3").remove();
+						}
+					});
+				});
+			</script>
 		</div>
 	</div>
 	<br>

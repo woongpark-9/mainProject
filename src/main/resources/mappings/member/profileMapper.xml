@@ -14,6 +14,20 @@
 	<result property="horror" column="HORROR" />
 	<result property="comic" column="COMIC"/>
 	<result property="action" column="ACTION"/>
+	<result property="profile_img" column="PROFILE_IMG" />
+	<result property="kids" column="KIDS" />
+	<result property="thriller" column="THRILLER" />
+	<result property="sf" column="SF" />
+	<result property="adventure" column="ADVENTURE" />
+	<result property="drama" column="DRAMA" />
+	<result property="animation" column="ANIMATION" />
+	<result property="crime" column="CRIME" />
+	<result property="familyg" column="FAMILYG" />
+	<result property="fantasy" column="FANTASY" />
+	<result property="mystery" column="MYSTERY" />
+	<result property="romance" column="ROMANCE" />
+	<result property="melodrama" column="MELODRAMA" />
+	<result property="a_historical_drama" column="A_HISTORICAL_DRAMA" />
 </resultMap>
 
 <!-- 프로파일 가져오기 -->
@@ -32,18 +46,12 @@
 	PROFILE_ID
 	, EMAIL
 	, PROFILE_NAME
-	, HORROR
-	, COMIC
-	, ACTION 
 	, PROFILE_IMG
 	, KIDS)
 	VALUES( 6
 	, 'jch7931@naver.com'
 	, #{profile_name}
-	, 0
-	, 0
-	, 0
-	, 'http://yonom.duckdns.org/images/profile/Netflix-avatar.png'
+	, 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
 	, #{kids}
 	)
 </select>
