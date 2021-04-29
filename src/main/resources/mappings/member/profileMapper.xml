@@ -49,18 +49,12 @@
    PROFILE_ID
    , EMAIL
    , PROFILE_NAME
-   , HORROR
-   , COMIC
-   , ACTION 
    , PROFILE_IMG
    , KIDS)
    VALUES( 6
    , 'jch7931@naver.com'
    , #{profile_name}
-   , 0
-   , 0
-   , 0
-   , 'http://yonom.duckdns.org/images/profile/Netflix-avatar.png'
+   , 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
    , #{kids}
    )
 </select>

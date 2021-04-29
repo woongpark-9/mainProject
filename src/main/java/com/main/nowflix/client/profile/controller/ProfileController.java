@@ -70,17 +70,11 @@ public class ProfileController {
 	   @RequestMapping("setGenre.do")
 	   public String setgenre(HttpServletRequest request, Model model, MovieVO movieVO, ProfileVO profileVO,HttpSession session)throws Exception{
 	      System.out.println("setGenre.do ½ÇÇà");
-	      
 	      MemberVO member =   (MemberVO)session.getAttribute("member");
 	      String[] arr= request.getParameterValues("checkbox");
 	      System.out.println(arr[0]);
 	      System.out.println(member.getNickname());
-	      
-	      
-	      
 	      service.setProfile(arr, member);
-	      
-	      
 	      return "redirect:profile.do";
 	   }
 	
