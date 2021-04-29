@@ -21,9 +21,15 @@ public class MovieController {
 
 	
 	@RequestMapping("/index.do")
-	public String getBoardList(MovieVO vo, Model model) {
+	public String getMovieList(MovieVO vo, Model model) {
 		System.out.println("Controller 작동");
-		model.addAttribute("movieList", movieService.getMovieList(vo)); // Model 정보저장
+		List<MovieVO> movieList =  movieService.getMovieList(vo);
+	
+		for(int i =0; i<movieList.size(); i++) {
+			if(movieList.get(i).getGenre_name().contains("공포")) {
+				
+			}
+		}
 		return "/views/member/index"; // View 정보저장
 	}
 	

@@ -8,19 +8,17 @@
 		<result property="movie_path" column="movie_path" />
 		<result property="title" column="title" />
 		<result property="director" column="director" />
-		<result property="genre1" column="genre1" />
-		<result property="genre2" column="genre2" />
 		<result property="movie_runningtime" column="movie_runningtime" />
-		<result property="movie_release_date"
-			column="movie_release_date" />
+		<result property="movie_release_date" column="movie_release_date" />
 		<result property="movie_rating" column="movie_rating" />
 		<result property="summary" column="summary" />
 		<result property="country" column="country" />
-		<result property="teaser_path" column="teaser_path" />
-		<result property="poster_path" column="poster_path" />
 		<result property="is_active" column="is_active" />
 		<result property="is_main" column="is_main" />
 		<result property="subtitle" column="subtitle" />
+		<result property="director_name" column="director_name" />
+		<result property="genre_name" column="genre_name" />
+		<result property="actor_name" column="actor_name" />
 	</resultMap>
 	<select id="getMovieList" resultMap="movieResult">
 		select * from movie
@@ -32,7 +30,8 @@
 	</select>
 
 	<select id="searchMovieList" resultMap="movieResult">
-		select * from movie where title like '%'||#{title}||'%'
+		select * from movie where
+		title like '%'||#{title}||'%'
 	</select>
 	<!-- <insert id="insertBoard" parameterType="myboard"> INSERT INTO myboard 
 		(seq, title, writer, content) VALUES((select nvl(max(seq), 0)+1 from myboard), 
