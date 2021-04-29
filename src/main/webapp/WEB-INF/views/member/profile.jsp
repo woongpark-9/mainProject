@@ -40,7 +40,7 @@
 				</a>
 			</div>
 		</c:forEach>
-		<c:if test="${fn:length(profile) <= 5}" >
+		<c:if test="${fn:length(profile) <= 4}" >
 			<div class="ml-3 mr-3">
 				<a href="#" class="profile" onclick="acyncMovePage('http://localhost:8080/nowflix/profileAdd.do')">
 					<img class="img-responsive addProfileImg" src="http://yonom.duckdns.org/images/profile/add3.png">
