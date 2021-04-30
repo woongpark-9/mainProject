@@ -15,7 +15,6 @@ import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.movie.service.MovieService;
 import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.profile.service.ProfileService;
-import com.main.nowflix.client.profile.vo.ProfileVO;
 
 @Controller
 @SessionAttributes("member")
