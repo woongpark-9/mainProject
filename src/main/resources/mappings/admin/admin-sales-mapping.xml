@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminSalesDAO">
+   <resultMap type="adminsales" id="salesResult">
+      <result property="sales_id" column="sales_id" />
+      <result property="cid" column="cid" />
+      <result property="tid" column="tid" />
+      <result property="email" column="email" />
+      <result property="ticket_id" column="ticket_id" />
+      <result property="sales_status" column="sales_status" />
+      <result property="payment_date" column="payment_date" />
+      <result property="expiry_date" column="expiry_date" />
+      <result property="payment_method_type" column="payment_method_type" />
+      <result property="card_name" column="card_name" />
+   </resultMap>
+
+<select id="getSalesList" parameterType="hashMap"
+      resultMap="salesResult">
+      select (row_number() over()) AS rownum, sales_id, cid, tid, email, ticket_id, sales_status, payment_date,
+      expiry_date, payment_method_type, card_name
+      from(
+      select sales_id, cid, tid, email, ticket_id, sales_status, payment_date,
+      expiry_date, payment_method_type, card_name
+      from sales
+      where 1=1
+      <if test="searchCondition=='EMAIL'">
+         AND email LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      <if test="searchCondition=='TICKET'">
+         AND ticket_id LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by payment_date desc ) st
+      order by rownum limit #{row} offset
+      #{startPoint}
+   </select>
+
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from sales
+      where 1=1
+      <if test="searchCondition=='EMAIL'">
+         AND email LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+      <if test="searchCondition=='TICKET'">
+         AND ticket_id LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+   </select>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminsales">
+      select * from sales order by payment_date asc
+   </select>
+</mapper>

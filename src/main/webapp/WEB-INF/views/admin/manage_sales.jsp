@@ -1,48 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- CDN 방식의 링크 연결  -->
-<!-- 보고 따라한 곳(밑에 링크)   -->
-<!-- https://blog.edit.kr/entry/Bootstrap-4-%EB%8B%AC%EB%A0%A5-datetimepicker-Bootstrap-3%EB%B2%84%EC%A0%84-%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C-%EB%B2%84%EC%A0%84-%EC%9D%B8%EA%B8%B0-%EB%8B%AC%EB%A0%A5 -->
-<script type="text/javascript"
-   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"
-   src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script type="text/javascript"
-   src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-<link rel="stylesheet"
-   href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-<!-- CDN 방식의 링크 연결  -->
-
-
-<!-- 캘린더 부분 스크립트 -->
-<script type="text/javascript">
-   $(function() {
-      $('#datetimepicker1').datetimepicker({
-         format : 'L' //포멧에 L들어오면 날짜만 표시되도록 함.
-      });
-      $('#datetimepicker2').datetimepicker({
-         format : 'L', //포멧에 L들어오면 날짜만 표시되도록 함.
-         useCurrent : false
-      //여기 true로 하면 날짜 지정 안됨.
-
-      });
-      $("#datetimepicker1").on("change.datetimepicker", function(e) {
-         $('#datetimepicker2').datetimepicker('minDate', e.date);
-      });
-      $("#datetimepicker2").on("change.datetimepicker", function(e) {
-         $('#datetimepicker1').datetimepicker('maxDate', e.date);
-      });
-   });
-</script>
-<!-- 캘린더 부분 자바스크립트 -->
-
+<title>결제 내역</title>
 
 </head>
 <body>
@@ -52,69 +16,32 @@
          <div class="row mb-5">
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                <div class="col-12">
-                  <h3 class="text-muted text-center mb-3">판매 관리</h3>
+                  <h3 class="text-muted text-center mb-3">결제  내역</h3>
                </div>
-
-
-
-
-
-
-               <div class="row">
-
-                  <!-- time -->
-                  <div class='col-md-3 col-xs-4'>
-                     <div class="form-group">
-                        <div class="input-group date" id="datetimepicker1"
-                           data-target-input="nearest">
-                           <input type="text" class="form-control datetimepicker-input"
-                              data-target="#datetimepicker1" value="">
-                           <div class="input-group-append" data-target="#datetimepicker1"
-                              data-toggle="datetimepicker">
-                              <div class="input-group-text">
-                                 <i class="fa fa-calendar"></i>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class='col-md-3 col-xs-4'>
-                     <div class="form-group">
-                        <div class="input-group date" id="datetimepicker2"
-                           data-target-input="nearest">
-                           <input type="text" class="form-control datetimepicker-input"
-                              data-target="#datetimepicker2" value="">
-                           <div class="input-group-append" data-target="#datetimepicker2"
-                              data-toggle="datetimepicker">
-                              <div class="input-group-text">
-                                 <i class="fa fa-calendar"></i>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  
-                  
+               <div class="row">            
                   <div class="col-7">
                      <button type="button" class="btn btn-info btn-sm">EXCEL</button>
                      <button type="button" class="btn btn-info btn-sm">PDF</button>
                   </div>
 
                   <div class="col-5">
-                     <form action="">
-
-                        <div class="input-group">
-                           <input type="text" class="form-control search-input"
-                              placeholder="검색어 입력">
-                           <button type="button" class="btn btn-light search-button">
-                              <i class="fas fa-search text-danger"></i>
-                           </button>
-                        </div>
-
-                     </form>
-
-                  </div>
+					<form name="insertConditionForm" id="insertConditionForm">
+						<div class="input-group">
+							<div>
+								<select class="form-control" name="searchCondition">
+									<option selected value="TITLE">제목</option>
+									<option value="CONTENT">내용</option>
+								</select>
+							</div>
+							<input type="text" class="form-control search-input"
+								name="searchKeyword" placeholder="검색어 입력">
+							<button type="button" class="btn btn-light search-button"
+								onclick="acyncConditionMovePage('manage_notice.mdo')">
+								<i class="fas fa-search text-danger"></i>
+							</button>
+						</div>
+					</form>
+					</div>
                </div>
                <table
                   class="table bg-light text-center table-bordered table-striped">
@@ -160,26 +87,118 @@
                   </tbody>
                </table>
 
-               <!-- page 1번 2 번 3번 이동하는 거임.-->
-               <nav>
-                  <ul class="pagination justify-content-center">
-                     <li class="page-item"><a href="#"
-                        class="page-link py-2 px-3"> <span>&laquo;</span>
-                     </a></li>
+               <!-- page -->
+						<nav>
+							<ul class="pagination justify-content-center">
+								<!--현재 페이지가 0보다 작아질 경우 이전 버튼을 disabled하는 조건문 -->
+								<c:choose>
+									<c:when test="${nowPage <= 0}">
+										<li class="disabled page-item"><a href="#"
+											class="page-link py-2 px-3"> <span>&laquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${searchCondition eq null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage-1})"
+												class="page-link py-2 px-3"> <span>&laquo;</span>
+											</a></li>
+										</c:if>
+										<c:if test="${searchCondition ne null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
+												class="page-link py-2 px-3"> <span>&laquo;</span>
+											</a></li>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 
-                     <!-- 페이지 정보 추가 -->
-                     <li class="page-item active"><a href="#"
-                        class="page-link py-2 px-3">1</a></li>
-                     <li class="page-item"><a href="#"
-                        class="page-link py-2 px-3">2</a></li>
-                     <li class="page-item"><a href="#"
-                        class="page-link py-2 px-3">3</a></li>
+								<!--해당하는 페이지로 갈 수 있는 버튼 -->
+								<c:if test="${totalPage < 0}">
+									<c:forEach var="i" begin="0" end="${totalPage+1}">
+										<c:choose>
+											<c:when test="${i eq nowPage}">
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:if>
 
-                     <li class="page-item"><a href="#"
-                        class="page-link py-2 px-3"> <span>&raquo;</span>
-                     </a></li>
-                  </ul>
-               </nav>
+
+								<c:if test="${totalPage >= 0}">
+									<c:forEach var="i" begin="0" end="${totalPage}">
+										<c:choose>
+											<c:when test="${i eq nowPage}">
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:if>
+
+
+								<!--현재 페이지가 totalPage보다 커질 경우 다음 버튼을 disabled하는 조건문 -->
+								<c:choose>
+									<c:when test="${nowPage >= totalPage }">
+										<li class="disabled page-item"><a href="#"
+											class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${searchCondition eq null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage+1})"
+												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+										</c:if>
+										<c:if test="${searchCondition ne null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
+												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</nav>
             </div>
          </div>
       </div>

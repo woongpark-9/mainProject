@@ -54,6 +54,8 @@
 			alias="adminfaq" />
 		<typeAlias type="com.main.nowflix.admin.inquiry.vo.AdminInquiryVO"
 			alias="admininquiry" />
+		<typeAlias type="com.main.nowflix.admin.sales.vo.AdminSalesVO"
+			alias="admininquiry" />
 
 	</typeAliases>
 	<mappers>
@@ -76,6 +78,6 @@
 		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
 		<mapper resource="mappings/admin/admin-faq-mapping.xml" />
 		<mapper resource="mappings/admin/admin-inquiry-mapping.xml" />
-
+		<mapper resource="mappings/admin/admin-sales-mapping.xml" />
 	</mappers>
 </configuration>
