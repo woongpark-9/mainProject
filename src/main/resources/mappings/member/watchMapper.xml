@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="watchMapper">
+	<resultMap type="watchVO" id="watchResult">
+		<id property="watch_id" column="WATCH_ID" />
+		<result property="movie_id" column="MOVIE_ID" />
+		<result property="profile_id" column="PROFILE_ID"/>
+		<result property="watch_date" column="WATCH_DATE" />
+		<result property="view_point" column="VIEW_POINT"/>
+	</resultMap>
+	
+<select id="getWatchVO" resultMap="watchResult">
+	SELECT * FROM WATCH WHERE PROFILE_ID = #{profile_id} and MOVIE_ID = #{movie_id}
+</select>
+</mapper>

@@ -10,7 +10,8 @@
 			alias="genreVO" />
 		<typeAlias type="com.main.nowflix.client.movie.vo.MovieVO"
 			alias="mymovie" />
-
+		<typeAlias type="com.main.nowflix.client.movie.vo.WatchVO"
+			alias="watchVO" />
 		<typeAlias
 			type="com.main.nowflix.client.profile.vo.ProfileVO" alias="profileVO" />
 		<typeAlias type="com.main.nowflix.client.ticket.vo.TicketVO"
@@ -57,10 +58,11 @@
 		<mapper resource="mappings/member/memberMapper.xml"></mapper>
 		<mapper resource="mappings/member/genreMapper.xml"></mapper>
 		<mapper resource="mappings/member/client-movie-mapping.xml" />
-
 		<mapper resource="mappings/member/profileMapper.xml"></mapper>
 		<mapper resource="mappings/member/ticketMapper.xml"></mapper>
 		<mapper resource="mappings/member/salesMapper.xml"></mapper>
+		<mapper resource="mappings/member/watchMapper.xml"></mapper>
+		
 		<mapper resource="mappings/admin/admin-movie-mapping.xml" />
 		<mapper resource="mappings/admin/admin-member-mapping.xml" />
 		<mapper resource="mappings/admin/admin-ticket-mapping.xml" />
