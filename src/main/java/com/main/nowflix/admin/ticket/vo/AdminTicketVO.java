@@ -8,6 +8,15 @@ public class AdminTicketVO {
 	private int ticket_price;
 	private String ticket_status;
 	private String ticket_recommend;
+	private int rownum;
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 
 	public int getSeq() {
 		return seq;

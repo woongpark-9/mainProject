@@ -11,13 +11,14 @@
       <result property="ticket_price" column="ticket_price" />
       <result property="ticket_status" column="ticket_status" />
       <result property="ticket_recommend" column="ticket_recommend" />
+      <result property="rownum" column="rownum" />
    </resultMap>
 
    <!-- Ticket List -->
    <select id="getTicketList" resultMap="ticketResult">
-      select seq , ticket_id ,
+      select (row_number() over()) as rownum, seq , ticket_id ,
       ticket_name , ticket_period , ticket_price , ticket_status from ticket
-      order by seq desc;
+      order by rownum;
    </select>
 
    <!-- Ticket insert -->

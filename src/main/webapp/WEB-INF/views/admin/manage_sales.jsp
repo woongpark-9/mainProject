@@ -29,14 +29,14 @@
 						<div class="input-group">
 							<div>
 								<select class="form-control" name="searchCondition">
-									<option selected value="TITLE">제목</option>
-									<option value="CONTENT">내용</option>
+									<option selected value="EMAIL">이메일</option>
+									<option value="TICKET">이용권</option>
 								</select>
 							</div>
 							<input type="text" class="form-control search-input"
 								name="searchKeyword" placeholder="검색어 입력">
 							<button type="button" class="btn btn-light search-button"
-								onclick="acyncConditionMovePage('manage_notice.mdo')">
+								onclick="acyncConditionMovePage('manage_sales.mdo')">
 								<i class="fas fa-search text-danger"></i>
 							</button>
 						</div>
@@ -47,43 +47,27 @@
                   class="table bg-light text-center table-bordered table-striped">
                   <thead>
                      <tr class="text-muted">
-                        <th>#</th>
-                        <th>상태</th>
-                        <th>이메일</th>
+                        <th>회원 이메일</th>
                         <th>이용권</th>
-                        <th>결제금액</th>
+                        <th>이용권 만료일</th>
+                        <th>결제 상태</th>
                         <th>결제일</th>
-                        <th>만료일</th>
+                        <th>결제 방식</th>
+                        <th>결제 카드</th>
                      </tr>
                   </thead>
                   <tbody>
+                  	<c:forEach var="salesList" items="${salesList }">
                      <tr>
-                        <th>1</th>
-                        <th>이용중</th>
-                        <th>test@naver.com</th>
-                        <th>정기권_1</th>
-                        <th>&#8361;7,900</th>
-                        <th>2021-04-08</th>
-                        <th>2021-10-08</th>
+                        <th>${salesList.email }</th>
+                        <th>${salesList.ticket_id }</th>
+                        <th>${salesList.expiry_date }</th>
+                        <th>${salesList.sales_status }</th>
+                        <th>${salesList.payment_date }</th>
+                        <th>${salesList.payment_method_type }</th>
+                        <th>${salesList.card_name }</th>
                      </tr>
-                     <tr>
-                        <th>1</th>
-                        <th>이용중</th>
-                        <th>test@naver.com</th>
-                        <th>정기권_2</th>
-                        <th>&#8361;7,900</th>
-                        <th>2021-04-08</th>
-                        <th>2021-10-08</th>
-                     </tr>
-                     <tr>
-                        <th>1</th>
-                        <th>이용중</th>
-                        <th>test@naver.com</th>
-                        <th>정기권_3</th>
-                        <th>&#8361;7,900</th>
-                        <th>2021-04-08</th>
-                        <th>2021-10-08</th>
-                     </tr>
+               		</c:forEach>
                   </tbody>
                </table>
 
@@ -100,13 +84,13 @@
 									<c:otherwise>
 										<c:if test="${searchCondition eq null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage-1})"
+												onclick="acyncNowPage1('manage_sales.mdo', ${nowPage-1})"
 												class="page-link py-2 px-3"> <span>&laquo;</span>
 											</a></li>
 										</c:if>
 										<c:if test="${searchCondition ne null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
+												onclick="acyncNowPage2('manage_sales.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
 												class="page-link py-2 px-3"> <span>&laquo;</span>
 											</a></li>
 										</c:if>
@@ -120,24 +104,24 @@
 											<c:when test="${i eq nowPage}">
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_sales.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_sales.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:when>
 											<c:otherwise>
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_sales.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_sales.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:otherwise>
@@ -152,24 +136,24 @@
 											<c:when test="${i eq nowPage}">
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_sales.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_sales.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:when>
 											<c:otherwise>
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_sales.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_sales.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:otherwise>
@@ -187,12 +171,12 @@
 									<c:otherwise>
 										<c:if test="${searchCondition eq null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage+1})"
+												onclick="acyncNowPage1('manage_sales.mdo', ${nowPage+1})"
 												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
 										</c:if>
 										<c:if test="${searchCondition ne null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
+												onclick="acyncNowPage2('manage_sales.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
 												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
 										</c:if>
 									</c:otherwise>

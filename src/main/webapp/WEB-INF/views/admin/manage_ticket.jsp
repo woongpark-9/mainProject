@@ -81,7 +81,7 @@
 							<tbody>
 								<c:forEach var="ticketList" items="${ticketList }">
 									<tr>
-										<th class="align-middle">${ticketList.seq }</th>
+										<th class="align-middle">${ticketList.rownum }</th>
 										<th class="align-middle">${ticketList.ticket_id }</th>
 										<th class="align-middle">${ticketList.ticket_name }</th>
 										<th class="align-middle">${ticketList.ticket_period }</th>

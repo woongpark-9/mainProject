@@ -52,3 +52,10 @@
 <script src="js/admin/notice_script.js"></script>
 <script src="js/admin/faq_script.js"></script>
 <script src="js/admin/inquiry_script.js"></script>
+<script src="js/admin/sales_script.js"></script>
+
+
+
+
+
+

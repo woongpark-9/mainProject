@@ -21,6 +21,7 @@
 		<result property="is_active" column="is_active" />
 		<result property="is_main" column="is_main" />
 		<result property="subtitle" column="subtitle" />
+		<result property="rownum" column="rownum" />
 	</resultMap>
 
 	<select id="getMovieList" parameterType="hashMap"
@@ -42,7 +43,7 @@
 		<if test="searchCondition=='GENRE'">
 			AND genre_name LIKE '%'||#{searchKeyword}||'%'
 		</if>
-		order by seq desc ) st
+		order by seq desc) st
 		order by rownum limit #{row} offset
 		#{startPoint}
 	</select>
@@ -69,7 +70,7 @@
 
 	<insert id="insertMovie" parameterType="adminmovie">
 		insert into movie(title,
-		movie_rating, summary, director_name, genre_name, country, summary,
+		movie_rating, summary, director_name, genre_name, country,
 		movie_release_date, movie_path,
 		movie_runningtime, is_active, is_main, subtitle, actor_name)
 		values(#{title}, #{movie_rating}, #{summary},

@@ -17,9 +17,21 @@ public class AdminMovieVO {
 	private String is_active;
 	private String is_main;
 	private String subtitle;
+	
+	private int rownum;
 
 	private String searchCondition;
 	private String searchKeyword;
+
+	
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 
 	public String getMovie_path() {
 		return movie_path;

@@ -98,7 +98,7 @@
 							<tbody>
 								<c:forEach var="movieList" items="${movieList }">
 									<tr>
-										<th class="align-middle">${movieList.seq }</th>
+										<th class="align-middle">${movieList.rownum }</th>
 										<th class="align-middle"><img
 											src="http://yonom.duckdns.org/movie/${movieList.movie_path }/poster.png"
 											alt="" width="130px"></th>
