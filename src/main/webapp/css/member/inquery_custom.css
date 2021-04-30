@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+.header {
+ 
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    align-items: center;
+    display: flex;
+    height: 71px;
+    justify-content: space-between;
+    
+}
+
+.container-divider {
+    border-top: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.breadcrumbs{
+	list-style: none;
+}
+
+
+.main {
+    display: block;
+}
+
+
+.NOWFLIX{
+	color: red;
+    text-decoration: none;
+}
+
+
+body {
+	margin:0;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(66, 65, 65, 1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+span{
+	font-size: 15px;
+}
+
+
+a{
+	color: red;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+.user-info > button{
+	border: 0;
+	color: red;
+	min-width: 0;
+	padding: 0;
+	white-space: nowrap;
+	background-color: transparent;
+}
+
+button{
+	appearance: auto;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+
+.user-name{
+	cursor: pointer;
+    background: none;
+    border: 0;
+    display: inline-block;
+    padding: 0;
+    text-align: initial;
+    vertical-align: middle;
+}

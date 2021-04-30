@@ -251,7 +251,7 @@
 					<div class="category">
 						<div class="title">Netflix 인기 콘텐츠</div>
 						<div class="list">
-							<c:forEach var="movieList" items="${movieList }">
+							<c:forEach var="movieList" items="${usaMovieList }">
 								<div class="items">
 									<div class="item">
 
