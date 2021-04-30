@@ -55,7 +55,7 @@
 		<typeAlias type="com.main.nowflix.admin.inquiry.vo.AdminInquiryVO"
 			alias="admininquiry" />
 		<typeAlias type="com.main.nowflix.admin.sales.vo.AdminSalesVO"
-			alias="admininquiry" />
+			alias="adminsales" />
 
 	</typeAliases>
 	<mappers>
