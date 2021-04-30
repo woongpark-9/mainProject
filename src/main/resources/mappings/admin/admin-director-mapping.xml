@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDirectorDAO">
+   <resultMap type="admindirector" id="directorResult">
+      <id property="director_id" column="director_id" />
+      <result property="director_name" column="director_name" />
+      <result property="director_birthdate" column="director_birthdate" />
+   </resultMap>
+
+<!--    <select id="getDirectorList" resultMap="directorResult"> -->
+<!--       select * from director order by director_id desc -->
+<!--    </select> -->
+   
+   <select id="getDirectorList" parameterType="hashMap"
+      resultMap="directorResult">
+      select (row_number() over()) AS rownum, director_id, director_name, director_birthdate
+      from(
+      select director_id, director_name, director_birthdate
+      from director
+      where 1=1
+      <if test="searchCondition=='NAME'">
+         AND director_name LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by director_id desc ) st
+      order by rownum limit #{row} offset
+      #{startPoint}
+   </select>
+   
+   <select id="getDirectorListWithoutPaging" resultMap="directorResult">
+      select * from director
+   </select>
+
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from director
+      where 1=1
+      <if test="searchCondition=='NAME'">
+         AND director_name LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+   </select>
+   
+   <insert id="insertDirector" parameterType="admindirector">
+      insert into director(director_name, director_birthdate)
+      values(#{director_name}, #{director_birthdate})
+   </insert>
+   
+   <delete id="deleteDirector" parameterType="admindirector">
+      delete from director where director_id = #{director_id}
+   </delete>
+   
+   <update id="modifyDirector" parameterType="admindirector">
+      update director 
+      set director_name = #{director_name}, director_birthdate = #{director_birthdate}
+      where director_id = #{director_id}
+   </update>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="admindirector">
+      select * from director order by director_id asc
+   </select>
+</mapper>

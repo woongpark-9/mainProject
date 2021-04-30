@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminGenreDAO">
+   <resultMap type="admingenre" id="genreResult">
+      <id property="genre_id" column="genre_id" />
+      <result property="genre_name" column="genre_name" />
+   </resultMap>
+   
+   <select id="getGenreList" resultMap="genreResult">
+      select * from genre order by genre_id desc
+   </select>
+   
+   <delete id="deleteGenre" parameterType="admingenre">
+      delete from genre where   genre_id = #{genre_id}
+   </delete>
+
+   <insert id="insertGenre" parameterType="admingenre">
+      insert into genre(genre_name)
+      values(#{genre_name})
+   </insert>
+
+   <select id="getGenreModifyInfo" resultType="admingenre">
+      select * genre where genre_id = #{genre_id}
+   </select>
+
+   <update id="modifyGenre" parameterType="admingenre">
+      update genre set genre_name = #{genre_name}
+      where genre_id = #{genre_id}
+   </update>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="admingenre">
+      select * from genre order by genre_id desc
+   </select>   
+   
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminActorDAO">
+   <resultMap type="adminactor" id="actorResult">
+      <id property="actor_id" column="actor_id" />
+      <result property="actor_name" column="actor_name" />
+      <result property="actor_birth" column="actor_birth" />
+   
+   </resultMap>
+
+   <select id="getActorList" parameterType="hashMap"
+      resultMap="actorResult">
+      select (row_number() over()) AS rownum, actor_id, actor_name, actor_birth
+      from(
+      select actor_id, actor_name, actor_birth
+      from actor
+      where 1=1
+      <if test="searchCondition=='actor_name'">
+         AND actor_name LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by actor_id desc ) st
+      order by rownum limit #{row} offset #{startPoint}
+   </select>
+   
+   <select id="getActorListWithoutPaging" resultMap="actorResult">
+      select * from actor
+   </select>
+
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from actor
+      where 1=1
+      <if test="searchCondition=='actor_name'">
+         AND actor_name LIKE '%'||#{searchKeyword}||'%'
+      </if>
+   </select>
+
+   <delete id="deleteActor" parameterType="adminactor">
+      delete from actor where
+      actor_id = #{actor_id}
+   </delete>
+
+   <insert id="insertActor" parameterType="adminactor">
+      insert into actor(actor_name, actor_birth)
+      values(#{actor_name}, #{actor_birth})
+   </insert>
+
+   <select id="getActorModifyInfo" resultType="adminactor">
+      select * from actor where
+      actor_id = #{actor_id}
+   </select>
+
+   <update id="modifyActor" parameterType="adminactor">
+      update actor set actor_name = #{actor_name}, actor_birth = #{actor_birth}
+      where actor_id = #{actor_id}
+   </update>
+
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminactor">
+      select actor_id, actor_name, actor_birth from actor order by actor_id desc
+   </select>   
+
+</mapper>

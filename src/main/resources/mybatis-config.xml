@@ -10,27 +10,67 @@
 			alias="genreVO" />
 		<typeAlias type="com.main.nowflix.client.movie.vo.MovieVO"
 			alias="mymovie" />
+
+		<typeAlias
+			type="com.main.nowflix.client.profile.vo.ProfileVO" alias="profileVO" />
+		<typeAlias type="com.main.nowflix.client.ticket.vo.TicketVO"
+			alias="ticketVO" />
+
+
+		<!-- admin -->
+
+
+		<typeAlias type="com.main.nowflix.client.sales.vo.SalesVO"
+			alias="salesVO" />
 		<typeAlias
 			type="com.main.nowflix.admin.movie.vo.AdminMovieVO"
 			alias="adminmovie" />
 		<typeAlias
-		 type="com.main.nowflix.client.profile.vo.ProfileVO"
-		 alias="profileVO" />
-		 <typeAlias
-		 type="com.main.nowflix.client.ticket.vo.TicketVO"
-		 alias="ticketVO" />
-		 
-		 <typeAlias
-		 type="com.main.nowflix.client.sales.vo.SalesVO"
-		 alias="salesVO" />
+			type="com.main.nowflix.admin.member.vo.AdminMemberVO"
+			alias="adminmember" />
+		<typeAlias
+			type="com.main.nowflix.admin.ticket.vo.AdminTicketVO"
+			alias="adminticket" />
+		<typeAlias
+			type="com.main.nowflix.admin.genre.vo.AdminGenreVO"
+			alias="admingenre" />
+		<typeAlias
+			type="com.main.nowflix.admin.actor.vo.AdminActorVO"
+			alias="adminactor" />
+		<typeAlias
+			type="com.main.nowflix.admin.director.vo.AdminDirectorVO"
+			alias="admindirector" />
+		<typeAlias
+			type="com.main.nowflix.admin.policy.vo.AdminPolicyVO"
+			alias="adminpolicy" />
+		<typeAlias
+			type="com.main.nowflix.admin.manager.vo.AdminManagerVO"
+			alias="adminmanager" />
+		<typeAlias
+			type="com.main.nowflix.admin.notice.vo.AdminNoticeVO"
+			alias="adminnotice" />
+		<typeAlias type="com.main.nowflix.admin.faq.vo.AdminFaqVO"
+			alias="adminfaq" />
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/member/memberMapper.xml"></mapper>
 		<mapper resource="mappings/member/genreMapper.xml"></mapper>
 		<mapper resource="mappings/member/client-movie-mapping.xml" />
-		<mapper resource="mappings/admin/admin-movie-mapping.xml" />
+
 		<mapper resource="mappings/member/profileMapper.xml"></mapper>
 		<mapper resource="mappings/member/ticketMapper.xml"></mapper>
 		<mapper resource="mappings/member/salesMapper.xml"></mapper>
+		<mapper resource="mappings/admin/admin-movie-mapping.xml" />
+		<mapper resource="mappings/admin/admin-member-mapping.xml" />
+		<mapper resource="mappings/admin/admin-ticket-mapping.xml" />
+		<mapper resource="mappings/admin/admin-genre-mapping.xml" />
+		<mapper resource="mappings/admin/admin-actor-mapping.xml" />
+		<mapper resource="mappings/admin/admin-director-mapping.xml" />
+		<mapper resource="mappings/admin/admin-policy-mapping.xml" />
+		<mapper resource="mappings/admin/admin-manager-mapping.xml" />
+		<mapper resource="mappings/admin/admin-notice-mapping.xml" />
+		<mapper resource="mappings/admin/admin-faq-mapping.xml" />
+
 	</mappers>
 </configuration>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminPolicyDAO">
+	<resultMap type="adminpolicy" id="policyResult">
+		<result property="policy_id" column="policy_id" />
+		<result property="policy_title" column="policy_title" />
+		<result property="policy_content" column="policy_content" />
+		<result property="policy_regdate" column="policy_regdate" />
+	</resultMap>
+
+	<select id="getPolicyList" parameterType="hashMap"
+		resultMap="policyResult">
+		select (row_number() over()) AS rownum, policy_id, policy_title,
+		policy_regdate, policy_content
+		from(
+		select policy_id, policy_title, policy_regdate, policy_content
+		from policies
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND policy_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		order by policy_id desc ) st
+		order by rownum limit #{row} offset
+		#{startPoint}
+	</select>
+
+	<select id="getTotalCount" parameterType="hashMap"
+		resultType="int">
+		select count(*) from policies
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND policy_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+
+	<insert id="insertPolicy" parameterType="adminpolicy">
+		insert into policies(policy_title, policy_content, policy_regdate)
+		values(#{policy_title}, #{policy_content}, current_timestamp)
+	</insert>
+
+	<delete id="deletePolicy" parameterType="adminpolicy">
+		delete from policies where policy_id = #{policy_id}
+	</delete>
+
+	<update id="modifyPolicy" parameterType="adminpolicy">
+		update policies
+		set policy_title = #{policy_title}, policy_content = #{policy_content}
+		where policy_id = #{policy_id}
+	</update>
+
+	<!-- EXCEL , PDF를 나타내기 위함. -->
+	<select id="selectBoardList" resultType="adminpolicy">
+		select * from policies order by policy_id asc
+	</select>
+</mapper>

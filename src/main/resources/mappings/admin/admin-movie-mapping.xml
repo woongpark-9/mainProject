@@ -7,46 +7,123 @@
 		<id property="seq" column="seq" />
 		<result property="movie_path" column="movie_path" />
 		<result property="title" column="title" />
-		<result property="director" column="director" />
-		<result property="actor" column="actor" />
-		<result property="genre1" column="genre1" />
-		<result property="genre2" column="genre2" />
+
+		<result property="director_name" column="director_name" />
+		<result property="actor_name" column="actor_name" />
+		<result property="genre_name" column="genre_name" />
+
 		<result property="movie_runningtime" column="movie_runningtime" />
-		<result property="movie_release_date" column="movie_release_date" />
+		<result property="movie_release_date"
+			column="movie_release_date" />
 		<result property="movie_rating" column="movie_rating" />
 		<result property="summary" column="summary" />
 		<result property="country" column="country" />
-		<result property="teaser_path" column="teaser_path" />
-		<result property="poster_path" column="poster_path" />
 		<result property="is_active" column="is_active" />
 		<result property="is_main" column="is_main" />
 		<result property="subtitle" column="subtitle" />
 	</resultMap>
-	
-	<select id="getMovieList" resultMap="movieResult">
-		select seq, poster_path, title, director, genre1, genre2, movie_runningtime, movie_release_date from movie order by seq desc
+
+	<select id="getMovieList" parameterType="hashMap"
+		resultMap="movieResult">
+		select (row_number() over()) AS rownum, seq, title, summary, 
+		director_name, genre_name, movie_runningtime, movie_release_date,
+		movie_path
+		from(
+		select seq, title, director_name, genre_name, summary,
+		movie_runningtime, movie_release_date, movie_path
+		from movie
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='DIRECTOR'">
+			AND director_name LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='GENRE'">
+			AND genre_name LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		order by seq desc ) st
+		order by rownum limit #{row} offset
+		#{startPoint}
 	</select>
-	
+
+	<select id="getTotalCount" parameterType="hashMap"
+		resultType="int">
+		select count(*) from movie
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='DIRECTOR'">
+			AND director_name LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='GENRE'">
+			AND genre_name LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+
 	<delete id="deleteMovie" parameterType="adminmovie">
-		delete from movie where seq = #{seq}
+		delete from movie where
+		seq = #{seq}
 	</delete>
-	
+
 	<insert id="insertMovie" parameterType="adminmovie">
-		insert into movie(title, movie_rating, summary, director, genre1, genre2, country, movie_release_date, poster_path, teaser_path, movie_path, movie_runningtime, is_active, is_main, subtitle, actor)
-		values(#{title}, #{movie_rating}, #{summary}, 
-		#{director}, #{genre1}, #{genre2}, #{country}, #{movie_release_date}, #{poster_path}, #{teaser_path}, 
-		#{movie_path}, #{movie_runningtime}, #{is_active}, #{is_main}, #{subtitle}, #{actor})
+		insert into movie(title,
+		movie_rating, summary, director_name, genre_name, country, summary,
+		movie_release_date, movie_path,
+		movie_runningtime, is_active, is_main, subtitle, actor_name)
+		values(#{title}, #{movie_rating}, #{summary},
+		#{director_name},
+		#{genre_name}, #{country}, #{movie_release_date},
+		#{movie_path}, #{movie_runningtime}, #{is_active},
+		#{is_main}, #{subtitle},
+		#{actor_name})
 	</insert>
-	
+
 	<select id="getMovieModifyInfo" resultType="adminmovie">
-		select seq, title, movie_rating, summary, director, genre1, genre2, country, movie_release_date, poster_path, teaser_path, movie_path, movie_runningtime, is_active, is_main, subtitle, actor	
-		from movie where seq = #{seq}
+		select seq, title,
+		movie_rating, summary, director_name, genre_name, country,
+		movie_release_date, movie_path,
+		movie_runningtime, is_active, is_main, subtitle, actor_name
+		from movie where
+		seq = #{seq}
 	</select>
-	
+
 	<update id="modifyMovie" parameterType="adminmovie">
-		update movie set title = #{title}, movie_rating = #{movie_rating}, summary = #{summary}, director = #{director}, genre1 = #{genre1}, genre2 = #{genre2}, country = #{country}, 
-		movie_release_date = #{movie_release_date}, poster_path = #{poster_path}, teaser_path = #{teaser_path}, movie_path = #{movie_path}, movie_runningtime = #{movie_runningtime}, 
-		is_active = #{is_active}, is_main = #{is_main}, subtitle = #{subtitle}, actor = #{actor}
+		update movie
+		set title = #{title}, movie_rating = #{movie_rating}, summary =
+		#{summary},
+		director_name = #{director_name}, genre_name = #{genre_name},
+		country = #{country},
+		movie_release_date =
+		#{movie_release_date},
+		movie_path = #{movie_path}, movie_runningtime =
+		#{movie_runningtime},
+		is_active =
+		#{is_active}, is_main = #{is_main},
+		subtitle = #{subtitle}, actor_name = #{actor_name}
 		where seq = #{seq}
 	</update>
+
+	<select id="getMovieDetail" resultType="adminmovie"
+		parameterType="int">
+		select * from movie where seq = #{seq}
+	</select>
+
+	<!-- EXCEL , PDF를 나타내기 위함. -->
+	<select id="selectBoardList" resultType="adminmovie">
+		select seq, title, director_name, actor_name, genre_name, movie_runningtime,
+		movie_release_date
+		from movie order by seq desc
+	</select>
+
+	<!-- DASHBOARD에 회원수를 나타내기 위함. -->
+	<select id="get_all_movie_count" resultType="int">
+		select count(*) from movie
+	</select>
+	
+	<select id="movieList" resultType="adminmovie">
+      select * from movie
+   </select>
+   
 </mapper>

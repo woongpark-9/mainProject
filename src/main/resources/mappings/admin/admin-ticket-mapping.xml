@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminTicketDAO">
+   <resultMap type="adminticket" id="ticketResult">
+      <result property="seq" column="seq" />
+      <result property="ticket_id" column="ticket_id" />
+      <result property="ticket_name" column="ticket_name" />
+      <result property="ticket_period" column="ticket_period" />
+      <result property="ticket_price" column="ticket_price" />
+      <result property="ticket_status" column="ticket_status" />
+      <result property="ticket_recommend" column="ticket_recommend" />
+   </resultMap>
+
+   <!-- Ticket List -->
+   <select id="getTicketList" resultMap="ticketResult">
+      select seq , ticket_id ,
+      ticket_name , ticket_period , ticket_price , ticket_status from ticket
+      order by seq desc;
+   </select>
+
+   <!-- Ticket insert -->
+   <insert id="insertTicket" parameterType="adminticket">
+      insert into
+      ticket(ticket_id , ticket_name , ticket_period , ticket_price ,
+      ticket_status)
+
+      values(#{ticket_id} , #{ticket_name} , #{ticket_period} , #{ticket_price} ,
+      #{ticket_status})
+   </insert>
+
+   <!-- modify page -->
+   <select id="getTicketModifyInfo" resultType="adminticket">
+      select seq ,
+      ticket_id, ticket_name , ticket_period , ticket_price , ticket_status
+      from ticket where
+      seq = #{seq}
+   </select>
+
+   <!-- modify -->
+   <update id="modifyTicket" parameterType="adminticket">
+      update ticket
+      set ticket_name = #{ticket_name}, 
+      ticket_period = #{ticket_period},
+      ticket_price = #{ticket_price},
+      ticket_status = #{ticket_status}
+      
+      where ticket_id = #{ticket_id}
+   </update>
+   
+   <!-- Ticket Delete -->
+   <delete id="deleteTicket" parameterType="adminticket">
+      delete from ticket
+      where
+      seq = #{seq}
+   </delete>
+
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminticket">
+      select seq
+      ,ticket_id,ticket_name,ticket_period
+      ,ticket_price,ticket_status from
+      ticket order by seq;
+   </select>
+
+</mapper>

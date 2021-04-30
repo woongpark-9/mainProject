@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminManagerDAO">
+   <resultMap type="adminmanager" id="managerResult">
+      <id property="manager_id" column="manager_id" />
+      <result property="manager_pass" column="manager_pass" />
+      <result property="manager_type" column="manager_type" />
+      <result property="manager_regdate" column="manager_regdate" />
+      <result property="manager_email" column="manager_email" />
+   </resultMap>
+
+   <select id="getManagerList" parameterType="hashMap"
+      resultMap="managerResult">
+      select (row_number() over()) AS rownum, manager_id, manager_email, manager_type, manager_regdate, manager_pass
+      from(
+      select manager_id, manager_email, manager_type, manager_regdate, manager_pass
+      from manager
+      where 1=1
+      <if test="searchCondition=='EMAIL'">
+         AND manager_email LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by manager_id desc ) st
+      order by rownum limit #{row} offset
+      #{startPoint}
+   </select>
+   
+   
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from manager
+      where 1=1
+      <if test="searchCondition=='EMAIL'">
+         AND manager_email LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+   </select>
+   
+   
+   <insert id="insertManager" parameterType="adminmanager">
+      insert into manager(manager_pass, manager_type, manager_regdate, manager_email)
+      values(#{manager_pass}, #{manager_type}, current_timestamp, #{manager_email})
+   </insert>
+   
+   <delete id="deleteManager" parameterType="adminmanager">
+      delete from manager where manager_id = #{manager_id}
+   </delete>
+
+   <update id="modifyManager" parameterType="adminmanager">
+      update manager 
+      set manager_email = #{manager_email}, manager_pass = #{manager_pass}, manager_type = #{manager_type}
+      where manager_id = #{manager_id}
+   </update>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminmanager">
+      select manager_id, manager_email, manager_type, manager_regdate from manager order by manager_id asc
+   </select>
+</mapper>

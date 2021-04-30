@@ -21,6 +21,7 @@
       for (count = 0; count < a.length; count++) {
          if (a[count].checked == true) {
             newvar = newvar + 1;
+           
          }
       }
 
@@ -50,12 +51,12 @@
       <form action="setGenre.do" method="post">
          <div class="info-box">
             <div id="number" class="select-count">
-               <h3>선호하는 작품을 선택해주세요.</h3>
-            </div>
+               	선호하는 작품을 선택해주세요.
             <div class="explanation">
-               <h3>최대 선택 개수는 3개 입니다.</h3>
+           		    최대 선택 개수는 10개 입니다.
             </div>
-            <div class="progressbar"></div>
+              </div>
+            
             <input type="submit" class="next-button" value="제출하기">
          </div>
 
@@ -69,7 +70,7 @@
                      <div class="option_inner">
                         <div class="tickmark"></div>
                         <div class="icon">
-                           <img style="height: 260px;" alt="돈의맛"
+                           <img style=" z-index:-600; width: 176px; height: 260px;" alt="돈의맛"
                               src="${prefixAddr }${movieList.movie_path }/poster2.png">
                         </div>
                      </div>

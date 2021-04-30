@@ -20,7 +20,7 @@
 										<i class="fas fa-video fa-3x text-waring"></i>
 										<div class="text-left text-secondary">
 											<h5>등록된 영화 수</h5>
-											<h3>총 90편</h3>
+											<h3>${all_movie_count}</h3>
 										</div>
 									</div>
 									
@@ -37,7 +37,7 @@
 										<i class="fas fa-user fa-3x text-waring"></i>
 										<div class="text-left text-secondary">
 											<h5>가입된 회원 수</h5>
-											<h3>총 200명</h3>
+											<h3>${all_member_count}</h3>
 										</div>
 									</div>
 									

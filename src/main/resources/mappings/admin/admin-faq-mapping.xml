@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminFaqDAO">
+   <resultMap type="adminfaq" id="faqResult">
+      <result property="faq_id" column="faq_id" />
+      <result property="faq_category" column="faq_category" />
+      <result property="faq_title" column="faq_title" />
+      <result property="faq_content" column="faq_content" />
+      <result property="faq_regdate" column="faq_regdate" />
+   </resultMap>
+
+<select id="getFaqList" parameterType="hashMap"
+      resultMap="faqResult">
+      select (row_number() over()) AS rownum, faq_id, faq_category, faq_title, faq_regdate, faq_content
+      from(
+      select faq_id, faq_category, faq_title, faq_regdate, faq_content
+      from faq
+      where 1=1
+      <if test="searchCondition=='TITLE'">
+         AND faq_title LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      <if test="searchCondition=='CONTENT'">
+         AND faq_content LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      <if test="searchCondition=='CATEGORY'">
+         AND faq_category LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by faq_id desc ) st
+      order by rownum limit #{row} offset
+      #{startPoint}
+   </select>
+
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from faq
+      where 1=1
+      <if test="searchCondition=='TITLE'">
+         AND faq_title LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+      <if test="searchCondition=='CONTENT'">
+         AND faq_content LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+      <if test="searchCondition=='CATEGORY'">
+         AND faq_category LIKE '%'||#{searchKeyword}||'%'
+      </if> 
+   </select>
+   
+   <insert id="insertFaq" parameterType="adminfaq">
+      insert into faq(faq_category, faq_title, faq_content, faq_regdate)
+      values(#{faq_category}, #{faq_title}, #{faq_content}, current_timestamp)
+   </insert>
+   
+   <delete id="deleteFaq" parameterType="adminfaq">
+      delete from faq where faq_id = #{faq_id}
+   </delete>
+   
+   <update id="modifyFaq" parameterType="adminfaq">
+      update faq 
+      set faq_category = #{faq_category}, faq_title = #{faq_title}, faq_content = #{faq_content}
+      where faq_id = #{faq_id}
+   </update>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminfaq">
+      select * from faq order by faq_id asc
+   </select>
+</mapper>

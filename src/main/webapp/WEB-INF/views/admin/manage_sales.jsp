@@ -97,10 +97,8 @@
                   
                   
                   <div class="col-7">
-                     <button type="button" class="btn btn-info btn-sm">COPY</button>
                      <button type="button" class="btn btn-info btn-sm">EXCEL</button>
                      <button type="button" class="btn btn-info btn-sm">PDF</button>
-                     <button type="button" class="btn btn-info btn-sm">Print</button>
                   </div>
 
                   <div class="col-5">

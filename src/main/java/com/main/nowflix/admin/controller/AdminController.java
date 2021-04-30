@@ -1,34 +1,22 @@
 package com.main.nowflix.admin.controller;
 
-import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.main.nowflix.admin.movie.service.AdminMovieService;
-import com.main.nowflix.admin.movie.vo.AdminMovieVO;
-
 @Controller
-public class AdminController {	
-	//템플릿(메인) 페이지
+public class AdminController {
+	// 템플릿(메인) 페이지
 	@RequestMapping("/manage_template.mdo")
 	public String getTemplate() {
 		System.out.println("Get Template");
 		return "manage_template";
 	}
-	
-	// 영화 추가 페이지 
-	@RequestMapping("/movie_insert.mdo")
-	public String getMovie_insert() {
 
-		return "movie_insert";
-	}
-	
-	@RequestMapping("/manage_actor.mdo")
-	public String getActor() {
+	// 티켓 추가 페이지
+	@RequestMapping("/ticket_insert.mdo")
+	public String getTicket_insert() {
 
-		return "manage_actor";
+		return "ticket_insert";
 	}
 
 	@RequestMapping("/manage_analysis.mdo")
@@ -41,48 +29,6 @@ public class AdminController {
 	public String getCs() {
 
 		return "manage_cs";
-	}
-
-	@RequestMapping("/manage_dashboard.mdo")
-	public String getDashboard() {
-
-		return "manage_dashboard";
-	}
-
-	@RequestMapping("/manage_director.mdo")
-	public String getDirector() {
-
-		return "manage_director";
-	}
-
-	@RequestMapping("/manage_genre.mdo")
-	public String getGenre() {
-
-		return "manage_genre";
-	}
-
-	@RequestMapping("/manage_manageraccount.mdo")
-	public String getManagerAccount() {
-
-		return "manage_manageraccount";
-	}
-
-	@RequestMapping("/manage_member.mdo")
-	public String getMember() {
-
-		return "manage_member";
-	}
-	
-	@RequestMapping("/manage_ticket.mdo")
-	public String getTicket() {
-
-		return "manage_ticket";
-	}
-
-	@RequestMapping("/manage_policy.mdo")
-	public String getPolicy() {
-
-		return "manage_policy";
 	}
 
 	@RequestMapping("/manage_sales.mdo")

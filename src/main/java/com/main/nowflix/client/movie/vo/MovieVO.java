@@ -106,6 +106,17 @@ public class MovieVO {
 	public void setActor_name(String actor_name) {
 		this.actor_name = actor_name;
 	}
+//	
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj instanceof MovieVO) {
+//			MovieVO movie = (MovieVO) obj;
+//			return movie.subtitle.equals(title) && (movie.seq == seq);
+// 		}else {
+// 			return false;
+// 		}
+//		
+//	}
 	
 	
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminNoticeDAO">
+   <resultMap type="adminnotice" id="noticeResult">
+      <result property="notice_id" column="notice_id" />
+      <result property="notice_title" column="notice_title" />
+      <result property="notice_content" column="notice_content" />
+      <result property="notice_regdate" column="notice_regdate" />
+   </resultMap>
+
+<select id="getNoticeList" parameterType="hashMap"
+      resultMap="noticeResult">
+      select (row_number() over()) AS rownum, notice_id, notice_title, notice_regdate, notice_content
+      from(
+      select notice_id, notice_title, notice_regdate, notice_content
+      from notice
+      where 1=1
+      <if test="searchCondition=='TITLE'">
+         AND notice_title LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      <if test="searchCondition=='CONTENT'">
+         AND notice_content LIKE '%'||#{searchKeyword}||'%'
+      </if>
+      order by notice_id desc ) st
+      order by rownum limit #{row} offset
+      #{startPoint}
+   </select>
+
+   <select id="getTotalCount" parameterType="hashMap"
+      resultType="int">
+      select count(*) from notice
+      where 1=1
+      <if test="searchCondition=='TITLE'">
+         AND notice_title LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+      <if test="searchCondition=='CONTENT'">
+         AND notice_content LIKE '%'||#{searchKeyword}||'%'
+      </if>  
+   </select>
+   
+   <insert id="insertNotice" parameterType="adminnotice">
+      insert into notice(notice_title, notice_content, notice_regdate)
+      values(#{notice_title}, #{notice_content}, current_timestamp)
+   </insert>
+   
+   <delete id="deleteNotice" parameterType="adminnotice">
+      delete from notice where notice_id = #{notice_id}
+   </delete>
+   
+   <update id="modifyNotice" parameterType="adminnotice">
+      update notice 
+      set notice_title = #{notice_title}, notice_content = #{notice_content}
+      where notice_id = #{notice_id}
+   </update>
+   
+   <!-- EXCEL , PDF를 나타내기 위함. -->
+   <select id="selectBoardList" resultType="adminnotice">
+      select * from notice order by notice_id asc
+   </select>
+</mapper>
