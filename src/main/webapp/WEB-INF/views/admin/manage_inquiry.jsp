@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +14,17 @@
 			<div class="row mb-5">
 				<div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
 					<div class="col-12">
-						<h3 class="text-muted text-center mb-3">공지사항</h3>
+						<h3 class="text-muted text-center mb-3">1:1 문의</h3>
 					</div>
 					<div class="row">
 						<div class="col-7">
-								<button type="button" class="btn btn-primary btn-sm"
-											data-toggle="modal" data-target="#insertNotice">+공지사항추가</button>
-								<button type="button" class="btn btn-info btn-sm"
+							<button type="button" class="btn btn-primary btn-sm"
+								data-toggle="modal" data-target="#insertInquiry">+추가</button>
+							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#testpdf">PDF</button>
-						      	<button type="button" class="btn btn-info btn-sm"
-								onclick="location.href='noticeExcelDown.mdo'">EXCEL</button>
-								<div class="modal fade" id="testpdf">
+							<button type="button" class="btn btn-info btn-sm"
+								onclick="location.href='inquiryExcelDown.mdo'">EXCEL</button>
+							<div class="modal fade" id="testpdf">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -38,16 +39,17 @@
 
 										<div class="modal-footer">
 											<input type="button" class="btn btn-success"
-												onclick="acyncNoticePdf('noticePdfDown.mdo')"
+												onclick="acyncInquiryPdf('inquiryPdfDown.mdo')"
 												value="PDF저장" data-dismiss="modal">
 											<button type="button" class="btn btn-danger"
-												data-dismiss="modal" onclick="acyncMovePage('manage_notice.mdo')">아니오</button>
+												data-dismiss="modal"
+												onclick="acyncMovePage('manage_inquiry.mdo')">아니오</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-5">
 							<form name="insertConditionForm" id="insertConditionForm">
 								<div class="input-group">
@@ -60,7 +62,7 @@
 									<input type="text" class="form-control search-input"
 										name="searchKeyword" placeholder="검색어 입력">
 									<button type="button" class="btn btn-light search-button"
-										onclick="acyncConditionMovePage('manage_notice.mdo')">
+										onclick="acyncConditionMovePage('manage_inquiry.mdo')">
 										<i class="fas fa-search text-danger"></i>
 									</button>
 								</div>
@@ -68,8 +70,9 @@
 							</form>
 						</div>
 					</div>
-						<div>
-						<table class="table bg-light text-center table-bordered table-striped">
+					<div>
+						<table
+							class="table bg-light text-center table-bordered table-striped">
 							<thead>
 								<tr class="text-muted">
 									<th>#</th>
@@ -79,30 +82,32 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="noticeList" items="${noticeList }">
-								<tr>
-									<th>${noticeList.notice_id }</th>
-									<th>${noticeList.notice_title }</th>
-									<th>${noticeList.notice_regdate }</th>
-									<th>
-										<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modifyNotice"
-										data-modifyid="${noticeList.notice_id }"
-												data-modifytitle="${noticeList.notice_title }"
-												data-modifycontent="${noticeList.notice_content }">수정</button>
-										<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" 
-										data-target="#deleteNotice"
-										data-delid="${noticeList.notice_id }">삭제</button>
-										<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detailNotice"
-										data-detailid="${noticeList.notice_id }"
-												data-detailtitle="${noticeList.notice_title }"
-												data-detailcontent="${noticeList.notice_content }">공지사항보기</button>
-									</th>
-								</tr>
-							</c:forEach>
+								<c:forEach var="inquiryList" items="${inquiryList }">
+									<tr>
+										<th>${inquiryList.inquiry_id }</th>
+										<th>${inquiryList.inquiry_title }</th>
+										<th>${inquiryList.inquiry_date }</th>
+										<th>
+											<button type="button" class="btn btn-primary btn-sm"
+												data-toggle="modal" data-target="#modifyInquiry"
+												data-modifyid="${inquiryList.inquiry_id }"
+												data-modifytitle="${inquiryList.inquiry_title }"
+												data-modifycontent="${inquiryList.inquiry_content }">수정</button>
+											<button type="button" class="btn btn-danger btn-sm"
+												data-toggle="modal" data-target="#deleteInquiry"
+												data-delid="${inquiryList.inquiry_id }">삭제</button>
+											<button type="button" class="btn btn-success btn-sm"
+												data-toggle="modal" data-target="#detailInquiry"
+												data-detailid="${inquiryList.inquiry_id }"
+												data-detailtitle="${inquiryList.inquiry_title }"
+												data-detailcontent="${inquiryList.inquiry_content }">공지사항보기</button>
+										</th>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<!--modify modal -->
-						<div class="modal fade" id="modifyNotice">
+						<div class="modal fade" id="modifyInquiry">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -112,25 +117,31 @@
 									<div class="modal-body">
 										<div class="form-group">
 											<div>
-												<label for="notice_title">제목</label>
-												<input type="text" class="form-control modifyNoticeTitleInput" id="modifyNoticeTitleInput" name="notice_title">
+												<label for="inquiry_title">제목</label> <input type="text"
+													class="form-control modifyInquiryTitleInput"
+													id="modifyInquiryTitleInput" name="inquiry_title">
 											</div>
 											<br>
 											<div>
-												<label for="notice_content">내용</label>
-												<textarea class="form-control rounded-0 modifyNoticeContentInput" id="modifyNoticeContentInput" cols="100" rows="20" name="notice_content"></textarea>
-											<br>
+												<label for="inquiry_content">내용</label>
+												<textarea
+													class="form-control rounded-0 modifyInquiryContentInput"
+													id="modifyInquiryContentInput" cols="100" rows="20"
+													name="inquiry_content"></textarea>
+												<br>
 											</div>
-											<button type="button" class="btn btn-success" data-dismiss="modal"
-												onclick="acyncModifyNotice('noticeModify.mdo')">수정</button>
-												<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+											<button type="button" class="btn btn-success"
+												data-dismiss="modal"
+												onclick="acyncModifyInquiry('inquiryModify.mdo')">수정</button>
+											<button type="button" class="btn btn-danger"
+												data-dismiss="modal">취소</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!--detail modal -->
-						<div class="modal fade" id="detailNotice">
+						<div class="modal fade" id="detailInquiry">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -139,24 +150,30 @@
 									</div>
 									<div class="modal-body">
 										<div>
-											<label for="notice_title">제목</label>
-											<input type="text" class="form-control detailNoticeTitleInput" id="detailNoticeTitleInput" name="notice_title" disabled="disabled">
+											<label for="inquiry_title">제목</label> <input type="text"
+												class="form-control detailInquiryTitleInput"
+												id="detailInquiryTitleInput" name="inquiry_title"
+												disabled="disabled">
 										</div>
 										<br>
 										<div>
-											<label for="notice_content">내용</label>
-											<textarea class="form-control rounded-0 detailNoticeContentInput" id="detailNoticeContentInput" cols="100" rows="20" name="notice_content" disabled="disabled"></textarea>
-										<br>
+											<label for="inquiry_content">내용</label>
+											<textarea
+												class="form-control rounded-0 detailInquiryContentInput"
+												id="detailInquiryContentInput" cols="100" rows="20"
+												name="inquiry_content" disabled="disabled"></textarea>
+											<br>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!--delete modal -->
-						<div class="modal fade" id="deleteNotice">
+						<div class="modal fade" id="deleteInquiry">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -165,16 +182,18 @@
 									</div>
 									<div class="modal-body">해당 공지사항을(를) 정말 삭제하시겠습니까?</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-success" data-dismiss="modal"
-									onclick="acyncDeleteNotice('noticeDelete.mdo')">예</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal">아니오</button>
+										<button type="button" class="btn btn-success"
+											data-dismiss="modal"
+											onclick="acyncDeleteInquiry('inquiryDelete.mdo')">예</button>
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal">아니오</button>
 									</div>
 								</div>
 							</div>
 						</div>
-						
+
 						<!--insert modal -->
-						<div class="modal fade" id="insertNotice">
+						<div class="modal fade" id="insertInquiry">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -182,26 +201,31 @@
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 									</div>
 									<div class="modal-body">
-										<form name="insertNoticeForm" id="insertNoticeForm">
+										<form name="insertInquiryForm" id="insertInquiryForm">
 											<div class="form-group">
 												<div>
-													<label for="notice_title">제목</label>
-													<input type="text" class="form-control" id="notice_title" name="notice_title">
+													<label for="inquiry_title">제목</label> <input type="text"
+														class="form-control" id="inquiry_title"
+														name="inquiry_title">
 												</div>
 												<br>
 												<div>
-													<label for="notice_content">내용</label>
-													<textarea class="form-control rounded-0" id="notice_content" cols="100" rows="20" name="notice_content"></textarea>
+													<label for="inquiry_content">내용</label>
+													<textarea class="form-control rounded-0"
+														id="inquiry_content" cols="100" rows="20"
+														name="inquiry_content"></textarea>
 												</div>
 												<br>
 												<div>
-													<button type="button" class="btn btn-success" data-dismiss="modal" 
-													onclick="acyncInsertNotice('noticeInsert.mdo')">추가</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal"
-													onclick="acyncMovePage('manage_notice.mdo')">취소</button>
+													<button type="button" class="btn btn-success"
+														data-dismiss="modal"
+														onclick="acyncInsertInquiry('inquiryInsert.mdo')">추가</button>
+													<button type="button" class="btn btn-danger"
+														data-dismiss="modal"
+														onclick="acyncMovePage('manage_inquiry.mdo')">취소</button>
 												</div>
 											</div>
-										</form>	
+										</form>
 									</div>
 								</div>
 							</div>
@@ -219,13 +243,13 @@
 									<c:otherwise>
 										<c:if test="${searchCondition eq null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage-1})"
+												onclick="acyncNowPage1('manage_inquiry.mdo', ${nowPage-1})"
 												class="page-link py-2 px-3"> <span>&laquo;</span>
 											</a></li>
 										</c:if>
 										<c:if test="${searchCondition ne null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
+												onclick="acyncNowPage2('manage_inquiry.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
 												class="page-link py-2 px-3"> <span>&laquo;</span>
 											</a></li>
 										</c:if>
@@ -239,24 +263,24 @@
 											<c:when test="${i eq nowPage}">
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_inquiry.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_inquiry.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:when>
 											<c:otherwise>
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_inquiry.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_inquiry.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:otherwise>
@@ -271,24 +295,24 @@
 											<c:when test="${i eq nowPage}">
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_inquiry.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_inquiry.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:when>
 											<c:otherwise>
 												<c:if test="${searchCondition eq null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage1('manage_notice.mdo', ${i})"
+														onclick="acyncNowPage1('manage_inquiry.mdo', ${i})"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_notice.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_inquiry.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:otherwise>
@@ -306,12 +330,12 @@
 									<c:otherwise>
 										<c:if test="${searchCondition eq null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage1('manage_notice.mdo', ${nowPage+1})"
+												onclick="acyncNowPage1('manage_inquiry.mdo', ${nowPage+1})"
 												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
 										</c:if>
 										<c:if test="${searchCondition ne null }">
 											<li class="page-item"><a
-												onclick="acyncNowPage2('manage_notice.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
+												onclick="acyncNowPage2('manage_inquiry.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
 												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
 										</c:if>
 									</c:otherwise>
@@ -319,9 +343,9 @@
 							</ul>
 						</nav>
 					</div>
-					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 </body>
 </html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminInquiryDAO">
+	<resultMap type="admininquiry" id="inquiryResult">
+		<result property="inquiry_id" column="inquiry_id" />
+		<result property="email" column="email" />
+		<result property="manager_email" column="manager_email" />
+		<result property="inquiry_type" column="inquiry_type" />
+		<result property="inquiry_title" column="inquiry_title" />
+		<result property="inquiry_content" column="inquiry_content" />
+		<result property="reply_title" column="reply_title" />
+		<result property="reply_content" column="reply_content" />
+		<result property="inquiry_date" column="inquiry_date" />
+		<result property="reply_date" column="reply_date" />
+		<result property="check_flag" column="check_flag" />
+	</resultMap>
+
+	<select id="getInquiryList" parameterType="hashMap"
+		resultMap="inquiryResult">
+		select (row_number() over()) AS rownum, inquiry_id, email,
+		manager_email, inquiry_type, inquiry_title, inquiry_content,
+		reply_title, reply_content, inquiry_date, reply_date, check_flag
+		from(
+		select *
+		from inquiry
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND inquiry_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='CONTENT'">
+			AND inquiry_content LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		order by inquiry_id desc ) st
+		order by rownum limit #{row} offset
+		#{startPoint}
+	</select>
+
+	<select id="getTotalCount" parameterType="hashMap"
+		resultType="int">
+		select count(*) from inquiry
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND inquiry_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='CONTENT'">
+			AND inquiry_content LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+
+	<insert id="insertInquiry" parameterType="admininquiry">
+		insert into
+		inquiry(reply_title, reply_content, reply_date,	check_flag)
+		values(#{reply_title}, #{reply_content}, current_timestamp, #{check_flag})
+	</insert>
+
+	<delete id="deleteInquiry" parameterType="admininquiry">
+		delete from inquiry
+		where inquiry_id = #{inquiry_id}
+	</delete>
+
+	<update id="modifyInquiry" parameterType="admininquiry">
+		update inquiry
+		set
+		reply_title = #{reply_title}, reply_content =
+		#{reply_content}, reply_date = current_timestamp
+		where inquiry_id = #{inquiry_id}
+	</update>
+
+	<!-- EXCEL , PDF를 나타내기 위함. -->
+	<select id="selectBoardList" resultType="admininquiry">
+		select * from inquiry
+		order by inquiry_id asc
+	</select>
+</mapper>
