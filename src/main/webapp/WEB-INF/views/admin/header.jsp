@@ -41,13 +41,14 @@
 
 <link rel="shortcut icon" href="#">
 
-<script src="js/admin/moviescript.js"></script>
-<script src="js/admin/genrescript.js"></script>
-<script src="js/admin/actorscript.js"></script>
-<script src="js/admin/directorscript.js"></script>
-<script src="js/admin/memberscript.js"></script>
-<script src="js/admin/ticketscript.js"></script>
-<script src="js/admin/policyscript.js"></script>
-<script src="js/admin/managerscript.js"></script>
-<script src="js/admin/noticescript.js"></script>
-<script src="js/admin/faqscript.js"></script>
+<script src="js/admin/movie_script.js"></script>
+<script src="js/admin/genre_script.js"></script>
+<script src="js/admin/actor_script.js"></script>
+<script src="js/admin/director_script.js"></script>
+<script src="js/admin/member_script.js"></script>
+<script src="js/admin/ticket_script.js"></script>
+<script src="js/admin/policy_script.js"></script>
+<script src="js/admin/manager_script.js"></script>
+<script src="js/admin/notice_script.js"></script>
+<script src="js/admin/faq_script.js"></script>
+<script src="js/admin/inquiry_script.js"></script>

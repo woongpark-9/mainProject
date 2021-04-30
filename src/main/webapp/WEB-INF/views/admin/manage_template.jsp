@@ -98,7 +98,7 @@
 										href="#" onclick="acyncMovePage('manage_faq.mdo')"><i
 											class="fas fa-angle-right"></i>&nbsp;FAQ</a></li>
 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link"
-										href="#" onclick="acyncMovePage('manage_cs.mdo')"><i
+										href="#" onclick="acyncMovePage('manage_inquiry.mdo')"><i
 											class="fas fa-angle-right"></i>&nbsp;1:1 문의</a></li>
 								</ul></li>
 							<li class="dropdown nav-item"><a href="#"
