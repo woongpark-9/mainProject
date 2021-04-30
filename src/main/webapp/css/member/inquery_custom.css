@@ -19,6 +19,7 @@
 
 .breadcrumbs{
 	list-style: none;
+	display: flex;
 }
 
 

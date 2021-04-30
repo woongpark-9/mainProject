@@ -141,7 +141,7 @@ public class MemberController  {
 	               return page;
 	            }
 	            // 장르를 선택했다면 프로필 페이지로
-	            page = "redirect:index.do";
+	            page = "redirect:profile.do";
 	            return page;
 				
 			

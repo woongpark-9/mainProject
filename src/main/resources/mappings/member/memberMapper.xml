@@ -166,4 +166,10 @@
 	                 		   )
 	
 	</insert>
+	
+	
+	<!-- 장르 N->Y세팅 -->
+   <update id="setGenre">
+      UPDATE MEMBER SET genre = 'Y' WHERE email = #{email}
+   </update>
 </mapper>

@@ -89,6 +89,10 @@ public class MemberServiceImpl implements MemberService {
 		dao.addinfo(vo);
 		
 	}
-	
+	@Override
+	   public void setGenre(MemberVO vo) throws Exception {
+	      dao.setGenre(vo);
+	      
+	   }
 	
 }

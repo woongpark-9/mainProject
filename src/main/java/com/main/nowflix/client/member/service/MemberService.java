@@ -20,12 +20,14 @@ public interface MemberService {
 	public String certCheck(MemberVO vo) throws Exception;
 
 	public void certUpdate(MemberVO vo) throws Exception;
-	
-	public String ticketCheck(MemberVO vo)throws Exception;
 
-	public String genreCheck(MemberVO vo)throws Exception;
-	
-	public void updateTicket(MemberVO vo)throws Exception;
-	
-	public void addinfo(MemberVO vo)throws Exception;
+	public String ticketCheck(MemberVO vo) throws Exception;
+
+	public String genreCheck(MemberVO vo) throws Exception;
+
+	public void updateTicket(MemberVO vo) throws Exception;
+
+	public void addinfo(MemberVO vo) throws Exception;
+
+	public void setGenre(MemberVO vo) throws Exception;
 }

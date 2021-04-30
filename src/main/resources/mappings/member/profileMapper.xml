@@ -11,32 +11,16 @@
    <id property="profile_id" column="PROFILE_ID" />
    <result property="email" column="EMAIL" />
    <result property="profile_name" column="PROFILE_NAME"/>
-   <result property="horror" column="HORROR" />
-   <result property="comic" column="COMIC"/>
-   <result property="action" column="ACTION"/>
-   <result property="thriller" column="thriller"/>
    <result property="profile_img" column="profile_img"/>
-   <result property="sf" column="sf"/>
-   <result property="adventure" column="adventure"/>
-   <result property="drama" column="drama"/>
-   <result property="animation" column="animation"/>
-   <result property="crime" column="crime"/>
-   <result property="familyg" column="familyg"/>
-   <result property="fantasy" column="fantasy"/>
-   <result property="mystery" column="mystery"/>
-   <result property="romance" column="romance"/>
-   <result property="melodrama" column="melodrama"/>
-   <result property="a_historical_drama" column="a_historical_drama"/>
-   
-   
-   
-   
+   <result property="kids" column="kids"/>
+   <result property="genre_name" column="genre_name"/>
 </resultMap>
+
 
 <!-- 프로파일 가져오기 -->
 <select id="getProfileList" resultType="profileVO">
    SELECT * FROM PROFILE
-   WHERE email = 'jch7931@naver.com' order by profile_id asc
+   WHERE email = #{email} order by profile_id asc
 </select>
 
 <select id="getProfile" resultType="profileVO">
@@ -69,8 +53,8 @@
 
 <insert id="setProfile">
    
-insert into profile(email, profile_name, horror,comic,action,profile_img, kids, thriller, sf, adventure, drama, animation, crime, familyg, fantasy, mystery, romance, melodrama, a_historical_drama )
-values(#{email}, #{profile_name} , #{horror}, #{comic}, #{action}, #{profile_img}, #{kids} , #{thriller}, #{sf}, #{adventure}, #{drama}, #{animation}, #{crime}, #{familyg}, #{fantasy}, #{mystery}, #{romance}, #{melodrama}, #{a_historical_drama});
+insert into profile(email, profile_name, profile_img, kids, genre_name)
+values(#{email}, #{profile_name} , #{profile_img}, #{kids} , #{genre_name});
 </insert>
 
 
