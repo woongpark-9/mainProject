@@ -31,7 +31,7 @@
 		<div class="row justify-content-center" align="center">
 		<c:forEach var="profile" items="${profile }">
 			<div class="ml-3 mr-3 proImg">
-				<a href="index.do?profile_seq=${profile.profile_id }" class="profile" onclick="">
+				<a href="index.do?profile_id=${profile.profile_id }" class="profile">
 					<img class="img-responsive img-rounded profileImg" src="${profile.profile_img }">
 					<br>${profile.profile_name }
 					<c:if test="${profile.kids  == 'Y'}">

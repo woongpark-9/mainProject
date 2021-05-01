@@ -119,7 +119,7 @@ public class MemberController  {
 					String ticketCheck = service.ticketCheck(login);
 				
 						// 접속한 유저가 이용권을 가지고 있지 않다면 결제페이지로 이동
-					if(ticketCheck == null) {
+					if(ticketCheck.equals("N")) {
 						List<TicketVO> basicticketList = new ArrayList<TicketVO>();
 						List<TicketVO> premiumticketList = new ArrayList<TicketVO>();
 						basicticketList = ticketService.getTicketList(new TicketVO("basic"));
