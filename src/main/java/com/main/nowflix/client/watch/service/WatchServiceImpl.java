@@ -13,6 +13,10 @@ public class WatchServiceImpl implements WatchService {
 
 	@Override
 	public WatchVO getWatchVo(WatchVO vo) throws Exception {
+		WatchVO getVO = dao.getWatchVo(vo);
+		if(getVO == null) {
+			dao.insertWatch(vo);
+		}
 		return dao.getWatchVo(vo);
 	}
 
@@ -20,5 +24,11 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public void updateWatch(WatchVO vo) throws Exception {
 		dao.updateWatch(vo);
+	}
+
+
+	@Override
+	public void insertWatch(WatchVO vo) throws Exception {
+		dao.insertWatch(vo);		
 	}
 }

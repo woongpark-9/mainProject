@@ -278,7 +278,7 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-														<a href="getPlayer.do?seq=${movieList.seq }"> <img
+														<a href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}"> <img
 															src="http://yonom.duckdns.org/images/member/play-button.png"
 															width="40px" height="40px">
 														</a>

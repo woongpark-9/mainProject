@@ -21,9 +21,12 @@ public class PlayerController {
 	private PlayerService playerService;
 	
 	@RequestMapping("/getPlayer.do")
-	public ModelAndView getPlayer(MovieVO movieVO, ModelAndView mav ) {
+	public ModelAndView getPlayer(MovieVO movieVO, WatchVO vo, ModelAndView mav, int seq, int profile_id) throws Exception {
+		vo.setMovie_id(seq);
+		vo.setProfile_id(profile_id);
 		System.out.println("영화 플레이어로 이동 controller");
 		mav.addObject("movie", playerService.getMovie(movieVO));
+		mav.addObject("watch", service.getWatchVo(vo));
 		mav.setViewName("views/player/player");
 		return mav;
 	}
@@ -31,7 +34,6 @@ public class PlayerController {
 	@ResponseBody
 	@RequestMapping("/saveTime.do")
 	public String saveTime(WatchVO vo, Model model) throws Exception {
-		System.out.println(vo.getView_point());
 		service.updateWatch(vo);
 		return " ";
 	}

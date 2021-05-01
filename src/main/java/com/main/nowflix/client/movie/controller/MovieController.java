@@ -39,6 +39,7 @@ public class MovieController {
 		List<MovieVO> movieList = movieService.getMovieList(vo);
 //		ProfileVO profile = profileService.getProfile(member);
 		movieService.getSelectMovieList(vo, movieList, model,getpro.getGenre_name());
+		model.addAttribute("profile", getpro);
 		return "/views/member/index"; // View 정보저장
 	}
 

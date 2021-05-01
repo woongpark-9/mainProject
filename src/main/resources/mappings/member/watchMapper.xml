@@ -20,6 +20,23 @@
 </select>
 
 <select id="updateWatch" resultMap="watchResult">
-	UPDATE watch set view_point= #{view_point} where movie_id=1 and profile_id=12
+	UPDATE watch set view_point= #{view_point} where movie_id=#{movie_id} and profile_id=#{profile_id}
+</select>
+
+<select id="insertWatch" resultMap="watchResult">
+	INSERT INTO watch(
+	WATCH_ID,
+	MOVIE_ID,
+	PROFILE_ID,
+	WATCH_DATE,
+	VIEW_POINT
+	) 
+	VALUES(
+	nextval('seq_watch'),
+	#{movie_id},
+	#{profile_id},
+	now(),
+	0
+	)
 </select>
 </mapper>

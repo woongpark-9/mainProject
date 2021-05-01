@@ -34,19 +34,30 @@
 		
 		<video id="video-aa" src="${prefixAddr }${movie.movie_path }/1080p.mp4" autoplay></video>
 <script type="text/javascript">
-    var video_aa = document.getElementById("video-aa");
+	var video_aa = document.getElementById("video-aa");
+	$(window).load(function() {
+		var view_point = ${watch.view_point}
+		if (view_point > 0) {
+			video_aa.currentTime = view_point;
+	        video_aa.play();
+		}
+	});
+    
     video_aa.addEventListener("timeupdate",PlayTime,false);
     
     function PlayTime(e){
         var currentTime = Math.floor(video_aa.currentTime);
-        saveTime("saveTime.do", currentTime);
+        var movie_id = ${watch.movie_id};
+        var profile_id = ${watch.profile_id};
+        
+        saveTime("saveTime.do", movie_id, profile_id, currentTime);
 	 }
 	 
-	 function saveTime(url, time) {
+	 function saveTime(url, movie_id, profile_id, time) {
 	     // ajax option
 	     var ajaxOption = {
 	             url : url,
-	             data : {"view_point" : time},
+	             data : {"movie_id" : movie_id, "profile_id" : profile_id, "view_point" : time},
 	             type : "POST",
 	     };
 	     $.ajax(ajaxOption).done(function(data){
