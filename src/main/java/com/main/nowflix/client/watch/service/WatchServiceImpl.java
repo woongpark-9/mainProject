@@ -15,4 +15,10 @@ public class WatchServiceImpl implements WatchService {
 	public WatchVO getWatchVo(WatchVO vo) throws Exception {
 		return dao.getWatchVo(vo);
 	}
+
+
+	@Override
+	public void updateWatch(WatchVO vo) throws Exception {
+		dao.updateWatch(vo);
+	}
 }

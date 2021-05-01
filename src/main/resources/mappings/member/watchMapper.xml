@@ -18,4 +18,8 @@
 <select id="getWatchVO" resultMap="watchResult">
 	SELECT * FROM WATCH WHERE PROFILE_ID = #{profile_id} and MOVIE_ID = #{movie_id}
 </select>
+
+<select id="updateWatch" resultMap="watchResult">
+	UPDATE watch set view_point= #{view_point} where movie_id=1 and profile_id=12
+</select>
 </mapper>

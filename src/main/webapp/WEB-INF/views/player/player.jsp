@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,6 +19,7 @@
 </head>
 
 <body>
+<div id="null"></div>
 	<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
 
 	<div class="video-container" >
@@ -26,14 +29,32 @@
 				<img alt="이전버튼"
 					src="http://yonom.duckdns.org/images/player/previous-button.png"
 					style="width: 30px; height: 45px; ">
-		
 			</button>
 		</div>
 		
-		<video src="${prefixAddr }${movie.movie_path }/1080p.mp4" autoplay>
-		
-		
-		</video>
+		<video id="video-aa" src="${prefixAddr }${movie.movie_path }/1080p.mp4" autoplay></video>
+<script type="text/javascript">
+    var video_aa = document.getElementById("video-aa");
+    video_aa.addEventListener("timeupdate",PlayTime,false);
+    
+    function PlayTime(e){
+        var currentTime = Math.floor(video_aa.currentTime);
+        saveTime("saveTime.do", currentTime);
+	 }
+	 
+	 function saveTime(url, time) {
+	     // ajax option
+	     var ajaxOption = {
+	             url : url,
+	             data : {"view_point" : time},
+	             type : "POST",
+	     };
+	     $.ajax(ajaxOption).done(function(data){
+	         // Contents 영역 삭제
+	         $('#null').html(data);
+	     });
+	 }
+</script>
 		<div class="controls-container">
 			<div class="progress-controls">
 				<div class="progress-bar">

@@ -14,6 +14,11 @@ public class WatchDAO {
 	public WatchVO getWatchVo(WatchVO vo) {
 		return sql.selectOne("watchMapper.getWatchVO", vo);
 	}
+	
+	public int updateWatch(WatchVO vo) {
+		sql.update("watchMapper.updateWatch", vo);
+		return 0;
+	}
 }
 
 
