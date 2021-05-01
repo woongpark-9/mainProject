@@ -36,7 +36,8 @@
 <script type="text/javascript">
 	var video_aa = document.getElementById("video-aa");
 	$(window).load(function() {
-		var view_point = ${watch.view_point}
+		var view_point = ${watch.view_point};
+		
 		if (view_point > 0) {
 			video_aa.currentTime = view_point;
 	        video_aa.play();
@@ -49,15 +50,17 @@
         var currentTime = Math.floor(video_aa.currentTime);
         var movie_id = ${watch.movie_id};
         var profile_id = ${watch.profile_id};
-        
-        saveTime("saveTime.do", movie_id, profile_id, currentTime);
+        var duration = Math.floor(video_aa.duration);
+        if (currentTime % 5 == 0) {
+        	saveTime("saveTime.do", movie_id, profile_id, currentTime, duration);
+        }
 	 }
 	 
-	 function saveTime(url, movie_id, profile_id, time) {
+	 function saveTime(url, movie_id, profile_id, time, duration) {
 	     // ajax option
 	     var ajaxOption = {
 	             url : url,
-	             data : {"movie_id" : movie_id, "profile_id" : profile_id, "view_point" : time},
+	             data : {"movie_id" : movie_id, "profile_id" : profile_id, "view_point" : time, "duration" : duration},
 	             type : "POST",
 	     };
 	     $.ajax(ajaxOption).done(function(data){

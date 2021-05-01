@@ -8,6 +8,13 @@ public class WatchVO {
 	private int profile_id;
 	private Date watch_date;
 	private int view_point;
+	private int duration;
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 	public int getWatch_id() {
 		return watch_id;
 	}

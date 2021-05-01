@@ -20,7 +20,7 @@
 </select>
 
 <select id="updateWatch" resultMap="watchResult">
-	UPDATE watch set view_point= #{view_point} where movie_id=#{movie_id} and profile_id=#{profile_id}
+	UPDATE watch set view_point= #{view_point}, duration=#{duration} where movie_id=#{movie_id} and profile_id=#{profile_id}
 </select>
 
 <select id="insertWatch" resultMap="watchResult">
