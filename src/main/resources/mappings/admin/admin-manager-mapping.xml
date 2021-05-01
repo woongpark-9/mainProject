@@ -9,6 +9,7 @@
       <result property="manager_type" column="manager_type" />
       <result property="manager_regdate" column="manager_regdate" />
       <result property="manager_email" column="manager_email" />
+      <result property="rownum" column="rownum" />
    </resultMap>
 
    <select id="getManagerList" parameterType="hashMap"
@@ -21,8 +22,8 @@
       <if test="searchCondition=='EMAIL'">
          AND manager_email LIKE '%'||#{searchKeyword}||'%'
       </if>
-      order by manager_id desc ) st
-      order by rownum limit #{row} offset
+      order by manager_id) st
+      order by rownum desc #{row} offset
       #{startPoint}
    </select>
    

@@ -16,6 +16,14 @@ public class AdminMemberVO {
 	private String ticket_id;
 	private String kakao;
 	private String naver;
+	private int rownum;
+	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getSeq() {
 		return seq;
 	}

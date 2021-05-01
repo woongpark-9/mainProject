@@ -43,8 +43,8 @@
 		<if test="searchCondition=='GENRE'">
 			AND genre_name LIKE '%'||#{searchKeyword}||'%'
 		</if>
-		order by seq desc) st
-		order by rownum limit #{row} offset
+		order by seq) st
+		order by rownum desc limit #{row} offset
 		#{startPoint}
 	</select>
 

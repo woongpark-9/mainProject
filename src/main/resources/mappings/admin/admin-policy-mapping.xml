@@ -8,6 +8,7 @@
 		<result property="policy_title" column="policy_title" />
 		<result property="policy_content" column="policy_content" />
 		<result property="policy_regdate" column="policy_regdate" />
+		<result property="rownum" column="rownum" />
 	</resultMap>
 
 	<select id="getPolicyList" parameterType="hashMap"
@@ -21,8 +22,8 @@
 		<if test="searchCondition=='TITLE'">
 			AND policy_title LIKE '%'||#{searchKeyword}||'%'
 		</if>
-		order by policy_id desc ) st
-		order by rownum limit #{row} offset
+		order by policy_id) st
+		order by rownum desc limit #{row} offset
 		#{startPoint}
 	</select>
 

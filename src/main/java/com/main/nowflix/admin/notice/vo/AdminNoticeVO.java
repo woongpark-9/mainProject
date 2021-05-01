@@ -8,7 +8,14 @@ public class AdminNoticeVO {
 	private String notice_title;
 	private String notice_content;
 	private Date notice_regdate;
+	private int rownum;
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getNotice_id() {
 		return notice_id;
 	}

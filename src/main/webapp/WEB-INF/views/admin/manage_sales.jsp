@@ -47,6 +47,7 @@
                   class="table bg-light text-center table-bordered table-striped">
                   <thead>
                      <tr class="text-muted">
+                     	<th>#</th>
                         <th>회원 이메일</th>
                         <th>이용권</th>
                         <th>이용권 만료일</th>
@@ -59,6 +60,7 @@
                   <tbody>
                   	<c:forEach var="salesList" items="${salesList }">
                      <tr>
+                     	<th>${salesList.rownum }</th>
                         <th>${salesList.email }</th>
                         <th>${salesList.ticket_id }</th>
                         <th>${salesList.expiry_date }</th>

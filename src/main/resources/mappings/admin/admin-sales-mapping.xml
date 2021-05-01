@@ -14,6 +14,7 @@
       <result property="expiry_date" column="expiry_date" />
       <result property="payment_method_type" column="payment_method_type" />
       <result property="card_name" column="card_name" />
+      <result property="rownum" column="rownum" />
    </resultMap>
 
 <select id="getSalesList" parameterType="hashMap"
@@ -31,8 +32,8 @@
       <if test="searchCondition=='TICKET'">
          AND ticket_id LIKE '%'||#{searchKeyword}||'%'
       </if>
-      order by payment_date desc ) st
-      order by rownum limit #{row} offset
+      order by payment_date) st
+      order by rownum desc limit #{row} offset
       #{startPoint}
    </select>
 

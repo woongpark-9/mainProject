@@ -8,6 +8,7 @@
       <result property="notice_title" column="notice_title" />
       <result property="notice_content" column="notice_content" />
       <result property="notice_regdate" column="notice_regdate" />
+      <result property="rownum" column="rownum" />
    </resultMap>
 
 <select id="getNoticeList" parameterType="hashMap"
@@ -23,8 +24,8 @@
       <if test="searchCondition=='CONTENT'">
          AND notice_content LIKE '%'||#{searchKeyword}||'%'
       </if>
-      order by notice_id desc ) st
-      order by rownum limit #{row} offset
+      order by notice_id) st
+      order by rownum desc limit #{row} offset
       #{startPoint}
    </select>
 

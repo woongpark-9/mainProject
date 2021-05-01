@@ -85,7 +85,7 @@
                      <tbody>
                      <c:forEach var="faqList" items="${faqList }">
                         <tr>
-                           <th>${faqList.faq_id }</th>
+                           <th>${faqList.rownum }</th>
                            <th>${faqList.faq_category }</th>
                            <th>${faqList.faq_title }</th>
                            <th>${faqList.faq_regdate }</th>

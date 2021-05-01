@@ -9,6 +9,7 @@
       <result property="faq_title" column="faq_title" />
       <result property="faq_content" column="faq_content" />
       <result property="faq_regdate" column="faq_regdate" />
+      <result property="rownum" column="rownum" />
    </resultMap>
 
 <select id="getFaqList" parameterType="hashMap"
@@ -27,8 +28,8 @@
       <if test="searchCondition=='CATEGORY'">
          AND faq_category LIKE '%'||#{searchKeyword}||'%'
       </if>
-      order by faq_id desc ) st
-      order by rownum limit #{row} offset
+      order by faq_id) st
+      order by rownum desc limit #{row} offset
       #{startPoint}
    </select>
 

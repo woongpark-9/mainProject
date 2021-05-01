@@ -84,8 +84,8 @@
 										<th class="align-middle">${ticketList.rownum }</th>
 										<th class="align-middle">${ticketList.ticket_id }</th>
 										<th class="align-middle">${ticketList.ticket_name }</th>
-										<th class="align-middle">${ticketList.ticket_period }</th>
-										<th class="align-middle">${ticketList.ticket_price }</th>
+										<th class="align-middle">${ticketList.ticket_period }일</th>
+										<th class="align-middle">${ticketList.ticket_price }원</th>
 										<th class="align-middle">${ticketList.ticket_status }</th>
 
 										<th><button type="button" class="btn btn-primary btn-sm"

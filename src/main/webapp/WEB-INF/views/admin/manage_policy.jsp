@@ -85,7 +85,7 @@
 							<tbody>
 								<c:forEach var="policyList" items="${policyList }">
 									<tr>
-										<th>${policyList.policy_id }</th>
+										<th>${policyList.rownum }</th>
 										<th>${policyList.policy_title }</th>
 										<th>${policyList.policy_regdate }</th>
 										<th>

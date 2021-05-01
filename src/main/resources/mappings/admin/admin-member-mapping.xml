@@ -17,6 +17,7 @@
 		<result property="ticket_id" column="ticket_id" />
 		<result property="kakao" column="kakao" />
 		<result property="naver" column="naver" />
+		<result property="rownum" column="rownum" />
 	</resultMap>
 
 	<select id="getMemberList" parameterType="hashMap"
@@ -35,8 +36,8 @@
 			AND nickname LIKE '%'||#{searchKeyword}||'%'
 		</if>
 
-		order by seq desc ) st
-		order by rownum limit #{row} offset
+		order by seq) st
+		order by rownum desc limit #{row} offset
 		#{startPoint}
 	</select>
 

@@ -90,7 +90,7 @@
 							<tbody>
 								<c:forEach var="managerList" items="${managerList }">
 									<tr>
-										<th>${managerList.manager_id }</th>
+										<th>${managerList.rownum }</th>
 										<th>${managerList.manager_email }</th>
 										<th>${managerList.manager_type }</th>
 										<th>${managerList.manager_regdate }</th>

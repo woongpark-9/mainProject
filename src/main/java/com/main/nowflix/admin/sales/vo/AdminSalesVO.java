@@ -3,7 +3,6 @@ package com.main.nowflix.admin.sales.vo;
 import java.sql.Date;
 
 public class AdminSalesVO {
-
 	private String sales_id;
 	private String cid;
 	private String tid;
@@ -14,7 +13,14 @@ public class AdminSalesVO {
 	private Date expiry_date;
 	private String payment_method_type;
 	private String card_name;
+	private int rownum;
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public String getSales_id() {
 		return sales_id;
 	}

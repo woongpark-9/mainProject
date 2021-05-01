@@ -9,7 +9,14 @@ public class AdminManagerVO {
 	private String manager_type;
 	private Date manager_regdate;
 	private String manager_email;
+	private int rownum;
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getManager_id() {
 		return manager_id;
 	}

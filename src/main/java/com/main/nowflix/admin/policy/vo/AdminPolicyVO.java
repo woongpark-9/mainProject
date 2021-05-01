@@ -8,7 +8,14 @@ public class AdminPolicyVO {
 	private String policy_title;
 	private String policy_content;
 	private Date policy_regdate;
+	private int rownum;
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getPolicy_id() {
 		return policy_id;
 	}

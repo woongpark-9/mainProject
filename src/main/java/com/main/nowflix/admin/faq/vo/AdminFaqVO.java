@@ -9,7 +9,14 @@ public class AdminFaqVO {
 	private String faq_title;
 	private String faq_content;
 	private Date faq_regdate;
+	private int rownum;
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getFaq_id() {
 		return faq_id;
 	}

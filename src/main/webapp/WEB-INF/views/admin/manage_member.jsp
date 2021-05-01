@@ -104,7 +104,7 @@
 								<tbody>
 									<c:forEach var="memberList" items="${memberList }">
 										<tr>
-											<th class="align-middle">${memberList.seq}</th>
+											<th class="align-middle">${memberList.rownum }</th>
 											<th class="align-middle">${memberList.email }</th>
 											<th class="align-middle">${memberList.nickname }</th>
 											<th class="align-middle">${memberList.age }</th>

@@ -84,7 +84,7 @@
 							<tbody>
 							<c:forEach var="noticeList" items="${noticeList }">
 								<tr>
-									<th>${noticeList.notice_id }</th>
+									<th>${noticeList.rownum }</th>
 									<th>${noticeList.notice_title }</th>
 									<th>${noticeList.notice_regdate }</th>
 									<th>
