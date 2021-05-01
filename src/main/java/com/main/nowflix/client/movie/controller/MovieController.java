@@ -15,6 +15,7 @@ import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.movie.service.MovieService;
 import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.profile.service.ProfileService;
+import com.main.nowflix.client.profile.vo.ProfileVO;
 
 @Controller
 @SessionAttributes("member")
@@ -30,15 +31,14 @@ public class MovieController {
 	
 	
 	@RequestMapping("/index.do")
-	public String getMovieList(MovieVO vo, Model model,String profile_seq) {
+	public String getMovieList(MovieVO vo, Model model,ProfileVO profile) throws Exception {
 		System.out.println("Controller 작동");
-		System.out.println("profile_seq : " + profile_seq);
+		System.out.println("profile_id : " + profile.getProfile_id());
+		ProfileVO getpro = profileService.getProfile(profile);
 		// 전체 영화 리스트
 		List<MovieVO> movieList = movieService.getMovieList(vo);
 //		ProfileVO profile = profileService.getProfile(member);
-		movieService.getSelectMovieList(vo, movieList, model);
-
-
+		movieService.getSelectMovieList(vo, movieList, model,getpro.getGenre_name());
 		return "/views/member/index"; // View 정보저장
 	}
 

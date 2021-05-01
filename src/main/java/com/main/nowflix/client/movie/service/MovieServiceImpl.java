@@ -33,19 +33,22 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public void getSelectMovieList(MovieVO vo,List<MovieVO> movieList,Model model) {
+	public void getSelectMovieList(MovieVO vo,List<MovieVO> movieList,Model model,String getGenre_name) {
 		
 		//전체 영화 리스트
 		movieList = getMovieList(vo);
+		
 		
 		// 미국 영화 리스트
 		List<MovieVO> usaMovieList = new ArrayList<MovieVO>();
 		
 		// 취향저격 리스트
 		Set<MovieVO> favoriteMovieList = new HashSet<MovieVO>(12);
-
-		String[] selectGenre = { "액션", "공포", "로맨스", "로맨스", "애니메이션" };
-
+		System.out.println(getGenre_name);
+		String[] selectGenre = getGenre_name.split(",");
+		for(String genre : selectGenre) {
+			System.out.print(genre);
+		}
 		// 0 ~ 사용자가 고른 영화의 장르 수의 난수 생성
 		while(true) {
 			// 0 부터 36 까지의 난수생성 예
