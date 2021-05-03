@@ -300,7 +300,7 @@
 								</c:if>
 						</div>
 						
-						
+						</div>
 					</div>
 				<div class="category-list">
 					<div class="category">
@@ -310,16 +310,18 @@
 							<c:forEach var="movieList" items="${watchMovieList }">
 								<div class="watch-items">
 									<div class="watchMovieList-item">
-
 										<div class="poster">
 											<img src="${prefixAddr }${movieList.movie_path }/poster.png" alt="">
-
-
-											<div class="progress">
-												<span class="progress-bar"><span role="presentation"
-													class="progress-completed" style="width: 50%;"></span></span>
-											</div>
 											
+											<c:forEach var="watchList" items="${watchList }">
+												<c:if test="${movieList.seq eq watchList.movie_id}">
+													<div class="progress">
+														<span class="progress-bar">
+															<span role="presentation" class="progress-completed" style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
+														</span>
+													</div>
+												</c:if>
+											</c:forEach>
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
