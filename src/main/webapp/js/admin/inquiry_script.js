@@ -80,6 +80,22 @@ function acyncDeleteInquiry(url) {
 	});
 }
 
+
+function acyncRefreshPage() {
+	$.ajax({
+		url : 'manage_template.mdo',
+		type : "POST",
+		contentType : "application/json",
+		success : function(data) {
+			$('#navbar1').children().remove();
+			$('#navbar1').html(data);
+		},
+		error : function() {
+			alert("error");
+		}
+	});
+}
+
 // 답변 수정
 function acyncModifyInquiry(url) {
 	var form = {
@@ -100,8 +116,8 @@ function acyncModifyInquiry(url) {
 		success : function(data) {
 			if (data == 1) {
 				alert("해당 답변이 수정되었습니다.");
-//				acyncRefreshPage();
-				acyncMovePage('manage_inquiry.mdo');
+				// acyncRefreshPage();
+				 acyncMovePage('manage_inquiry.mdo');
 			} else {
 				alert("[Error] 답변 수정 오류");
 			}
@@ -109,24 +125,13 @@ function acyncModifyInquiry(url) {
 		error : function() {
 			alert("error");
 		}
-	});
+	})
 }
 
 
-//function acyncRefreshPage() {
-//	$.ajax({
-//		url : 'manage_template.mdo',
-//		type : "POST",
-//		contentType : "application/json",
-//		success : function(data) {
-//			$('#navbar1').children().remove();
-//			$('#navbar1').html(data);
-//		},
-//		error : function() {
-//			alert("error");
-//		}
-//	});
-//}
+// acyncModifyInquiry()
+// .then(acyncRefreshPage())
+// .then(acyncMovePage('manage_inquiry.mdo'));
 
 //
 // // FAQ 추가

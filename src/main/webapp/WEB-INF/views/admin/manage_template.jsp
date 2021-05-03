@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@
 
 <body>
 	<!-- index.html : navbar -->
-	<nav class="navbar navbar-expand-md navbar-light" id="navbar1">
+	<nav class="navbar navbar-expand-md navbar-light">
 		<button class="navbar-toggler ml-auto mb-2 bg-light" type="button"
 			data-toggle="collapse" data-target="#sidebar">
 			<span class="navbar-toggle-icon"></span>
@@ -179,19 +179,36 @@
 									<!-- 									<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li> -->
 									<li><span class="text-white">________ 관리자님
 											반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-									<li class="nav-item icon-parent">
-										<div class="dropdown">
-											<a href="#" class="nav-link icon-bullet dropdown-toggle"
-												role="button" id="dropdownMenuOffset" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false" data-offset="0,30"> <i
-												class="fas fa-bell text-muted fa-lg"></i></a>
-											<div class="dropdown-menu dropdown-menu-right p-4" aria-labelledby="dropdownMenuOffset">
-												<a class="dropdown-item" href="#"
-													onclick="acyncMovePage('manage_inquiry.mdo')">새로운 문의
-													사항이 ${inquiryCount}개 있습니다.</a>
+									<li class="nav-item icon-parent"><c:if
+											test="${inquiryCount gt 0 }">
+											<div class="dropdown">
+												<a href="#" class="nav-link icon-bullet dropdown-toggle"
+													role="button" id="dropdownMenuOffset"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false" data-offset="0,30"> <i
+													class="fas fa-bell text-muted fa-lg"></i></a>
+												<div class="dropdown-menu dropdown-menu-right p-4"
+													aria-labelledby="dropdownMenuOffset">
+													<a class="dropdown-item" href="#"
+														onclick="acyncMovePage('manage_inquiry.mdo')" id="hi">새로운
+														문의 사항이 ${inquiryCount}개 있습니다.</a>
+												</div>
 											</div>
-										</div>
-									</li>
+										</c:if> <c:if test="${inquiryCount eq 0 }">
+											<div class="dropdown">
+												<a href="#" class="nav-link dropdown-toggle"
+													role="button" id="dropdownMenuOffset"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false" data-offset="0,30"> <i
+													class="fas fa-bell text-muted fa-lg"></i></a>
+												<div class="dropdown-menu dropdown-menu-right p-4"
+													aria-labelledby="dropdownMenuOffset">
+													<a class="dropdown-item" href="#"
+														onclick="acyncMovePage('manage_inquiry.mdo')" id="hi">새로운
+														문의 사항이 없습니다.</a>
+												</div>
+											</div>
+										</c:if></li>
 									<li class="nav-item"><a href="#" class="nav-link"
 										data-toggle="modal" data-target="#log-out"> <span
 											class="text-white"> 로그아웃&nbsp;<i
