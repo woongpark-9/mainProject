@@ -49,10 +49,16 @@
 		</if>
 	</select>
 
+	<select id="getInquiryCount" resultType="int">
+		select count(*) from inquiry
+		where check_flag='0'
+	</select>
+
 	<insert id="insertInquiry" parameterType="admininquiry">
 		insert into
-		inquiry(reply_title, reply_content, reply_date,	check_flag)
-		values(#{reply_title}, #{reply_content}, current_timestamp, #{check_flag})
+		inquiry(reply_title, reply_content, reply_date, check_flag)
+		values(#{reply_title}, #{reply_content}, current_timestamp,
+		#{check_flag})
 	</insert>
 
 	<delete id="deleteInquiry" parameterType="admininquiry">
@@ -64,8 +70,11 @@
 		update inquiry
 		set
 		reply_title = #{reply_title}, reply_content =
-		#{reply_content}, reply_date = current_timestamp
-		where inquiry_id = #{inquiry_id}
+		#{reply_content},
+		reply_date = current_timestamp,
+		check_flag = #{check_flag}
+		where
+		inquiry_id = #{inquiry_id}
 	</update>
 
 	<!-- EXCEL , PDF를 나타내기 위함. -->

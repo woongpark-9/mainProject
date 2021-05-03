@@ -19,4 +19,6 @@ public interface AdminInquiryService {
 	List<AdminInquiryVO> selectBoardList() throws Exception; // EXCEL
 
 	int createPdf(String newpdf); // PDF
+
+	int getInquiryCount();
 }

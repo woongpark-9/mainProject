@@ -25,7 +25,7 @@
 
 <body>
 	<!-- index.html : navbar -->
-	<nav class="navbar navbar-expand-md navbar-light">
+	<nav class="navbar navbar-expand-md navbar-light" id="navbar1">
 		<button class="navbar-toggler ml-auto mb-2 bg-light" type="button"
 			data-toggle="collapse" data-target="#sidebar">
 			<span class="navbar-toggle-icon"></span>
@@ -46,11 +46,11 @@
 								class="text-white">admin</a>
 						</div>
 						<ul class="navbar-nav flex-column mt-4">
-<!-- 							<li class="nav-item"><a href="#" -->
-<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link" -->
-<!-- 								onclick="acyncMovePage('manage_dashboard.mdo')"> <i -->
-<!-- 									class="fas fa-home text-white fa-lg mr-2"></i>DashBoard -->
-<!-- 							</a></li> -->
+							<!-- 							<li class="nav-item"><a href="#" -->
+							<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link" -->
+							<!-- 								onclick="acyncMovePage('manage_dashboard.mdo')"> <i -->
+							<!-- 									class="fas fa-home text-white fa-lg mr-2"></i>DashBoard -->
+							<!-- 							</a></li> -->
 							<li class="nav-item"><a href="#"
 								class="nav-link text-white p-2 mb-2 sidebar-link"
 								onclick="acyncMovePage('manage_movie.mdo')"> <i
@@ -179,9 +179,19 @@
 									<!-- 									<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li> -->
 									<li><span class="text-white">________ 관리자님
 											반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-									<li class="nav-item icon-parent"><a href="#"
-										class="nav-link icon-bullet"><i
-											class="fas fa-bell text-muted fa-lg"></i></a></li>
+									<li class="nav-item icon-parent">
+										<div class="dropdown">
+											<a href="#" class="nav-link icon-bullet dropdown-toggle"
+												role="button" id="dropdownMenuOffset" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false" data-offset="0,30"> <i
+												class="fas fa-bell text-muted fa-lg"></i></a>
+											<div class="dropdown-menu dropdown-menu-right p-4" aria-labelledby="dropdownMenuOffset">
+												<a class="dropdown-item" href="#"
+													onclick="acyncMovePage('manage_inquiry.mdo')">새로운 문의
+													사항이 ${inquiryCount}개 있습니다.</a>
+											</div>
+										</div>
+									</li>
 									<li class="nav-item"><a href="#" class="nav-link"
 										data-toggle="modal" data-target="#log-out"> <span
 											class="text-white"> 로그아웃&nbsp;<i

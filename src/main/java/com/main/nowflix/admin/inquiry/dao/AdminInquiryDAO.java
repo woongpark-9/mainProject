@@ -19,10 +19,17 @@ public class AdminInquiryDAO {
 		System.out.println("DAO 작동 ---> MyBatis로 getInquiryList() 기능 처리");
 		return sqlSessionTemplate.selectList("AdminInquiryDAO.getInquiryList", map);
 	}
+
 	// 문의 총 개수
 	public int getTotalCount(HashMap<String, Object> map) {
 		System.out.println("DAO 작동 ---> MyBatis로 getTotalCount() 기능 처리");
 		return sqlSessionTemplate.selectOne("AdminInquiryDAO.getTotalCount", map);
+	}
+
+	// 미답변 문의 개수
+	public int getInquiryCount() {
+		System.out.println("DAO 작동 ---> MyBatis로 getInquiryCount() 기능 처리");
+		return sqlSessionTemplate.selectOne("AdminInquiryDAO.getInquiryCount");
 	}
 
 	// 문의 추가
@@ -42,9 +49,10 @@ public class AdminInquiryDAO {
 		System.out.println("DAO작동 ---> MyBatis로 modifyInquiry() 기능 처리");
 		return sqlSessionTemplate.update("AdminInquiryDAO.modifyInquiry", vo);
 	}
-	
-	//PDF,EXCEL 둘중하나 (주석고쳐야함)
+
+	// PDF,EXCEL 둘중하나 (주석고쳐야함)
 	public List<AdminInquiryVO> selectBoardList(AdminInquiryVO vo) {
 		return sqlSessionTemplate.selectList("AdminInquiryDAO.selectBoardList");
 	}
+
 }
