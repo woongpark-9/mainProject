@@ -304,7 +304,7 @@
 					</div>
 				<div class="category-list">
 					<div class="category">
-					<c:if test="${watchMovieList != NULL}" >
+					<c:if test="${not empty watchMovieList}" >
 						<div class="title">${profile.profile_name } 님이 시청 중인 콘텐츠</div>
 						<div class="watch-list">
 							<c:forEach var="movieList" items="${watchMovieList }">
