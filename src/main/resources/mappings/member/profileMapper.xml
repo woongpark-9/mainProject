@@ -7,55 +7,62 @@
 
 
 <mapper namespace="profileMapper">
-   <resultMap type="profileVO" id="profileResult">
-   <id property="profile_id" column="PROFILE_ID" />
-   <result property="email" column="EMAIL" />
-   <result property="profile_name" column="PROFILE_NAME"/>
-   <result property="profile_img" column="profile_img"/>
-   <result property="kids" column="kids"/>
-   <result property="genre_name" column="genre_name"/>
-</resultMap>
+	<resultMap type="profileVO" id="profileResult">
+		<id property="profile_id" column="PROFILE_ID" />
+		<result property="email" column="EMAIL" />
+		<result property="profile_name" column="PROFILE_NAME" />
+		<result property="profile_img" column="profile_img" />
+		<result property="kids" column="kids" />
+		<result property="genre_name" column="genre_name" />
+	</resultMap>
 
 
-<!-- 프로파일 가져오기 -->
-<select id="getProfileList" resultType="profileVO">
-   SELECT * FROM PROFILE
-   WHERE email = #{email} order by profile_id asc
-</select>
+	<!-- 프로파일 가져오기 -->
+	<select id="getProfileList" resultType="profileVO">
+		SELECT * FROM PROFILE
+		WHERE email = #{email} order by profile_id asc
+	</select>
 
-<select id="getProfile" resultType="profileVO">
-   SELECT * FROM PROFILE
-   WHERE profile_id = #{profile_id} order by profile_id asc
-</select>
+	<select id="getProfile" resultType="profileVO">
+		SELECT * FROM PROFILE
+		WHERE profile_id = #{profile_id} order by profile_id asc
+	</select>
 
-<select id="profileAdd">
-   INSERT INTO PROFILE( 
-   PROFILE_ID
-   , EMAIL
-   , PROFILE_NAME
-   , PROFILE_IMG
-   , KIDS)
-   VALUES( 6
-   , 'jch7931@naver.com'
-   , #{profile_name}
-   , 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
-   , #{kids}
-   )
-</select>
+	<select id="getProfileNew" resultType="profileVO">
+		SELECT * FROM PROFILE WHERE PROFILE_ID =
+		(SELECT MAX(PROFILE_ID) FROM PROFILE WHERE EMAIL = #{email})
+	</select>
 
-<select id="updateProfile">
-   UPDATE profile SET 
-   PROFILE_NAME = #{profile_name},
-   PROFILE_IMG = #{profile_img},
-   KIDS = #{kids}
-   WHERE PROFILE_ID = #{profile_id}
-</select>
+	<select id="profileAdd">
+		INSERT INTO PROFILE(
 
-<insert id="setProfile">
-   
-insert into profile(email, profile_name, profile_img, kids, genre_name)
-values(#{email}, #{profile_name} , #{profile_img}, #{kids} , #{genre_name});
-</insert>
+		EMAIL
+		, PROFILE_NAME
+		, PROFILE_IMG
+		, KIDS)
+		VALUES(
+		#{email}
+		, #{profile_name}
+		, 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
+		, #{kids}
+		)
+	</select>
+
+	<select id="updateProfile">
+		UPDATE profile SET
+		PROFILE_NAME = #{profile_name},
+		PROFILE_IMG = #{profile_img},
+		KIDS = #{kids},
+		genre_name = #{genre_name}
+		WHERE PROFILE_ID = #{profile_id}
+	</select>
+
+	<insert id="setProfile">
+
+		insert into profile(email, profile_name, profile_img, kids, genre_name)
+		values(#{email}, #{profile_name} , #{profile_img}, #{kids} ,
+		#{genre_name});
+	</insert>
 
 
 </mapper>

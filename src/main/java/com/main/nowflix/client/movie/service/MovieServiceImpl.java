@@ -16,9 +16,6 @@ import com.main.nowflix.client.movie.vo.MovieVO;
 public class MovieServiceImpl implements MovieService {
 	@Autowired
 	private MovieDAO movieDAO;
-	
-	
-	
 
 	@Override
 	public List<MovieVO> getMovieList(MovieVO vo) {
@@ -33,54 +30,13 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public void getSelectMovieList(MovieVO vo,List<MovieVO> movieList,Model model,String getGenre_name) {
-		
-		//전체 영화 리스트
+	public void getSelectMovieList(MovieVO vo, List<MovieVO> movieList, Model model, String getGenre_name) {
+
+		// 전체 영화 리스트
 		movieList = getMovieList(vo);
-		
-		
+
 		// 미국 영화 리스트
 		List<MovieVO> usaMovieList = new ArrayList<MovieVO>();
-		
-		// 취향저격 리스트
-		Set<MovieVO> favoriteMovieList = new HashSet<MovieVO>(12);
-		System.out.println(getGenre_name);
-		String[] selectGenre = getGenre_name.split(",");
-		for(String genre : selectGenre) {
-			System.out.print(genre);
-		}
-		// 0 ~ 사용자가 고른 영화의 장르 수의 난수 생성
-		while(true) {
-			// 0 부터 36 까지의 난수생성 예
-			int result = (int)(Math.random()*37);
-			System.out.println(result);
-			if(result == 36) {
-				break;
-			}
-		}
-
-		System.out.println("--------------------------");
-
-		for (int j = 0; j < movieList.size(); j++) {
-			int index = (int) (Math.random() * selectGenre.length);
-			System.out.println(index);
-				System.out.println(selectGenre[index]);
-			if (movieList.get(j).getGenre_name().contains(selectGenre[index])) {
-				System.out.println(movieList.get(j).getGenre_name());
-				System.out.println(selectGenre[index]);
-				favoriteMovieList.add(movieList.get(j));
-
-			}
-
-		}
-
-		System.out.println("사용자가 고른 영화배열의 길이 : " + selectGenre.length);
-
-		for (MovieVO movie : favoriteMovieList) {
-			System.out.println(movie.getTitle());
-		}
-
-		// 스릴러 영화 리스트
 
 		// 공포 영화 리스트
 		List<MovieVO> horrorMovieList = new ArrayList<MovieVO>();
@@ -88,13 +44,41 @@ public class MovieServiceImpl implements MovieService {
 		// 로맨스 영화 리스트
 		List<MovieVO> romanceMovieList = new ArrayList<MovieVO>();
 
-		
-
 		// 미국 + 호러 영화 리스트
 		List<MovieVO> usaHorrorMovieList = new ArrayList<MovieVO>();
+		
+		// 외국영화 리스트
+		List<MovieVO> foreignMovieList = new ArrayList<MovieVO>();
+		
+		// 한국영화 리스트
+		List<MovieVO> koreaMovieList = new ArrayList<MovieVO>();
 
 		// 애니메이션
 		List<MovieVO> animationList = new ArrayList<MovieVO>();
+		
+		//액션 영화 리스트
+		List<MovieVO> actionMovieList = new ArrayList<MovieVO>();
+
+		// 취향저격 리스트
+		Set<MovieVO> favoriteMovieList = new HashSet<MovieVO>(12);
+		System.out.println(getGenre_name);
+		String[] selectGenre = getGenre_name.split(",");
+		for (String genre : selectGenre) {
+			System.out.print(genre);
+		}
+
+		// 0 ~ 사용자가 고른 영화의 장르 수의 난수 생성
+		for (int j = 0; j < movieList.size(); j++) {
+			int index = (int) (Math.random() * selectGenre.length);
+			System.out.println(index);
+			System.out.println(selectGenre[index]);
+			if (movieList.get(j).getGenre_name().contains(selectGenre[index])) {
+				System.out.println(movieList.get(j).getGenre_name());
+				System.out.println(selectGenre[index]);
+				favoriteMovieList.add(movieList.get(j));
+			}
+		}
+		
 
 //		// 전체 영화 수 만큼 돌려서 장르가 공포에 해당하는 영화가 있으면 공포영화리스트에 넣어준다
 
@@ -104,7 +88,6 @@ public class MovieServiceImpl implements MovieService {
 				if (movieList.get(j).getCountry().equals("미국")) {
 					usaHorrorMovieList.add(movieList.get(j));
 				}
-
 				horrorMovieList.add(movieList.get(j));
 			}
 			if (movieList.get(j).getGenre_name().contains("로맨스")) {
@@ -116,46 +99,73 @@ public class MovieServiceImpl implements MovieService {
 			if (movieList.get(j).getGenre_name().contains("애니메이션")) {
 				animationList.add(movieList.get(j));
 			}
+			if(!movieList.get(j).getCountry().equals("한국")) {
+				foreignMovieList.add(movieList.get(j));
+			}
+			if(movieList.get(j).getCountry().equals("한국")) {
+				koreaMovieList.add(movieList.get(j));
+			}
+			if(movieList.get(j).getGenre_name().contains("액션")) {
+				actionMovieList.add(movieList.get(j));
+			}
 
 		}
-
-		for (MovieVO movie : horrorMovieList) {
-			System.out.print(movie.getTitle() + " ");
+		System.out.println("취향저격 : ");
+		for(MovieVO movie : favoriteMovieList) {
+			System.out.println(movie.getTitle());
 		}
-
-		for (MovieVO movie : usaHorrorMovieList) {
-			System.out.print(movie.getTitle() + " 미국호러");
+		System.out.println();
+		
+		System.out.println("미국 : ");
+		for(MovieVO movie : usaMovieList) {
+			System.out.print(movie.getTitle());
 		}
-
-		for (MovieVO movie : animationList) {
-			System.out.print(movie.getTitle() + " 애니메이션");
+		System.out.println();
+		System.out.println("한국 : ");
+		for(MovieVO movie : koreaMovieList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("애니메이션 : ");
+		for(MovieVO movie : animationList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("외국 : ");
+		for(MovieVO movie : foreignMovieList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("로맨스 : ");
+		for(MovieVO movie : romanceMovieList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("호러 : ");
+		for(MovieVO movie : horrorMovieList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("미국호러 : ");
+		for(MovieVO movie : usaHorrorMovieList) {
+			System.out.print(movie.getTitle());
+		}
+		System.out.println();
+		System.out.println("액션 : ");
+		for(MovieVO movie : actionMovieList) {
+			System.out.print(movie.getTitle());
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		model.addAttribute("usaMovieList",usaMovieList);
-		
-		
-		
-		
-		
+		model.addAttribute("favoriteMovieList",favoriteMovieList);
+		model.addAttribute("usaMovieList", usaMovieList);
+		model.addAttribute("koreaMovieList",koreaMovieList);
+		model.addAttribute("animationList",animationList);
+		model.addAttribute("foreignMovieList",foreignMovieList);
+		model.addAttribute("romanceMovieList",romanceMovieList);
+		model.addAttribute("horrorMovieList",horrorMovieList);
+		model.addAttribute("usaHorrorMovieList",usaHorrorMovieList);
+		model.addAttribute("actionMovieList",actionMovieList);
 	}
-	
-	
-	
-	
+
 }

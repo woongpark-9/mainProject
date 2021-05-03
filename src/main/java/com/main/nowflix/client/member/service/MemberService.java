@@ -30,4 +30,6 @@ public interface MemberService {
 	public void addinfo(MemberVO vo) throws Exception;
 
 	public void setGenre(MemberVO vo) throws Exception;
+
+	public MemberVO getMember(MemberVO vo) throws Exception;
 }

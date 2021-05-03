@@ -117,12 +117,12 @@ public class KakaoLoginController {
 		 
 		System.out.println("나우플릭스 유저네임 : "+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
 		System.out.println("나우플릭스 이메일 : "+kakaoProfile.getKakao_account().getEmail());
-		System.out.println("출생년도 : "+kakaoProfile.getKakao_account().getBirthyear());
-		System.out.println("성별 : "+kakaoProfile.getKakao_account().getGender());
+		System.out.println("이름 : "+kakaoProfile.getKakao_account().getProfile().getNickname());
 		MemberVO member = new MemberVO();
 		
 		member.setKakao(Integer.toString(kakaoProfile.getId()));
 		member.setEmail(kakaoProfile.getKakao_account().getEmail());
+		member.setNickname(kakaoProfile.getKakao_account().getProfile().getNickname());
 		
 		session.setAttribute("member", member);
 		int result = service.oauthEmailCheck(member);
@@ -143,7 +143,7 @@ public class KakaoLoginController {
 			
 			System.out.println("카카오 기존회원입니다 로그인 처리");
 			String ticketCheck = service.ticketCheck(member);
-			if(ticketCheck == null) {
+			if(ticketCheck.equals("N")) {
 				List<TicketVO> basicticketList = new ArrayList<TicketVO>();
 				List<TicketVO> premiumticketList = new ArrayList<TicketVO>();
 				basicticketList = ticketService.getTicketList(new TicketVO("basic"));
@@ -159,13 +159,13 @@ public class KakaoLoginController {
 			System.out.println(genreCheck);
 			if(genreCheck.equals("N")) {
 				System.out.println("장르페이지로 이동합니다");
-				page = "views/member/favorite_genre";
+	               page = "redirect:favorite.do";
 				return page;
 			}
 			// 장르를 선택했다면 프로필 페이지로
 			
 		}
-		page = "redirect:index.do";
+		page = "redirect:profile.do";
 		return page;
 		
 		// 만든 나우플릭스 정보를 이용해 회원가입

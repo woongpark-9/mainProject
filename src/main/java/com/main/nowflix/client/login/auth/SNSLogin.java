@@ -64,9 +64,9 @@ public class SNSLogin {
 		String email = responseNode.get("id").asText();
 		String naver = responseNode.get("email").asText();
 		
-		member.setEmail(email);
+		member.setEmail(naver);
 		member.setNickname(name);
-		member.setNaver(naver);
+		member.setNaver(email);
 		
 		System.out.println("네이버 고유번호 : "+member.getEmail());
 		System.out.println("네이버 사용자 이름 :"+member.getNickname());

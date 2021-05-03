@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.ticket.service.TicketService;
 import com.main.nowflix.client.ticket.vo.TicketVO;
 import com.main.nowflix.util.SHA256;
+import com.main.nowflix.util.ScriptUtils;
 import com.main.nowflix.util.sendMail;
 
 @Controller
@@ -90,7 +92,7 @@ public class MemberController  {
 	// post 방식 로그인 처리
 	
 		@RequestMapping(value = "/login.do",method = RequestMethod.POST)
-		public String login(MemberVO vo, HttpSession session, RedirectAttributes rttr,Model model) throws Exception{
+		public String login(MemberVO vo, HttpSession session, RedirectAttributes rttr,Model model,HttpServletResponse response) throws Exception{
 			String page;
 			
 			
@@ -98,9 +100,11 @@ public class MemberController  {
 			session.getAttribute("member");
 			// 해당하는 email의 db안의 email과 pass 가져오기
 			MemberVO login = service.login(vo);
-			
+			boolean pwdMatch = false;
 //			 입력한 비밀번호와 db의 비밀번호를 비교
-			boolean pwdMatch = pwdEncoder.matches(vo.getPass(), login.getPass());
+			if(login!= null) {
+				pwdMatch = pwdEncoder.matches(vo.getPass(), login.getPass());
+			}
 			if(login != null && pwdMatch == true) {
 				session.setAttribute("member", login);
 				System.out.println("로그인성공");
@@ -120,13 +124,8 @@ public class MemberController  {
 				
 						// 접속한 유저가 이용권을 가지고 있지 않다면 결제페이지로 이동
 					if(ticketCheck.equals("N")) {
-						List<TicketVO> basicticketList = new ArrayList<TicketVO>();
-						List<TicketVO> premiumticketList = new ArrayList<TicketVO>();
-						basicticketList = ticketService.getTicketList(new TicketVO("basic"));
-						premiumticketList = ticketService.getTicketList(new TicketVO("premium"));
-						model.addAttribute("basicticketList",basicticketList);
-						model.addAttribute("premiumticketList",premiumticketList);
-							page = "views/member/selectTicket";
+					
+							page = "redirect:selectTicket.do";
 							return page;
 					}
 					
@@ -147,9 +146,9 @@ public class MemberController  {
 			
 			}else {
 				session.setAttribute("member", null);
-				rttr.addFlashAttribute("msg",false);
-				System.out.println("로그인실패");
-				page = "redirect:/";
+				ScriptUtils.alert(response, "해당 아이디는 존재하지 않습니다");
+			
+				page = "/views/member/memberLogin";
 			}
 			
 			return page;
@@ -227,6 +226,12 @@ public class MemberController  {
 			return 0;
 		}
 		
+//		@RequestMapping(value="/request_ticket_step2.do")
+//		public String request_ticket_step2(Model model,String ticketType) {
+//			model.addAttribute(")
+//			return "redirect:ticket_step2.do";
+//		}
+//		
 		
 		
 		//결제 전 추가정보입력

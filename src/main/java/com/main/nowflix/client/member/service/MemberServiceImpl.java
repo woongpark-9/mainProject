@@ -10,6 +10,7 @@ import com.main.nowflix.client.member.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO dao;
+
 	@Override
 	public void register(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
@@ -44,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 	public void oauthRegister(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		dao.oauthRegister(vo);
-		
+
 	}
 
 	@Override
@@ -52,8 +53,9 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		int result = dao.oauthEmailCheck(vo);
 		return result;
-		
+
 	}
+
 	@Override
 	public String certCheck(MemberVO vo) throws Exception {
 		String code = dao.certCheck(vo);
@@ -68,8 +70,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String ticketCheck(MemberVO vo) throws Exception {
-			String result = dao.ticketCheck(vo);
-			return result;
+		String result = dao.ticketCheck(vo);
+		return result;
 	}
 
 	@Override
@@ -77,22 +79,30 @@ public class MemberServiceImpl implements MemberService {
 		String result = dao.genreCheck(vo);
 		return result;
 	}
-	
+
 	@Override
 	public void updateTicket(MemberVO vo) throws Exception {
 		dao.updateTicket(vo);
-	
+
 	}
-	
+
 	@Override
 	public void addinfo(MemberVO vo) throws Exception {
 		dao.addinfo(vo);
-		
+
 	}
+
 	@Override
-	   public void setGenre(MemberVO vo) throws Exception {
-	      dao.setGenre(vo);
-	      
-	   }
-	
+	public void setGenre(MemberVO vo) throws Exception {
+		dao.setGenre(vo);
+
+	}
+
+	@Override
+	public MemberVO getMember(MemberVO vo) throws Exception {
+
+		return dao.getMember(vo);
+
+	}
+
 }

@@ -85,4 +85,9 @@ public class MemberDAO {
 		System.out.println("Member테이블 genre Y로 바꿈");
 		sql.update("memberMapper.setGenre", vo);
 	}
+
+	public MemberVO getMember(MemberVO vo) throws Exception {
+		System.out.println("getMember DAO");
+		return sql.selectOne("memberMapper.getMember", vo);
+	}
 }

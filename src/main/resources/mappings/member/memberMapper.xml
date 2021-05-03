@@ -8,7 +8,7 @@
 
 
 
-<mapper namespace="memberMapper" >
+<mapper namespace="memberMapper">
 	<resultMap type="memberVO" id="memberResult">
 		<id property="email" column="EMAIL" />
 		<result property="pass" column="PASS" />
@@ -22,154 +22,159 @@
 		<result property="join_date" column="JOIN_DATE" />
 		<result property="ticket_id" column="TICKET_ID" />
 		<result property="kakao" column="KAKAO" />
-		<result property="naver" column="NAVER" />	
+		<result property="naver" column="NAVER" />
 	</resultMap>
-	 <!-- 회원가입 -->
+	<!-- 회원가입 -->
 	<insert id="register">
-	    INSERT INTO MEMBER(   EMAIL 
-	   					       , PASS 
-	   					       , NICKNAME
-	   					       ,BIRTH
-	   					       ,AGE
-	   					       ,GENDER
-	   					       ,CERT
-	   					       ,BAN
-	   					    
-	   					       ,JOIN_DATE
-	   					       ,TICKET_ID
-	   					       ,KAKAO
-	   					       ,NAVER 	)
-	                  VALUES(    #{email} 
-	                 		   , #{pass}
-	                 		   , #{nickname}
-	                 		   , #{birth}
-	                 		   , #{age}
-	                 		   , #{gender}
-	                 		   , #{cert}
-	                 		   , #{ban}
-	                 		   
-	                 		   , #{join_date}
-	                 		   , #{ticket_id}
-	                 		   , #{kakao}
-	                 		   , #{naver}
-	                 		   
-	                 		   
-	                 		   )
-   						
-    </insert>
-    
-	   <!-- 로그인 -->
-   <select id="login" resultType="memberVO">
-      SELECT *
-        FROM member
-       WHERE email = #{email}
-         
-   </select>
-	
+		INSERT INTO MEMBER( EMAIL
+		, PASS
+		, NICKNAME
+		,BIRTH
+		,AGE
+		,GENDER
+		,CERT
+		,BAN
+		,JOIN_DATE
+		,KAKAO
+		,NAVER )
+		VALUES( #{email}
+		, #{pass}
+		, #{nickname}
+		, #{birth}
+		, #{age}
+		, #{gender}
+		, #{cert}
+		, #{ban}
+		, #{join_date}
+		, #{kakao}
+		, #{naver}
+
+
+		)
+
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="memberVO">
+		SELECT *
+		FROM member
+		WHERE email = #{email}
+
+	</select>
+
 	<!-- 추가정보 입력 -->
 	<update id="addinfo">
-		UPDATE MEMBER SET GENDER = #{gender} , BIRTH = #{birth} where EMAIL = #{email}
-	
+		UPDATE MEMBER SET GENDER = #{gender} , BIRTH =
+		#{birth} where EMAIL = #{email}
+
 	</update>
-	
-	
+
+
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate">
 		UPDATE MEMBER SET
 		PASS = #{pass}
 		WHERE email = #{email}
 	</update>
-	
-	<!--  아이디 중복 체크 -->
+
+	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE email = #{email}
-	
+
 	</select>
 	<!-- 패스워드 체크 -->
 	<select id="passCheck" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE email = #{email}
-		  AND pass = #{pass}
+		AND pass = #{pass}
 	</select>
-	
+
 	<!-- 이메일 인증 체크 -->
 	<select id="certCheck" resultType="String">
-		SELECT email FROM MEMBER 
+		SELECT email FROM MEMBER
 		WHERE cert = #{cert}
 	</select>
-	
+
 	<!-- Cert 수정 -->
 	<update id="certUpdate">
 		UPDATE MEMBER SET
 		cert = 'Y'
 		WHERE email = #{email}
 	</update>
-	
-	
+
+
 	<!-- 간편로그인 유저 체크 -->
 	<select id="oauthEmailCheck" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM
+		MEMBER
 		WHERE email = #{email}
-			
+
 	</select>
 	<!-- 티켓 체크 -->
 	<select id="ticketCheck" resultType="String">
-		SELECT ticket_id FROM MEMBER WHERE email = #{email}
+		SELECT ticket_id FROM MEMBER
+		WHERE email = #{email}
 	</select>
-	
+
 	<!-- 장르 체크 상태 확인 -->
-	
+
 	<select id="genreCheck" resultType="String">
-		SELECT genre FROM MEMBER WHERE email = #{email}
-	
+		SELECT genre FROM MEMBER
+		WHERE email = #{email}
+
 	</select>
-	
+
 	<!-- 티켓 구매 -->
 	<insert id="updateTicket">
-	
+
 		UPDATE MEMBER SET ticket_id = #{ticket_id} WHERE email = #{email}
-	
+
 	</insert>
-	
-	
+
+
 	<!-- 간편 회원가입 -->
 	<insert id="oauthRegister">
-	  INSERT INTO MEMBER(   EMAIL 
-	   					       , PASS 
-	   					       , NICKNAME
-	   					       ,BIRTH
-	   					       ,AGE
-	   					       ,GENDER
-	   					       ,CERT
-	   					       ,BAN
-	   					     
-	   					       ,JOIN_DATE
-	   					       ,TICKET_ID
-	   					       ,KAKAO
-	   					       ,NAVER 	)
-	                  VALUES(    #{email} 
-	                 		   , #{pass}
-	                 		   , #{nickname}
-	                 		   , #{birth}
-	                 		   , #{age}
-	                 		   , #{gender}
-	                 		   , #{cert}
-	                 		   , #{ban}
-	                 		 
-	                 		   , #{join_date}
-	                 		   , #{ticket_id}
-	                 		   , #{kakao}
-	                 		   , #{naver}
-	                 		   
-	                 		   
-	                 		   )
-	
+		INSERT INTO MEMBER( EMAIL
+		, PASS
+		, NICKNAME
+		,BIRTH
+		,AGE
+		,GENDER
+		,CERT
+		,BAN
+
+		,JOIN_DATE
+
+		,KAKAO
+		,NAVER )
+		VALUES( #{email}
+		, #{pass}
+		, #{nickname}
+		, #{birth}
+		, #{age}
+		, #{gender}
+		, #{cert}
+		, #{ban}
+
+		, #{join_date}
+
+		, #{kakao}
+		, #{naver}
+
+
+		)
+
 	</insert>
-	
-	
+
+
 	<!-- 장르 N->Y세팅 -->
-   <update id="setGenre">
-      UPDATE MEMBER SET genre = 'Y' WHERE email = #{email}
-   </update>
+	<update id="setGenre">
+		UPDATE MEMBER SET genre = 'Y' WHERE email = #{email}
+	</update>
+
+	<!-- 맴버VO가져오기 -->
+	<select id="getMember" resultType="memberVO">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	</select>
 </mapper>

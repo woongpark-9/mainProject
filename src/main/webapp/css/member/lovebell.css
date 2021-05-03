@@ -47,6 +47,7 @@ body, html {
 	color: white;
 	line-height: 36px;
 	font-size: 13px;
+	    text-decoration: none;
 }
 
 .nav-item {
@@ -331,12 +332,7 @@ button.profile-button {
 	/*caption에 이벤트가 발생하여 0.5초 딜레이 후 발생시킴*/
 }
 
-.poster img {
-	border-radius: 4px;
-	width: 224px;
-	height: 126px;
-	margin: 0 0 15px 0;
-}
+
 
 .item:hover .caption {
 	width: 400px;
@@ -355,7 +351,7 @@ button.profile-button {
 .poster {
 	width: 224px;
 	height: 126px;
-	background: white;
+	
 }
 
 .video {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -51,13 +52,32 @@ public class MovieController {
 	}
 
 	@RequestMapping("/favorite.do")
-	public String getMovieGenreList(MovieVO vo, Model model, HttpSession session) {
-
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		model.addAttribute("movieList", movieService.getMovieList(vo)); // Model 정보저장
-		model.addAttribute("member", member);
-
-		return "/views/member/favorite_genre"; // View 정보저장
-	}
+	   public String getMovieGenreList(MovieVO vo, Model model,
+	         HttpSession session) {
+	      
+	      MemberVO member = (MemberVO) session.getAttribute("member");
+//	      ProfileVO addProfileVO = (ProfileVO)model.getAttribute("profileVO");
+	      
+	      
+	      model.addAttribute("movieList", movieService.getMovieList(vo)); // Model 정보저장
+	      model.addAttribute("member", member);
+	      return "/views/member/favorite_genre"; // View 정보저장
+	   }
+	   
+	   @RequestMapping("/favoriteNew.do")
+	   public String getMovieGenreList(MovieVO vo, Model model, @RequestAttribute("profileVO") ProfileVO addProfileVO,
+	         HttpSession session) {
+	      
+	      MemberVO member = (MemberVO) session.getAttribute("member");
+//	      ProfileVO addProfileVO = (ProfileVO)model.getAttribute("profileVO");
+	      System.out.println("favorite.do 에 바인딩된 프로파일VO" + addProfileVO);
+	      
+	      
+	      model.addAttribute("movieList", movieService.getMovieList(vo)); // Model 정보저장
+	      model.addAttribute("member", member);
+//	      model.addAttribute("addProfileVO", addProfileVO);
+	      return "/views/member/favorite_genre"; // View 정보저장
+	   }
+	   
 
 }

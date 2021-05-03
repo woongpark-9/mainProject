@@ -261,6 +261,14 @@ public class Profile {
    public String nickname;
    public String thumbnail_image_url;
    public String profile_image_url;
+   public Boolean is_default_image;
+   
+public Boolean getIs_default_image() {
+	return is_default_image;
+}
+public void setIs_default_image(Boolean is_default_image) {
+	this.is_default_image = is_default_image;
+}
 public String getNickname() {
 	return nickname;
 }

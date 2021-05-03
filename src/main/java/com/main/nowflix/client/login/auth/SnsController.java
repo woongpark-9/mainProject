@@ -1,6 +1,10 @@
 package com.main.nowflix.client.login.auth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.nowflix.client.member.service.MemberService;
 import com.main.nowflix.client.member.vo.MemberVO;
+import com.main.nowflix.client.ticket.service.TicketService;
+import com.main.nowflix.client.ticket.vo.TicketVO;
 
 @Controller
 public class SnsController {
@@ -20,35 +26,68 @@ public class SnsController {
 	@Inject
 	MemberService service;
 	
+	@Inject
+	TicketService ticketService;
 
 
 	@RequestMapping(value = "callbackNaver.do")
-	public String snsNaverLoginCallback(Model model, @RequestParam String code) throws Exception {
+	public String snsNaverLoginCallback(Model model, @RequestParam String code,HttpSession session) throws Exception {
 		String page = "";
 		// 1. code를 이용해서 access_token 받기
 		// 2. access_token을 이용해서 사용자 profile 정보 가져오기
 
 		SNSLogin snsLogin = new SNSLogin(naverSns);
 		// String profile = snsLogin.getUserProfile(code);
-		MemberVO snsMember = snsLogin.getMemberProfile(code);
+		MemberVO member = snsLogin.getMemberProfile(code);
 
-		System.out.println("Profile>>" + snsMember);
+		System.out.println("Profile>>" + member);
 //		model.addAttribute("result", snsMember);
 		// 3. DB 해당 유저가 존재하는 체크 (googleid, naverid 컬럼 추가)
 
 		// 4. 존재시 강제로그인, 미존재시 가입페이지로 !!
 		
-		int result = service.oauthEmailCheck(snsMember);
+		int result = service.oauthEmailCheck(member);
+		session.setAttribute("member", member);
 		if(result == 0) {
 			// 신규회원이라면 장르선택 페이지로
 			System.out.println("네이버 신규회원입니다");
-			service.oauthRegister(snsMember);
-			page = "redirect:/don.do";
+			service.oauthRegister(member);
+			List<TicketVO> basicticketList = new ArrayList<TicketVO>();
+			List<TicketVO> premiumticketList = new ArrayList<TicketVO>();
+			basicticketList = ticketService.getTicketList(new TicketVO("basic"));
+			premiumticketList = ticketService.getTicketList(new TicketVO("premium"));
+			model.addAttribute("basicticketList",basicticketList);
+			model.addAttribute("premiumticketList",premiumticketList);
+			page = "views/member/selectTicket";
+			return page;
+			
 		}else if(result == 1) {
 			//프로필 선택 페이지로
 			System.out.println("네이버 기존회원입니다 로그인 처리");
-			page = "redirect:index.jsp";
+			String ticketCheck = service.ticketCheck(member);
+			if(ticketCheck.equals("N")) {
+				List<TicketVO> basicticketList = new ArrayList<TicketVO>();
+				List<TicketVO> premiumticketList = new ArrayList<TicketVO>();
+				basicticketList = ticketService.getTicketList(new TicketVO("basic"));
+				premiumticketList = ticketService.getTicketList(new TicketVO("premium"));
+				model.addAttribute("basicticketList",basicticketList);
+				model.addAttribute("premiumticketList",premiumticketList);
+				page = "views/member/selectTicket";
+				return page;
+			}
+			System.out.println("해당 유저의 이용권 : "+ticketCheck);
+			// 장르를 선택했는지 확인
+			String genreCheck = service.genreCheck(member);
+			System.out.println(genreCheck);
+			if(genreCheck.equals("N")) {
+				System.out.println("장르페이지로 이동합니다");
+	               page = "redirect:favorite.do";
+				return page;
+			}
+			// 장르를 선택했다면 프로필 페이지로
+			
 		}
+		page = "redirect:profile.do";
 		return page;
 	
 	}
