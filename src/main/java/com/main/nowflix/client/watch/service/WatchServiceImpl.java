@@ -1,5 +1,7 @@
 package com.main.nowflix.client.watch.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,11 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public void insertWatch(WatchVO vo) throws Exception {
 		dao.insertWatch(vo);		
+	}
+
+
+	@Override
+	public List<WatchVO> getWatchList(WatchVO vo) throws Exception {
+		return dao.getWatchList(vo);
 	}
 }

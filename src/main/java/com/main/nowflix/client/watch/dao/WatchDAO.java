@@ -1,5 +1,7 @@
 package com.main.nowflix.client.watch.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,9 @@ public class WatchDAO {
 	
 	public void updateWatch(WatchVO vo) {
 		sql.update("watchMapper.updateWatch", vo);
+	}
+	public List<WatchVO> getWatchList(WatchVO vo)  {
+		return sql.selectList("watchMapper.getWatchList",vo);
 	}
 }
 

@@ -14,6 +14,10 @@
 		<result property="watch_date" column="WATCH_DATE" />
 		<result property="view_point" column="VIEW_POINT"/>
 	</resultMap>
+
+<select id="getWatchList" resultMap="watchResult">
+	SELECT * FROM WATCH WHERE PROFILE_ID = #{profile_id}
+</select>
 	
 <select id="getWatchVO" resultMap="watchResult">
 	SELECT * FROM WATCH WHERE PROFILE_ID = #{profile_id} and MOVIE_ID = #{movie_id}

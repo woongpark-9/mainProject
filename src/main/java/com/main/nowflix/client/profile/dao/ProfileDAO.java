@@ -46,4 +46,5 @@ public class ProfileDAO {
 	public ProfileVO getProfileNew(ProfileVO vo) {
 		return sqlSessionTemplate.selectOne("profileMapper.getProfileNew", vo);
 	}
+
 }

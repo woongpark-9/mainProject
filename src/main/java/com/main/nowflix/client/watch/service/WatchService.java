@@ -1,5 +1,7 @@
 package com.main.nowflix.client.watch.service;
 
+import java.util.List;
+
 import com.main.nowflix.client.watch.vo.WatchVO;
 
 public interface WatchService {
@@ -7,4 +9,5 @@ public interface WatchService {
 	public WatchVO getWatchVo(WatchVO vo) throws Exception;
 	public void updateWatch(WatchVO vo) throws Exception;
 	public void insertWatch(WatchVO vo) throws Exception;
+	public List<WatchVO> getWatchList(WatchVO vo) throws Exception;
 }

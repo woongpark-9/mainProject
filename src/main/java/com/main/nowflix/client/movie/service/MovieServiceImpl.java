@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.main.nowflix.client.movie.dao.MovieDAO;
 import com.main.nowflix.client.movie.vo.MovieVO;
+import com.main.nowflix.client.watch.vo.WatchVO;
 
 @Service("movieService")
 public class MovieServiceImpl implements MovieService {
@@ -30,37 +31,42 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public void getSelectMovieList(MovieVO vo, List<MovieVO> movieList, Model model, String getGenre_name) {
+	public void getSelectMovieList(MovieVO vo, List<MovieVO> movieList, Model model, String getGenre_name,
+			List<WatchVO> watchList) {
 
 		// 전체 영화 리스트
 		movieList = getMovieList(vo);
 
 		// 미국 영화 리스트
-		List<MovieVO> usaMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> usaMovieList = new ArrayList<MovieVO>(30);
 
 		// 공포 영화 리스트
-		List<MovieVO> horrorMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> horrorMovieList = new ArrayList<MovieVO>(30);
 
 		// 로맨스 영화 리스트
-		List<MovieVO> romanceMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> romanceMovieList = new ArrayList<MovieVO>(30);
 
 		// 미국 + 호러 영화 리스트
-		List<MovieVO> usaHorrorMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> usaHorrorMovieList = new ArrayList<MovieVO>(30);
 		
 		// 외국영화 리스트
-		List<MovieVO> foreignMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> foreignMovieList = new ArrayList<MovieVO>(30);
 		
 		// 한국영화 리스트
-		List<MovieVO> koreaMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> koreaMovieList = new ArrayList<MovieVO>(30);
 
 		// 애니메이션
-		List<MovieVO> animationList = new ArrayList<MovieVO>();
+		List<MovieVO> animationList = new ArrayList<MovieVO>(30);
 		
 		//액션 영화 리스트
-		List<MovieVO> actionMovieList = new ArrayList<MovieVO>();
+		List<MovieVO> actionMovieList = new ArrayList<MovieVO>(30);
 
 		// 취향저격 리스트
 		Set<MovieVO> favoriteMovieList = new HashSet<MovieVO>(12);
+		
+		//
+		List<MovieVO> watchMovieList = new ArrayList<MovieVO>();
+		
 		System.out.println(getGenre_name);
 		String[] selectGenre = getGenre_name.split(",");
 		for (String genre : selectGenre) {
@@ -76,6 +82,15 @@ public class MovieServiceImpl implements MovieService {
 				System.out.println(movieList.get(j).getGenre_name());
 				System.out.println(selectGenre[index]);
 				favoriteMovieList.add(movieList.get(j));
+			}
+		}
+		
+		for(int i =0; i<watchList.size(); i++) {
+			for(int j =0; j<movieList.size(); j++) {
+				if(movieList.get(j).getSeq() == watchList.get(i).getMovie_id()) {
+					watchMovieList.add(movieList.get(j));
+					break;
+				}
 			}
 		}
 		
@@ -108,6 +123,7 @@ public class MovieServiceImpl implements MovieService {
 			if(movieList.get(j).getGenre_name().contains("액션")) {
 				actionMovieList.add(movieList.get(j));
 			}
+		
 
 		}
 		System.out.println("취향저격 : ");
@@ -155,7 +171,11 @@ public class MovieServiceImpl implements MovieService {
 		for(MovieVO movie : actionMovieList) {
 			System.out.print(movie.getTitle());
 		}
-		
+		System.out.println();
+		System.out.println("내가 시청한 영화: ");
+		for(MovieVO movie : watchMovieList) {
+			System.out.print(movie.getTitle());
+		}
 		
 		model.addAttribute("favoriteMovieList",favoriteMovieList);
 		model.addAttribute("usaMovieList", usaMovieList);
@@ -166,6 +186,9 @@ public class MovieServiceImpl implements MovieService {
 		model.addAttribute("horrorMovieList",horrorMovieList);
 		model.addAttribute("usaHorrorMovieList",usaHorrorMovieList);
 		model.addAttribute("actionMovieList",actionMovieList);
+		model.addAttribute("watchMovieList",watchMovieList);
+		model.addAttribute("watchList",watchList);
 	}
+
 
 }
