@@ -258,10 +258,6 @@
 
 										<div class="poster">
 											<img src="${prefixAddr }${movieList.movie_path }/poster.png" alt="">
-
-
-											
-											
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
