@@ -69,7 +69,6 @@ public class AdminInquiryController {
 		model.addAttribute("endPage", endPage); // endPage 정보저장
 		model.addAttribute("searchCondition", searchCondition); // searchCondition 정보저장
 		model.addAttribute("searchKeyword", searchKeyword); // searchKeyword 정보저장
-		model.addAttribute("inquiryCount", inquiryService.getInquiryCount()); // inquiryCount 정보저장
 		return "manage_inquiry";
 	}
 	
