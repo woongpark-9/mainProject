@@ -134,7 +134,7 @@
 </script>
 </head>
 <body>
-<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
+	<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
 
 	<div class="home">
 		<video class="video1" src="images/member/love.mp4"
@@ -144,7 +144,9 @@
 		<div class="overlay">
 			<div class="header">
 				<!-- 	<div class="logo">NEFLIX</div> -->
-				<a href="http://localhost:8080/nowflix/index.do"><img class="logo" src="images/member/로고.png" style="width: 92px; margin-top: 10px;"></a>
+				<a href="http://localhost:8080/nowflix/index.do"><img
+					class="logo" src="images/member/로고.png"
+					style="width: 92px; margin-top: 10px;"></a>
 
 				<div class="nav">
 					<div class="nav-item">
@@ -168,11 +170,11 @@
 				</div>
 				<div class="menu">
 					<div class="search-box">
-                     <input type="text" class="search-txt" placeholder="제목,사람,장르" id="search-txt" onkeydown="startSuggest()" />
-                     <a class="search-btn" href="#">
-                       <i class="fas fa-search"></i>
-                     </a>
-                  </div>
+						<input type="text" class="search-txt" placeholder="제목,사람,장르"
+							id="search-txt" onkeydown="startSuggest()" /> <a
+							class="search-btn" href="#"> <i class="fas fa-search"></i>
+						</a>
+					</div>
 					<div class="menu-item">키즈</div>
 					<div class="menu-item">
 						<i class="fas fa-gift"></i>
@@ -222,12 +224,14 @@
 					</button>
 					<button
 						style="background: 0 0; border: 0; border-radius: 4px; padding: 0;"
-						class="detailBtn" data-toggle="modal" data-video="https://clienti.dk/media/1140/friheden-video.mp4" data-target="#videoModal">
-						
-						
+						class="detailBtn" data-toggle="modal"
+						data-video="https://clienti.dk/media/1140/friheden-video.mp4"
+						data-target="#videoModal">
+
+
 						<div class="gray-button">
-						
-						
+
+
 							<i class="far fa-info-circle"></i> 상세정보
 						</div>
 					</button>
@@ -249,7 +253,7 @@
 				</div>
 				<div class="category-list">
 					<div class="category">
-					<c:if test="${watchMovieList != NULL}" >
+
 						<div class="title">${profile.profile_name } 님의 취향저격 베스트 콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }">
@@ -257,14 +261,18 @@
 									<div class="favoriteMovieList-item">
 
 										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png" alt="">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
 												<div class=video>
 													<video id="thevideo" style="display: none;"
-														class="thevideo" poster="${prefixAddr }${movieList.movie_path }/poster.png" muted>
-														<source src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+														class="thevideo"
+														poster="${prefixAddr }${movieList.movie_path }/poster.png"
+														muted>
+														<source
+															src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
 													</video>
 												</div>
 											</div>
@@ -272,7 +280,9 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-														<a href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}"> <img
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
 															src="http://yonom.duckdns.org/images/member/play-button.png"
 															width="40px" height="40px">
 														</a>
@@ -290,30 +300,32 @@
 										</div>
 									</div>
 								</div>
-							
+
 							</c:forEach>
-							</div>
-								</c:if>
 						</div>
-						
-						</div>
+
 					</div>
-				<div class="category-list">
-					<div class="category">
-					<c:if test="${not empty watchMovieList}" >
+
+				</div>
+			</div>
+			<div class="category-list">
+				<div class="category">
+					<c:if test="${not empty watchMovieList}">
 						<div class="title">${profile.profile_name } 님이 시청 중인 콘텐츠</div>
 						<div class="watch-list">
 							<c:forEach var="movieList" items="${watchMovieList }">
 								<div class="watch-items">
 									<div class="watchMovieList-item">
 										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png" alt="">
-											
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
+
 											<c:forEach var="watchList" items="${watchList }">
 												<c:if test="${movieList.seq eq watchList.movie_id}">
 													<div class="progress">
-														<span class="progress-bar">
-															<span role="presentation" class="progress-completed" style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
+														<span class="progress-bar"> <span
+															role="presentation" class="progress-completed"
+															style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
 														</span>
 													</div>
 												</c:if>
@@ -323,8 +335,11 @@
 											<div class="preview">
 												<div class=video>
 													<video id="thevideo" style="display: none;"
-														class="thevideo" poster="${prefixAddr }${movieList.movie_path }/poster.png" muted>
-														<source src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+														class="thevideo"
+														poster="${prefixAddr }${movieList.movie_path }/poster.png"
+														muted>
+														<source
+															src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
 													</video>
 												</div>
 											</div>
@@ -332,7 +347,9 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-														<a href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}"> <img
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
 															src="http://yonom.duckdns.org/images/member/play-button.png"
 															width="40px" height="40px">
 														</a>
@@ -350,162 +367,498 @@
 										</div>
 									</div>
 								</div>
-							
+
 							</c:forEach>
-							</div>
-								</c:if>
 						</div>
-						
-						
+					</c:if>
+				</div>
+
+
+			</div>
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">미국 영화</div>
+					<div class="usa-list">
+						<c:forEach var="movieList" items="${usaMovieList }">
+							<div class="usa-items">
+								<div class="usaMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
 					</div>
 
-
-<!-- 					<div class="category"> -->
-<!-- 						<div class="title">박영웅 님이 시청 중인 콘텐츠</div> -->
-<!-- 						<div class="list"> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYOt1G8AZuGVcnuHnZTMhwS8_HIes6zdivNuMLTZuYtpvnLwNHdm9B-9457q-TAjtGiFpTzugSjOmiCI2ZKm0kSIn_7dOXg5YpG46dqnUO2wprzjfv9UzmoyXLkRad7UfdXnVWuexeIabfWeGnT9gyRiY-yn6dnEx0_mqxQKs3ijmkzdmp2P7U7FEgii.webp?r=aef" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 33%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSyKKo6YI0tqk776fHGQEPezj43pT5u2vVxlgnO351aJ6jcjs81ho6GhSEXduEfSTZtl2lQxxKPERRytTTH8QAYGa7XWDfa_8XpxDEW8aPDeh3DngeuAc1EE2PEB4JI66Q.webp?r=c4e" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 13%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbRimFoshBDFc5ebs3TXbgMP9qctTPHLzPQ7O2i2LLWdBz7zFhO9Ms5cPZPWmF133AYpF1aDId1zPUClOgQLqs7pMUA.webp?r=c75" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 53%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbbcHE-dy148R9njiMEgj6EKyGB2sfJTOCVaKVArIWj9BXZKHtAJbkjz_9oWC5M4O-6v8TndPbcncMUefuZFOv9BjQJn56UGmH3DJd9CYQq7FUUFX04HMRyhqRR7TKsGfnfX9SxsOcJNKUeMpXj0Z6LnEmi8OvCGvMWSUKjtW5ixqR7d0mlBBZ91utp-V5daJreOVUxFLuqFPR4s8DSkFDq_.jpg?r=21e" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 23%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="movie"> -->
-<!-- 								<img -->
-<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-<!-- 									alt=""> -->
-<!-- 								<div class="progress"> -->
-<!-- 									<span class="progress-bar"><span role="presentation" -->
-<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 				</div>
 
 			</div>
+			
+			
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">애니메이션 영화</div>
+					<div class="ani-list">
+						<c:forEach var="movieList" items="${animationList }">
+							<div class="ani-items">
+								<div class="aniMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+
+				</div>
+
+			</div>
+			
+			
+			
+			
+			
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">한국 영화</div>
+					<div class="korea-list">
+						<c:forEach var="movieList" items="${koreaMovieList }">
+							<div class="korea-items">
+								<div class="koreaMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">SF·미래 영화</div>
+					<div class="sf-list">
+						<c:forEach var="movieList" items="${sfMovieList }">
+							<div class="sf-items">
+								<div class="sfMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">로맨스 영화</div>
+					<div class="romance-list">
+						<c:forEach var="movieList" items="${romanceMovieList }">
+							<div class="romance-items">
+								<div class="romanceMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="category-list">
+				<div class="category">
+
+					<div class="title">액션 영화</div>
+					<div class="action-list">
+						<c:forEach var="movieList" items="${actionMovieList }">
+							<div class="action-items">
+								<div class="actionMovieList-item">
+
+									<div class="poster">
+										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+											alt="">
+									</div>
+									<div id="caption" class="caption" style="display: none;">
+										<div class="preview">
+											<div class=video>
+												<video id="thevideo" style="display: none;" class="thevideo"
+													poster="${prefixAddr }${movieList.movie_path }/poster.png"
+													muted>
+													<source
+														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
+												</video>
+											</div>
+										</div>
+
+										<div class="detail">
+											<div class="detailFirst">
+												<div class="play-button">
+													<a
+														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+														<img
+														src="http://yonom.duckdns.org/images/member/play-button.png"
+														width="40px" height="40px">
+													</a>
+												</div>
+												<div class="title-name">${movieList.title }</div>
+												<div class="movie-summary">${movieList.summary}</div>
+												<div class="detail-button">
+													<a href="#"> <img
+														src="http://yonom.duckdns.org/images/member/plus-button.png"
+														width="30px" height="30px">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+
+				</div>
+
+			</div>
+			
+			<!-- 					<div class="category"> -->
+			<!-- 						<div class="title">박영웅 님이 시청 중인 콘텐츠</div> -->
+			<!-- 						<div class="list"> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+
+
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYOt1G8AZuGVcnuHnZTMhwS8_HIes6zdivNuMLTZuYtpvnLwNHdm9B-9457q-TAjtGiFpTzugSjOmiCI2ZKm0kSIn_7dOXg5YpG46dqnUO2wprzjfv9UzmoyXLkRad7UfdXnVWuexeIabfWeGnT9gyRiY-yn6dnEx0_mqxQKs3ijmkzdmp2P7U7FEgii.webp?r=aef" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 33%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSyKKo6YI0tqk776fHGQEPezj43pT5u2vVxlgnO351aJ6jcjs81ho6GhSEXduEfSTZtl2lQxxKPERRytTTH8QAYGa7XWDfa_8XpxDEW8aPDeh3DngeuAc1EE2PEB4JI66Q.webp?r=c4e" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 13%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbRimFoshBDFc5ebs3TXbgMP9qctTPHLzPQ7O2i2LLWdBz7zFhO9Ms5cPZPWmF133AYpF1aDId1zPUClOgQLqs7pMUA.webp?r=c75" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 53%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbbcHE-dy148R9njiMEgj6EKyGB2sfJTOCVaKVArIWj9BXZKHtAJbkjz_9oWC5M4O-6v8TndPbcncMUefuZFOv9BjQJn56UGmH3DJd9CYQq7FUUFX04HMRyhqRR7TKsGfnfX9SxsOcJNKUeMpXj0Z6LnEmi8OvCGvMWSUKjtW5ixqR7d0mlBBZ91utp-V5daJreOVUxFLuqFPR4s8DSkFDq_.jpg?r=21e" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 23%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="movie"> -->
+			<!-- 								<img -->
+			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
+			<!-- 									alt=""> -->
+			<!-- 								<div class="progress"> -->
+			<!-- 									<span class="progress-bar"><span role="presentation" -->
+			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
+			<!-- 								</div> -->
+			<!-- 							</div> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
 		</div>
+
+	</div>
+	</div>
 
 
 

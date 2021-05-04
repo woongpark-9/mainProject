@@ -40,6 +40,7 @@ public class MovieController {
 		System.out.println("Controller 작동");
 		System.out.println("profile_id : " + profile.getProfile_id());
 		ProfileVO getpro = profileService.getProfile(profile);
+		System.out.println(getpro);
 		// 전체 영화 리스트
 		watch_id.setProfile_id(getpro.getProfile_id());
 		List<WatchVO> watchList = watchService.getWatchList(watch_id);

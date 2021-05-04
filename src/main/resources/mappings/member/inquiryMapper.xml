@@ -1,0 +1,68 @@
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="inquiryMapper">
+	<resultMap type="inquiryVO" id="inquiryResult">
+		<id property="inquiry_id" column="INQUIRY_ID" />
+		<result property="email" column="EMAIL" />
+		<result property="manager_email" column="MANAGER_EMAIL" />
+		<result property="profile_img" column="profile_img" />
+		<result property="kids" column="kids" />
+		<result property="genre_name" column="genre_name" />
+	</resultMap>
+
+
+	<!-- 프로파일 가져오기 -->
+	<select id="getProfileList" resultType="profileVO">
+		SELECT * FROM PROFILE
+		WHERE email = #{email} order by profile_id asc
+	</select>
+
+	<select id="getProfile" resultType="profileVO">
+		SELECT * FROM PROFILE
+		WHERE profile_id = #{profile_id} order by profile_id asc
+	</select>
+
+	<select id="getProfileNew" resultType="profileVO">
+		SELECT * FROM PROFILE WHERE PROFILE_ID =
+		(SELECT MAX(PROFILE_ID) FROM PROFILE WHERE EMAIL = #{email})
+	</select>
+
+	<select id="profileAdd">
+		INSERT INTO PROFILE(
+
+		EMAIL
+		, PROFILE_NAME
+		, PROFILE_IMG
+		, KIDS)
+		VALUES(
+		#{email}
+		, #{profile_name}
+		, 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
+		, #{kids}
+		)
+	</select>
+
+	<select id="updateProfile">
+		UPDATE profile SET
+		PROFILE_NAME = #{profile_name},
+		PROFILE_IMG = #{profile_img},
+		KIDS = #{kids},
+		genre_name = #{genre_name}
+		WHERE PROFILE_ID = #{profile_id}
+	</select>
+
+	<insert id="setProfile">
+
+		insert into profile(email, profile_name, profile_img, kids, genre_name)
+		values(#{email}, #{profile_name} , #{profile_img}, #{kids} ,
+		#{genre_name});
+	</insert>
+
+
+</mapper>
