@@ -39,7 +39,7 @@ public class AdminSalesController {
 			@RequestParam(value = "searchCondition", required = false) String searchCondition,
 			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
 			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage) {
-		int row = 4;
+		int row = 8;
 		int startPoint = nowPage * row;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -51,6 +51,10 @@ public class AdminSalesController {
 
 		int totalList = salesService.getTotalCount(map);
 		int totalPage = totalList / row - 1;
+		int countPage = 5;
+		int startPage = ((nowPage) / countPage) * countPage; // 1번 페이지 누르면 startPage = 0, 6번 페이지 누르면 startPage = 5
+		int endPage = startPage + countPage - 1; // endPage = 4, endPage = 9
+		
 		if ((totalList % row) > 0) {
 			totalPage++;
 		}
@@ -61,6 +65,8 @@ public class AdminSalesController {
 		model.addAttribute("salesList", salesList); // movieList 정보저장
 		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장
+		model.addAttribute("startPage", startPage); // startPage 정보저장
+		model.addAttribute("endPage", endPage); // endPage 정보저장
 		model.addAttribute("searchCondition", searchCondition); // searchCondition 정보저장
 		model.addAttribute("searchKeyword", searchKeyword); // searchKeyword 정보저장
 		return "manage_sales";

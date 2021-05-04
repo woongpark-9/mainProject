@@ -124,29 +124,12 @@
 								onclick="acyncMovePage('manage_policy.mdo')"> <i
 									class="fas fa-file-signature text-white fa-lg mr-2"></i>이용약관
 							</a></li>
-							<li class="nav-item"><a href="#"
-								class="nav-link text-white p-2 mb-2 sidebar-link"
-								onclick="acyncMovePage('manage_screen.mdo')"> <i
-									class="fas fa-tablet-alt text-white fa-lg mr-2"></i>화면
-							</a></li>
-							<!-- 							<li class="dropdown nav-item"><a href="#" -->
-							<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link dropdown-toggle" -->
-							<!-- 								data-toggle="dropdown" role="button" aria-expanded="false"><i -->
-							<!-- 									class="fas fa-question-circle text-white fa-lg mr-2"></i>분석</a> -->
-							<!-- 								<ul class="dropdown-menu"> -->
-							<!-- 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link" -->
-							<!-- 										href="#" onclick="acyncMovePage('manage_analysis.mdo')"><i -->
-							<!-- 											class="fas fa-angle-right"></i>&nbsp;장르TEST</a></li> -->
-							<!-- 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link" -->
-							<!-- 										href="#" onclick="acyncMovePage('')"><i -->
-							<!-- 											class="fas fa-angle-right"></i>&nbsp;판매</a></li> -->
-							<!-- 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link" -->
-							<!-- 										href="#" onclick="acyncMovePage('manage_analysis_movie.mdo')"><i -->
-							<!-- 											class="fas fa-angle-right"></i>&nbsp;영화</a></li> -->
-							<!-- 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link" -->
-							<!-- 										href="#" onclick="acyncMovePage('manage_analysis_member.mdo')"><i -->
-							<!-- 											class="fas fa-angle-right"></i>&nbsp;회원</a></li> -->
-							<!-- 								</ul></li> -->
+<!-- 							<li class="nav-item"><a href="#" -->
+<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link" -->
+<!-- 								onclick="acyncMovePage('manage_screen.mdo')"> <i -->
+<!-- 									class="fas fa-tablet-alt text-white fa-lg mr-2"></i>화면 -->
+<!-- 							</a></li> -->
+							
 							<li class="nav-item"><a href="#"
 								class="nav-link text-white p-2 mb-2 sidebar-link"
 								onclick="acyncMovePage('manage_manager.mdo')"> <i
@@ -164,14 +147,7 @@
 								<h4 class="text-light mb-0">&nbsp;Manager DashBoard</h4>
 							</div>
 							<div class="col-md-4">
-								<!-- 								<form action=""> -->
-								<!-- 									<div class="input-group"> -->
-								<!-- 										<input type="text" class="form-control search-input" placeholder="검색어 입력"> -->
-								<!-- 										<button type="button" class="btn btn-light search-button"> -->
-								<!-- 											<i class="fas fa-search text-danger"></i> -->
-								<!-- 										</button> -->
-								<!-- 									</div> -->
-								<!-- 								</form> -->
+								
 							</div>
 							<div class="col-md-4">
 								<ul
@@ -196,10 +172,10 @@
 											</div>
 										</c:if> <c:if test="${inquiryCount eq 0 }">
 											<div class="dropdown">
-												<a href="#" class="nav-link dropdown-toggle"
-													role="button" id="dropdownMenuOffset"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false" data-offset="0,30"> <i
+												<a href="#" class="nav-link dropdown-toggle" role="button"
+													id="dropdownMenuOffset" data-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false"
+													data-offset="0,30"> <i
 													class="fas fa-bell text-muted fa-lg"></i></a>
 												<div class="dropdown-menu dropdown-menu-right p-4"
 													aria-labelledby="dropdownMenuOffset">
@@ -257,7 +233,7 @@
 											<i class="fas fa-video fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
 												<h5>등록된 영화 수</h5>
-												<h3>총 90편</h3>
+												<h3>총 ${movieCount}편</h3>
 											</div>
 										</div>
 
@@ -275,7 +251,7 @@
 											<i class="fas fa-user fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
 												<h5>가입된 회원 수</h5>
-												<h3>총 200명</h3>
+												<h3>총 ${memberCount}명</h3>
 											</div>
 										</div>
 
@@ -293,7 +269,7 @@
 											<i class="fas fa-chalkboard fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
 												<h5>문의 건수</h5>
-												<h3>총 15건</h3>
+												<h3>총 ${inquiryAllCount}건</h3>
 											</div>
 										</div>
 
@@ -346,25 +322,15 @@
 											<th>가입일</th>
 										</tr>
 									</thead>
-									<tbody>
+
+									<c:forEach var="memberList" items="${memberList }">
 										<tr>
-											<th>1</th>
-											<th>nowflix@gmail.com</th>
-											<th>홍길동</th>
-											<th>2021-01-03</th>
+											<th class="align-middle">${memberList.rownum }</th>
+											<th class="align-middle">${memberList.email }</th>
+											<th class="align-middle">${memberList.nickname }</th>
+											<th class="align-middle">${memberList.join_date}</th>
 										</tr>
-										<tr>
-											<th>2</th>
-											<th>exam@naver.com</th>
-											<th>둘리</th>
-											<th>2020-06-27</th>
-										</tr>
-										<tr>
-											<th>3</th>
-											<th>test@hanmail.net</th>
-											<th>또치</th>
-											<th>2019-08-29</th>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 								<!-- page -->
@@ -397,30 +363,21 @@
 									<thead>
 										<tr class="text-muted">
 											<th>#</th>
-											<th>이메일</th>
+											<th>회원 이메일</th>
 											<th>이용권</th>
 											<th>결제일</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th>1</th>
-											<th>nowflix@gmail.com</th>
-											<th>30일권</th>
-											<th>2021-01-03</th>
-										</tr>
-										<tr>
-											<th>2</th>
-											<th>exam@naver.com</th>
-											<th>정기권</th>
-											<th>2020-06-27</th>
-										</tr>
-										<tr>
-											<th>3</th>
-											<th>test@hanmail.net</th>
-											<th>15일권</th>
-											<th>2019-08-29</th>
-										</tr>
+										<c:forEach var="salesList" items="${salesList }">
+											<tr>
+												<th>${salesList.rownum }</th>
+												<th>${salesList.email }</th>
+												<th>${salesList.ticket_id }</th>
+												<th>${salesList.expiry_date }</th>
+												<th>${salesList.payment_date }</th>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 								<!-- page -->
@@ -466,41 +423,29 @@
 											<th>#</th>
 											<th>썸네일</th>
 											<th>제목</th>
-											<th>장르1</th>
-											<th>장르2</th>
+											<th>감독</th>
+											<th>장르</th>
 											<th>상영시간</th>
 											<th>개봉일</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th>1</th>
-											<th>thumbnail1</th>
-											<th>그랜드 부다페스트 호텔</th>
-											<th>드라마</th>
-											<th>코미디</th>
-											<th>60분</th>
-											<th>2021-04-01</th>
-										</tr>
-										<tr>
-											<th>2</th>
-											<th>thumbnail2</th>
-											<th>클래식</th>
-											<th>드라마</th>
-											<th>로맨스</th>
-											<th>80분</th>
-											<th>2021-03-31</th>
-										</tr>
-										<tr>
-											<th>3</th>
-											<th>thumbnail3</th>
-											<th>태극기 휘날리며</th>
-											<th>전쟁</th>
-											<th>드라마</th>
-											<th>120분</th>
-											<th>2021-04-05</th>
-										</tr>
+										<c:forEach var="movieList" items="${movieList }">
+											<tr>
+												<th class="align-middle">${movieList.rownum }</th>
+												<th class="align-middle"><img
+													src="http://yonom.duckdns.org/movie/${movieList.movie_path }/poster.png"
+													alt="" width="130px"></th>
+												<th class="align-middle">${movieList.title }</th>
+												<th class="align-middle">${movieList.director_name }</th>
+												<th class="align-middle">${movieList.genre_name }</th>
+												<th class="align-middle">${movieList.movie_runningtime }분</th>
+												<th class="align-middle">${movieList.movie_release_date}년</th>
+											</tr>
+										</c:forEach>
 									</tbody>
+
+
 								</table>
 								<!-- page -->
 								<nav>
