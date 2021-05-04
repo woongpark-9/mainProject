@@ -11,58 +11,18 @@
 		<id property="inquiry_id" column="INQUIRY_ID" />
 		<result property="email" column="EMAIL" />
 		<result property="manager_email" column="MANAGER_EMAIL" />
-		<result property="profile_img" column="profile_img" />
-		<result property="kids" column="kids" />
-		<result property="genre_name" column="genre_name" />
+		<result property="inquiry_type" column="INQUIRY_TYPE" />
+		<result property="inquiry_title" column="INQUIRY_TITLE" />
+		<result property="inquiry_content" column="INQUIRY_CONTENT" />
+		<result property="reply_title" column="REPLY_TITLE"/>
+		<result property="reply_content" column="REPLY_CONTENT"/>
+		<result property="inquiry_date" column="INQUIRY_DATE"/>
+		<result property="reply_date" column="REPLY_DATE"/>
 	</resultMap>
-
-
-	<!-- 프로파일 가져오기 -->
-	<select id="getProfileList" resultType="profileVO">
-		SELECT * FROM PROFILE
-		WHERE email = #{email} order by profile_id asc
-	</select>
-
-	<select id="getProfile" resultType="profileVO">
-		SELECT * FROM PROFILE
-		WHERE profile_id = #{profile_id} order by profile_id asc
-	</select>
-
-	<select id="getProfileNew" resultType="profileVO">
-		SELECT * FROM PROFILE WHERE PROFILE_ID =
-		(SELECT MAX(PROFILE_ID) FROM PROFILE WHERE EMAIL = #{email})
-	</select>
-
-	<select id="profileAdd">
-		INSERT INTO PROFILE(
-
-		EMAIL
-		, PROFILE_NAME
-		, PROFILE_IMG
-		, KIDS)
-		VALUES(
-		#{email}
-		, #{profile_name}
-		, 'http://yonom.duckdns.org/images/profile/Netflix-avatar0.png'
-		, #{kids}
-		)
-	</select>
-
-	<select id="updateProfile">
-		UPDATE profile SET
-		PROFILE_NAME = #{profile_name},
-		PROFILE_IMG = #{profile_img},
-		KIDS = #{kids},
-		genre_name = #{genre_name}
-		WHERE PROFILE_ID = #{profile_id}
-	</select>
-
-	<insert id="setProfile">
-
-		insert into profile(email, profile_name, profile_img, kids, genre_name)
-		values(#{email}, #{profile_name} , #{profile_img}, #{kids} ,
-		#{genre_name});
+	
+	<insert id="insertInquiry">
+		INSERT INTO INQUIRY (EMAIL,INQUIRY_TYPE,INQUIRY_TITLE,INQUIRY_CONTENT,INQUIRY_DATE) VALUES(#{email},#{inquiry_type},#{inquiry_title},#{inquiry_content},current_timestamp)
+	
 	</insert>
-
 
 </mapper>

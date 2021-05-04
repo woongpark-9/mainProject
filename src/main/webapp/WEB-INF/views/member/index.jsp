@@ -109,28 +109,28 @@
 
 	 }); */
 
-	$(document).ready(function() {
-		$(".poster").each(function(i, obj) {
-			$(this).on("mouseenter", function() {
-				startVideo(i);
-			});
-			$(".caption").on("mouseleave", function() {
-				stopVideo(i);
-			})
-		});
-	});
+// 	$(document).ready(function() {
+// 		$(".poster").each(function(i, obj) {
+// 			$(this).on("mouseenter", function() {
+// 				startVideo(i);
+// 			});
+// 			$(".caption").on("mouseleave", function() {
+// 				stopVideo(i);
+// 			})
+// 		});
+// 	});
 
-	function startVideo(i) {
-		$(".caption").css("display", "block");
-		$(".thevideo").css("display", "block");
-		$(".thevideo")[i].play();
-	}
+// 	function startVideo(i) {
+// 		$(".caption").css("display", "block");
+// 		$(".thevideo").css("display", "block");
+// 		$(".thevideo")[i].play();
+// 	}
 
-	function stopVideo(i) {
-		$(".caption").css("display", "none");
-		$(".thevideo")[i].pause();
-		$(".thevideo")[i].currentTime = 0;
-	}
+// 	function stopVideo(i) {
+// 		$(".caption").css("display", "none");
+// 		$(".thevideo")[i].pause();
+// 		$(".thevideo")[i].currentTime = 0;
+// 	}
 </script>
 </head>
 <body>
@@ -267,13 +267,13 @@
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
 												<div class=video>
-													<video id="thevideo" style="display: none;"
-														class="thevideo"
-														poster="${prefixAddr }${movieList.movie_path }/poster.png"
-														muted>
-														<source
-															src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-													</video>
+<!-- 													<video id="thevideo" style="display: none;" -->
+<!-- 														class="thevideo" -->
+<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 														muted> -->
+<!-- 														<source -->
+<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 													</video> -->
 												</div>
 											</div>
 
@@ -333,15 +333,15 @@
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
-												<div class=video>
-													<video id="thevideo" style="display: none;"
-														class="thevideo"
-														poster="${prefixAddr }${movieList.movie_path }/poster.png"
-														muted>
-														<source
-															src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-													</video>
-												</div>
+<!-- 												<div class=video> -->
+<!-- 													<video id="thevideo" style="display: none;" -->
+<!-- 														class="thevideo" -->
+<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 														muted> -->
+<!-- 														<source -->
+<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 													</video> -->
+<!-- 												</div> -->
 											</div>
 
 											<div class="detail">
@@ -390,14 +390,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
@@ -447,14 +447,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
@@ -507,14 +507,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
@@ -562,14 +562,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
@@ -617,14 +617,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
@@ -672,14 +672,14 @@
 									</div>
 									<div id="caption" class="caption" style="display: none;">
 										<div class="preview">
-											<div class=video>
-												<video id="thevideo" style="display: none;" class="thevideo"
-													poster="${prefixAddr }${movieList.movie_path }/poster.png"
-													muted>
-													<source
-														src="${prefixAddr }${movieList.movie_path }/1080p.mp4">
-												</video>
-											</div>
+<!-- 											<div class=video> -->
+<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
+<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+<!-- 													muted> -->
+<!-- 													<source -->
+<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+<!-- 												</video> -->
+<!-- 											</div> -->
 										</div>
 
 										<div class="detail">
