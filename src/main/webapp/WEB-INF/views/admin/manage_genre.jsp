@@ -168,7 +168,151 @@
 								</c:forEach>
 							</tbody>
 						</table>
+<!-- page -->
+						<nav>
+							<ul class="pagination justify-content-center">
+								<!--현재 페이지가 0보다 작아질 경우 이전 버튼을 disabled하는 조건문 -->
+								<c:choose>
+									<c:when test="${nowPage <= 0}">
+										<li class="disabled page-item"><a href="#"
+											class="page-link py-2 px-3"> <span>&laquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${searchCondition eq null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage1('manage_genre.mdo', ${nowPage-1})"
+												class="page-link py-2 px-3"> <span>&laquo;</span>
+											</a></li>
+										</c:if>
+										<c:if test="${searchCondition ne null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage2('manage_genre.mdo', ${nowPage-1}, '${searchCondition }', '${searchKeyword}')"
+												class="page-link py-2 px-3"> <span>&laquo;</span>
+											</a></li>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 
+								<!--해당하는 페이지로 갈 수 있는 버튼 -->
+								<c:if test="${totalPage < 0}">
+									<c:forEach var="i" begin="0" end="${totalPage+1}">
+										<c:choose>
+											<c:when test="${i eq nowPage}">
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item active"><a
+														onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<c:if test="${searchCondition eq null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+												<c:if test="${searchCondition ne null }">
+													<li class="page-item"><a
+														onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														class="page-link py-2 px-3">${i+1}</a></li>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:if>
+
+
+								<c:if test="${totalPage >= 0}">
+									<c:if test="${totalPage >= endPage }">
+										<c:forEach var="i" begin="${startPage}" end="${endPage}">
+											<c:choose>
+												<c:when test="${i eq nowPage}">
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:if>
+
+									<c:if test="${totalPage < endPage }">
+										<c:forEach var="i" begin="${startPage}" end="${totalPage}">
+											<c:choose>
+												<c:when test="${i eq nowPage}">
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage1('manage_genre.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage2('manage_genre.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:if>
+								</c:if>
+
+
+								<!--현재 페이지가 totalPage보다 커질 경우 다음 버튼을 disabled하는 조건문 -->
+								<c:choose>
+									<c:when test="${nowPage >= totalPage }">
+										<li class="disabled page-item"><a href="#"
+											class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${searchCondition eq null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage1('manage_genre.mdo', ${nowPage+1})"
+												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+										</c:if>
+										<c:if test="${searchCondition ne null }">
+											<li class="page-item"><a
+												onclick="acyncNowPage2('manage_genre.mdo', ${nowPage+1}, '${searchCondition }', '${searchKeyword}')"
+												class="page-link py-2 px-3"><span>&raquo;</span> </a></li>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</nav>
 					</div>
 					
 				</div>

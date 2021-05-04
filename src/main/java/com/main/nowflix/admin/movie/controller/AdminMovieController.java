@@ -109,7 +109,7 @@ public class AdminMovieController {
 		model.addAttribute("movieModifyInfo", movieService.getMovieModifyInfo(vo)); // Model 정보저장
 		model.addAttribute("directorList", directorService.getDirectorListWithoutPaging(directorVO));
 		model.addAttribute("actorList", actorService.getActorListWithoutPaging(actorVO));
-		model.addAttribute("genreList", genreService.getGenreList());
+		model.addAttribute("genreList", genreService.getGenreList(null));
 		System.out.println(movieService.getMovieModifyInfo(vo));
 		return "movie_insert";
 	}
@@ -119,7 +119,7 @@ public class AdminMovieController {
 	public String getMovie_insert(AdminDirectorVO directorVO, AdminActorVO actorVO, Model model) {
 		model.addAttribute("directorList", directorService.getDirectorListWithoutPaging(directorVO)); // Model 정보저장
 		model.addAttribute("actorList", actorService.getActorListWithoutPaging(actorVO)); // Model 정보저장
-		model.addAttribute("genreList", genreService.getGenreList());
+		model.addAttribute("genreList", genreService.getGenreList(null));
 		return "movie_insert";
 	}
 
