@@ -23,8 +23,7 @@
          AND manager_email LIKE '%'||#{searchKeyword}||'%'
       </if>
       order by manager_id) st
-      order by rownum desc #{row} offset
-      #{startPoint}
+      order by rownum desc limit #{row} offset #{startPoint}
    </select>
    
    

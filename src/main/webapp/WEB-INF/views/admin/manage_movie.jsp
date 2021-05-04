@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<title>영화 관리</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <%@ include file="header.jsp"%>

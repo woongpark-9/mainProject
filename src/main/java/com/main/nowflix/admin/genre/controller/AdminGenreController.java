@@ -1,5 +1,6 @@
 package com.main.nowflix.admin.genre.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,41 @@ public class AdminGenreController {
 
 	// 장르 관리 페이지
 	@RequestMapping("/manage_genre.mdo")
-	public String getGenre(Model model) {		
-		List<AdminGenreVO> genreList = genreService.getGenreList();
-		model.addAttribute("genreList", genreList); // genreList 정보저장		
+	public String getGenre(Model model, 
+			@RequestParam(value = "searchCondition", required = false) String searchCondition,
+			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage) {		
+		
+		
+		int row = 8;
+		int startPoint = nowPage * row;
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("searchCondition", searchCondition);
+		map.put("searchKeyword", searchKeyword);
+		map.put("startPoint", startPoint);
+		map.put("row", row);
+
+		int totalList = genreService.getTotalCount(map);
+		int totalPage = totalList / row - 1;
+		int countPage = 5;
+		int startPage = ((nowPage) / countPage) * countPage; 
+		int endPage = startPage + countPage - 1; 
+		
+		if ((totalList % row) > 0) {
+			totalPage++;
+		}
+		
+		List<AdminGenreVO> genreList = genreService.getGenreList(map);		
+
+		model.addAttribute("genreList", genreList); // genreList 정보저장
+		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
+		model.addAttribute("totalPage", totalPage); // totalPage 정보저장
+		model.addAttribute("startPage", startPage); // startPage 정보저장
+		model.addAttribute("endPage", endPage); // endPage 정보저장
+		model.addAttribute("searchCondition", searchCondition); // searchCondition 정보저장
+		model.addAttribute("searchKeyword", searchKeyword); // searchKeyword 정보저장
 		return "manage_genre";
 	}
 

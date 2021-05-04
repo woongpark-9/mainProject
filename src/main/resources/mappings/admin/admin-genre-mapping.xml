@@ -3,36 +3,62 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="AdminGenreDAO">
-   <resultMap type="admingenre" id="genreResult">
-      <id property="genre_id" column="genre_id" />
-      <result property="genre_name" column="genre_name" />
-   </resultMap>
-   
-   <select id="getGenreList" resultMap="genreResult">
-      select * from genre order by genre_id desc
-   </select>
-   
-   <delete id="deleteGenre" parameterType="admingenre">
-      delete from genre where   genre_id = #{genre_id}
-   </delete>
+	<resultMap type="admingenre" id="genreResult">
+		<id property="genre_id" column="genre_id" />
+		<result property="genre_name" column="genre_name" />
+	</resultMap>
 
-   <insert id="insertGenre" parameterType="admingenre">
-      insert into genre(genre_name)
-      values(#{genre_name})
-   </insert>
+	<select id="getGenreList" parameterType="hashMap"
+		resultMap="genreResult">
+		select (row_number() over()) AS rownum, genre_id, genre_name
+		from(
+		select *
+		from genre
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND inquiry_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='CONTENT'">
+			AND inquiry_content LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		order by genre_id desc ) st
+		order by rownum limit #{row} offset
+		#{startPoint}
+	</select>
 
-   <select id="getGenreModifyInfo" resultType="admingenre">
-      select * genre where genre_id = #{genre_id}
-   </select>
+	<select id="getTotalCount" parameterType="hashMap"
+		resultType="int">
+		select count(*) from genre
+		where 1=1
+		<if test="searchCondition=='TITLE'">
+			AND inquiry_title LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition=='CONTENT'">
+			AND inquiry_content LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
 
-   <update id="modifyGenre" parameterType="admingenre">
-      update genre set genre_name = #{genre_name}
-      where genre_id = #{genre_id}
-   </update>
-   
-   <!-- EXCEL , PDF를 나타내기 위함. -->
-   <select id="selectBoardList" resultType="admingenre">
-      select * from genre order by genre_id desc
-   </select>   
-   
+	<delete id="deleteGenre" parameterType="admingenre">
+		delete from genre where genre_id = #{genre_id}
+	</delete>
+
+	<insert id="insertGenre" parameterType="admingenre">
+		insert into genre(genre_name)
+		values(#{genre_name})
+	</insert>
+
+	<select id="getGenreModifyInfo" resultType="admingenre">
+		select * genre where genre_id = #{genre_id}
+	</select>
+
+	<update id="modifyGenre" parameterType="admingenre">
+		update genre set genre_name = #{genre_name}
+		where genre_id = #{genre_id}
+	</update>
+
+	<!-- EXCEL , PDF를 나타내기 위함. -->
+	<select id="selectBoardList" resultType="admingenre">
+		select * from genre order by genre_id desc
+	</select>
+
 </mapper>

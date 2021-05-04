@@ -1,5 +1,6 @@
 package com.main.nowflix.admin.genre.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,9 +15,14 @@ public class AdminGenreDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public List<AdminGenreVO> getGenreList() {
+	public List<AdminGenreVO> getGenreList(HashMap<String, Object> map) {
 		System.out.println("DAO 작동 ---> MyBatis로 getGenreList() 기능 처리");
-		return sqlSessionTemplate.selectList("AdminGenreDAO.getGenreList");
+		return sqlSessionTemplate.selectList("AdminGenreDAO.getGenreList", map);
+	}
+	
+	public int getTotalCount(HashMap<String, Object> map) {
+		System.out.println("DAO 작동 ---> MyBatis로 getTotalCount() 기능 처리");
+		return sqlSessionTemplate.selectOne("AdminGenreDAO.getTotalCount", map);
 	}
 
 	public int deleteGenre(AdminGenreVO vo) {
@@ -43,4 +49,5 @@ public class AdminGenreDAO {
 	public List<AdminGenreVO> selectBoardList(AdminGenreVO vo) {
 		return sqlSessionTemplate.selectList("AdminGenreDAO.selectBoardList");
 	}
+	
 }

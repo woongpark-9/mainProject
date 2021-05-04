@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>배우 관리</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <%@ include file="header.jsp"%>
@@ -228,7 +229,7 @@
 
 								<!--해당하는 페이지로 갈 수 있는 버튼 -->
 								<c:if test="${totalPage < 0}">
-									<c:forEach var="i" begin="0" end="${totalPage+1}">
+									<c:forEach var="i" begin="${startPage}" end="${totalPage+1}">
 										<c:choose>
 											<c:when test="${i eq nowPage}">
 												<c:if test="${searchCondition eq null }">
@@ -238,7 +239,7 @@
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword }')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:when>
@@ -250,7 +251,7 @@
 												</c:if>
 												<c:if test="${searchCondition ne null }">
 													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword }')"
 														class="page-link py-2 px-3">${i+1}</a></li>
 												</c:if>
 											</c:otherwise>
@@ -260,34 +261,67 @@
 
 
 								<c:if test="${totalPage >= 0}">
-									<c:forEach var="i" begin="0" end="${totalPage}">
-										<c:choose>
-											<c:when test="${i eq nowPage}">
-												<c:if test="${searchCondition eq null }">
-													<li class="page-item active"><a
-														onclick="acyncNowPage1('manage_actor.mdo', ${i})"
-														class="page-link py-2 px-3">${i+1}</a></li>
-												</c:if>
-												<c:if test="${searchCondition ne null }">
-													<li class="page-item active"><a
-														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
-														class="page-link py-2 px-3">${i+1}</a></li>
-												</c:if>
-											</c:when>
-											<c:otherwise>
-												<c:if test="${searchCondition eq null }">
-													<li class="page-item"><a
-														onclick="acyncNowPage1('manage_actor.mdo', ${i})"
-														class="page-link py-2 px-3">${i+1}</a></li>
-												</c:if>
-												<c:if test="${searchCondition ne null }">
-													<li class="page-item"><a
-														onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
-														class="page-link py-2 px-3">${i+1}</a></li>
-												</c:if>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
+									<c:if test="${totalPage >= endPage }">
+										<c:forEach var="i" begin="${startPage}" end="${endPage}">
+											<c:choose>
+												<c:when test="${i eq nowPage}">
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage1('manage_actor.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage1('manage_actor.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:if>
+
+									<c:if test="${totalPage < endPage }">
+										<c:forEach var="i" begin="${startPage}" end="${totalPage}">
+											<c:choose>
+												<c:when test="${i eq nowPage}">
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage1('manage_actor.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item active"><a
+															onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${searchCondition eq null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage1('manage_actor.mdo', ${i})"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+													<c:if test="${searchCondition ne null }">
+														<li class="page-item"><a
+															onclick="acyncNowPage2('manage_actor.mdo', ${i}, '${searchCondition }', '${searchKeyword}')"
+															class="page-link py-2 px-3">${i+1}</a></li>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:if>
 								</c:if>
 
 

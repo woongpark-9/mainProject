@@ -1,6 +1,7 @@
 package com.main.nowflix.admin.genre.service;
 
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.main.nowflix.admin.director.vo.AdminDirectorVO;
 import com.main.nowflix.admin.genre.dao.AdminGenreDAO;
 import com.main.nowflix.admin.genre.vo.AdminGenreVO;
 
@@ -29,9 +29,15 @@ public class AdminGenreServiceImpl implements AdminGenreService {
 
 	// 장르 리스트 가져오기
 	@Override
-	public List<AdminGenreVO> getGenreList() {
-		return genreDAO.getGenreList();
+	public List<AdminGenreVO> getGenreList(HashMap<String, Object> map) {
+		return genreDAO.getGenreList(map);
 	}
+	
+	// 장르 개수 가져오기
+		@Override
+		public int getTotalCount(HashMap<String, Object> map) {
+			return genreDAO.getTotalCount(map);
+		}
 
 	// 장르 삭제
 	@Override
