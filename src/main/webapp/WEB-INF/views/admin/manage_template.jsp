@@ -153,7 +153,7 @@
 								<ul
 									class="navbar-nav d-flex justify-content-between align-items-center">
 									<!-- 									<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li> -->
-									<li><span class="text-white">________ 관리자님
+									<li><span class="text-white">${sessionScope.manager.manager_email} 님
 											반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
 									<li class="nav-item icon-parent"><c:if
 											test="${inquiryCount gt 0 }">
@@ -203,9 +203,9 @@
 									<h4 class="modal-title">관리자 로그아웃</h4>
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
-								<div class="modal-body">정말 로그아웃 하시겠습니까?</div>
+								<div class="modal-body">${sessionScope.manager.manager_email} 님 정말 로그아웃 하시겠습니까?</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-success"
+									<button type="button" class="btn btn-success" onclick="location.href='adminLogout.mdo'"
 										data-dismiss="modal">예</button>
 									<button type="button" class="btn btn-danger"
 										data-dismiss="modal">아니오</button>

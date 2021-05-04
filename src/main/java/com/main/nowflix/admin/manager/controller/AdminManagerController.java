@@ -1,5 +1,6 @@
 package com.main.nowflix.admin.manager.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -195,14 +196,16 @@ public class AdminManagerController {
 		return "adminLogin";
 	}
 	
-	// 관리자 로그인 체크
+	// 관리자 로그인
 	@RequestMapping("/adminLoginCheck.mdo")
 	public String adminLogin(AdminManagerVO vo, HttpSession session, RedirectAttributes rttr, 
 			Model model, HttpServletResponse response) throws Exception {
-		System.out.println(vo.getManager_email());
+		//System.out.println(vo.getManager_email());
+		
 		String page = "adminLogin";
-		AdminManagerVO adminLogin = managerService.adminLogin(vo);
-		System.out.println(managerService.adminLogin(vo));
+		AdminManagerVO adminLogin = managerService.adminLogin(vo); // 로그인한 관리자 정보 vo
+		//System.out.println(managerService.adminLogin(vo));
+		
 		if(adminLogin != null) {
 			if(vo.getManager_pass().equals(adminLogin.getManager_pass())) { // 비밀번호가 일치한다면
 				System.out.println("관리자 " + adminLogin.getManager_email() + " 로그인 성공");
@@ -214,12 +217,22 @@ public class AdminManagerController {
 				ScriptUtils.alert(response, "비밀번호가 일치하지 않습니다");
 			}
 		}
-		else {
+		
+		else { // 가져온 vo가 null일 때, 즉 로그인 시도한 아이디가 존재하지 않을 때
 			System.out.println("해당 아이디가 존재하지 않습니다");
 			ScriptUtils.alert(response, "해당 아이디가 존재하지 않습니다");
 		}
 		
 		return page;
+	}
+	
+	// 관리자 로그아웃
+	@RequestMapping("/adminLogout.mdo") 
+	public String adminLogout(HttpSession session) throws Exception {
+		if(session != null) {
+			session.invalidate(); // 세션이 존재하면 세션 무효화 => 로그아웃
+		}
+		return "redirect:/adminLogin.mdo";
 	}
 }
 

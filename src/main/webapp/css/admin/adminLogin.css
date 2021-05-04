@@ -129,6 +129,12 @@ body {
 	cursor: pointer;
 } 
 
+.center_login_button:hover {
+	border-radius: 7px;
+	box-shadow: 2px 5px 20px #111;
+	transform: translateY(-1px);
+}
+
 .bottom_porm {
 	left: 0px;
 	bottom: 0px;
