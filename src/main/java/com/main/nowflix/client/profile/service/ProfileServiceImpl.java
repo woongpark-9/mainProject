@@ -24,7 +24,11 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public ProfileVO createProfile(ProfileVO vo, MemberVO memberVO) throws Exception {
+		System.out.println("createProfile의 첫번째 줄" + vo.toString());
 		vo.setEmail(memberVO.getEmail());
+		vo.setGenre_name("N");
+
+		System.out.println("createProfile의 profileVO" + vo.toString());
 		profileDAO.createProfile(vo);
 		vo = profileDAO.getProfileNew(vo);
 		System.out.println("serviceImpl 매퍼" + vo);
@@ -75,6 +79,18 @@ public class ProfileServiceImpl implements ProfileService {
 			profileDAO.updateProfile(profileVO);
 
 		}
+	}
+
+	@Override
+	public void updateProfileEdit(ProfileVO vo) throws Exception {
+		profileDAO.updateProfileEdit(vo);
+
+	}
+
+	@Override
+	public void deleteProfile(ProfileVO profile) throws Exception {
+		profileDAO.deleteProfile(profile);
+
 	}
 
 }

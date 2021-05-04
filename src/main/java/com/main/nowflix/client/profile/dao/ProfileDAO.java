@@ -35,6 +35,10 @@ public class ProfileDAO {
 		sqlSessionTemplate.insert("profileMapper.profileAdd", vo);
 	}
 
+	public void updateProfileEdit(ProfileVO vo) {
+		sqlSessionTemplate.update("profileMapper.updateProfileEdit", vo);
+	}
+
 	public void updateProfile(ProfileVO vo) {
 		sqlSessionTemplate.update("profileMapper.updateProfile", vo);
 	}
@@ -45,6 +49,10 @@ public class ProfileDAO {
 
 	public ProfileVO getProfileNew(ProfileVO vo) {
 		return sqlSessionTemplate.selectOne("profileMapper.getProfileNew", vo);
+	}
+
+	public void deleteProfile(ProfileVO vo) {
+		sqlSessionTemplate.delete("profileMapper.deleteProfile", vo);
 	}
 
 }

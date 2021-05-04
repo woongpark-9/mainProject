@@ -16,6 +16,8 @@ public interface ProfileService {
 
 	public void setProfile(String[] arr, MemberVO member) throws Exception;
 	
+	public void deleteProfile(ProfileVO profile) throws Exception;
 	
+	public void updateProfileEdit(ProfileVO vo)throws Exception;
 
 }

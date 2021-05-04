@@ -35,14 +35,25 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/profileAdd.do")
-	public String profileAdd() {
+	public String profileAdd(HttpSession session) {
 		return "/views/member/profileAdd";
 	}
 
 	@RequestMapping(value = "/profileEdit.do")
-	public String profileEdit(ProfileVO vo, Model model) throws Exception {
+	public String profileEdit(HttpSession session, ProfileVO vo, Model model) throws Exception {
+		vo = service.getProfile(vo);
 		model.addAttribute("selectProfile", vo);
+		System.out.println("프로필 관리선택시 profileVO" + vo.toString());
 		return "/views/member/profileEdit";
+	}
+
+	@RequestMapping(value = "/deleteProfile.do")
+	public String deleteProfile(HttpSession session, Model model, ProfileVO profileVO) throws Exception {
+		model.addAttribute("selectProfile", profileVO);
+		System.out.println("deleteProfile.do실행 프로필 삭제");
+		service.deleteProfile(profileVO);
+
+		return "forward:profile.do";
 	}
 
 	@RequestMapping(value = "/manageProfiles.do")
@@ -66,6 +77,17 @@ public class ProfileController {
 		return "/views/member/selectProfileImg";
 	}
 
+	@RequestMapping(value = "updateProfileEdit.do")
+	public String updateProfileEdit(HttpSession session, Model model, ProfileVO vo) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (vo.getKids() == null) {
+			vo.setKids("N");
+		}
+		service.updateProfileEdit(vo);
+		model.addAttribute("profile", service.getProfileList(vo, member));
+		return "/views/member/profile";
+	}
+
 	// HttpSession session을 매개변수로 입력하면 접속한 사람의 memberVO를 가져올수잇다.
 	// HttpSession session을 매개변수로 입력하면 접속한 사람의 memberVO를 가져올수잇다.
 	@RequestMapping("setGenre.do")
@@ -87,19 +109,23 @@ public class ProfileController {
 
 //	      service.setProfile(arr, member, addProfileVO);
 
-		return "redirect:profile.do";
+		return "forward:profile.do";
 	}
 
 	@RequestMapping(value = "/createProfile.do")
 	public String createProfile(HttpSession session, Model model, ProfileVO profileVO) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		model.addAttribute("profileVO", profileVO);
+		System.out.println("11createProfile.do의 프로파일" + profileVO);
+		if (profileVO.getKids() == null) {
+			profileVO.setKids("N");
+		}
+
 		profileVO = service.createProfile(profileVO, member);
 
-//	      service.getProfile(vo)
+//	         service.getProfile(vo)
 
-//	      model.addAttribute("profile", service.getProfileList(profileVO, member));
-
-		model.addAttribute("profileVO", profileVO);
+//	         model.addAttribute("profile", service.getProfileList(profileVO, member));
 
 		System.out.println("createProfile.do의 프로파일" + profileVO);
 		return "forward:favoriteNew.do";

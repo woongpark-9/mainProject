@@ -49,3 +49,19 @@ function acyncMovePage3(url, id, name, img, kid) {
         $('#body').html(data);
     });
 }
+
+function acyncMovePage4(url, id) {
+    // ajax option
+    var ajaxOption = {
+            url : url,
+            data : {"profile_id" : id},
+            type : "POST",
+    };
+    
+    $.ajax(ajaxOption).done(function(data){
+        // Contents 영역 삭제
+        $('#body').children().remove();
+        // Contents 영역 교체
+        $('#body').html(data);
+    });
+}
