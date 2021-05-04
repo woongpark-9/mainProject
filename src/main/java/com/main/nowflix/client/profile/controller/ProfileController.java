@@ -30,7 +30,7 @@ public class ProfileController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 
 		model.addAttribute("profile", service.getProfileList(vo, member));
-
+		model.addAttribute("member",member);
 		return "/views/member/profile";
 	}
 

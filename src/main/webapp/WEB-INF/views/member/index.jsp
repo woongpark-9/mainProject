@@ -21,7 +21,6 @@
 <link href="css/member/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
 <link rel="stylesheet" href="css/member/search.css">
-<script type="text/javascript" src="js/member/search.js"></script>
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
@@ -109,38 +108,111 @@
 
 	 }); */
 
-// 	$(document).ready(function() {
-// 		$(".poster").each(function(i, obj) {
-// 			$(this).on("mouseenter", function() {
-// 				startVideo(i);
-// 			});
-// 			$(".caption").on("mouseleave", function() {
-// 				stopVideo(i);
-// 			})
-// 		});
-// 	});
+	// 	$(document).ready(function() {
+	// 		$(".poster").each(function(i, obj) {
+	// 			$(this).on("mouseenter", function() {
+	// 				startVideo(i);
+	// 			});
+	// 			$(".caption").on("mouseleave", function() {
+	// 				stopVideo(i);
+	// 			})
+	// 		});
+	// 	});
+	// 	function startVideo(i) {
+	// 		$(".caption").css("display", "block");
+	// 		$(".thevideo").css("display", "block");
+	// 		$(".thevideo")[i].play();
+	// 	}
+	// 	function stopVideo(i) {
+	// 		$(".caption").css("display", "none");
+	// 		$(".thevideo")[i].pause();
+	// 		$(".thevideo")[i].currentTime = 0;
+	// 	}
+	$(document).ready(function() {
+		$(".poster").each(function(i, obj) {
+			$(this).on("mouseenter", function() {
+				startVideo(i);
+			});
+			$(".caption").on("mouseleave", function() {
+				stopVideo(i);
+			})
+		});
+	});
 
-// 	function startVideo(i) {
-// 		$(".caption").css("display", "block");
-// 		$(".thevideo").css("display", "block");
-// 		$(".thevideo")[i].play();
-// 	}
+	function startVideo(i) {
+		$(".caption").css("display", "block");
+		// 		$(".thevideo").css("display", "block");
+		//$(".thevideo")[i].play();
+	}
 
-// 	function stopVideo(i) {
-// 		$(".caption").css("display", "none");
-// 		$(".thevideo")[i].pause();
-// 		$(".thevideo")[i].currentTime = 0;
-// 	}
+	function stopVideo(i) {
+		$(".caption").css("display", "none");
+		//$(".thevideo")[i].pause();
+		//$(".thevideo")[i].currentTime = 0;
+	}
+
+	var title = new Array();
+	var path = new Array();
+	var genre = new Array();
+	var actor = new Array();
+	var director = new Array();
+	$(document).ready(function() {
+		<c:forEach items="${movieList}" var="movieList">
+		title.push("${movieList.title}");
+		path.push("${movieList.movie_path}");
+		genre.push("${movieList.genre_name}");
+		actor.push("${movieList.actor_name}");
+		director.push("${movieList.director_name}");
+		</c:forEach>
+	});
+
+	function startSuggest() {
+		var words = $("#search-txt").val();
+		var str = '';
+		if (words != '') {
+			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
+					+ words + '</span><br><br></div><div class="col-md-12">'
+			for (var i = 0; i < title.length; i++) {
+				if (words != '') {
+					if (title[i].includes(words) || genre[i].includes(words)
+							|| actor[i].includes(words)
+							|| director[i].includes(words)) {
+						str += '<div class="col-md-3 poster"><img src="'
+	                     + 'http://yonom.duckdns.org/movie/'
+	                     + path[i] + '/poster.png'
+	                     + '" alt="" style="width:17vw; height:auto;"></div>';
+
+					}
+				}
+			}
+
+			str += "</div>";
+
+			//	          $(".test").css("display","none");
+			//	          $(".bbbb").html(str);
+
+			$(".test").hide();
+			$(".bbbb").html(str);
+		} else {
+			//	          $(".test").css("display","");
+			//	          $('.bbbb').children().remove();
+			$(".test").show();
+			$('.bbbb').children().remove();
+		}
+	}
 </script>
 </head>
 <body>
 	<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
 
+
 	<div class="home">
-		<video class="video1" src="images/member/love.mp4"
-			poster="https://occ-0-2218-1009.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYlW4dC81I67OWWpvjybrMQfxgF-nMCuPzZb_K7RIYsRV1_QEuYtYJ2tuSelUR57nV_E-MsiNW8IxhEZtzXLCdTycBUN.webp?r=c49"
-			autoplay muted>
-		</video>
+		<div class="test">
+			<video class="video1" id="video1" src="images/member/love.mp4"
+				poster="https://occ-0-2218-1009.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYlW4dC81I67OWWpvjybrMQfxgF-nMCuPzZb_K7RIYsRV1_QEuYtYJ2tuSelUR57nV_E-MsiNW8IxhEZtzXLCdTycBUN.webp?r=c49"
+				autoplay muted>
+			</video>
+		</div>
 		<div class="overlay">
 			<div class="header">
 				<!-- 	<div class="logo">NEFLIX</div> -->
@@ -171,14 +243,12 @@
 				<div class="menu">
 					<div class="search-box">
 						<input type="text" class="search-txt" placeholder="제목,사람,장르"
-							id="search-txt" onkeydown="startSuggest()" /> <a
+							id="search-txt" onkeyup="startSuggest()" /> <a
 							class="search-btn" href="#"> <i class="fas fa-search"></i>
 						</a>
 					</div>
 					<div class="menu-item">키즈</div>
-					<div class="menu-item">
-						<i class="fas fa-gift"></i>
-					</div>
+				
 
 					<div class="menu-item">
 						<div class="dropdown">
@@ -199,66 +269,197 @@
 								<c:forEach var="profileList" items="${profileList }">
 									<a href="#">${profileList.profile_name }</a>
 								</c:forEach>
+								   <a href="getInquiryList.do?email=${profile.email }">문의하기</a>
 							</div>
 						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="banner">
+			<div class="bbbb"></div>
+			<div class="test">
+				<div class="banner">
 
-				<div class="title">
-					<img
-						src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABf2KuOLYvCA8ZctYlCbwe-wvuYjMhhxAWrl1ULZVkFm1q3Npbdcm6t0Kp6qPe-PZM3lLBYBqKL9LUxSz8vLAs-9CJHeVSYIpJnA7TwWt1_0G60764vxN2J9-DDv1eUsw5NACZkEjmju1YCkd3dbBjSauZfB1w_-7OOaQHF2--ocm.webp?r=94c">
-				</div>
-				<div class="badge">오늘 한국에서 콘텐츠 순위 7위</div>
-				<div class="description">"짝사랑 상대의 마음을 알 수 있다면 어떨까? 혼자 밤새워 고민하던
-					시대는 끝났다. ‘좋알람’ 앱을 켜고 그 사람의 반경 10m 안에 들어가라. 좋아하면 반드시 울린다."</div>
+					<div class="title">
+						<img
+							src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABf2KuOLYvCA8ZctYlCbwe-wvuYjMhhxAWrl1ULZVkFm1q3Npbdcm6t0Kp6qPe-PZM3lLBYBqKL9LUxSz8vLAs-9CJHeVSYIpJnA7TwWt1_0G60764vxN2J9-DDv1eUsw5NACZkEjmju1YCkd3dbBjSauZfB1w_-7OOaQHF2--ocm.webp?r=94c">
+					</div>
+					<div class="badge">오늘 한국에서 콘텐츠 순위 7위</div>
+					<div class="description">"짝사랑 상대의 마음을 알 수 있다면 어떨까? 혼자 밤새워
+						고민하던 시대는 끝났다. ‘좋알람’ 앱을 켜고 그 사람의 반경 10m 안에 들어가라. 좋아하면 반드시 울린다."</div>
 
-				<div class="buttons">
-					<button
-						style="background: 0 0; border: 0; border-radius: 4px; padding: 0;">
-						<div class="white-button">
-							<i class="fas fa-play"></i> 재생
-						</div>
-					</button>
-					<button
-						style="background: 0 0; border: 0; border-radius: 4px; padding: 0;"
-						class="detailBtn" data-toggle="modal"
-						data-video="https://clienti.dk/media/1140/friheden-video.mp4"
-						data-target="#videoModal">
-
-
-						<div class="gray-button">
-
-
-							<i class="far fa-info-circle"></i> 상세정보
-						</div>
-					</button>
-				</div>
-				<div class="extra">
-					<button aria-label="다시 재생" onclick="replay()"
-						class="color-supplementary hasIcon ltr-pjs1vp" type="button">
-						<i class="fas fa-undo-alt"></i>
-						<div class="ltr-1ksxkn9">
-							<div class="small ltr-dguo2f" role="presentation">
-								<svg viewBox="0 0 24 24">
-									<path
-										d="M20 12.35l1.919-1.371 1.162 1.627-4.08 2.915-4.082-2.915 1.162-1.627L18 12.349V12c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.93 0 3.68-.79 4.94-2.06l1.42 1.42A8.954 8.954 0 0 1 11 21a9 9 0 1 1 9-9v.35z"
-										fill="currentColor"></path></svg>
+					<div class="buttons">
+						<button
+							style="background: 0 0; border: 0; border-radius: 4px; padding: 0;">
+							<div class="white-button">
+								<i class="fas fa-play"></i> 재생
 							</div>
+						</button>
+						<button
+							style="background: 0 0; border: 0; border-radius: 4px; padding: 0;"
+							class="detailBtn" data-toggle="modal"
+							data-video="https://clienti.dk/media/1140/friheden-video.mp4"
+							data-target="#videoModal">
+
+
+							<div class="gray-button">
+
+
+								<i class="far fa-info-circle"></i> 상세정보
+							</div>
+						</button>
+					</div>
+					<div class="extra">
+						<button aria-label="다시 재생" onclick="replay()"
+							class="color-supplementary hasIcon ltr-pjs1vp" type="button">
+							<i class="fas fa-undo-alt"></i>
+							<div class="ltr-1ksxkn9">
+								<div class="small ltr-dguo2f" role="presentation">
+									<svg viewBox="0 0 24 24">
+									<path
+											d="M20 12.35l1.919-1.371 1.162 1.627-4.08 2.915-4.082-2.915 1.162-1.627L18 12.349V12c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.93 0 3.68-.79 4.94-2.06l1.42 1.42A8.954 8.954 0 0 1 11 21a9 9 0 1 1 9-9v.35z"
+											fill="currentColor"></path></svg>
+								</div>
+							</div>
+						</button>
+						<div class="rating">15+</div>
+					</div>
+					<div class="category-list">
+						<div class="category">
+
+							<div class="title">${profile.profile_name }님의취향저격 베스트 콘텐츠</div>
+							<div class="favorite-list">
+								<c:forEach var="movieList" items="${favoriteMovieList }">
+									<div class="favorite-items">
+										<div class="favoriteMovieList-item">
+
+											<div class="poster">
+												<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+													alt="">
+											</div>
+											<div id="caption" class="caption" style="display: none;">
+												<div class="preview">
+													<div class=video>
+														<!-- 													<video id="thevideo" style="display: none;" -->
+														<!-- 														class="thevideo" -->
+														<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+														<!-- 														muted> -->
+														<!-- 														<source -->
+														<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+														<!-- 													</video> -->
+														<!-- 													<div class="thevideo" style="display: none;"> -->
+														<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
+													</div>
+												</div>
+
+												<div class="detail">
+													<div class="detailFirst">
+														<div class="play-button">
+															<a
+																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+																<img
+																src="http://yonom.duckdns.org/images/member/play-button.png"
+																width="40px" height="40px">
+															</a>
+														</div>
+														<%-- 													<div class="title-name">${movieList.title }</div> --%>
+														<%-- 													<div class="movie-summary">${movieList.summary}</div> --%>
+														<div class="detail-button">
+															<a href="#"> <img
+																src="http://yonom.duckdns.org/images/member/plus-button.png"
+																width="30px" height="30px">
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</c:forEach>
+							</div>
+
 						</div>
-					</button>
-					<div class="rating">15+</div>
+
+					</div>
+				</div>
+				<div class="category-list">
+					<div class="category">
+						<c:if test="${not empty watchMovieList}">
+							<div class="title">${profile.profile_name }님이시청 중인 콘텐츠</div>
+							<div class="watch-list">
+								<c:forEach var="movieList" items="${watchMovieList }">
+									<div class="watch-items">
+										<div class="watchMovieList-item">
+											<div class="poster">
+												<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+													alt="">
+
+												<c:forEach var="watchList" items="${watchList }">
+													<c:if test="${movieList.seq eq watchList.movie_id}">
+														<div class="progress">
+															<span class="progress-bar"> <span
+																role="presentation" class="progress-completed"
+																style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
+															</span>
+														</div>
+													</c:if>
+												</c:forEach>
+											</div>
+											<div id="caption" class="caption" style="display: none;">
+												<div class="preview">
+													<div class=video>
+														<!-- 													<video id="thevideo" style="display: none;" -->
+														<!-- 														class="thevideo" -->
+														<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+														<!-- 														muted> -->
+														<!-- 														<source -->
+														<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+														<!-- 													</video> -->
+														<!-- 													<div class="thevideo" style="display: none;"> -->
+														<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
+													</div>
+												</div>
+
+												<div class="detail">
+													<div class="detailFirst">
+														<div class="play-button">
+															<a
+																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+																<img
+																src="http://yonom.duckdns.org/images/member/play-button.png"
+																width="40px" height="40px">
+															</a>
+														</div>
+														<%-- 													<div class="title-name">${movieList.title }</div> --%>
+														<%-- 													<div class="movie-summary">${movieList.summary}</div> --%>
+														<div class="detail-button">
+															<a href="#"> <img
+																src="http://yonom.duckdns.org/images/member/plus-button.png"
+																width="30px" height="30px">
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</c:forEach>
+							</div>
+						</c:if>
+					</div>
+
+
 				</div>
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name } 님의 취향저격 베스트 콘텐츠</div>
-						<div class="favorite-list">
-							<c:forEach var="movieList" items="${favoriteMovieList }">
-								<div class="favorite-items">
-									<div class="favoriteMovieList-item">
+						<div class="title">미국 영화</div>
+						<div class="usa-list">
+							<c:forEach var="movieList" items="${usaMovieList }">
+								<div class="usa-items">
+									<div class="usaMovieList-item">
 
 										<div class="poster">
 											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
@@ -267,13 +468,15 @@
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
 												<div class=video>
-<!-- 													<video id="thevideo" style="display: none;" -->
-<!-- 														class="thevideo" -->
-<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 														muted> -->
-<!-- 														<source -->
-<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 													</video> -->
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 												</div>
 											</div>
 
@@ -287,8 +490,8 @@
 															width="40px" height="40px">
 														</a>
 													</div>
-													<div class="title-name">${movieList.title }</div>
-													<div class="movie-summary">${movieList.summary}</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
 													<div class="detail-button">
 														<a href="#"> <img
 															src="http://yonom.duckdns.org/images/member/plus-button.png"
@@ -307,41 +510,34 @@
 					</div>
 
 				</div>
-			</div>
-			<div class="category-list">
-				<div class="category">
-					<c:if test="${not empty watchMovieList}">
-						<div class="title">${profile.profile_name } 님이 시청 중인 콘텐츠</div>
-						<div class="watch-list">
-							<c:forEach var="movieList" items="${watchMovieList }">
-								<div class="watch-items">
-									<div class="watchMovieList-item">
+
+
+				<div class="category-list">
+					<div class="category">
+
+						<div class="title">애니메이션 영화</div>
+						<div class="ani-list">
+							<c:forEach var="movieList" items="${animationList }">
+								<div class="ani-items">
+									<div class="aniMovieList-item">
+
 										<div class="poster">
 											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
 												alt="">
-
-											<c:forEach var="watchList" items="${watchList }">
-												<c:if test="${movieList.seq eq watchList.movie_id}">
-													<div class="progress">
-														<span class="progress-bar"> <span
-															role="presentation" class="progress-completed"
-															style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
-														</span>
-													</div>
-												</c:if>
-											</c:forEach>
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
-<!-- 												<div class=video> -->
-<!-- 													<video id="thevideo" style="display: none;" -->
-<!-- 														class="thevideo" -->
-<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 														muted> -->
-<!-- 														<source -->
-<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 													</video> -->
-<!-- 												</div> -->
+												<div class=video>
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
+												</div>
 											</div>
 
 											<div class="detail">
@@ -354,8 +550,8 @@
 															width="40px" height="40px">
 														</a>
 													</div>
-													<div class="title-name">${movieList.title }</div>
-													<div class="movie-summary">${movieList.summary}</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
 													<div class="detail-button">
 														<a href="#"> <img
 															src="http://yonom.duckdns.org/images/member/plus-button.png"
@@ -370,349 +566,248 @@
 
 							</c:forEach>
 						</div>
-					</c:if>
+
+					</div>
+
 				</div>
 
 
-			</div>
-			<div class="category-list">
-				<div class="category">
 
-					<div class="title">미국 영화</div>
-					<div class="usa-list">
-						<c:forEach var="movieList" items="${usaMovieList }">
-							<div class="usa-items">
-								<div class="usaMovieList-item">
 
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
+
+				<div class="category-list">
+					<div class="category">
+
+						<div class="title">한국 영화</div>
+						<div class="korea-list">
+							<c:forEach var="movieList" items="${koreaMovieList }">
+								<div class="korea-items">
+									<div class="koreaMovieList-item">
+
+										<div class="poster">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
 										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
+										<div id="caption" class="caption" style="display: none;">
+											<div class="preview">
+												<div class=video>
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
+											</div>
+											<div class="detail">
+												<div class="detailFirst">
+													<div class="play-button">
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://yonom.duckdns.org/images/member/play-button.png"
+															width="40px" height="40px">
+														</a>
+													</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://yonom.duckdns.org/images/member/plus-button.png"
+															width="30px" height="30px">
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
+						</div>
+
 					</div>
 
 				</div>
+				<div class="category-list">
+					<div class="category">
 
-			</div>
-			
-			
-			<div class="category-list">
-				<div class="category">
+						<div class="title">SF·미래 영화</div>
+						<div class="sf-list">
+							<c:forEach var="movieList" items="${sfMovieList }">
+								<div class="sf-items">
+									<div class="sfMovieList-item">
 
-					<div class="title">애니메이션 영화</div>
-					<div class="ani-list">
-						<c:forEach var="movieList" items="${animationList }">
-							<div class="ani-items">
-								<div class="aniMovieList-item">
-
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
+										<div class="poster">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
 										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
+										<div id="caption" class="caption" style="display: none;">
+											<div class="preview">
+												<div class=video>
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
+											</div>
+
+											<div class="detail">
+												<div class="detailFirst">
+													<div class="play-button">
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://yonom.duckdns.org/images/member/play-button.png"
+															width="40px" height="40px">
+														</a>
+													</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://yonom.duckdns.org/images/member/plus-button.png"
+															width="30px" height="30px">
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
+						</div>
+
 					</div>
 
 				</div>
+				<div class="category-list">
+					<div class="category">
 
-			</div>
-			
-			
-			
-			
-			
-			<div class="category-list">
-				<div class="category">
+						<div class="title">로맨스 영화</div>
+						<div class="romance-list">
+							<c:forEach var="movieList" items="${romanceMovieList }">
+								<div class="romance-items">
+									<div class="romanceMovieList-item">
 
-					<div class="title">한국 영화</div>
-					<div class="korea-list">
-						<c:forEach var="movieList" items="${koreaMovieList }">
-							<div class="korea-items">
-								<div class="koreaMovieList-item">
-
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
+										<div class="poster">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
 										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
+										<div id="caption" class="caption" style="display: none;">
+											<div class="preview">
+												<div class=video>
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
+											</div>
+
+											<div class="detail">
+												<div class="detailFirst">
+													<div class="play-button">
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://yonom.duckdns.org/images/member/play-button.png"
+															width="40px" height="40px">
+														</a>
+													</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://yonom.duckdns.org/images/member/plus-button.png"
+															width="30px" height="30px">
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
+						</div>
+
 					</div>
 
 				</div>
+				<div class="category-list">
+					<div class="category">
 
-			</div>
-			<div class="category-list">
-				<div class="category">
+						<div class="title">액션 영화</div>
+						<div class="action-list">
+							<c:forEach var="movieList" items="${actionMovieList }">
+								<div class="action-items">
+									<div class="actionMovieList-item">
 
-					<div class="title">SF·미래 영화</div>
-					<div class="sf-list">
-						<c:forEach var="movieList" items="${sfMovieList }">
-							<div class="sf-items">
-								<div class="sfMovieList-item">
-
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
+										<div class="poster">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
 										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
+										<div id="caption" class="caption" style="display: none;">
+											<div class="preview">
+												<div class=video>
+													<!-- 													<video id="thevideo" style="display: none;" -->
+													<!-- 														class="thevideo" -->
+													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
+													<!-- 														muted> -->
+													<!-- 														<source -->
+													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
+													<!-- 													</video> -->
+													<!-- 													<div class="thevideo" style="display: none;"> -->
+													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
+											</div>
+
+											<div class="detail">
+												<div class="detailFirst">
+													<div class="play-button">
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://yonom.duckdns.org/images/member/play-button.png"
+															width="40px" height="40px">
+														</a>
+													</div>
+													<%-- 												<div class="title-name">${movieList.title }</div> --%>
+													<%-- 												<div class="movie-summary">${movieList.summary}</div> --%>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://yonom.duckdns.org/images/member/plus-button.png"
+															width="30px" height="30px">
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
+
+						</div>
+
 					</div>
-
 				</div>
-
 			</div>
-			<div class="category-list">
-				<div class="category">
 
-					<div class="title">로맨스 영화</div>
-					<div class="romance-list">
-						<c:forEach var="movieList" items="${romanceMovieList }">
-							<div class="romance-items">
-								<div class="romanceMovieList-item">
-
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
-										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
-												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</c:forEach>
-					</div>
-
-				</div>
-
-			</div>
-			<div class="category-list">
-				<div class="category">
-
-					<div class="title">액션 영화</div>
-					<div class="action-list">
-						<c:forEach var="movieList" items="${actionMovieList }">
-							<div class="action-items">
-								<div class="actionMovieList-item">
-
-									<div class="poster">
-										<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-											alt="">
-									</div>
-									<div id="caption" class="caption" style="display: none;">
-										<div class="preview">
-<!-- 											<div class=video> -->
-<!-- 												<video id="thevideo" style="display: none;" class="thevideo" -->
-<%-- 													poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-<!-- 													muted> -->
-<!-- 													<source -->
-<%-- 														src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-<!-- 												</video> -->
-<!-- 											</div> -->
-										</div>
-
-										<div class="detail">
-											<div class="detailFirst">
-												<div class="play-button">
-													<a
-														href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-														<img
-														src="http://yonom.duckdns.org/images/member/play-button.png"
-														width="40px" height="40px">
-													</a>
-												</div>
-												<div class="title-name">${movieList.title }</div>
-												<div class="movie-summary">${movieList.summary}</div>
-												<div class="detail-button">
-													<a href="#"> <img
-														src="http://yonom.duckdns.org/images/member/plus-button.png"
-														width="30px" height="30px">
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</c:forEach>
-					</div>
-
-				</div>
-
-			</div>
-			
 			<!-- 					<div class="category"> -->
 			<!-- 						<div class="title">박영웅 님이 시청 중인 콘텐츠</div> -->
 			<!-- 						<div class="list"> -->

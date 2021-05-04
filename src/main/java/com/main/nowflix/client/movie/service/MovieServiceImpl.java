@@ -131,7 +131,7 @@ public class MovieServiceImpl implements MovieService {
 
 		}
 	
-		
+		model.addAttribute("movieList", movieList);	
 		model.addAttribute("favoriteMovieList",favoriteMovieList);
 		model.addAttribute("usaMovieList", usaMovieList);
 		model.addAttribute("koreaMovieList",koreaMovieList);

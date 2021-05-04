@@ -18,11 +18,15 @@
 		<result property="reply_content" column="REPLY_CONTENT"/>
 		<result property="inquiry_date" column="INQUIRY_DATE"/>
 		<result property="reply_date" column="REPLY_DATE"/>
+		<result property="check_flag" column="CHECK_FLAG"/>
 	</resultMap>
 	
 	<insert id="insertInquiry">
 		INSERT INTO INQUIRY (EMAIL,INQUIRY_TYPE,INQUIRY_TITLE,INQUIRY_CONTENT,INQUIRY_DATE) VALUES(#{email},#{inquiry_type},#{inquiry_title},#{inquiry_content},current_timestamp)
 	
 	</insert>
-
+	<select id="getInquiryList" resultMap="inquiryResult">
+		SELECT * FROM INQUIRY WHERE EMAIL = #{email} order by inquiry_date asc
+	
+	</select>
 </mapper>

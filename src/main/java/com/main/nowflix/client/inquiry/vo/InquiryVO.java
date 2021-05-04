@@ -13,6 +13,13 @@ private String reply_title;
 private String reply_content;
 private Date inquiry_date;
 private Date reply_date;
+private String check_flag;
+public String getCheck_flag() {
+	return check_flag;
+}
+public void setCheck_flag(String check_flag) {
+	this.check_flag = check_flag;
+}
 public int getInquiry_id() {
 	return inquiry_id;
 }

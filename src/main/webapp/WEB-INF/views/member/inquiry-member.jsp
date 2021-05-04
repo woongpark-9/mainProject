@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>고객문의 페이지</title>
 </head>
-<link rel="stylesheet" href="../../../css/member/inquery_custom.css">
+<link rel="stylesheet" href="css/member/inquery_custom.css">
 <body>
 	<div class="header">
 		<a title="홈" href="#"> <img
@@ -15,11 +16,18 @@
 		</a>
 
 		<div class="user-info">
-			<button class="dropdown-togle" aria-haspopup="true">
-				<span class="user-name">전천후</span> <img
+		
+		<div class="dropdown">
+		<span class="user-name">${member.nickname }</span> <img
 					src="http://yonom.duckdns.org/images/member/dropdown.png"
 					style="width: 15px;">
-			</button>
+			<button class="dropdown-togle" aria-haspopup="true"></button>
+			<div class="dropdown-content">
+				<a href="#">문의등록</a>
+				<a href="#">문의내역</a>
+			</div>
+			
+			</div>
 		</div>
 	</div>
 

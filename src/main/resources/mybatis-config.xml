@@ -16,7 +16,7 @@
 			type="com.main.nowflix.client.profile.vo.ProfileVO" alias="profileVO" />
 		<typeAlias type="com.main.nowflix.client.ticket.vo.TicketVO"
 			alias="ticketVO" />
-
+		<typeAlias type="com.main.nowflix.client.inquiry.vo.InquiryVO" alias="inquiryVO"/>
 
 		<!-- admin -->
 
@@ -66,6 +66,7 @@
 		<mapper resource="mappings/member/ticketMapper.xml"></mapper>
 		<mapper resource="mappings/member/salesMapper.xml"></mapper>
 		<mapper resource="mappings/member/watchMapper.xml"></mapper>
+		<mapper resource="mappings/member/inquiryMapper.xml"></mapper>
 
 		<mapper resource="mappings/admin/admin-movie-mapping.xml" />
 		<mapper resource="mappings/admin/admin-member-mapping.xml" />
