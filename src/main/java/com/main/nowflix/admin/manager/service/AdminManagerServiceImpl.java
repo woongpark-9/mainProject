@@ -59,6 +59,12 @@ public class AdminManagerServiceImpl implements AdminManagerService {
 		return managerDAO.modifyManager(vo);
 	}
 	
+	//관리자 로그인
+	@Override
+	public AdminManagerVO adminLogin(AdminManagerVO vo) throws Exception {
+		return managerDAO.adminLogin(vo);
+	}
+	
 	//EXCEL
 	@Override
 	public List<AdminManagerVO> selectBoardList() throws Exception {
@@ -141,5 +147,5 @@ public class AdminManagerServiceImpl implements AdminManagerService {
             result = 0;
         }
         return result;
-    }
+    }	
 }

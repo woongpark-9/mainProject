@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
@@ -23,9 +24,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.main.nowflix.admin.manager.service.AdminManagerService;
 import com.main.nowflix.admin.manager.vo.AdminManagerVO;
+import com.main.nowflix.util.ScriptUtils;
 
 @Controller
 public class AdminManagerController {
@@ -191,4 +194,56 @@ public class AdminManagerController {
 	public String getAdminLogin() {
 		return "adminLogin";
 	}
+	
+	// 관리자 로그인 체크
+	@RequestMapping("/adminLoginCheck.mdo")
+	public String adminLogin(AdminManagerVO vo, HttpSession session, RedirectAttributes rttr, 
+			Model model, HttpServletResponse response) throws Exception {
+		System.out.println(vo.getManager_email());
+		String page = "adminLogin";
+		AdminManagerVO adminLogin = managerService.adminLogin(vo);
+		System.out.println(managerService.adminLogin(vo));
+		if(adminLogin != null) {
+			if(vo.getManager_pass().equals(adminLogin.getManager_pass())) { // 비밀번호가 일치한다면
+				System.out.println("관리자 " + adminLogin.getManager_email() + " 로그인 성공");
+				session.setAttribute("manager", adminLogin);
+				page = "manage_template";
+			}
+			else {
+				System.out.println("비밀번호가 일치하지 않습니다.");
+				ScriptUtils.alert(response, "비밀번호가 일치하지 않습니다");
+			}
+		}
+		else {
+			System.out.println("해당 아이디가 존재하지 않습니다");
+			ScriptUtils.alert(response, "해당 아이디가 존재하지 않습니다");
+		}
+		
+		return page;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

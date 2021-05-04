@@ -44,6 +44,12 @@ public class AdminManagerDAO {
 		return sqlSessionTemplate.update("AdminManagerDAO.modifyManager", vo);
 	}
 	
+	// 관리자 로그인
+	public AdminManagerVO adminLogin(AdminManagerVO vo) throws Exception {
+		System.out.println("DAO작동 ---> MyBatis로 adminLogin() 기능 처리");
+		return sqlSessionTemplate.selectOne("AdminManagerDAO.adminLogin", vo);
+	}	
+	
 	//PDF,EXCEL 둘중하나 (주석고쳐야함)
 	public List<AdminManagerVO> selectBoardList(AdminManagerVO vo) {
 		return sqlSessionTemplate.selectList("AdminManagerDAO.selectBoardList");

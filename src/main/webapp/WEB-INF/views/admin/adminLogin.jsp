@@ -20,19 +20,19 @@
 		<div class="center_login_text_div">
 			<p>관리자 로그인<p>
 		</div>
-		<form action="" method="post" >
+		<form action="adminLoginCheck.mdo" method="post" >
 			<div class="center_login_id">
 				<div class="center_login_id_label">
-					<label for="id">이메일 주소 또는 전화번호 </label><br>	
+					<label for="id">이메일 주소</label><br>	
 				</div>
-				<input type="text" size="20" value="" name="email">
+				<input type="text" size="20" name="manager_email">
 			</div>
 			
 			<div class="center_login_pw">
 				<div class="center_login_pw_label">
 					<label for="pw">비밀번호 </label><br>	
 				</div>
-				<input type="password" size="20" value="" name="pass">
+				<input type="password" size="20" name="manager_pass">
 			</div>
 			
 			<div class="center_login_button">

@@ -13,6 +13,7 @@ public interface AdminManagerService {
 	int insertManager(AdminManagerVO vo);
 	int deleteManager(AdminManagerVO vo);
 	int modifyManager(AdminManagerVO vo);
+	AdminManagerVO adminLogin(AdminManagerVO vo) throws Exception;
 	List<AdminManagerVO> selectBoardList() throws Exception; //EXCEL 
 	int createPdf(String newpdf);	//PDF 
 }		

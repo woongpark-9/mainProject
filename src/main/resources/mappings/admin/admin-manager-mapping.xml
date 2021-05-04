@@ -52,6 +52,12 @@
       where manager_id = #{manager_id}
    </update>
    
+   <!-- 관리자 로그인 -->
+   <select id="adminLogin" resultType="adminmanager">
+   		select * from manager where manager_email = #{manager_email}
+   </select>
+   
+   
    <!-- EXCEL , PDF를 나타내기 위함. -->
    <select id="selectBoardList" resultType="adminmanager">
       select manager_id, manager_email, manager_type, manager_regdate from manager order by manager_id asc
