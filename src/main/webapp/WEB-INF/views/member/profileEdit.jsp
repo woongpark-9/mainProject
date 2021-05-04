@@ -12,7 +12,7 @@
             style="height: 65%; width: 100%; padding: 0px;">
             <div class="proImg" style="height: 100%; width: 30%;">
                <a href="#" class="profileEdit"
-                  onclick="acyncMovePage3('http://localhost:8080/nowflix/selectProfileImg.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }'">
+                  onclick="acyncMovePage3('http://localhost:8080/nowflix/selectProfileImg.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', '${selectProfile.kids}')">
                   <img class="img-responsive img-rounded profileImg"
                   src="${selectProfile.profile_img }"> <c:if
                      test="${selectProfile.kids  == 'Y'}">

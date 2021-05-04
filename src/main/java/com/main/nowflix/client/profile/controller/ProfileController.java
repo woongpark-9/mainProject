@@ -73,6 +73,7 @@ public class ProfileController {
 
 	@RequestMapping(value = "/selectProfileImg.do")
 	public String selectProfileImg(Model model, ProfileVO vo) throws Exception {
+		vo = service.getProfile(vo);
 		model.addAttribute("profile", vo);
 		return "/views/member/selectProfileImg";
 	}
