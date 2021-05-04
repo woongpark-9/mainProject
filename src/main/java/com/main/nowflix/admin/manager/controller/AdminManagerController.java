@@ -185,4 +185,10 @@ public class AdminManagerController {
 		wb.write(response.getOutputStream());
 		wb.close();
 	}
+	
+	// 관리자 로그인 창
+	@RequestMapping("/adminLogin.mdo")
+	public String getAdminLogin() {
+		return "adminLogin";
+	}
 }
