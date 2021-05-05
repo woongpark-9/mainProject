@@ -20,6 +20,7 @@
 	href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
 <link href="css/member/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
+
 <link rel="stylesheet" href="css/member/search.css">
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -171,16 +172,16 @@
 		var str = '';
 		if (words != '') {
 			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
-					+ words + '</span><br><br></div><div class="col-md-12">'
+					+ words + '</span><br><br></div><div class="col-md-11" align="center">'
 			for (var i = 0; i < title.length; i++) {
 				if (words != '') {
 					if (title[i].includes(words) || genre[i].includes(words)
 							|| actor[i].includes(words)
 							|| director[i].includes(words)) {
-						str += '<div class="col-md-3 poster"><img src="'
+						str += '<div class="col-md-2 searchPoster"><img src="'
 	                     + 'http://yonom.duckdns.org/movie/'
 	                     + path[i] + '/poster.png'
-	                     + '" alt="" style="width:17vw; height:auto;"></div>';
+	                     + '" alt="" style="width:17vw; height:10vw;"></div>';
 
 					}
 				}
@@ -276,7 +277,7 @@
 
 				</div>
 			</div>
-			<div class="bbbb"></div>
+			<div class="bbbb" align="center"></div>
 			<div class="test">
 				<div class="banner">
 

@@ -28,6 +28,13 @@ body, html {
 	/* 	background-color: rgb(20, 20, 20); */
 }
 
+.bbbb {
+	position: absolute;
+	top: 8vw;
+	left: 0;
+	width: 100%;
+}
+
 .header {
 	z-index: -2;
 	display: flex;
@@ -619,4 +626,9 @@ button.profile-button {
 
 .runningTime {
 	margin-left: 5px;
+}
+
+.searchPoster {
+	margin-bottom: 3vw;
+	padding-right: 2vw;
 }
