@@ -46,7 +46,8 @@
 		<div class="row justify-content-center" align="center">
 			<div class="ml-3 mr-3" style="font-size: 2vw; color: grey;">
 				<br>
-				해당 이메일로 결제내역을 보내드렸습니다. 결제 이후 취소 등 관련 사항은 문의하여 주세요.
+				이제 Nowflix를 자유롭게 이용하세요! <br>
+				결제 내역을 Email로 보내드렸습니다.
 			</div>
 		</div>
 		<div class="text-center mt-5" style="font-size: 1vw; color:grey;">

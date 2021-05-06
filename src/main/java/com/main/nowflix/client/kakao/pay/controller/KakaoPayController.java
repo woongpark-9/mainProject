@@ -23,6 +23,7 @@ import com.main.nowflix.client.member.service.MemberService;
 import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.sales.service.SalesService;
 import com.main.nowflix.client.sales.vo.SalesVO;
+import com.main.nowflix.util.sendMail;
 
 
 
@@ -116,6 +117,7 @@ public class KakaoPayController {
 		
 		// info라는 이름으로 카카오페이 결제정보를 바인딩해준다
 		model.addAttribute("info", kakaoPayApprovalVO);
+		sendMail.paymentInfo(member.getEmail(), kakaoPayApprovalVO);
         // 결제 성공페이지로 이동
 		return "views/member/kakaoPaySuccess";
         
