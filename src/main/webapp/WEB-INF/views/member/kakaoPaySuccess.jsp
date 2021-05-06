@@ -30,15 +30,7 @@
 
  
 <!-- 카카오페이 결제가 정상적으로 완료되었습니다. -->
- 
-<%-- 결제일시:     [[${info.approved_at}]]<br/> --%>
-<%-- 주문번호:    [[${info.partner_order_id}]]<br/> --%>
-<%-- 상품명:    [[${info.item_name}]]<br/> --%>
-<%-- 상품수량:    [[${info.quantity}]]<br/> --%>
-<%-- 결제금액:    [[${info.amount.total}]]<br/> --%>
-<%-- 결제방법:    [[${info.payment_method_type}]]<br/> --%>
-<%-- 결제카드:    [[${info.card_info.purchase_corp }]]<br/> --%>
- 
+
 <body style="background: #141414;     height: 100%;"id="body">
 	<div class="position-relative" id="bodyContents" style="top: 25%;">
 		<div class="page-header col-md-12" style="color: white; font-size: 3vw;" align="center">결제완료!</div>
