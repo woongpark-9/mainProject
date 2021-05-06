@@ -28,6 +28,11 @@ body, html {
 	/* 	background-color: rgb(20, 20, 20); */
 }
 
+#test {
+	position: relative;
+	top: 13vw;
+}
+
 .bbbb {
 	position: absolute;
 	top: 8vw;
@@ -38,6 +43,7 @@ body, html {
 .header {
 	z-index: -2;
 	display: flex;
+	height: 3vw;
 	
 }
 
@@ -72,7 +78,7 @@ body, html {
 }
 
 .menu-item {
-	margin: 15px;
+	margin-left: 2vw;
 	font-size: 13px;
 }
 
@@ -136,14 +142,14 @@ button.profile-button {
 }
 
 .badge {
-	font-size: 17px;
-	font-weight: 900;
+	font-size: 1.2vw;
+	font-weight: 600;
 	padding: 15px 0;
 }
 
 .description {
 	width: 40%;
-	font-size: 17px;
+	font-size: 1.1vw;
 }
 
 .buttons {
@@ -187,11 +193,11 @@ button.profile-button {
 
 .rating {
 	background-color: rgba(170, 170, 170, .2);
-	/* 	border-left: 3px solid white; */
-	padding: 10px;
-	width: 100%;
-	margin-left: 10px;
-	font-size: 13px;
+    border-left: 3px solid white;
+    border-radius: 0.3vw;
+    padding: 10px;
+    width: 1.5vw;
+    margin-left: 10px;
 }
 
 .rating img {
@@ -235,10 +241,10 @@ button.profile-button {
 }
 
 .title {
-	font-size: 17px;
-	font-weight: 700;
+	font-size: 1.4vw;
+	font-weight: 550;
 	color: white;
-	padding: 15px 15px 15px 0;
+	padding: 2vw 0.5vw 1vw 0.5vw;
 }
 
 .watch-list {
@@ -271,10 +277,9 @@ button.profile-button {
 }
 
 .poster img {
-	border-radius: 4px;
-	width: 224px;
-	height: 126px;
-	margin: 0 0 15px 0;
+	border-radius: 0.2vw;
+	width: 15.2vw;
+	height: 8.2vw	;
 }
 
 .movie img {
@@ -316,11 +321,9 @@ button.profile-button {
 .progress-bar {
 	display: block;
 	position: absolute;
-	height: 3px;
+	height: 0.15vw;
 	background-color: rgba(255, 255, 255, .3);
-	margin-left: 30px;
-	margin-right: 10px;
-	width: 160px;
+	width: 15.2vw;
 }
 
 .progress-completed {
@@ -332,6 +335,7 @@ button.profile-button {
 }
 
 .slick-dotted.slick-slider {
+	
 	margin-bottom: 0;
 }
 
@@ -538,13 +542,6 @@ button.profile-button {
 }
 
 
-
-.poster {
-/* 	width: 224px; */
-/* 	height: 126px; */
-	
-}
-
 .video {
 	position: absolute;
 }
@@ -570,14 +567,14 @@ button.profile-button {
 
 .play-button {
 	position: absolute;
-	left: 15px;
-	top: 43px;
+	left: 1vw;
+	top: 3vw;
 }
 
 .detail-button {
 	position: absolute;
-	top: 50px;
-	left: 175px;
+	top: 3.3vw;
+	left: 12vw;
 }
 
 .detail {
