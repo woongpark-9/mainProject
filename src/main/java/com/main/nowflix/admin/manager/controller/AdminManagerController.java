@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,9 @@ public class AdminManagerController {
 	@Autowired
 	private AdminManagerService managerService;
 
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+	
 	// 관리자 관리 페이지(리스트)
 	@RequestMapping("/manage_manager.mdo")
 	public String getManager(Model model,
@@ -91,6 +96,9 @@ public class AdminManagerController {
 	@RequestMapping("/managerInsert.mdo")
 	public int insertManager(AdminManagerVO vo) {
 		System.out.println("AdminManagerController load for inserting manager");
+		String inputPass = vo.getManager_pass(); // 입력한(받아온) 비밀번호 
+		String encodedPass = pwdEncoder.encode(inputPass); // 받아온 비밀번호 암호화
+		vo.setManager_pass(encodedPass); // 암호화 후 프로퍼티에 적용
 		int result = managerService.insertManager(vo); // 추가된 행의 개수(관리자 개수) 반환
 		return result;
 	}
@@ -109,6 +117,9 @@ public class AdminManagerController {
 	@RequestMapping("/managerModify.mdo")
 	public int modifyManager(AdminManagerVO vo) {
 		System.out.println("AdminManagerController load for modifying manager");
+		String inputPass = vo.getManager_pass(); // 수정을 위해 받아온 비밀번호
+		String encodedePass = pwdEncoder.encode(inputPass); // 수정할 비밀번호 암호화
+		vo.setManager_pass(encodedePass); // 암호화 후 프로퍼티에 적용
 		int result = managerService.modifyManager(vo); // 수정된 행의 개수(관리자 개수) 반환
 		return result;
 	}
@@ -218,15 +229,19 @@ public class AdminManagerController {
 			Model model, HttpServletResponse response) throws Exception {
 		//System.out.println(vo.getManager_email());
 		
-		String page = "adminLogin";
 		AdminManagerVO adminLogin = managerService.adminLogin(vo); // 로그인한 관리자 정보 vo
 		//System.out.println(managerService.adminLogin(vo));
 		
 		if(adminLogin != null) {
-			if(vo.getManager_pass().equals(adminLogin.getManager_pass())) { // 비밀번호가 일치한다면
+//			if(vo.getManager_pass().equals(adminLogin.getManager_pass())) { // 비밀번호가 일치한다면
+//				System.out.println("관리자 " + adminLogin.getManager_email() + " 로그인 성공");
+//				session.setAttribute("manager", adminLogin);
+//				page = "manage_template";
+//				return "redirect:manage_template.mdo";
+//			}
+			if(pwdEncoder.matches(vo.getManager_pass(), adminLogin.getManager_pass())) { // 비밀번호가 일치한다면
 				System.out.println("관리자 " + adminLogin.getManager_email() + " 로그인 성공");
 				session.setAttribute("manager", adminLogin);
-				page = "manage_template";
 				return "redirect:manage_template.mdo";
 			}
 			else {

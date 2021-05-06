@@ -42,6 +42,7 @@
       values(#{manager_pass}, #{manager_type}, current_timestamp, #{manager_email})
    </insert>
    
+   
    <delete id="deleteManager" parameterType="adminmanager">
       delete from manager where manager_id = #{manager_id}
    </delete>
