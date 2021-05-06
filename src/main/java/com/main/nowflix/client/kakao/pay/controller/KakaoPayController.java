@@ -120,9 +120,7 @@ public class KakaoPayController {
 		sendMail.paymentInfo(member.getEmail(), kakaoPayApprovalVO);
         // 결제 성공페이지로 이동
 		return "views/member/kakaoPaySuccess";
-        
-     
-     
+
 	}
 	
 	@PostMapping("/kakaoPayCancel.do")
