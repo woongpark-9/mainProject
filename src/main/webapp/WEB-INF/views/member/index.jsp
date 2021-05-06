@@ -139,6 +139,17 @@
 			})
 		});
 	});
+	
+	$(document).ready(function() {
+		$(".col-md-2 searchPoster").each(function(i, obj) {
+			$(this).on("mouseenter", function() {
+				startVideo(i);
+			});
+			$(".caption").on("mouseleave", function() {
+				stopVideo(i);
+			})
+		});
+	});
 
 	function startVideo(i) {
 		$(".caption").css("display", "block");
@@ -157,6 +168,8 @@
 	var genre = new Array();
 	var actor = new Array();
 	var director = new Array();
+	var seq = new Array();
+	var profile_id = ${profile.profile_id};
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
 		title.push("${movieList.title}");
@@ -164,6 +177,7 @@
 		genre.push("${movieList.genre_name}");
 		actor.push("${movieList.actor_name}");
 		director.push("${movieList.director_name}");
+		seq.push("${movieList.seq}");
 		</c:forEach>
 	});
 
@@ -172,17 +186,19 @@
 		var str = '';
 		if (words != '') {
 			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
-					+ words + '</span><br><br></div><div class="col-md-11" align="center">'
+					+ words + '</span><br><br></div><div class="col-md-11 searchList" align="center">';
 			for (var i = 0; i < title.length; i++) {
 				if (words != '') {
 					if (title[i].includes(words) || genre[i].includes(words)
 							|| actor[i].includes(words)
 							|| director[i].includes(words)) {
-						str += '<div class="col-md-2 searchPoster"><img src="'
+						str += '<div class="col-md-2 searchPoster"><img class="searchImg" src="'
 	                     + 'http://yonom.duckdns.org/movie/'
 	                     + path[i] + '/poster.png'
-	                     + '" alt="" style="width:17vw; height:10vw;"></div>';
-
+	                     + '" alt="" style="width:17vw; height:10vw;"></div>'
+	                     + '<div id="caption" class="caption" style="display: none;"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
+	                     + '<a href="getPlayer.do?seq=' + seq[i] + '&profile_id=' + profile_id + '"><img src="http://yonom.duckdns.org/images/member/play-button.png" width="40px" height="40px"></a></div>'
+	                     + '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div>';
 					}
 				}
 			}
