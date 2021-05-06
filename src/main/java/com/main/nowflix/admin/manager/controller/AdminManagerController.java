@@ -1,6 +1,7 @@
 package com.main.nowflix.admin.manager.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,8 +43,10 @@ public class AdminManagerController {
 	public String getManager(Model model,
 			@RequestParam(value = "searchCondition", required = false) String searchCondition,
 			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage) {
-		int row = 4;
+			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage,
+			HttpSession session,
+			HttpServletResponse response) throws Exception {
+		int row = 8;
 		int startPoint = nowPage * row;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -67,6 +70,19 @@ public class AdminManagerController {
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장
 		model.addAttribute("searchCondition", searchCondition); // searchCondition 정보저장
 		model.addAttribute("searchKeyword", searchKeyword); // searchKeyword 정보저장
+		
+		AdminManagerVO admin = (AdminManagerVO)session.getAttribute("manager");
+		
+		if(admin != null) {
+			if(admin.getManager_type().equals("일반 관리자")) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('접근 권한이 없습니다'); location.href='manage_template.mdo';</script>");
+				out.flush();
+				return null;
+			}
+		}
+
 		return "manage_manager";
 	}
 

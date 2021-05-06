@@ -138,7 +138,6 @@
 						</ul>
 					</div>
 					<!-- end of sidebar -->
-
 					<!-- top navbar -->
 					<div
 						class="col-xl-10 col-lg-9 ml-auto bg-dark fixed-top py-2 top-navbar">
