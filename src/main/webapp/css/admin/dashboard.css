@@ -115,24 +115,25 @@
 }
 
 .modal-video {
-/* 	margin: 5px; */
-	width: 100%; 
-	height: 100%; 
-	margin:0 auto; 
-	frameborder:0;
+	/* 	margin: 5px; */
+	width: 100%;
+	height: 80%;
+	margin: 0 auto;
+	frameborder: 0;
 }
 
 #detailMovieBody {
 	border: 0;
 	border-radius: 4px;
-/* 	position: relative; */
-/* 	width: 600px; */
-/* 	height: 900px; */
+	/* 	position: relative; */
+	/* 	width: 600px; */
+	/* 	height: 900px; */
 	width: 1000px;
-	height: 1000px;
+	height: 1800px;
 	padding: 0;
-/* 	left: 20%; */
-/* 	top: 5%; */
+	margin: 0;
+	/* 	left: 20%; */
+	/* 	top: 5%; */
 }
 
 .modal-detailMetadata {
@@ -145,15 +146,17 @@
 	color: white;
 	font-weight: 700;
 	margin-right: 5%;
+	margin-left: 5%;
 	font-size: 15px;
 	margin: 10px 10px 10px 10px;
 }
 
 .modal-detailMetadata-left {
-	width: 70%;
+	width: 50%;
 	color: white;
 	font-weight: 700;
 	margin-left: 5%;
+	margin-right: 5%;
 	margin: 10px 10px 10px 10px;
 }
 
@@ -167,15 +170,14 @@
 	margin: 10px 10px 10px 10px;
 }
 
-.modal-todayrank {
-	color: white;
-	font-weight: 700;
-	margin-bottom: 15px;
-	width: 50%;
-	font-size: 17px;
-	margin: 10px 10px 10px 10px;
-}
-
+/* .modal-todayrank { */
+/* 	color: white; */
+/* 	font-weight: 700; */
+/* 	margin-bottom: 15px; */
+/* 	width: 50%; */
+/* 	font-size: 17px; */
+/* 	margin: 10px 10px 10px 10px; */
+/* } */
 .modal-description {
 	color: white;
 	font-weight: 700;
@@ -194,4 +196,13 @@
 /*   height: auto; */
 /*   min-height: 100%; */
 /*   border-radius: 0;  */
+/* } */
+/* .modal { */
+/* 	text-align: center; */
+/* } */
+
+/* .modal-dialog { */
+/* 	display: inline-block; */
+/* 	text-align: left; */
+/* 	vertical-align: middle; */
 /* } */

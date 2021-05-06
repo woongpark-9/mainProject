@@ -26,11 +26,11 @@
 
 	<select id="getMovieList" parameterType="hashMap"
 		resultMap="movieResult">
-		select (row_number() over()) AS rownum, seq, title, summary, 
+		select (row_number() over()) AS rownum, seq, title, summary, actor_name,
 		director_name, genre_name, movie_runningtime, movie_release_date,
 		movie_path
 		from(
-		select seq, title, director_name, genre_name, summary,
+		select seq, title, director_name, genre_name, summary, actor_name,
 		movie_runningtime, movie_release_date, movie_path
 		from movie
 		where 1=1

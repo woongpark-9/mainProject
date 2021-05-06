@@ -158,7 +158,7 @@
 
 										<div class="modal-dialog modal-fullsize">
 											<div class="modal-body" id="detailMovieBody">
-												<div class="modal-content modal-fullsize" style="background-color: black">
+												<div class="modal-content" style="background-color: black">
 													<div>
 														<div class="content-right" id="closingBtn">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -166,24 +166,26 @@
 
 													</div>
 
-<!-- 													<video class="modal-video" poster="" autoplay muted width="1080px"> -->
-<!-- 														<source src="" type="video/mp4"> -->
-<!-- 													</video> -->
-													<video class="modal-video embed-responsive embed-responsive-item embed-responsive-16by9" poster="" autoplay muted>
+													<!-- 													<video class="modal-video" poster="" autoplay muted width="1080px"> -->
+													<!-- 														<source src="" type="video/mp4"> -->
+													<!-- 													</video> -->
+													<video
+														class="modal-video embed-responsive embed-responsive-item embed-responsive-16by9"
+														poster="" autoplay muted>
 														<source src="" id="video" type="video/mp4">
 													</video>
 													<div class="modal-btn-over"></div>
 													<div class="modal-over"></div>
-<!-- 													<div> -->
-<!-- 														<img class="modal-poster" width="400px" alt="" src=""> -->
-<!-- 													</div> -->
+													<!-- 													<div> -->
+													<!-- 														<img class="modal-poster" width="400px" alt="" src=""> -->
+													<!-- 													</div> -->
 													<div class="modal-detailMetadata"
 														style="background-color: black">
 
 														<div class="modal-detailMetadata-left">
 
 															<div class="modal-videoMetadata"></div>
-															<div class="modal-todayrank"></div>
+															<!-- 															<div class="modal-todayrank"></div> -->
 															<div class="modal-description"></div>
 														</div>
 														<div class="modal-detailMetadata-right">

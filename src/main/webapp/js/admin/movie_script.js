@@ -91,7 +91,7 @@ $(document).ready(function() {
 		var director = $(event.relatedTarget).data('director');
 		var genre = $(event.relatedTarget).data('genre');
 		var moviepath = $(event.relatedTarget).data('moviepath');
-		var posterpath = $(event.relatedTarget).data('posterpath');
+		// var posterpath = $(event.relatedTarget).data('posterpath');
 		var releasedate = $(event.relatedTarget).data('releasedate');
 
 		// alert(title);
@@ -103,9 +103,21 @@ $(document).ready(function() {
 		modal.find('.modal-director').text(director);
 		modal.find('.modal-genre').text(genre);
 		modal.find('.modal-video').attr('src', moviepath);
-		modal.find('.modal-video').attr('poster', posterpath);
-		modal.find('.modal-poster').attr('src', posterpath);
+		// modal.find('.modal-video').attr('poster', posterpath);
+		// modal.find('.modal-poster').attr('src', posterpath);
 		modal.find('.modal-releasedate').text(releasedate);
+
+	});
+
+	// 모달 수평 수직 정렬
+	// $("#detailMovie").modal('show').css({
+	$("#detailMovie").on('show.bs.modal').css({
+		'margin-top' : function() { // vertical centering
+			return +($(this).height() / 7);
+		},
+		'margin-left' : function() { // Horizontal centering
+			return -($(this).width() / 3.5);
+		}
 	});
 
 });
