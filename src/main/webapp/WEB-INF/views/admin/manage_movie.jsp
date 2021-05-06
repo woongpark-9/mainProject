@@ -101,7 +101,7 @@
 									<tr>
 										<th class="align-middle">${movieList.rownum }</th>
 										<th class="align-middle"><img
-											src="http://yonom.duckdns.org/movie/${movieList.movie_path }/poster.png"
+											src="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 											alt="" width="130px"></th>
 										<th class="align-middle">${movieList.title }</th>
 										<th class="align-middle">${movieList.director_name }</th>
@@ -123,8 +123,8 @@
 												data-genre="${movieList.genre_name }"
 												data-actor="${movieList.actor_name }"
 												data-director="${movieList.director_name }"
-												data-moviepath="http://yonom.duckdns.org/movie/${movieList.movie_path }/1080p.mp4"
-												data-posterpath="http://yonom.duckdns.org/movie/${movieList.movie_path }/poster.png"
+												data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+												data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 												data-releasedate="${movieList.movie_release_date }">상세보기</button>
 
 										</th>
@@ -166,8 +166,11 @@
 
 													</div>
 
-													<video class="modal-video" poster="" autoplay muted width="1080px">
-														<source src="" type="video/mp4">
+<!-- 													<video class="modal-video" poster="" autoplay muted width="1080px"> -->
+<!-- 														<source src="" type="video/mp4"> -->
+<!-- 													</video> -->
+													<video class="modal-video embed-responsive embed-responsive-item embed-responsive-16by9" poster="" autoplay muted>
+														<source src="" id="video" type="video/mp4">
 													</video>
 													<div class="modal-btn-over"></div>
 													<div class="modal-over"></div>

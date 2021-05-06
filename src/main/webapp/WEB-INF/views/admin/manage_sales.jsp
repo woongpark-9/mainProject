@@ -55,6 +55,7 @@
 								<th>결제일</th>
 								<th>결제 방식</th>
 								<th>결제 카드</th>
+								<th>관리</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -68,6 +69,10 @@
 									<th>${salesList.payment_date }</th>
 									<th>${salesList.payment_method_type }</th>
 									<th>${salesList.card_name }</th>
+									<th class="align-middle">											
+											<button type="button" class="btn btn-danger btn-sm"
+												data-toggle="" data-target="">결제 취소</button>
+									</th>
 								</tr>
 							</c:forEach>
 						</tbody>
