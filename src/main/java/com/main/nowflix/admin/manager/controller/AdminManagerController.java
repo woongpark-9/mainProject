@@ -211,6 +211,7 @@ public class AdminManagerController {
 				System.out.println("관리자 " + adminLogin.getManager_email() + " 로그인 성공");
 				session.setAttribute("manager", adminLogin);
 				page = "manage_template";
+				return "redirect:manage_template.mdo";
 			}
 			else {
 				System.out.println("비밀번호가 일치하지 않습니다.");
@@ -223,7 +224,7 @@ public class AdminManagerController {
 			ScriptUtils.alert(response, "해당 아이디가 존재하지 않습니다");
 		}
 		
-		return page;
+		return "adminLogin";
 	}
 	
 	// 관리자 로그아웃
