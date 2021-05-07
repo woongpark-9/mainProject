@@ -90,29 +90,46 @@ button.bell-button {
 
 .dropdown {
 	position: relative;
-	display: inline-block;
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: black;
-	opacity: 0.7;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	border-color: white;
-	border-top: 2px solid;
-	right: 0;
+   width: 14em;
+   display: none;
+   position: absolute;
+   background-color: black;
+   opacity: 1;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   z-index: 1;
+   right: 0;
 }
 
 .dropdown-content a {
-	color: white;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-	border-color: white;
-	border: 0.5px solid;
+   color: white;
+   padding: 5px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+.margin{
+   border-top: 1px solid;
+   border-bottom: 1px solid;
+   border-color: gray;
+   height: 17px;
+}
+
+.profile-bottom a{
+   margin-top: 0.2px;
+   margin-bottom: 0.2px;
+   padding-top: 0.2px;
+   padding-bottom: 0.2px;
+}
+
+.profile-list{
+   display: flex;
+}
+
+.profile-list a{
+   width: 100%;
 }
 
 .dropdown-content a:hover {

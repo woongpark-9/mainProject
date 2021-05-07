@@ -139,7 +139,7 @@
 			})
 		});
 	});
-	
+
 	$(document).ready(function() {
 		$(".col-md-2 searchPoster").each(function(i, obj) {
 			$(this).on("mouseenter", function() {
@@ -169,7 +169,10 @@
 	var actor = new Array();
 	var director = new Array();
 	var seq = new Array();
-	var profile_id = ${profile.profile_id};
+	var profile_id = $
+	{
+		profile.profile_id
+	};
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
 		title.push("${movieList.title}");
@@ -186,7 +189,8 @@
 		var str = '';
 		if (words != '') {
 			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
-					+ words + '</span><br><br></div><div class="col-md-11 searchList" align="center">';
+					+ words
+					+ '</span><br><br></div><div class="col-md-11 searchList" align="center">';
 			for (var i = 0; i < title.length; i++) {
 				if (words != '') {
 					if (title[i].includes(words) || genre[i].includes(words)
@@ -196,9 +200,13 @@
 	                     + 'http://yonom.duckdns.org/movie/'
 	                     + path[i] + '/poster.png'
 	                     + '" alt="" style="width:17vw; height:10vw;"></div>'
-	                     + '<div id="caption" class="caption" style="display: none;"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
-	                     + '<a href="getPlayer.do?seq=' + seq[i] + '&profile_id=' + profile_id + '"><img src="http://yonom.duckdns.org/images/member/play-button.png" width="40px" height="40px"></a></div>'
-	                     + '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div>';
+								+ '<div id="caption" class="caption" style="display: none;"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
+								+ '<a href="getPlayer.do?seq='
+								+ seq[i]
+								+ '&profile_id='
+								+ profile_id
+								+ '"><img src="http://yonom.duckdns.org/images/member/play-button.png" width="40px" height="40px"></a></div>'
+								+ '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div>';
 					}
 				}
 			}
@@ -233,7 +241,8 @@
 		<div class="overlay">
 			<div class="header">
 				<!-- 	<div class="logo">NEFLIX</div> -->
-				<a href="http://localhost:8080/nowflix/index.do?profile_id=${profile.profile_id }"><img
+				<a
+					href="http://localhost:8080/nowflix/index.do?profile_id=${profile.profile_id }"><img
 					class="logo" src="images/member/로고.png"
 					style="width: 92px; margin-top: 10px;"></a>
 
@@ -264,7 +273,7 @@
 							class="search-btn" href="#"> <i class="fas fa-search"></i>
 						</a>
 					</div>
-				
+
 
 					<div class="menu-item">
 						<div class="dropdown">
@@ -280,12 +289,28 @@
 					<!-- 프로필 드롭다운 부분 -->
 					<div class="menu-item">
 						<div class="dropdown">
-							<button class="profile-button">유저</button>
+							<button class="profile-button">
+								<img src="${profile.profile_img }"
+									style="width: 3em; height: 3em; margin-right: 1em;">
+							</button>
 							<div class="dropdown-content">
 								<c:forEach var="profileList" items="${profileList }">
-									<a href="#">${profileList.profile_name }</a>
+									<div class="profile-list">
+										<a href="index.do?profile_id=${profileList.profile_id }">
+											<img src="${profileList.profile_img }"
+											style="width: 2em; height: 2em; margin-right: 1em;">${profileList.profile_name }</a>
+									</div>
 								</c:forEach>
-								   <a href="getInquiryList.do?email=${profile.email }">문의하기</a>
+								<div class="profile-manage">
+									<a href="http://localhost:8080/nowflix/profile.do">프로필
+										관리</a>
+								</div>
+								<div class="margin"></div>
+								<div class="profile-bottom">
+									<a href="#">계정</a> <a
+										href="getInquiryList.do?email=${profile.email }">고객센터</a> <a
+										href="#">Nowflix에서 로그아웃하기</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -325,74 +350,73 @@
 							</div>
 						</button>
 						<div class="extra">
-						<button aria-label="다시 재생" onclick="replay()"
-							class="color-supplementary hasIcon ltr-pjs1vp" type="button">
-							<i class="fas fa-undo-alt"></i>
-							<div class="ltr-1ksxkn9">
-								<div class="small ltr-dguo2f" role="presentation">
-									<svg viewBox="0 0 24 24">
+							<button aria-label="다시 재생" onclick="replay()"
+								class="color-supplementary hasIcon ltr-pjs1vp" type="button">
+								<i class="fas fa-undo-alt"></i>
+								<div class="ltr-1ksxkn9">
+									<div class="small ltr-dguo2f" role="presentation">
+										<svg viewBox="0 0 24 24">
 									<path
-											d="M20 12.35l1.919-1.371 1.162 1.627-4.08 2.915-4.082-2.915 1.162-1.627L18 12.349V12c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.93 0 3.68-.79 4.94-2.06l1.42 1.42A8.954 8.954 0 0 1 11 21a9 9 0 1 1 9-9v.35z"
-											fill="currentColor"></path></svg>
+												d="M20 12.35l1.919-1.371 1.162 1.627-4.08 2.915-4.082-2.915 1.162-1.627L18 12.349V12c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.93 0 3.68-.79 4.94-2.06l1.42 1.42A8.954 8.954 0 0 1 11 21a9 9 0 1 1 9-9v.35z"
+												fill="currentColor"></path></svg>
+									</div>
 								</div>
-							</div>
-						</button>
-						<div class="rating">15+</div>
+							</button>
+							<div class="rating">15+</div>
+						</div>
 					</div>
-					</div>
-					
+
 				</div>
-					<div class="category-list">
-						<div class="category">
+				<div class="category-list">
+					<div class="category">
 
-							<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
-							<div class="favorite-list">
-								<c:forEach var="movieList" items="${favoriteMovieList }">
-									<div class="favorite-items">
-										<div class="favoriteMovieList-item">
+						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
+						<div class="favorite-list">
+							<c:forEach var="movieList" items="${favoriteMovieList }">
+								<div class="favorite-items">
+									<div class="favoriteMovieList-item">
 
-											<div class="poster">
-												<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-													alt="">
+										<div class="poster">
+											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
+												alt="">
+										</div>
+										<div id="caption" class="caption" style="display: none;">
+											<div class="preview">
+												<div class=video></div>
 											</div>
-											<div id="caption" class="caption" style="display: none;">
-												<div class="preview">
-													<div class=video>
-													</div>
-												</div>
 
-												<div class="detail">
-													<div class="detailFirst">
-														<div class="play-button">
-															<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
-														</div>
+											<div class="detail">
+												<div class="detailFirst">
+													<div class="play-button">
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+								</div>
 
-								</c:forEach>
-							</div>
-
+							</c:forEach>
 						</div>
 
 					</div>
+
+				</div>
 				<div class="category-list">
 					<div class="category">
 						<c:if test="${not empty watchMovieList}">
-							<div class="title">${profile.profile_name }님이 시청 중인 콘텐츠</div>
+							<div class="title">${profile.profile_name }님이시청 중인 콘텐츠</div>
 							<div class="watch-list">
 								<c:forEach var="movieList" items="${watchMovieList }">
 									<div class="watch-items">
@@ -487,18 +511,18 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-													<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -546,17 +570,17 @@
 												<div class="detailFirst">
 													<div class="play-button">
 														<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -606,17 +630,17 @@
 												<div class="detailFirst">
 													<div class="play-button">
 														<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -662,17 +686,17 @@
 												<div class="detailFirst">
 													<div class="play-button">
 														<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -717,18 +741,18 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-													<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -773,18 +797,18 @@
 											<div class="detail">
 												<div class="detailFirst">
 													<div class="play-button">
-												<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30vw" height="auto">
-															</a>
+														<a
+															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															<img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+															width="40vw" height="auto">
+														</a>
+													</div>
+													<div class="detail-button">
+														<a href="#"> <img
+															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															width="30vw" height="auto">
+														</a>
 													</div>
 												</div>
 											</div>

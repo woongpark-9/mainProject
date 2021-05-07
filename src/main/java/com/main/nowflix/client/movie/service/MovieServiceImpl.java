@@ -73,8 +73,8 @@ public class MovieServiceImpl implements MovieService {
 		// 0 ~ 사용자가 고른 영화의 장르 수의 난수 생성
 		for (int j = 0; j < movieList.size(); j++) {
 			int index = (int) (Math.random() * selectGenre.length);
-			System.out.println(index);
-			System.out.println(selectGenre[index]);
+//			System.out.println(index);
+//			System.out.println(selectGenre[index]);
 			if (movieList.get(j).getGenre_name().contains(selectGenre[index])) {
 			
 				if(favoriteMovieList.size()>24) {

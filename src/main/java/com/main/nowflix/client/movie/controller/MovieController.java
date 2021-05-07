@@ -34,7 +34,8 @@ public class MovieController {
 	private WatchService watchService;
 
 	@RequestMapping("/index.do")
-	public String getMovieList(MovieVO vo, Model model, ProfileVO profile, WatchVO watch_id,HttpSession session) throws Exception {
+	public String getMovieList(MovieVO vo, Model model, ProfileVO profile, WatchVO watch_id, HttpSession session)
+			throws Exception {
 		String page = "";
 		ProfileVO getpro = profileService.getProfile(profile);
 		model.addAttribute("profile", getpro);
@@ -56,8 +57,10 @@ public class MovieController {
 //		ProfileVO profile = profileService.getProfile(member);
 		movieService.getSelectMovieList(vo, movieList, model, getpro.getGenre_name(), watchList);
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		
-		model.addAttribute("member",member);
+		List<ProfileVO> profileList = profileService.getProfileList(getpro, member);
+
+		model.addAttribute("profileList", profileList);
+		model.addAttribute("member", member);
 		model.addAttribute("profile", getpro);
 		return page;
 	}
