@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link type="text/css" rel="stylesheet" href="http://yonom.duckdns.org/css/member/reset.css">
+<link type="text/css" rel="stylesheet" href="css/member/reset.css">
 <link type="text/css" rel="stylesheet" href="css/member/memberLogin.css">
 </head>
 <body>
@@ -43,22 +43,31 @@
 			<input type="checkbox" 
 			name="login_info_check" /> 
 			<p>로그인 정보 저장</p> 
-			<div>
+			<div class="find_password">
 				<a href="#">비밀번호 찾기</a>
 			</div>
 		</div>
 		
 		
 		
-		<div class="center_login_button_naver">
-			<a href ="${naver_url }"><img src="http://yonom.duckdns.org/images/member/naverLogin.PNG" alt="네이버로그인" style="width:314px;  height:58px; margin-left: 70px; margin-bottom: 10px;" ></a>
-		</div>
+<!-- 		<div class="center_login_button_naver"> -->
+<%-- 			<a href ="${naver_url }"><img src="http://yonom.duckdns.org/images/member/naverLogin.PNG" alt="네이버로그인" style="width:314px;  height:58px; margin-left: 70px; margin-bottom: 10px;" ></a> --%>
+<!-- 		</div> -->
 		
-		<div class="center_login_button_kakao">
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418
-&redirect_uri=http://localhost:8080/nowflix/kakaoController.do
-&response_type=code"><img src="http://yonom.duckdns.org/images/member/kakao_login_large_narrow.png" style="width:314px; height:64px; margin-left: 70px; margin-bottom: 10px;"></a>
-		</div>
+<!-- 		<div class="center_login_button_kakao"> -->
+<!-- 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418 -->
+<!-- &redirect_uri=http://localhost:8080/nowflix/kakaoController.do -->
+<!-- &response_type=code"><img src="http://yonom.duckdns.org/images/member/kakao_login_large_narrow.png" style="width:314px; height:64px; margin-left: 70px; margin-bottom: 10px;"></a> -->
+<!-- 		</div> -->
+		
+		<ul class="list">
+			<li class="naver">
+			<a href ="${naver_url }"><span>네이버 로그인</span></a>
+			</li>
+			<li class="kakao">
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418&redirect_uri=http://localhost:8080/nowflix/kakaoController.do&response_type=code"><span>카카오 로그인</span></a>
+			</li>
+		</ul>
 		</form>
 		
 		<div class="center_new_member_go">

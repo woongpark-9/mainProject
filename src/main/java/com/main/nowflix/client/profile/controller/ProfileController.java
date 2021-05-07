@@ -46,6 +46,12 @@ public class ProfileController {
 		System.out.println("프로필 관리선택시 profileVO" + vo.toString());
 		return "/views/member/profileEdit";
 	}
+	
+	@RequestMapping(value = "/profileImgSelect.do")
+	public String profileImgSelect(HttpSession session, ProfileVO vo, Model model) throws Exception {
+		model.addAttribute("selectProfile", vo);
+		return "/views/member/profileEdit";
+	}
 
 	@RequestMapping(value = "/deleteProfile.do")
 	public String deleteProfile(HttpSession session, Model model, ProfileVO profileVO) throws Exception {

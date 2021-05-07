@@ -14,8 +14,6 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background: #000000;
-	color: #999999;
-	
     word-break: keep-all;
 
 }
@@ -103,6 +101,7 @@ img {
 .showcase-content h1 {
 	font-weight: 700;
 	font-size: 64px;
+	color: white;
 	margin: 0 30px;
 	max-width: 800px;
 	line-height: 74.5px;
@@ -110,21 +109,21 @@ img {
 
 .showcase-content h3 {
 	color: white;
-	font-size: 25px;
+	font-size: 1.5vw;
 	margin: 16px 0;
 }
 
 .showcase-content p {
 	font-weight: 300;
-	font-size: 19.2;
+	font-size: 1.1vw;
 	padding-top: 0.5rem;
 	padding-bottom: 1rem;
 }
 
 .showcase-content input {
 	position: relative;
-	width: 25vw;
-	height: 4rem;
+	width: 27vw;
+	height: 4.5rem;
 	font-size: 1rem;
 	padding-left: 0.5rem;
 }
@@ -146,6 +145,8 @@ img {
 
 .btn:hover {
 	opacity: 0.9;
+	text-decoration: none;
+	color: white;
 }
 
 .btn-rounded {
@@ -153,17 +154,24 @@ img {
 }
 
 .showcase-content .btn-lg {
+	text-decoration: none solid white;
 	position: relative;
-	padding: 0.5rem 1.2rem;
-	font-size: 1.5rem;
+	top: -0.15vw;
+	left: -0.2vw;
+	padding: 0rem;
+	line-height: 4.45rem;
+	font-size: 1.8rem;
 	text-transform: uppercase;
-	height: 4rem;
-	width: 14rem;
+	height: 4.45rem;
+	width: 12rem;
+	border-radius: 0vw;
 }
 
 .card-1 {
 	position: relative;
 	display: inline-grid;
+	    background: #000000;
+    color: #ffffff;
 	border-bottom: 8px solid #222;
 	border-top: 8px solid #222;
 	grid-template-columns: 50% 40%;
@@ -193,7 +201,7 @@ img {
 	height: 54%;
 	grid-column: 2/2;
 	grid-row: 1/2;
-	z-index: -1;
+	z-index: 100;
 }
 
 .card-1 img {
@@ -203,6 +211,8 @@ img {
 
 .card-2 {
 	position: relative;
+	background: #000000;
+    color: #ffffff;
 	display: inline-grid;
 	border-bottom: 8px solid #222;
 	grid-template-columns: 40% 50%;
@@ -223,6 +233,8 @@ img {
 	text-align: left;
 	align-items: center;
 	padding: 25px 45px 50px;
+	background: #000000;
+    color: #ffffff;
 }
 
 .desc-3{
@@ -331,4 +343,9 @@ img {
 .footer li{
 	line-height: 2.4;
 	
+}
+
+.lastsec {
+	background: #000000;
+	color: white;
 }

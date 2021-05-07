@@ -169,10 +169,7 @@
 	var actor = new Array();
 	var director = new Array();
 	var seq = new Array();
-	var profile_id = $
-	{
-		profile.profile_id
-	};
+	var profile_id = ${profile.profile_id };
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
 		title.push("${movieList.title}");

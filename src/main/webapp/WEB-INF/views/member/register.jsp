@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="http://yonom.duckdns.org/css/member/reset.css">
-<link type="text/css" rel="stylesheet" href="http://yonom.duckdns.org/css/member/register.css">
+<link type="text/css" rel="stylesheet" href="css/member/register.css">
 <script>
 
 

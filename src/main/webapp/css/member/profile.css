@@ -126,7 +126,25 @@
 	text-decoration: none solid grey;
 }
 
+.delete {
+	border: 1px solid grey;
+	font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1vw;
+	text-align: center;
+	font-weight: 700;
+	padding: 0.5vw 2vw;
+	cursor: pointer;
+	color: grey;
+	text-decoration: none solid grey;
+}
+
 .cancel:hover {
+	border: 1px solid white;
+	text-decoration: none solid white;
+	color:white;
+}
+
+.delete:hover {
 	border: 1px solid white;
 	text-decoration: none solid white;
 	color:white;
@@ -194,7 +212,7 @@
 	position: absolute;
 	width: 2.2vw;
 	height: auto;
-	top: 26%;
+	top: 115%;
 	left: 82%;
 	transform: translate( -50%, -50% );
 	z-index: 2;
