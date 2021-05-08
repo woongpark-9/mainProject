@@ -14,6 +14,8 @@ public class AdminSalesVO {
 	private String payment_method_type;
 	private String card_name;
 	private int rownum;
+	private Date date1;
+	private Date date2;
 	
 	public int getRownum() {
 		return rownum;
@@ -81,4 +83,31 @@ public class AdminSalesVO {
 	public void setCard_name(String card_name) {
 		this.card_name = card_name;
 	}
+	public Date getDate1() {
+		return date1;
+	}
+	public void setDate1(Date date1) {
+		this.date1 = date1;
+	}
+	public Date getDate2() {
+		return date2;
+	}
+	public void setDate2(Date date2) {
+		this.date2 = date2;
+	}
+	@Override
+	public String toString() {
+		return "AdminSalesVO [sales_id=" + sales_id + ", cid=" + cid + ", tid=" + tid + ", email=" + email
+				+ ", ticket_id=" + ticket_id + ", sales_status=" + sales_status + ", payment_date=" + payment_date
+				+ ", expiry_date=" + expiry_date + ", payment_method_type=" + payment_method_type + ", card_name="
+				+ card_name + ", rownum=" + rownum + ", date1=" + date1 + ", date2=" + date2 + ", getRownum()="
+				+ getRownum() + ", getSales_id()=" + getSales_id() + ", getCid()=" + getCid() + ", getTid()=" + getTid()
+				+ ", getEmail()=" + getEmail() + ", getTicket_id()=" + getTicket_id() + ", getSales_status()="
+				+ getSales_status() + ", getPayment_date()=" + getPayment_date() + ", getExpiry_date()="
+				+ getExpiry_date() + ", getPayment_method_type()=" + getPayment_method_type() + ", getCard_name()="
+				+ getCard_name() + ", getDate1()=" + getDate1() + ", getDate2()=" + getDate2() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }

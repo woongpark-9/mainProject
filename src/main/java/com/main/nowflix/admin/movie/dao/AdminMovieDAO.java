@@ -65,5 +65,5 @@ public class AdminMovieDAO {
 	public List<AdminMemberVO> movieList(AdminMovieVO movieVO) {
 		System.out.println("DAO 실행--> MyBatis 로 실행 movieList()");
 		return sqlSessionTemplate.selectList("AdminMovieDAO.movieList", movieVO);
-	}
+	}	
 }

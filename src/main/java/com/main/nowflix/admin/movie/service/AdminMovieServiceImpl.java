@@ -196,73 +196,9 @@ public class AdminMovieServiceImpl implements AdminMovieService {
 		return movieDAO.get_all_movie_count(movieVO);
 	}
 
-	public ArrayList<Integer> movieList(AdminMovieVO movieVO, AdminAnalysis_Age_VO analysis_age_VO) {
+	public List<String> movieList(AdminMovieVO movieVO, AdminAnalysis_Age_VO analysis_age_VO) {
 		List test1 = movieDAO.movieList(movieVO);
-		ArrayList<Integer> return_list = new ArrayList<Integer>();
-
-		int movie_ratring_all = 0;
-		int movie_ratring_12 = 0;
-		int movie_ratring_15 = 0;
-		int movie_ratring_19 = 0;
-		int movie_all_count = test1.size();
-
-		int kor_movie = 0;
-		int eng_movie = 0;
-		int japan_movie = 0;
-		int canada_movie = 0;
-		int sweden_movie = 0;
-
-		for (int i = 0; i < test1.size(); i++) {
-			AdminMovieVO testVO = (AdminMovieVO) test1.get(i);
-
-			if (testVO.getMovie_rating().equals("All")) {
-				movie_ratring_all++;
-			}
-
-			if (testVO.getMovie_rating().equals("12")) {
-				movie_ratring_12++;
-			}
-
-			if (testVO.getMovie_rating().equals("15")) {
-				movie_ratring_15++;
-			}
-
-			if (testVO.getMovie_rating().equals("19")) {
-				movie_ratring_19++;
-			}
-
-			if (testVO.getCountry().equals("한국")) {
-				kor_movie++;
-			}
-			if (testVO.getCountry().equals("미국")) {
-				eng_movie++;
-			}
-			if (testVO.getCountry().equals("일본")) {
-				japan_movie++;
-			}
-			if (testVO.getCountry().equals("캐나다")) {
-				canada_movie++;
-			}
-			if (testVO.getCountry().equals("스페인")) {
-				sweden_movie++;
-			}
-		}
-
-		return_list.add((Integer) movie_ratring_all); // INDEX[0]
-		return_list.add((Integer) movie_ratring_12); // INDEX[1]
-		return_list.add((Integer) movie_ratring_15); // INDEX[2]
-		return_list.add((Integer) movie_ratring_19); // INDEX[3]
-		return_list.add((Integer) movie_all_count); // INDEX[4]
-
-		return_list.add((Integer) kor_movie); // INDEX[5]
-		return_list.add((Integer) eng_movie); // INDEX[6]
-		return_list.add((Integer) japan_movie); // INDEX[7]
-		return_list.add((Integer) sweden_movie); // INDEX[8]
-		return_list.add((Integer) canada_movie); // INDEX[9]
-
-		System.out.println("return_list" + return_list);
-
-		return return_list;
+		return test1;
 
 	}
 }

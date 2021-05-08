@@ -21,4 +21,6 @@ public interface AdminGenreService {
 	int createPdf(String newpdf); // PDF
 
 	List<AdminGenreVO> selectBoardList() throws Exception; // EXCEL
+
+	List<String> genreNameList(AdminGenreVO genreVO);
 }

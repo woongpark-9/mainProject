@@ -174,4 +174,16 @@ public class AdminSalesServiceImpl implements AdminSalesService {
         }
         return result;
     }
+	
+	@Override
+	public List<AdminSalesVO> SalesList(AdminSalesVO salesVO) {
+		List salesList = salesDAO.SalesList(salesVO);
+		return salesList;
+	}
+	
+	@Override
+	public List<AdminSalesVO> selectPaymentDataList(AdminSalesVO salesVO) {
+		List PaymentDataList = salesDAO.selectPaymentDataList(salesVO);
+		return PaymentDataList;
+	}
 }

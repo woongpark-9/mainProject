@@ -124,7 +124,7 @@
 	</select>
 	
 	<select id="movieList" resultType="adminmovie">
-      select * from movie
-   </select>
+		select * from movie
+	</select>
    
 </mapper>

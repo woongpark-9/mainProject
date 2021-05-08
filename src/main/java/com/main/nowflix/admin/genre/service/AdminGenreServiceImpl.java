@@ -141,4 +141,9 @@ public class AdminGenreServiceImpl implements AdminGenreService {
 		}
 		return result;
 	}
+	public List<String> genreNameList(AdminGenreVO genreVO) {
+		List genre_data_list = genreDAO.getGenreList2(genreVO);
+		
+		return genre_data_list;
+	}	
 }

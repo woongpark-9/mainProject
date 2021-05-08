@@ -53,4 +53,12 @@
    <select id="selectBoardList" resultType="adminsales">
       select * from sales order by payment_date asc
    </select>
+   
+   <select id="SalesList" resultType="adminsales">
+		select * from sales
+	</select>
+	
+	<select id="selectPaymentDataList" resultType="adminsales">
+		select * from sales where payment_date BETWEEN #{date1} AND #{date2} 
+	</select>
 </mapper>

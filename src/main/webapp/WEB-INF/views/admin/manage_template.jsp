@@ -110,7 +110,7 @@
 										href="#" onclick="acyncMovePage('manage_analysis.mdo')"><i
 											class="fas fa-angle-right"></i>&nbsp;장르TEST</a></li>
 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link"
-										href="#" onclick="acyncMovePage('')"><i
+										href="#" onclick="acyncMovePage('manage_analysis_sale.mdo')"><i
 											class="fas fa-angle-right"></i>&nbsp;판매</a></li>
 									<li><a class="nav-link text-white p-2 mb-2 sidebar-link"
 										href="#" onclick="acyncMovePage('manage_analysis_movie.mdo')"><i

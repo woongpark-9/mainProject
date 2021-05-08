@@ -29,4 +29,14 @@ public class AdminSalesDAO {
 	public List<AdminSalesVO> selectBoardList(AdminSalesVO vo) {
 		return sqlSessionTemplate.selectList("AdminSalesDAO.selectBoardList");
 	}
+	
+	public List<AdminSalesVO> SalesList(AdminSalesVO salseVO){
+		System.out.println("DAO 작동 ---> MyBatis로 getSalesList() 기능 처리");
+		return sqlSessionTemplate.selectList("AdminSalesDAO.SalesList",salseVO);
+	}
+
+	public List<AdminSalesVO> selectPaymentDataList(AdminSalesVO salseVO){
+		System.out.println("DAO 작동 ---> MyBatis로 selectPaymentDataList() 기능 처리");
+		return sqlSessionTemplate.selectList("AdminSalesDAO.selectPaymentDataList",salseVO);
+	}
 }

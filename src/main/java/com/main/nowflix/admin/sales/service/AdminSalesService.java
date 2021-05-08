@@ -10,4 +10,7 @@ public interface AdminSalesService {
 	int getTotalCount(HashMap<String, Object> map);
 	List<AdminSalesVO> selectBoardList() throws Exception; //EXCEL 
 	int createPdf(String newpdf);	//PDF 
+	
+	List<AdminSalesVO> SalesList(AdminSalesVO salesVO);
+	List<AdminSalesVO> selectPaymentDataList(AdminSalesVO salesVO);
 }

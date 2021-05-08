@@ -61,4 +61,8 @@
 		select * from genre order by genre_id desc
 	</select>
 
+<select id="getGenreList2" resultMap="genreResult">
+      select * from genre order by genre_id desc
+   </select>
+
 </mapper>

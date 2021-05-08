@@ -28,5 +28,5 @@ public interface AdminMovieService {
 
 	public int get_all_movie_count(AdminMovieVO movieVO); // DASHBOARD에 회원 수
 
-	ArrayList<Integer> movieList(AdminMovieVO movieVO, AdminAnalysis_Age_VO analysis_age_VO);
+List<String> movieList(AdminMovieVO movieVO, AdminAnalysis_Age_VO analysis_age_VO);
 }

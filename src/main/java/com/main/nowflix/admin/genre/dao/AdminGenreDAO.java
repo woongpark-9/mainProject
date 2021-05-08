@@ -49,5 +49,12 @@ public class AdminGenreDAO {
 	public List<AdminGenreVO> selectBoardList(AdminGenreVO vo) {
 		return sqlSessionTemplate.selectList("AdminGenreDAO.selectBoardList");
 	}
+
+	public List<AdminGenreVO> getGenreList2(AdminGenreVO vo) {
+		System.out.println("DAO 작동 ---> MyBatis로 getGenreList() 기능 처리");
+		return sqlSessionTemplate.selectList("AdminGenreDAO.getGenreList2");
+	}
+
+		
 	
 }
