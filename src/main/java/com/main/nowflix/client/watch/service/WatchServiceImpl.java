@@ -15,6 +15,7 @@ public class WatchServiceImpl implements WatchService {
 
 	@Override
 	public WatchVO getWatchVo(WatchVO vo) throws Exception {
+		System.out.println(vo.toString());
 		WatchVO getVO = dao.getWatchVo(vo);
 		if(getVO == null) {
 			dao.insertWatch(vo);

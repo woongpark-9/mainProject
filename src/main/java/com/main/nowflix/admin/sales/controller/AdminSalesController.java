@@ -26,12 +26,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.main.nowflix.admin.sales.service.AdminSalesService;
 import com.main.nowflix.admin.sales.vo.AdminSalesVO;
+import com.main.nowflix.admin.ticket.service.AdminTicketService;
+import com.main.nowflix.admin.ticket.vo.AdminTicketVO;
 
 @Controller
 public class AdminSalesController {
 	
 	@Autowired
 	private AdminSalesService salesService;
+	
+	@Autowired
+	private AdminTicketService ticketService;
 	
 	// 결제내역 관리 페이지(리스트)
 	@RequestMapping("/manage_sales.mdo")
@@ -61,7 +66,11 @@ public class AdminSalesController {
 
 		List<AdminSalesVO> salesList;
 		salesList = salesService.getSalesList(map);
-
+		List<AdminTicketVO> ticketList;
+		
+	    ticketList = ticketService.getTicketList(null);
+	      
+	    model.addAttribute("ticketList",ticketList);
 		model.addAttribute("salesList", salesList); // movieList 정보저장
 		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장

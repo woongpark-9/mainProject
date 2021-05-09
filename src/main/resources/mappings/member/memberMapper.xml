@@ -33,7 +33,7 @@
 		,AGE
 		,GENDER
 		,CERT
-		,BAN
+	
 		,JOIN_DATE
 		,KAKAO
 		,NAVER )
@@ -44,7 +44,7 @@
 		, #{age}
 		, #{gender}
 		, #{cert}
-		, #{ban}
+	
 		, #{join_date}
 		, #{kakao}
 		, #{naver}
@@ -142,8 +142,6 @@
 		,AGE
 		,GENDER
 		,CERT
-		,BAN
-
 		,JOIN_DATE
 
 		,KAKAO
@@ -155,7 +153,7 @@
 		, #{age}
 		, #{gender}
 		, #{cert}
-		, #{ban}
+	
 
 		, #{join_date}
 
@@ -167,6 +165,16 @@
 
 	</insert>
 
+	<!-- 카카오 로그인 연동 -->
+	<update id="kakaoConnect">
+		UPDATE MEMBER SET kakao= #{kakao} WHERE EMAIL= #{email}
+	</update>
+	
+	<!-- 네이버 로그인 연동 -->
+	<update id="naverConnect">
+		UPDATE MEMBER SET naver= #{naver} WHERE EMAIL= #{email}
+	</update>
+	
 
 	<!-- 장르 N->Y세팅 -->
 	<update id="setGenre">

@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.main.nowflix.client.kakao.pay.vo.AmountVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayApprovalVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayCancelVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayReadyVO;
@@ -23,9 +21,9 @@ import com.main.nowflix.client.kakao.pay.vo.KakaoPayReadyVO;
 @Service
 
 public class KakaoPayServiceImpl implements KakaoPayService {
-	
-	
-	// 호스트 url
+   
+   
+   // 호스트 url
     private static final String HOST = "https://kapi.kakao.com";
     // 결제 정보 vo 객체
     private KakaoPayApprovalVO kakaoPayApprovalVO;
@@ -39,8 +37,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
     //결제준비 메서드
   
     @Override 
-	public String kakaopayReady(String total_amount, String item_name,Model model, String partner_order_id,String partner_user_id) {
-    	//restapi 호출후 응답받을 객체
+   public String kakaopayReady(String total_amount, String item_name,Model model, String partner_order_id,String partner_user_id) {
+       //restapi 호출후 응답받을 객체
         RestTemplate restTemplate = new RestTemplate();
     
         this.total_amount = total_amount;
@@ -77,7 +75,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
         //바디와 헤더 합치기
          HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
  
-         	//포스트 방식으로 보내기 uri + 데이터 + 응답받을형식
+            //포스트 방식으로 보내기 uri + 데이터 + 응답받을형식
         try {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
            
@@ -102,9 +100,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
     //결제 승인 후 정보리턴 메서드
     @Override
     public KakaoPayApprovalVO kakaoPayInfo(String pg_token,HttpSession session) {
-    	 
-    	KakaoPayReadyVO vo = (KakaoPayReadyVO) session.getAttribute("kakaoPayReadyVO");
-    	
+        
+       KakaoPayReadyVO vo = (KakaoPayReadyVO) session.getAttribute("kakaoPayReadyVO");
+       
         RestTemplate restTemplate = new RestTemplate();
  
         // 서버로 요청할 Header
@@ -149,9 +147,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
     }
     
     @Override
-    public KakaoPayCancelVO kakaoPayCancle() {
-    	  RestTemplate restTemplate = new RestTemplate();
-    	  
+    public KakaoPayCancelVO kakaoPayCancle(String tid, String total) {
+         RestTemplate restTemplate = new RestTemplate();
+         
           // 서버로 요청할 Header
           HttpHeaders headers = new HttpHeaders();
           headers.add("Authorization", "KakaoAK " + "49a135ac006e06594458c5a0f4d65f1a");
@@ -161,8 +159,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
        // 서버로 요청할 Body
           MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
           params.add("cid", "TC0ONETIME");
-          params.add("tid", "T2888909039385480257");
-          params.add("cancel_amount", "2200");
+          params.add("tid", tid);
+          params.add("cancel_amount", total);
           params.add("cancel_tax_free_amount", "0");
 
      
@@ -173,14 +171,14 @@ public class KakaoPayServiceImpl implements KakaoPayService {
           HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
           
         
-        	  try {
-				kakaoPayCancelVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelVO.class);
-			} catch (RestClientException | URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	  
-        	  return kakaoPayCancelVO;
+             try {
+            kakaoPayCancelVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelVO.class);
+         } catch (RestClientException | URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
+             
+             return kakaoPayCancelVO;
           
     
     

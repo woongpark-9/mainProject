@@ -18,3 +18,30 @@ function acyncSalesPdf(url){
       }
    });
 }
+
+
+//결제 취소
+function acyncCancelPayment(url) {
+	var form = {
+	   "tid" : document.getElementById("tid").value,
+	   "total" : document.getElementById("total").value
+	};
+	$.ajax({
+	   url : url,
+	   type : "POST",
+	   data : form,
+	   dataType : "json",
+	   success : function(data) {
+	      if (data == 1) {
+	         alert("해당 답변이 수정되었습니다.");
+	         // acyncRefreshPage();
+	          acyncMovePage('manage_inquiry.mdo');
+	      } else {
+	         alert("[Error] 답변 수정 오류");
+	      }
+	   },
+	   error : function() {
+	      alert("error");
+	   }
+	})
+}

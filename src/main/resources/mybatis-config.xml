@@ -17,7 +17,7 @@
 		<typeAlias type="com.main.nowflix.client.ticket.vo.TicketVO"
 			alias="ticketVO" />
 		<typeAlias type="com.main.nowflix.client.inquiry.vo.InquiryVO" alias="inquiryVO"/>
-
+		<typeAlias type="com.main.nowflix.client.faq.vo.FaqVO" alias="faqVO"/>
 		<!-- admin -->
 
 
@@ -80,5 +80,6 @@
 		<mapper resource="mappings/admin/admin-faq-mapping.xml" />
 		<mapper resource="mappings/admin/admin-inquiry-mapping.xml" />
 		<mapper resource="mappings/admin/admin-sales-mapping.xml" />
+		<mapper resource="mappings/member/faqMapper.xml"></mapper>
 	</mappers>
 </configuration>

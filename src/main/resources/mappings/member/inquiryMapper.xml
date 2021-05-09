@@ -26,7 +26,8 @@
 	
 	</insert>
 	<select id="getInquiryList" resultMap="inquiryResult">
-		SELECT * FROM INQUIRY WHERE EMAIL = #{email} order by inquiry_date asc
-	
+select (row_number() over()) as rownum,inquiry_type , inquiry_title ,inquiry_id, email,manager_email,
+      inquiry_date , inquiry_content , reply_title , reply_content,reply_date from inquiry
+      where EMAIL=#{email} order by rownum ,INQUIRY_DATE asc 
 	</select>
 </mapper>

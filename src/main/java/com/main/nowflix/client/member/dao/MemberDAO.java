@@ -90,4 +90,14 @@ public class MemberDAO {
 		System.out.println("getMember DAO");
 		return sql.selectOne("memberMapper.getMember", vo);
 	}
+
+	public void kakaoConnect(MemberVO vo) throws Exception {
+		System.out.println("dao kakaoConnect 실행");
+		sql.update("memberMapper.kakaoConnect", vo);
+	}
+
+	public void naverConnect(MemberVO vo) throws Exception {
+		System.out.println("dao naverConnect 실행");
+		sql.update("memberMapper.naverConnect", vo);
+	}
 }

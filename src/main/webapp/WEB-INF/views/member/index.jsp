@@ -38,7 +38,6 @@
 <title>Nowflix</title>
 
 <script>
-	
 	$(function() {
 		$(".video1").click(
 				function() {
@@ -52,6 +51,42 @@
 						$(theModal + ' source').attr('src', videoSRC);
 					});
 				});
+	});
+
+	var movieDeleteSeq = "";
+	$(document).ready(function() {
+		$('#deleteMovie').on('show.bs.modal', function(event) {
+			movieDeleteSeq = $(event.relatedTarget).data('delseq');
+			// alert(movieDeleteSeq);
+			// console.log(movieDeleteSeq);
+		});
+		$('#detailMovie').on('show.bs.modal', function(event) {
+			var title = $(event.relatedTarget).data('title');
+			var summary = $(event.relatedTarget).data('summary');
+			var actor = $(event.relatedTarget).data('actor');
+			var director = $(event.relatedTarget).data('director');
+			var genre = $(event.relatedTarget).data('genre');
+			var moviepath = $(event.relatedTarget).data('moviepath');
+			var posterpath = $(event.relatedTarget).data('posterpath');
+			var releasedate = $(event.relatedTarget).data('releasedate');
+			var webimage = $(event.relatedTarget).data('webimage');
+
+			// alert(title);
+			// console.log(title);
+			var modal = $(this);
+			modal.find('.modal-videoMetadata').text(title);
+			modal.find('.modal-description').text(summary);
+			modal.find('.modal-actor').text(actor);
+			modal.find('.modal-director').text(director);
+			modal.find('.modal-genre').text(genre);
+			modal.find('.modal-video').attr('src', moviepath);
+			modal.find('.modal-video').attr('poster', posterpath);
+			modal.find('.modal-poster').attr('src', posterpath);
+			modal.find('.modal-releasedate').text(releasedate);
+			modal.find('.modal-webimage').attr('src', webimage);
+			modal.find('.morelikethis-section').text(title + " 상세정보");
+		});
+
 	});
 
 	/* 	$(document).on("click", ".detailBtn", function(e) {
@@ -131,20 +166,9 @@
 	// 		$(".thevideo")[i].pause();
 	// 		$(".thevideo")[i].currentTime = 0;
 	// 	}
-	
-
-	
 	$(document).ready(function() {
-		$("#searchPoster").each(function(i, obj) {
-			alert("1");
-			$(this).on("mouseenter", function() {
-				startVideo(i);
-			});
-			$(".caption").on("mouseleave", function() {
-				stopVideo(i);
-			})
-		});
-		
+
+
 		$(".poster").each(function(i, obj) {
 			$(this).on("mouseenter", function() {
 				startVideo(i);
@@ -153,20 +177,17 @@
 				stopVideo(i);
 			})
 		});
-	});	
-
-
-	
+	});
 
 	function startVideo(i) {
-// 		$(".caption").css("display", "block");
+		// 		$(".caption").css("display", "block");
 		$(".caption").show();
 		// 		$(".thevideo").css("display", "block");
 		//$(".thevideo")[i].play();
 	}
 
 	function stopVideo(i) {
-// 		$(".caption").css("display", "none");
+		// 		$(".caption").css("display", "none");
 		$(".caption").hide();
 		//$(".thevideo")[i].pause();
 		//$(".thevideo")[i].currentTime = 0;
@@ -178,7 +199,7 @@
 	var actor = new Array();
 	var director = new Array();
 	var seq = new Array();
-	
+
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
 		title.push("${movieList.title}");
@@ -418,9 +439,21 @@
 														</a>
 													</div>
 													<div class="detail-button">
-														<a href="#"> <img
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"<%--                                  data-cardimg ="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png" --%>
+                                    >
+															<img
 															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -846,148 +879,7 @@
 				</div>
 			</div>
 
-			<!-- 					<div class="category"> -->
-			<!-- 						<div class="title">박영웅 님이 시청 중인 콘텐츠</div> -->
-			<!-- 						<div class="list"> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
 
-
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYOt1G8AZuGVcnuHnZTMhwS8_HIes6zdivNuMLTZuYtpvnLwNHdm9B-9457q-TAjtGiFpTzugSjOmiCI2ZKm0kSIn_7dOXg5YpG46dqnUO2wprzjfv9UzmoyXLkRad7UfdXnVWuexeIabfWeGnT9gyRiY-yn6dnEx0_mqxQKs3ijmkzdmp2P7U7FEgii.webp?r=aef" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 33%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSyKKo6YI0tqk776fHGQEPezj43pT5u2vVxlgnO351aJ6jcjs81ho6GhSEXduEfSTZtl2lQxxKPERRytTTH8QAYGa7XWDfa_8XpxDEW8aPDeh3DngeuAc1EE2PEB4JI66Q.webp?r=c4e" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 13%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbRimFoshBDFc5ebs3TXbgMP9qctTPHLzPQ7O2i2LLWdBz7zFhO9Ms5cPZPWmF133AYpF1aDId1zPUClOgQLqs7pMUA.webp?r=c75" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 53%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbbcHE-dy148R9njiMEgj6EKyGB2sfJTOCVaKVArIWj9BXZKHtAJbkjz_9oWC5M4O-6v8TndPbcncMUefuZFOv9BjQJn56UGmH3DJd9CYQq7FUUFX04HMRyhqRR7TKsGfnfX9SxsOcJNKUeMpXj0Z6LnEmi8OvCGvMWSUKjtW5ixqR7d0mlBBZ91utp-V5daJreOVUxFLuqFPR4s8DSkFDq_.jpg?r=21e" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 23%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUhRCfVdKDRPk5Lw6ObULYqJWyPQ3FBYppCrkalohCc9bQT-m_-F3CfYcLu-4_b_d_kHZAquHLc9zdiGhyEHr_9llQR69LhyJNtdKITHI_zxK06IFCdw5ricIc8H.jpg?r=158" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 43%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 							<div class="movie"> -->
-			<!-- 								<img -->
-			<!-- 									src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABRDH13VvVc4aJ96XHn0AawDgS470J9tz3bpixc3ElJ42dV1eIZQwrf3pxeL19PV4iWKVzz1vjEVwC1AsQAAY-Ez7k6w_0O2W3L0onM5rgIV_ALq5hqQoJGW868I2e6rk9AM5r4aykCQY6Qw8t0IrjxI-d0w.webp?r=e1e" -->
-			<!-- 									alt=""> -->
-			<!-- 								<div class="progress"> -->
-			<!-- 									<span class="progress-bar"><span role="presentation" -->
-			<!-- 										class="progress-completed" style="width: 50%;"></span></span> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 						</div> -->
-			<!-- 					</div> -->
 		</div>
 
 	</div>
@@ -1005,9 +897,8 @@
 	<!-- 		data-video="https://clienti.dk/media/1140/friheden-video.mp4" -->
 	<!-- 		data-toggle="modal" data-target="#videoModal">Play Video</button> -->
 
-	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="detailMovie" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
-
 
 
 		<div class="modal-body">
@@ -1027,11 +918,11 @@
 					</button>
 					<img class="modal-webimage"
 						src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABf2KuOLYvCA8ZctYlCbwe-wvuYjMhhxAWrl1ULZVkFm1q3Npbdcm6t0Kp6qPe-PZM3lLBYBqKL9LUxSz8vLAs-9CJHeVSYIpJnA7TwWt1_0G60764vxN2J9-DDv1eUsw5NACZkEjmju1YCkd3dbBjSauZfB1w_-7OOaQHF2--ocm.webp?r=94c">
-					<div class="modal-progress">
-						<span class="modal-progress-bar"><span role="presentation"
-							class="modal-progress-completed" style="width: 50%;"></span>
-							<div class="modal-progress-text">총 55분 중 2분</div></span>
-					</div>
+					<!-- 					<div class="modal-progress"> -->
+					<!-- 						<span class="modal-progress-bar"><span role="presentation" -->
+					<!-- 							class="modal-progress-completed" style="width: 50%;"></span> -->
+					<!-- 							<div class="modal-progress-text">총 55분 중 2분</div></span> -->
+					<!-- 					</div> -->
 					<div class="modal-icon">
 						<div class="modal-white-button">
 							<i class="fas fa-play"></i> 재생
@@ -1059,9 +950,12 @@
 						알람이 울린다. 마음을 알려주는 앱 ‘좋알람’의 시대, 힘겹게 살아가는 소녀 조조에게도 풋풋한 사랑이 찾아온다.</div>
 				</div>
 				<div class="modal-detailMetadata-right">
-					<p class="actor">출연: 김소현,정가람,송강,더보기</p>
-					<p class="genre">장르: 웹툰 원작 한국 드라마,TV 드라마 , 로맨스,한국 드라마</p>
-					<p class="character">프로그램 특징:감상적,풍부한 감정,로맨스</p>
+					감독 :
+					<div class="modal-director"></div>
+					출연:
+					<div class="modal-actor"></div>
+					장르:
+					<div class="modal-genre"></div>
 
 				</div>
 			</div>

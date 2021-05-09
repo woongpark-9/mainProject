@@ -105,4 +105,16 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public void kakaoConnect(MemberVO vo) throws Exception {
+		dao.kakaoConnect(vo);
+
+	}
+
+	@Override
+	public void naverConnect(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		dao.naverConnect(vo);
+	}
+
 }

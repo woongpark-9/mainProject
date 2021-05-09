@@ -8,6 +8,48 @@
 
 <link type="text/css" rel="stylesheet" href="css/member/reset.css">
 <link type="text/css" rel="stylesheet" href="css/member/memberLogin.css">
+<script>
+
+//유효성 검사 메서드
+function checkAll() {
+   if(!checkEmail()){
+      return false;
+   }else if(!checkPassword(form.email.value,form.pass.value)){
+      return false;
+   }
+   return true;
+}
+//공백확인 메서드
+function checkExistData(value, dataName) {
+    if (value == "") {
+        alert(dataName + " 입력해주세요!");
+        return false;
+    }
+    return true;
+}
+
+
+function checkEmail(){
+   
+   if(document.getElementById("email").value.length <= 0){
+      alert("이메일을 입력해주세요!");
+      return false;
+   }
+   return true;
+}
+function checkPassword(email,pass){
+   //비밀번호가 입력되었는지 확인하기
+   if(!checkExistData(pass,"비밀번호를")){
+      return false;
+   }else if(document.getElementById("pass").value.length <=0){
+      alert("비밀번호를 입력해주세요!");
+      return false;
+   }
+   return true;
+}
+
+
+</script>
 </head>
 <body>
 <div class="root" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),

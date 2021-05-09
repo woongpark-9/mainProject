@@ -32,4 +32,8 @@ public interface MemberService {
 	public void setGenre(MemberVO vo) throws Exception;
 
 	public MemberVO getMember(MemberVO vo) throws Exception;
+
+	public void kakaoConnect(MemberVO vo) throws Exception;
+
+	public void naverConnect(MemberVO vo) throws Exception;
 }
