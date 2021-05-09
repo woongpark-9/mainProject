@@ -2,6 +2,7 @@ package com.main.nowflix.admin.analysis.controller;
 
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.nowflix.admin.analysis.vo.AdminAnalysis_Age_VO;
+import com.main.nowflix.admin.analysis.vo.AdminAnalysis_Director_count_VO;
 import com.main.nowflix.admin.genre.service.AdminGenreService;
 import com.main.nowflix.admin.genre.vo.AdminGenreVO;
 import com.main.nowflix.admin.member.service.AdminMemberService;
@@ -52,9 +54,9 @@ public class AdminAnalysisController {
 
 	
 	@RequestMapping("manage_analysis_movie.mdo")
-	public String movie_count(Model model, AdminMovieVO movievo, AdminAnalysis_Age_VO analysis_age_VO, AdminGenreVO genreVO) {
+	public String movie_count(Model model, AdminMovieVO movievo, AdminAnalysis_Age_VO analysis_age_VO, AdminAnalysis_Director_count_VO adminAnalysis_Director_count_VO , AdminGenreVO genreVO) {
 				
-		//ï¿½ë¿¬æ¹²ê³—ê½Œ åª›ï¿½ï¿½ì¡‡ï¿½ì‚¤ï¿½ë’— ï¿½ëœ²ï¿½ì” ï¿½ê½£ï¿½ë’— ï¿½ì˜£ç‘œí•bï¿½ë¿‰ ï¿½ì—³ï¿½ë’— ï¿½ì” ç”±ê¾©ì“£ ç”±ÑŠë’ªï¿½ë“ƒæ¿¡ï¿½ è«›ì†ë¸˜ï¿½ìƒ‚
+		//¿©±â¼­ °¡Á®¿À´Â µ¥ÀÌÅÍ´Â Àå¸£db¿¡ ÀÖ´Â ÀÌ¸§À» ¸®½ºÆ®·Î ¹Ş¾Æ¿È
 		List setgenreNameList = genreService.genreNameList(genreVO);
 		List<String> addgenreNameList = new ArrayList<String>();
 		
@@ -67,7 +69,7 @@ public class AdminAnalysisController {
 			
 		}
 	
-		//ï¿½ë¿¬æ¹²ê³—ê½Œ åª›ï¿½ï¿½ì¡‡ï¿½ì‚¤ï¿½ë’— ï¿½ëœ²ï¿½ì” ï¿½ê½£ï¿½ë’— movie_dbï¿½ë¿‰ ï¿½ì—³ï¿½ë’— ï¿½ì˜£ç‘œï¿½ (ï¿½ë£·ï¿½ë¸¿ï¿½ë§‚)ç”±ÑŠë’ªï¿½ë“ƒç‘œï¿½ è«›ì†ë¸˜ï¿½ìƒ‚ 
+		//¿©±â¼­ °¡Á®¿À´Â µ¥ÀÌÅÍ´Â movie_db¿¡ ÀÖ´Â Àå¸£ (Æ÷ÇÔµÈ)¸®½ºÆ®¸¦ ¹Ş¾Æ¿È 
 		List setmovieGenreList = movieService.movieList(movievo, analysis_age_VO);
 		List<String> addMovieGenreList = new ArrayList<String>();
 		
@@ -96,47 +98,47 @@ public class AdminAnalysisController {
 		}
 
 		
-		//æ„¿ï¿½ï¿½ì—ºï¿½ë²‘æ¹²ï¿½ ç”±ÑŠë’ªï¿½ë“ƒç‘œï¿½ ï§ëš®ë±¾ï¿½ë¼±ï¿½ê½Œ è­°ê³—ì ™.
-		ArrayList<Integer> setMovieRating = new ArrayList<Integer>(); // ï¿½ìºï¿½ì†• ï¿½ì …ï¿½ì” ï¿½ë˜¿ï¿½ì“£ åª›ï¿½ï§ï¿½æ€¨ì¢ì—³ï¿½ë’— ï¿½ì …ï¿½ì” ï¿½ë˜¿ç”±ÑŠë’ªï¿½ë“ƒ 
-		List<String> setMovieReleaseDate = new ArrayList<String>(); // ï¿½ìºï¿½ì†• ç”±ëŒ€â”ï¿½ë’ª ï¿½ëœ²ï¿½ì” ï¿½ê½£åª›ë¯©ì­” ï¿½ï¿½ï¿½ì˜£ï¿½ë¸¯ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ
+		//°ü¶÷µî±Ş ¸®½ºÆ®¸¦ ¸¸µé¾î¼­ Á¶Á¤.
+		ArrayList<Integer> setMovieRating = new ArrayList<Integer>(); // ¿µÈ­ ·¹ÀÌÆÃÀ» °¡Áö°íÀÖ´Â ·¹ÀÌÆÃ¸®½ºÆ® 
+		List<String> setMovieReleaseDate = new ArrayList<String>(); // ¿µÈ­ ¸±¸®½º µ¥ÀÌÅÍ°ª¸¸ ÀúÀåÇÏ´Â ¸®½ºÆ®
 		
 		
-		int movieRatingCountAll = 0;	//ï¿½ìŸ¾ï§£ï¿½ æ„¿ï¿½ï¿½ì—º ç§»ëŒìŠ«ï¿½ë“ƒ ï¿½ï¿½ï¿½ì˜£ è¹‚ï¿½ï¿½ë‹” 
-		int movieRatingCount12 = 0;	//12ï¿½ê½­ æ„¿ï¿½ï¿½ì—º ç§»ëŒìŠ«ï¿½ë“ƒ ï¿½ï¿½ï¿½ì˜£ è¹‚ï¿½ï¿½ë‹” 
-		int movieRatingCount15 = 0;	//15ï¿½ê½­ æ„¿ï¿½ï¿½ì—º ç§»ëŒìŠ«ï¿½ë“ƒ ï¿½ï¿½ï¿½ì˜£ è¹‚ï¿½ï¿½ë‹” 
-		int movieRatingCount19 = 0;	//19ï¿½ê½­  æ„¿ï¿½ï¿½ì—º ç§»ëŒìŠ«ï¿½ë“ƒ ï¿½ï¿½ï¿½ì˜£ è¹‚ï¿½ï¿½ë‹” 
-		int movieAllCount = setmovieGenreList.size(); //setmovieGenreList.size åª›ë¯ªì‘æ¿¡ï¿½ ï¿½ìºï¿½ì†•ï¿½ìŸ¾ï§£ï¿½ ç”±ÑŠë’ªï¿½ë“ƒ åª›ï¿½ï¿½ë‹”ç‘œï¿½ åª›ï¿½ï§ï¿½.
+		int movieRatingCountAll = 0;	//ÀüÃ¼ °ü¶÷ Ä«¿îÆ® ÀúÀå º¯¼ö 
+		int movieRatingCount12 = 0;	//12¼¼ °ü¶÷ Ä«¿îÆ® ÀúÀå º¯¼ö 
+		int movieRatingCount15 = 0;	//15¼¼ °ü¶÷ Ä«¿îÆ® ÀúÀå º¯¼ö 
+		int movieRatingCount19 = 0;	//19¼¼  °ü¶÷ Ä«¿îÆ® ÀúÀå º¯¼ö 
+		int movieAllCount = setmovieGenreList.size(); //setmovieGenreList.size °ªÀ¸·Î ¿µÈ­ÀüÃ¼ ¸®½ºÆ® °¹¼ö¸¦ °¡Áü.
 		
 		for (int i = 0; i < setmovieGenreList.size(); i++) {
 			AdminMovieVO testVO = (AdminMovieVO) setmovieGenreList.get(i);
 			
-			//movie ratingï¿½ì”  allï¿½ì” ï¿½ì”ªï§ï¿½ movieRatingCountAll ç§»ëŒìŠ«ï¿½ë“ƒåª›ï¿½ ï§ì•·ï¿½.
+			//movie ratingÀÌ allÀÌ¶ó¸é movieRatingCountAll Ä«¿îÆ®°ª Áõ°¡.
 			if (testVO.getMovie_rating().equals("All")) {
 				movieRatingCountAll++;
 			}
 			
-			//movie ratingï¿½ì”  12 ï¿½ì” ï¿½ì”ªï§ï¿½  movieRatingCount12 ç§»ëŒìŠ«ï¿½ë“ƒåª›ï¿½ ï§ì•·ï¿½.
+			//movie ratingÀÌ 12 ÀÌ¶ó¸é  movieRatingCount12 Ä«¿îÆ®°ª Áõ°¡.
 			if (testVO.getMovie_rating().equals("12")) {
 				movieRatingCount12++;
 			}
 			
-			//movie ratingï¿½ì”  15ï¿½ì” ï¿½ì”ªï§ï¿½ movieRatingCount15  ç§»ëŒìŠ«ï¿½ë“ƒåª›ï¿½ ï§ì•·ï¿½.
+			//movie ratingÀÌ 15ÀÌ¶ó¸é movieRatingCount15  Ä«¿îÆ®°ª Áõ°¡.
 			if (testVO.getMovie_rating().equals("15")) {
 				movieRatingCount15++;
 			}
 
-			//movie ratingï¿½ì”  19ï¿½ì” ï¿½ì”ªï§ï¿½ movieRatingCount19 ç§»ëŒìŠ«ï¿½ë“ƒåª›ï¿½ ï§ì•·ï¿½.
+			//movie ratingÀÌ 19ÀÌ¶ó¸é movieRatingCount19 Ä«¿îÆ®°ª Áõ°¡.
 			if (testVO.getMovie_rating().equals("19")) {
 				movieRatingCount19++;
 			}
 			
-			//movie release ï¿½ëœ²ï¿½ì” ï¿½ê½£åª›ï¿½ ï¿½ê¼¸ï¿½ì”  ï¿½ë¸˜ï¿½ë•²ï¿½ì”ªï§ï¿½ setMovieReleaseDateï¿½ë¿‰ ç”±ÑŠë’ªï¿½ë“ƒç‘œï¿½ ç•°ë¶½ï¿½ï¿½ë¸¿.
+			//movie release µ¥ÀÌÅÍ°¡ ³ÎÀÌ ¾Æ´Ï¶ó¸é setMovieReleaseDate¿¡ ¸®½ºÆ®¸¦ Ãß°¡ÇÔ.
 			if(testVO.getMovie_release_date() != null) {
 				setMovieReleaseDate.add(testVO.getMovie_release_date());
 			}
 		}
 		
-		//setMovieRating ç”±ÑŠë’ªï¿½ë“ƒï¿½ë¿‰ï¿½ë–åª›ï¿½ è¹‚ï¿½ï¿½ë‹”(ç§»ëŒìŠ«ï¿½ë“ƒ)åª›ë¯ªì“£ ADD 
+		//setMovieRating ¸®½ºÆ®¿¡´Ù°¡ º¯¼ö(Ä«¿îÆ®)°ªÀ» ADD 
 		setMovieRating.add((Integer) movieRatingCountAll); // INDEX[0]
 		setMovieRating.add((Integer) movieRatingCount12); // INDEX[1]
 		setMovieRating.add((Integer) movieRatingCount15); // INDEX[2]
@@ -145,26 +147,26 @@ public class AdminAnalysisController {
 
 	
 		
-		List<String> movieReleaseList = new ArrayList<String>(); //2000ï¿½ë€ˆï¿½ë£„éºï¿½ï¿½ê½£ ï¿½ì½ï¿½ì˜±ï¿½ê¶‡ï§ï¿½ æºëš¯ï¿½ï¿½ì“½ ç”±ÑŠë’ªï¿½ë“ƒç‘œï¿½ è«›ì†ì“£ ç”±ÑŠë’ªï¿½ë“ƒ è¹‚ï¿½ï¿½ë‹”
-		List<Integer> movieReleaseRatingList = new ArrayList<Integer>(); //ï¿½ë€ˆï¿½ë£„è¹‚ï¿½ ç§»ëŒìŠ«ï¿½ë“ƒåª›ë¯ªì“£ åª›ï¿½ï§ï¿½ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ è¹‚ï¿½ï¿½ë‹”
+		List<String> movieReleaseList = new ArrayList<String>(); //2000³âµµºÎÅÍ ÇöÀç³¯Â¥ ±îÁöÀÇ ¸®½ºÆ®¸¦ ¹ŞÀ» ¸®½ºÆ® º¯¼ö
+		List<Integer> movieReleaseRatingList = new ArrayList<Integer>(); //³âµµº° Ä«¿îÆ®°ªÀ» °¡Áö´Â ¸®½ºÆ® º¯¼ö
 		
-		Calendar cal = Calendar.getInstance();	//Calendarï¿½ê²¢ï¿½ì˜’ï¿½ë’ªï¿½ë¿‰  calåª›ì•¹ê»œ ï¿½ê¹®ï¿½ê½¦
-		int year = cal.get(Calendar.YEAR); //è¹‚ï¿½ï¿½ë‹” yearï¿½ë¿‰ ï¿½ì‚¤ï¿½ë’› ï¿½ê¶‡ï§ì’•ï¿½ï¿½ ï¿½ï¿½ï¿½ì˜£. ï¿½ì‚)2021
+		Calendar cal = Calendar.getInstance();	//CalendarÅ¬·¡½º¿¡  cal°´Ã¼ »ı¼º
+		int year = cal.get(Calendar.YEAR); //º¯¼ö year¿¡ ¿À´Ã ³¯Â¥¸¦ ÀúÀå. ¿¹)2021
 		
-		//<ï¿½ì”ªè¸°â‘¥ë¿‰ ï¿½ë²æ¹²ê³—ìï¿½ë¸³ ï¿½ë€ˆï¿½ë£„è¹‚ï¿½ ç”±ÑŠë’ªï¿½ë“ƒåª›ï¿½ ï¿½ë¾¾æ¹²ê³—ë¿‰ ç”±ÑŠë’ªï¿½ë“ƒæ¿¡ì’•ì­”ï¿½ë±¶ï¿½ë’— ï¿½ì˜‰ï¿½ë¾½!>
-		//è«›ì„ë‚¬è‡¾ï¿½ ï¿½ë–ï¿½ë»¾ iåª›ë¯ªì“£ 2000ï¿½ë€ˆï¿½ë£„éºï¿½ï¿½ê½£ ï¿½ë–†ï¿½ì˜‰
-		//ï¿½ì½ï¿½ì˜±ï¿½ê¶‡ï§ï¿½ æºëš¯ï¿½ è«›ì„ë‚¬è‡¾ï¿½ ï¿½ë–ï¿½ë»¾. ï§ì•·ï¿½ åª›ï¿½ ç§»ëŒìŠ«ï¿½ë“ƒ ++
+		//<¶óº§¿¡ ¾²±âÀ§ÇÑ ³âµµº° ¸®½ºÆ®°¡ ¾ø±â¿¡ ¸®½ºÆ®·Î¸¸µå´Â ÀÛ¾÷!>
+		//¹İº¹¹® ½ÇÇà i°ªÀ» 2000³âµµºÎÅÍ ½ÃÀÛ
+		//ÇöÀç³¯Â¥ ±îÁö ¹İº¹¹® ½ÇÇà. Áõ°¡ °ª Ä«¿îÆ® ++
 		for(int i = 2000; i < year+1; i++) {
-			String str = String.valueOf(i); //String strï¿½ë¿‰ï¿½ë–åª›ï¿½ iï¿½ì“½ åª›ë¯ªì“£ ï¿½ì‚è¹‚ï¿½ï¿½ì†š ï¿½ë–†è€³ì’–ì¨². 
-			movieReleaseList.add(str); //ç”±ÑŠë’ªï¿½ë“ƒï¿½ë¿‰ï¿½ë–åª›ï¿½ strï¿½ì“½ åª›ë¯ªì“£ add ï¿½ë¹ä»¥ï¿½.
+			String str = String.valueOf(i); //String str¿¡´Ù°¡ iÀÇ °ªÀ» Çüº¯È¯ ½ÃÄÑÁÜ. 
+			movieReleaseList.add(str); //¸®½ºÆ®¿¡´Ù°¡ strÀÇ °ªÀ» add ÇØÁÜ.
 		}
 		
 		
-		//1.ï¿½ë€ˆï¿½ë£„è¹‚ï¿½ ç”±ÑŠë’ªï¿½ë“ƒåª›ï¿½ ï¿½ë±¾ï¿½ë¼±ï¿½ì—³ï¿½ë’— åª›ë¯©ì­”ï¿½ê²® è«›ì„ë‚¬ ï¿½ë–†ï¿½ì˜‰
-		//2.movieï¿½ë¿‰ï¿½ì—³ï¿½ë’— releaseï¿½ëœ²ï¿½ì” ï¿½ê½£ ç”±ÑŠë’ªï¿½ë“ƒï¿½ì“½ ï§£ãƒ«ì¾²ï§ï¿½ åª›ï¿½ éºï¿½ï¿½ê½£ ï¿½ê±¹åª›ï¿½ï§ï¿½ è«›ì„ë‚¬
-		//3.è­°ê³Œêµ”è‡¾ëª„ì‘æ¿¡ï¿½ movieï¿½ë¿‰ï¿½ì—³ï¿½ë’— releaseï¿½ì“½ ï¿½ëœ²ï¿½ì” ï¿½ê½£ jè¸°ë‰ãï¿½ë¿‰. contains(ï¿½ë£·ï¿½ë¸¿) ï¿½ë¦ºï¿½ê¹˜? | ï¿½ë€ˆï¿½ë£„è¹‚ï¿½ ç”±ÑŠë’ªï¿½ë“ƒï¿½ë¿‰ ?
-		//4.è­°ê³Œêµ”ï¿½ì”  ï§ìšŒë’—ï¿½ë–ï§ï¿½ countingï¿½ì“£ ++ 
-		//5.ï§ë‰ï¿½ï§ë±ë¿‰ movieReleaseRatingList.add (ï§£ì„ì“¬ forè‡¾ëª„ì”  ï¿½ê±¹ï¿½ê¶‡ï¿½ë¸£ï§ëˆë– ç”±ÑŠë’ªï¿½ë“ƒï¿½ë¿‰ addï¿½ë¹ä»¥ï¿½)
+		//1.³âµµº° ¸®½ºÆ®°¡ µé¾îÀÖ´Â °ª¸¸Å­ ¹İº¹ ½ÃÀÛ
+		//2.movie¿¡ÀÖ´Â releaseµ¥ÀÌÅÍ ¸®½ºÆ®ÀÇ Ã¹¹øÂ° °ª ºÎÅÍ ³¡°¡Áö ¹İº¹
+		//3.Á¶°Ç¹®À¸·Î movie¿¡ÀÖ´Â releaseÀÇ µ¥ÀÌÅÍ j¹øÂ°¿¡. contains(Æ÷ÇÔ) µÇ³Ä? | ³âµµº° ¸®½ºÆ®¿¡ ?
+		//4.Á¶°ÇÀÌ ¸Â´Â´Ù¸é countingÀ» ++ 
+		//5.¸¶Áö¸·¿¡ movieReleaseRatingList.add (Ã³À½ for¹®ÀÌ ³¡³¯¶§¸¶´Ù ¸®½ºÆ®¿¡ addÇØÁÜ)
 		for(int i = 0;  i < movieReleaseList.size(); i++) {
 			int counting = 0;
 			for(int j = 0; j < setMovieReleaseDate.size(); j++) {
@@ -175,7 +177,7 @@ public class AdminAnalysisController {
 			movieReleaseRatingList.add(counting);
 		}
 		
-		// è‡¾ëŒ€í‰¬ æ´¹ëªƒì˜’ï¿½ë´½ï¿½ë¿‰ï¿½ê½Œ ï¿½ì˜£ç‘œï¿½ ï¿½ë„»æ€¨ï¿½ ï¿½ëœ²ï¿½ì” ï¿½ê½£ç‘œï¿½ ï¿½ë£ï¿½ìŸ»ï¿½ì‘æ¿¡ï¿½ ï¿½ê¹‹æºë¶¿ì“£ ï¿½ì˜–ï¿½ëœ¡ï¿½ì‘æ¿¡ï¿½ ï¿½ëœ²ï¿½ì” ï¿½ê½£ç‘œï¿½ ï¿½ê½”ï¿½ë¼±äºŒì‡°ë’— æ¹²ê³•ë’«.
+		// ¹«ºñ ±×·¡ÇÁ¿¡¼­ Àå¸£ Åë°è µ¥ÀÌÅÍ¸¦ µ¿ÀûÀ¸·Î »ö±òÀ» ·£´ıÀ¸·Î µ¥ÀÌÅÍ¸¦ ³Ö¾îÁÖ´Â ±â´É.
 		List<String> chartColorRandomGenre = new ArrayList<String>();
 		for (int i = 0; i < addgenreNameList.size(); i++) {
 			int r = (int) Math.floor(Math.random() * 255);
@@ -185,7 +187,7 @@ public class AdminAnalysisController {
 			chartColorRandomGenre.add(put);
 		}
 
-		// è‡¾ëŒ€í‰¬ æ´¹ëªƒì˜’ï¿½ë´½ï¿½ë¿‰ï¿½ê½Œ ç•°ì’–ë–†ï¿½ì”ª ï¿½ë„»æ€¨ï¿½ ï¿½ëœ²ï¿½ì” ï¿½ê½£ç‘œï¿½ ï¿½ë£ï¿½ìŸ»ï¿½ì‘æ¿¡ï¿½ ï¿½ê¹‹æºë¶¿ì“£ ï¿½ì˜–ï¿½ëœ¡ï¿½ì‘æ¿¡ï¿½ ï¿½ëœ²ï¿½ì” ï¿½ê½£ç‘œï¿½ ï¿½ê½”ï¿½ë¼±äºŒì‡°ë’— æ¹²ê³•ë’«.
+		// ¹«ºñ ±×·¡ÇÁ¿¡¼­ Ãâ½ÃÀÏ Åë°è µ¥ÀÌÅÍ¸¦ µ¿ÀûÀ¸·Î »ö±òÀ» ·£´ıÀ¸·Î µ¥ÀÌÅÍ¸¦ ³Ö¾îÁÖ´Â ±â´É.
 		List<String> chartColorRandomRelease = new ArrayList<String>();
 		for (int i = 0; i < movieReleaseList.size(); i++) {
 			int r = (int) Math.floor(Math.random() * 255);
@@ -195,25 +197,25 @@ public class AdminAnalysisController {
 			chartColorRandomRelease.add(put);
 		}
 		
-		//ï¿½ì˜£ç‘œï¿½ ï¿½ëœ²ï¿½ì” ï¿½ê½£è¸°ì¢ì” ï¿½ë’ªï¿½ë¿‰ ï¿½ì—³ï¿½ë’— ï¿½ì˜£ç‘œï¿½ ï¿½ì” ç”±ê¾©ì“£ åª›ï¿½ï§ï¿½æ€¨ì¢ì—³ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ åª›ï¿½.
+		//Àå¸£ µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀÖ´Â Àå¸£ ÀÌ¸§À» °¡Áö°íÀÖ´Â ¸®½ºÆ® °ª.
 		model.addAttribute("addgenreNameList" , addgenreNameList);
 		
-		//ï¿½ìŸ¾ï§£ï¿½ ï¿½ìºï¿½ì†•ï¿½ë¿‰ ï¿½ë£·ï¿½ë¸¿ï¿½ë§‚ ï¿½ì˜£ç‘œëŒì“½ åª›ï¿½ï¿½ë‹”ç‘œï¿½ åª›ï¿½ï§ï¿½æ€¨ì¢ì—³ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ åª›ï¿½.
+		//ÀüÃ¼ ¿µÈ­¿¡ Æ÷ÇÔµÈ Àå¸£ÀÇ °¹¼ö¸¦ °¡Áö°íÀÖ´Â ¸®½ºÆ® °ª.
 		model.addAttribute("MovieGenreListCount" , MovieGenreListCount);
 		
-		//ï¿½ì˜–ï¿½ëœ¡ ï¿½ê¹‹æºë¶¿ì“£ ç”±Ñ‹ê½©ï¿½ë¹ä»¥ï¿½.(ï¿½ì˜£ç‘œï¿½ ï¿½ë„»æ€¨ï¿½)
+		//·£´ı »ö±òÀ» ¸®ÅÏÇØÁÜ.(Àå¸£ Åë°è)
 		model.addAttribute("chart_color_random_genre" , chartColorRandomGenre); 
 		
-		//ï¿½ì˜–ï¿½ëœ¡ ï¿½ê¹‹æºë¶¿ì“£ ç”±Ñ‹ê½©ï¿½ë¹ä»¥ï¿½.(ç•°ì’–ë–†ï¿½ì”ª ï¿½ë„»æ€¨ï¿½)
+		//·£´ı »ö±òÀ» ¸®ÅÏÇØÁÜ.(Ãâ½ÃÀÏ Åë°è)
 		model.addAttribute("chart_color_random_release" , chartColorRandomRelease); 
 		
-		//æ„¿ï¿½ï¿½ì—ºï¿½ë²‘æ¹²ï¿½ ç”±ÑŠë’ªï¿½ë“ƒ ç§»ëŒìŠ«ï¿½ë“ƒåª›ë¯ªì“£ åª›ï¿½ï§ï¿½ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ.
+		//°ü¶÷µî±Ş ¸®½ºÆ® Ä«¿îÆ®°ªÀ» °¡Áö´Â ¸®½ºÆ®.
 		model.addAttribute("setMovieRating" , setMovieRating); 
 		
-		//ï¿½ìºï¿½ì†• ç”±ëŒ€â”ï¿½ë’ª ï¿½ëœ²ï¿½ì” ï¿½ê½£ï¿½ì“½ ç”±ÑŠë’ªï¿½ë“ƒç‘œï¿½ åª›ï¿½ï§ï¿½ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ
+		//¿µÈ­ ¸±¸®½º µ¥ÀÌÅÍÀÇ ¸®½ºÆ®¸¦ °¡Áö´Â ¸®½ºÆ®
 		model.addAttribute("movie_year_list" , movieReleaseList); 
 		
-		//ï¿½ë¼‡ï¿½ì†• ç”±ëŒ€â”ï¿½ë’ª ï¿½ëœ²ï¿½ì” ï¿½ê½£ï¿½ì“½ ç§»ëŒìŠ«ï¿½ë“ƒç‘œï¿½ åª›ï¿½ï§ï¿½ï¿½ë’— ç”±ÑŠë’ªï¿½ë“ƒ 
+		//¾çÈ­ ¸±¸®½º µ¥ÀÌÅÍÀÇ Ä«¿îÆ®¸¦ °¡Áö´Â ¸®½ºÆ® 
 		model.addAttribute("movie_year_list_count" , movieReleaseRatingList); 
 		
 		
@@ -221,7 +223,7 @@ public class AdminAnalysisController {
 	}
 	
 	@RequestMapping("/manage_analysis_sale.mdo")
-	public String test_sale(AdminSalesVO salesVO, AdminTicketVO ticketvo, Model model) {
+	public String test_sale(AdminSalesVO salesVO, AdminTicketVO ticketvo, Model model) throws ParseException {
 		
 		List setSalesList = salesService.SalesList(salesVO);
 		List<String> salesSucessList = new ArrayList<String>();
@@ -230,41 +232,47 @@ public class AdminAnalysisController {
 		List<Date> salesExpiryList = new ArrayList<Date>();
 		List<String> salesCardList = new ArrayList<String>();
 		List<String> salesCardNameList = new ArrayList<String>();
+		List<String> salesEmailList = new ArrayList<String>();
+		
 		
 		for(int i = 0; i < setSalesList.size(); i++) {
 			AdminSalesVO copy_salesVO = (AdminSalesVO) setSalesList.get(i);
 			
-			if(!(copy_salesVO.getSales_status() == null)){
+			if((copy_salesVO.getSales_status().equals("SUCCESS"))){
 				salesSucessList.add(copy_salesVO.getSales_status());
 			}	
 			
-			if(!(copy_salesVO.getTicket_id() == null)){
+			if(copy_salesVO.getTicket_id() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
 				salesTicketidList.add(copy_salesVO.getTicket_id());
 			}
 			
-			if(!(copy_salesVO.getPayment_date() == null)){
+			if(copy_salesVO.getPayment_date() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
 				salesPaymentList.add(copy_salesVO.getPayment_date());
 			}
 			
-			if(!(copy_salesVO.getExpiry_date() == null)){
+			if(copy_salesVO.getExpiry_date() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
 				salesExpiryList.add(copy_salesVO.getExpiry_date());
 			}
 			
-			if(!(copy_salesVO.getPayment_method_type() == null)){
+			if(copy_salesVO.getPayment_method_type() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
 				salesCardList.add(copy_salesVO.getPayment_method_type());
 			}
 			
-			if(!(copy_salesVO.getCard_name() == null)){
+			if(copy_salesVO.getCard_name() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
 				salesCardNameList.add(copy_salesVO.getCard_name());
+			}
+			if(copy_salesVO.getEmail() != null && copy_salesVO.getSales_status().equals("SUCCESS")){
+				salesEmailList.add(copy_salesVO.getEmail());
 			}
 		}
 		
-		System.out.println("ï¿½ê½ï¿½ê½­ï¿½ë’ªç”±ÑŠë’ªï¿½ë“ƒ = " +salesSucessList);
-		System.out.println("ï¿½ë–šè€³ë³¦ë¸˜ï¿½ì” ï¿½ëµ’ç”±ÑŠë’ªï¿½ë“ƒ = " +salesTicketidList);
-		System.out.println("ï¿½ì” ï¿½ìŠœæ²…ëš­ê»ï¿½ì £ï¿½ì”ª = " +salesPaymentList);
-		System.out.println("ï¿½ì” ï¿½ìŠœæ²…ëš®ì­”çŒ·ëš¯ì”ª = " +salesExpiryList);
-		System.out.println("å¯ƒê³—ì £è«›â‘¹ë–‡ç”±ÑŠë’ªï¿½ë“ƒ = " +salesCardList);
-		System.out.println("å¯ƒê³—ì £ï¿½ë¸³ç§»ëŒ€ë±¶ï¿½ì” ç”±ê¾¨â”ï¿½ë’ªï¿½ë“ƒ = " +salesCardNameList);
+		System.out.println("¼®¼¼½º¸®½ºÆ® = " +salesSucessList);
+		System.out.println("ÀÌ¸ŞÀÏ¸®½ºÆ® = " +salesEmailList);
+		System.out.println("Æ¼ÄÏ¾ÆÀÌµğ¸®½ºÆ® = " +salesTicketidList);
+		System.out.println("ÀÌ¿ë±Ç°áÁ¦ÀÏ = " +salesPaymentList);
+		System.out.println("ÀÌ¿ë±Ç¸¸·áÀÏ = " +salesExpiryList);
+		System.out.println("°áÁ¦¹æ½Ä¸®½ºÆ® = " +salesCardList);
+		System.out.println("°áÁ¦ÇÑÄ«µåÀÌ¸§¸®½ºÆ® = " +salesCardNameList);
 		
 		
 		List setticketList = ticketService.getTicketList(ticketvo);
@@ -285,8 +293,8 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("ï¿½ì” ç”±ï¿½ = " +ticketListid);
-		System.out.println("åª›ï¿½å¯ƒï¿½ = " +ticketListprice);
+		System.out.println("ÀÌ¸§ = " +ticketListid);
+		System.out.println("°¡°İ = " +ticketListprice);
 		
 		for(int i = 0; i < ticketListid.size(); i++) {
 			for(int j = 0; j < salesTicketidList.size(); j++) {
@@ -296,17 +304,23 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("ç¥ï¿½ æ¹²ë‰ë¸¸ = " + totalMoney);
+		System.out.println("ÃÑ ±İ¾× = " + totalMoney);
 		List<String> ticketyearList = new ArrayList<String>(); 
+		List<Integer> ticketyearCount = new ArrayList<Integer>();
 		
 		Calendar calnow = Calendar.getInstance();
 		int yearnow = calnow.get(Calendar.YEAR);
+
 		for(int i = 2018; i < yearnow+1; i++) {
 			String strnow = String.valueOf(i);
 			ticketyearList.add(strnow);
 		}
 		
-		System.out.println(ticketyearList);
+//		for(int i = 2018; i < yearnow+1; i++) {
+//			ticketyearCount.add((Integer)0);
+//		}
+		
+		
 		
 //		for(int i = 0; i < ticketListid.size(); i++) {
 //			for(int j = 0; j < salesTicketidList.size(); i++) {
@@ -317,23 +331,26 @@ public class AdminAnalysisController {
 		List getPaymentDataList = salesService.selectPaymentDataList(salesVO);
 		List<Date> setPaymentDataList = new ArrayList<Date>();
 		List<String> setPaymentTicketList = new ArrayList<String>();
+		List<String> setPaymentemailList = new ArrayList<String>();
 		
 		int yearTotal = 0;
 		for(int i = 0; i < getPaymentDataList.size(); i++) {
 			AdminSalesVO copy_SalesVO = (AdminSalesVO) getPaymentDataList.get(i);
 			
-			if(!(copy_SalesVO.getPayment_date() == null)){
+			if(copy_SalesVO.getPayment_date() != null && copy_SalesVO.getSales_status().equals("SUCCESS")){
 				setPaymentDataList.add(copy_SalesVO.getPayment_date());
 				setPaymentTicketList.add(copy_SalesVO.getTicket_id());
+				setPaymentemailList.add(copy_SalesVO.getEmail());
 			}		
 		}
 	
 
 		
-		System.out.println("ï§ï¿½ï¿½ì ™ï¿½ë¸³ ï¿½ë€ˆï¿½ë£„"+setPaymentDataList);
-		System.out.println("ï§ï¿½ï¿½ì ™ï¿½ë¸³ ï¿½ë€ˆï¿½ë£„ ï¿½ë–šè€³ï¿½ åª›ï¿½"+setPaymentTicketList);
-		Date selectYearStart;
-		Date selectYearEnd;
+		System.out.println("ÁöÁ¤ÇÑ ³âµµ"+setPaymentDataList);
+		System.out.println("ÁöÁ¤ÇÑ ³âµµ Æ¼ÄÏ °ª"+setPaymentTicketList);
+		System.out.println("ÁöÁ¤ÇÑ ³âµµ ÀÌ¸ŞÀÏ °ª"+setPaymentemailList);
+		Date selectYearStart = null;
+		Date selectYearEnd = null;
 		
 		int setSize = setPaymentDataList.size();
 //		System.out.println(setPaymentDataList.get(setSize - setSize + 1));
@@ -342,7 +359,11 @@ public class AdminAnalysisController {
 //		selectYearStart = setPaymentDataList.get(1);
 //		selectYearEnd = setPaymentDataList.get(setPaymentDataList.size());
 				
-
+		for(int i = 0; i < setPaymentDataList.size(); i++) {
+			if(setPaymentDataList.get(i) == setPaymentDataList.get(0)) {
+				selectYearStart = setPaymentDataList.get(i);
+			}
+		}
 		
 		for(int i = 0;  i < ticketListid.size(); i++) {
 			for(int j = 0; j < setPaymentTicketList.size(); j++) {
@@ -351,12 +372,84 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("ï§ï¿½ï¿½ì ™ï¿½ë¸³ ï¿½ë€ˆï¿½ë£„ ç¥ì•¹ë¸¸ = " + yearTotal);
-//		System.out.println(selectYearStart);
-//		System.out.println(selectYearEnd);
+		System.out.println("ÁöÁ¤ÇÑ ³âµµ ÃÑ¾× = " + yearTotal);
+				
+		if(salesVO.getDate1() != null) {
+			selectYearStart = salesVO.getDate1();
+		}
+		if(salesVO.getDate2() != null) {
+			selectYearEnd = salesVO.getDate2();
+		}
+		
+		System.out.println(selectYearStart);
+		System.out.println(selectYearEnd);
+	
+		String formatyearStart = null;
+		String formatyearEnd = null;
+		String yearStartEndAdd = null;
+		
+		if(selectYearStart != null && selectYearEnd != null) {
+			DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+			formatyearStart = dateformat.format(selectYearStart);
+			formatyearEnd = dateformat.format(selectYearEnd);
+			yearStartEndAdd = formatyearStart +   "~"   +  formatyearEnd;
+		}
+		
+		System.out.println(yearStartEndAdd);
+		
+		List<String> testList = new ArrayList<String>();
+		for(Date date : salesPaymentList) {
+			String dateStr = String.valueOf(date);
+			testList.add(dateStr);
+		}
+		
+		for(int i = 0; i < ticketyearList.size(); i++) {
+		int count = 0;
+		for(int j = 0; j < testList.size(); j++) {
+			if(testList.get(j).contains(ticketyearList.get(i))) {
+				count++;	
+			}			
+		}
+		ticketyearCount.add((Integer)count);
+	}
+		System.out.println("Æ¼ÄÏ ¸®½ºÆ® °ª = " +  ticketyearList);
+		System.out.println("³âµµº° Ä«¿îÆ®°ª = "+ticketyearCount);
+		
+		System.out.println("Å×½ºÆ®¸®½ºÆ® = " + testList);
+		
+//		System.out.println(ticketyearList);
+//		System.out.println(ticketyearCount);
+		
+		// ÆÇ¸Å ±×·¡ÇÁ¿¡¼­ Ãâ½ÃÀÏ Åë°è µ¥ÀÌÅÍ¸¦ µ¿ÀûÀ¸·Î »ö±òÀ» ·£´ıÀ¸·Î µ¥ÀÌÅÍ¸¦ ³Ö¾îÁÖ´Â ±â´É.
+		List<String> chartColorRandomsalse = new ArrayList<String>();
+		for (int i = 0; i < ticketyearList.size(); i++) {
+			int r = (int) Math.floor(Math.random() * 255);
+			int g = (int) Math.floor(Math.random() * 255);
+			int b = (int) Math.floor(Math.random() * 255);
+			String put = "rgba(" + r + "," + g + "," + b + ",0.3)";
+			chartColorRandomsalse.add(put);
+		}
+//		System.out.println("ÁöÁ¤ÇÑ ³âµµ"+setPaymentDataList);
+//		System.out.println("ÁöÁ¤ÇÑ ³âµµ Æ¼ÄÏ °ª"+setPaymentTicketList);
+//		System.out.println("ÁöÁ¤ÇÑ ³âµµ ÀÌ¸ŞÀÏ °ª"+setPaymentemailList);
+
+
 		
 		model.addAttribute("totalMoney",totalMoney);
 		model.addAttribute("yearTotal",yearTotal);
+		model.addAttribute("yearStartEndAdd",yearStartEndAdd);
+		model.addAttribute("ticketyearList",ticketyearList);
+		model.addAttribute("ticketyearCount",ticketyearCount);
+		model.addAttribute("chartColorRandomsalse",chartColorRandomsalse);
+		
+		model.addAttribute("setPaymentDataList",setPaymentDataList);
+		model.addAttribute("setPaymentTicketList",setPaymentTicketList);
+		model.addAttribute("setPaymentemailList",setPaymentemailList);
+		
+		model.addAttribute("salesEmailList",salesEmailList);
+		model.addAttribute("salesTicketidList",salesTicketidList);
+		model.addAttribute("salesPaymentList",salesPaymentList);
+		
 		return "manage_analysis_sale";
 	}
 }
