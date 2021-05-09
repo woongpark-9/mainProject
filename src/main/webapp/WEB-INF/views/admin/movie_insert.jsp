@@ -23,15 +23,14 @@
 	var str_actor_name = '${movieModifyInfo.actor_name }';
 	var str_country = '${movieModifyInfo.country }';
 	var str_is_active = '${movieModifyInfo.is_active }';
-	var str_is_main = '${movieModifyInfo.is_main }';
+	var str_is_main = '${movieModifyInfo.is_main }';	
+	
 
 	var arr_genre_name = str_genre_name.split(','); // ','을 기준으로 나눠서 배열을 반환
 	for (a in arr_genre_name)
 		opt_genre_name.push(arr_genre_name[a]);
 
-	var arr_director_name = str_director_name.split(','); // ','을 기준으로 나눠서 배열을 반환
-	for (a in arr_director_name)
-		opt_director_name.push(arr_director_name[a]);
+	opt_director_name.push(str_director_name);
 
 	opt_movie_rating.push(str_movie_rating);
 
@@ -45,7 +44,7 @@
 
 	opt_is_main.push(str_is_main);
 
-	$(document).ready(function() {
+	$(document).ready(function() {		
 		$('#genre_name').selectpicker('val', opt_genre_name);
 		$('#director_name').selectpicker('val', opt_director_name);
 		$('#movie_rating').selectpicker('val', opt_movie_rating);
@@ -55,29 +54,6 @@
 		$('#is_main').selectpicker('val', opt_is_main);
 	});
 
-// 	$(document).ready(function() {
-// 		$('#director_name').selectpicker('val', opt_director_name);
-// 	});
-
-// 	$(document).ready(function() {
-// 		$('#movie_rating').selectpicker('val', opt_movie_rating);
-// 	});
-
-// 	$(document).ready(function() {
-// 		$('#actor_name').selectpicker('val', opt_actor_name);
-// 	});
-
-// 	$(document).ready(function() {
-// 		$('#country').selectpicker('val', opt_country);
-// 	});
-
-// 	$(document).ready(function() {
-// 		$('#is_active').selectpicker('val', opt_is_active);
-// 	});
-
-// 	$(document).ready(function() {
-// 		$('#is_main').selectpicker('val', opt_is_main);
-// 	});
 </script>
 </head>
 <body>
@@ -164,12 +140,11 @@
 																	</div>
 																	<br>
 																	<div>
-																		<label for="director">감독</label> <select
+																		<label for="director_name">감독</label> <select
 																			class="form-control" id="director_name"
-																			name="director_name" multiple data-live-search="true"
-																			data-size="5" title="선택해 주세요" data-max-options="3">
-																			<c:forEach var="directorList"
-																				items="${directorList }">
+																			name="director_name" data-live-search="true"
+																			data-size="5" title="선택해 주세요" >
+																			<c:forEach var="directorList" items="${directorList }">
 																				<option value="${directorList.director_name }">${directorList.director_name }</option>
 																			</c:forEach>
 																		</select>
