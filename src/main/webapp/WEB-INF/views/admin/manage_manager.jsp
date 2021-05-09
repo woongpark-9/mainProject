@@ -153,6 +153,7 @@
 												<div>
 													<select class="form-control" name="manager_type">
 														<option value="일반 관리자">일반 관리자</option>
+														<option value="최고 관리자 ">최고 관리자</option>
 													</select>
 												</div>
 												<br>
@@ -198,6 +199,7 @@
 												<select class="form-control modifyManagerTypeInput"
 													id="modifyManagerTypeInput" name="manager_type">
 													<option value="일반 관리자">일반 관리자</option>
+													<option value="최고 관리자">최고 관리자</option>
 												</select>
 											</div>
 											<br>

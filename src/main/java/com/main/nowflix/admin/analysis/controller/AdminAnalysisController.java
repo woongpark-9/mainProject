@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.nowflix.admin.analysis.vo.AdminAnalysis_Age_VO;
-import com.main.nowflix.admin.analysis.vo.AdminAnalysis_Director_count_VO;
 import com.main.nowflix.admin.genre.service.AdminGenreService;
 import com.main.nowflix.admin.genre.vo.AdminGenreVO;
 import com.main.nowflix.admin.member.service.AdminMemberService;
@@ -53,9 +52,9 @@ public class AdminAnalysisController {
 
 	
 	@RequestMapping("manage_analysis_movie.mdo")
-	public String movie_count(Model model, AdminMovieVO movievo, AdminAnalysis_Age_VO analysis_age_VO, AdminAnalysis_Director_count_VO adminAnalysis_Director_count_VO , AdminGenreVO genreVO) {
+	public String movie_count(Model model, AdminMovieVO movievo, AdminAnalysis_Age_VO analysis_age_VO, AdminGenreVO genreVO) {
 				
-		//여기서 가져오는 데이터는 장르db에 있는 이름을 리스트로 받아옴
+		//�뿬湲곗꽌 媛��졇�삤�뒗 �뜲�씠�꽣�뒗 �옣瑜큕b�뿉 �엳�뒗 �씠由꾩쓣 由ъ뒪�듃濡� 諛쏆븘�샂
 		List setgenreNameList = genreService.genreNameList(genreVO);
 		List<String> addgenreNameList = new ArrayList<String>();
 		
@@ -68,7 +67,7 @@ public class AdminAnalysisController {
 			
 		}
 	
-		//여기서 가져오는 데이터는 movie_db에 있는 장르 (포함된)리스트를 받아옴 
+		//�뿬湲곗꽌 媛��졇�삤�뒗 �뜲�씠�꽣�뒗 movie_db�뿉 �엳�뒗 �옣瑜� (�룷�븿�맂)由ъ뒪�듃瑜� 諛쏆븘�샂 
 		List setmovieGenreList = movieService.movieList(movievo, analysis_age_VO);
 		List<String> addMovieGenreList = new ArrayList<String>();
 		
@@ -97,47 +96,47 @@ public class AdminAnalysisController {
 		}
 
 		
-		//관람등급 리스트를 만들어서 조정.
-		ArrayList<Integer> setMovieRating = new ArrayList<Integer>(); // 영화 레이팅을 가지고있는 레이팅리스트 
-		List<String> setMovieReleaseDate = new ArrayList<String>(); // 영화 릴리스 데이터값만 저장하는 리스트
+		//愿��엺�벑湲� 由ъ뒪�듃瑜� 留뚮뱾�뼱�꽌 議곗젙.
+		ArrayList<Integer> setMovieRating = new ArrayList<Integer>(); // �쁺�솕 �젅�씠�똿�쓣 媛�吏�怨좎엳�뒗 �젅�씠�똿由ъ뒪�듃 
+		List<String> setMovieReleaseDate = new ArrayList<String>(); // �쁺�솕 由대━�뒪 �뜲�씠�꽣媛믩쭔 ���옣�븯�뒗 由ъ뒪�듃
 		
 		
-		int movieRatingCountAll = 0;	//전체 관람 카운트 저장 변수 
-		int movieRatingCount12 = 0;	//12세 관람 카운트 저장 변수 
-		int movieRatingCount15 = 0;	//15세 관람 카운트 저장 변수 
-		int movieRatingCount19 = 0;	//19세  관람 카운트 저장 변수 
-		int movieAllCount = setmovieGenreList.size(); //setmovieGenreList.size 값으로 영화전체 리스트 갯수를 가짐.
+		int movieRatingCountAll = 0;	//�쟾泥� 愿��엺 移댁슫�듃 ���옣 蹂��닔 
+		int movieRatingCount12 = 0;	//12�꽭 愿��엺 移댁슫�듃 ���옣 蹂��닔 
+		int movieRatingCount15 = 0;	//15�꽭 愿��엺 移댁슫�듃 ���옣 蹂��닔 
+		int movieRatingCount19 = 0;	//19�꽭  愿��엺 移댁슫�듃 ���옣 蹂��닔 
+		int movieAllCount = setmovieGenreList.size(); //setmovieGenreList.size 媛믪쑝濡� �쁺�솕�쟾泥� 由ъ뒪�듃 媛��닔瑜� 媛�吏�.
 		
 		for (int i = 0; i < setmovieGenreList.size(); i++) {
 			AdminMovieVO testVO = (AdminMovieVO) setmovieGenreList.get(i);
 			
-			//movie rating이 all이라면 movieRatingCountAll 카운트값 증가.
+			//movie rating�씠 all�씠�씪硫� movieRatingCountAll 移댁슫�듃媛� 利앷�.
 			if (testVO.getMovie_rating().equals("All")) {
 				movieRatingCountAll++;
 			}
 			
-			//movie rating이 12 이라면  movieRatingCount12 카운트값 증가.
+			//movie rating�씠 12 �씠�씪硫�  movieRatingCount12 移댁슫�듃媛� 利앷�.
 			if (testVO.getMovie_rating().equals("12")) {
 				movieRatingCount12++;
 			}
 			
-			//movie rating이 15이라면 movieRatingCount15  카운트값 증가.
+			//movie rating�씠 15�씠�씪硫� movieRatingCount15  移댁슫�듃媛� 利앷�.
 			if (testVO.getMovie_rating().equals("15")) {
 				movieRatingCount15++;
 			}
 
-			//movie rating이 19이라면 movieRatingCount19 카운트값 증가.
+			//movie rating�씠 19�씠�씪硫� movieRatingCount19 移댁슫�듃媛� 利앷�.
 			if (testVO.getMovie_rating().equals("19")) {
 				movieRatingCount19++;
 			}
 			
-			//movie release 데이터가 널이 아니라면 setMovieReleaseDate에 리스트를 추가함.
+			//movie release �뜲�씠�꽣媛� �꼸�씠 �븘�땲�씪硫� setMovieReleaseDate�뿉 由ъ뒪�듃瑜� 異붽��븿.
 			if(testVO.getMovie_release_date() != null) {
 				setMovieReleaseDate.add(testVO.getMovie_release_date());
 			}
 		}
 		
-		//setMovieRating 리스트에다가 변수(카운트)값을 ADD 
+		//setMovieRating 由ъ뒪�듃�뿉�떎媛� 蹂��닔(移댁슫�듃)媛믪쓣 ADD 
 		setMovieRating.add((Integer) movieRatingCountAll); // INDEX[0]
 		setMovieRating.add((Integer) movieRatingCount12); // INDEX[1]
 		setMovieRating.add((Integer) movieRatingCount15); // INDEX[2]
@@ -146,26 +145,26 @@ public class AdminAnalysisController {
 
 	
 		
-		List<String> movieReleaseList = new ArrayList<String>(); //2000년도부터 현재날짜 까지의 리스트를 받을 리스트 변수
-		List<Integer> movieReleaseRatingList = new ArrayList<Integer>(); //년도별 카운트값을 가지는 리스트 변수
+		List<String> movieReleaseList = new ArrayList<String>(); //2000�뀈�룄遺��꽣 �쁽�옱�궇吏� 源뚯��쓽 由ъ뒪�듃瑜� 諛쏆쓣 由ъ뒪�듃 蹂��닔
+		List<Integer> movieReleaseRatingList = new ArrayList<Integer>(); //�뀈�룄蹂� 移댁슫�듃媛믪쓣 媛�吏��뒗 由ъ뒪�듃 蹂��닔
 		
-		Calendar cal = Calendar.getInstance();	//Calendar클래스에  cal객체 생성
-		int year = cal.get(Calendar.YEAR); //변수 year에 오늘 날짜를 저장. 예)2021
+		Calendar cal = Calendar.getInstance();	//Calendar�겢�옒�뒪�뿉  cal媛앹껜 �깮�꽦
+		int year = cal.get(Calendar.YEAR); //蹂��닔 year�뿉 �삤�뒛 �궇吏쒕�� ���옣. �삁)2021
 		
-		//<라벨에 쓰기위한 년도별 리스트가 없기에 리스트로만드는 작업!>
-		//반복문 실행 i값을 2000년도부터 시작
-		//현재날짜 까지 반복문 실행. 증가 값 카운트 ++
+		//<�씪踰⑥뿉 �벐湲곗쐞�븳 �뀈�룄蹂� 由ъ뒪�듃媛� �뾾湲곗뿉 由ъ뒪�듃濡쒕쭔�뱶�뒗 �옉�뾽!>
+		//諛섎났臾� �떎�뻾 i媛믪쓣 2000�뀈�룄遺��꽣 �떆�옉
+		//�쁽�옱�궇吏� 源뚯� 諛섎났臾� �떎�뻾. 利앷� 媛� 移댁슫�듃 ++
 		for(int i = 2000; i < year+1; i++) {
-			String str = String.valueOf(i); //String str에다가 i의 값을 형변환 시켜줌. 
-			movieReleaseList.add(str); //리스트에다가 str의 값을 add 해줌.
+			String str = String.valueOf(i); //String str�뿉�떎媛� i�쓽 媛믪쓣 �삎蹂��솚 �떆耳쒖쨲. 
+			movieReleaseList.add(str); //由ъ뒪�듃�뿉�떎媛� str�쓽 媛믪쓣 add �빐以�.
 		}
 		
 		
-		//1.년도별 리스트가 들어있는 값만큼 반복 시작
-		//2.movie에있는 release데이터 리스트의 첫번째 값 부터 끝가지 반복
-		//3.조건문으로 movie에있는 release의 데이터 j번째에. contains(포함) 되냐? | 년도별 리스트에 ?
-		//4.조건이 맞는다면 counting을 ++ 
-		//5.마지막에 movieReleaseRatingList.add (처음 for문이 끝날때마다 리스트에 add해줌)
+		//1.�뀈�룄蹂� 由ъ뒪�듃媛� �뱾�뼱�엳�뒗 媛믩쭔�겮 諛섎났 �떆�옉
+		//2.movie�뿉�엳�뒗 release�뜲�씠�꽣 由ъ뒪�듃�쓽 泥ル쾲吏� 媛� 遺��꽣 �걹媛�吏� 諛섎났
+		//3.議곌굔臾몄쑝濡� movie�뿉�엳�뒗 release�쓽 �뜲�씠�꽣 j踰덉㎏�뿉. contains(�룷�븿) �릺�깘? | �뀈�룄蹂� 由ъ뒪�듃�뿉 ?
+		//4.議곌굔�씠 留욌뒗�떎硫� counting�쓣 ++ 
+		//5.留덉�留됱뿉 movieReleaseRatingList.add (泥섏쓬 for臾몄씠 �걹�궇�븣留덈떎 由ъ뒪�듃�뿉 add�빐以�)
 		for(int i = 0;  i < movieReleaseList.size(); i++) {
 			int counting = 0;
 			for(int j = 0; j < setMovieReleaseDate.size(); j++) {
@@ -176,7 +175,7 @@ public class AdminAnalysisController {
 			movieReleaseRatingList.add(counting);
 		}
 		
-		// 무비 그래프에서 장르 통계 데이터를 동적으로 색깔을 랜덤으로 데이터를 넣어주는 기능.
+		// 臾대퉬 洹몃옒�봽�뿉�꽌 �옣瑜� �넻怨� �뜲�씠�꽣瑜� �룞�쟻�쑝濡� �깋源붿쓣 �옖�뜡�쑝濡� �뜲�씠�꽣瑜� �꽔�뼱二쇰뒗 湲곕뒫.
 		List<String> chartColorRandomGenre = new ArrayList<String>();
 		for (int i = 0; i < addgenreNameList.size(); i++) {
 			int r = (int) Math.floor(Math.random() * 255);
@@ -186,7 +185,7 @@ public class AdminAnalysisController {
 			chartColorRandomGenre.add(put);
 		}
 
-		// 무비 그래프에서 출시일 통계 데이터를 동적으로 색깔을 랜덤으로 데이터를 넣어주는 기능.
+		// 臾대퉬 洹몃옒�봽�뿉�꽌 異쒖떆�씪 �넻怨� �뜲�씠�꽣瑜� �룞�쟻�쑝濡� �깋源붿쓣 �옖�뜡�쑝濡� �뜲�씠�꽣瑜� �꽔�뼱二쇰뒗 湲곕뒫.
 		List<String> chartColorRandomRelease = new ArrayList<String>();
 		for (int i = 0; i < movieReleaseList.size(); i++) {
 			int r = (int) Math.floor(Math.random() * 255);
@@ -196,25 +195,25 @@ public class AdminAnalysisController {
 			chartColorRandomRelease.add(put);
 		}
 		
-		//장르 데이터베이스에 있는 장르 이름을 가지고있는 리스트 값.
+		//�옣瑜� �뜲�씠�꽣踰좎씠�뒪�뿉 �엳�뒗 �옣瑜� �씠由꾩쓣 媛�吏�怨좎엳�뒗 由ъ뒪�듃 媛�.
 		model.addAttribute("addgenreNameList" , addgenreNameList);
 		
-		//전체 영화에 포함된 장르의 갯수를 가지고있는 리스트 값.
+		//�쟾泥� �쁺�솕�뿉 �룷�븿�맂 �옣瑜댁쓽 媛��닔瑜� 媛�吏�怨좎엳�뒗 由ъ뒪�듃 媛�.
 		model.addAttribute("MovieGenreListCount" , MovieGenreListCount);
 		
-		//랜덤 색깔을 리턴해줌.(장르 통계)
+		//�옖�뜡 �깋源붿쓣 由ы꽩�빐以�.(�옣瑜� �넻怨�)
 		model.addAttribute("chart_color_random_genre" , chartColorRandomGenre); 
 		
-		//랜덤 색깔을 리턴해줌.(출시일 통계)
+		//�옖�뜡 �깋源붿쓣 由ы꽩�빐以�.(異쒖떆�씪 �넻怨�)
 		model.addAttribute("chart_color_random_release" , chartColorRandomRelease); 
 		
-		//관람등급 리스트 카운트값을 가지는 리스트.
+		//愿��엺�벑湲� 由ъ뒪�듃 移댁슫�듃媛믪쓣 媛�吏��뒗 由ъ뒪�듃.
 		model.addAttribute("setMovieRating" , setMovieRating); 
 		
-		//영화 릴리스 데이터의 리스트를 가지는 리스트
+		//�쁺�솕 由대━�뒪 �뜲�씠�꽣�쓽 由ъ뒪�듃瑜� 媛�吏��뒗 由ъ뒪�듃
 		model.addAttribute("movie_year_list" , movieReleaseList); 
 		
-		//양화 릴리스 데이터의 카운트를 가지는 리스트 
+		//�뼇�솕 由대━�뒪 �뜲�씠�꽣�쓽 移댁슫�듃瑜� 媛�吏��뒗 由ъ뒪�듃 
 		model.addAttribute("movie_year_list_count" , movieReleaseRatingList); 
 		
 		
@@ -260,12 +259,12 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("석세스리스트 = " +salesSucessList);
-		System.out.println("티켓아이디리스트 = " +salesTicketidList);
-		System.out.println("이용권결제일 = " +salesPaymentList);
-		System.out.println("이용권만료일 = " +salesExpiryList);
-		System.out.println("결제방식리스트 = " +salesCardList);
-		System.out.println("결제한카드이름리스트 = " +salesCardNameList);
+		System.out.println("�꽍�꽭�뒪由ъ뒪�듃 = " +salesSucessList);
+		System.out.println("�떚耳볦븘�씠�뵒由ъ뒪�듃 = " +salesTicketidList);
+		System.out.println("�씠�슜沅뚭껐�젣�씪 = " +salesPaymentList);
+		System.out.println("�씠�슜沅뚮쭔猷뚯씪 = " +salesExpiryList);
+		System.out.println("寃곗젣諛⑹떇由ъ뒪�듃 = " +salesCardList);
+		System.out.println("寃곗젣�븳移대뱶�씠由꾨━�뒪�듃 = " +salesCardNameList);
 		
 		
 		List setticketList = ticketService.getTicketList(ticketvo);
@@ -286,8 +285,8 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("이름 = " +ticketListid);
-		System.out.println("가격 = " +ticketListprice);
+		System.out.println("�씠由� = " +ticketListid);
+		System.out.println("媛�寃� = " +ticketListprice);
 		
 		for(int i = 0; i < ticketListid.size(); i++) {
 			for(int j = 0; j < salesTicketidList.size(); j++) {
@@ -297,7 +296,7 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("총 금액 = " + totalMoney);
+		System.out.println("珥� 湲덉븸 = " + totalMoney);
 		List<String> ticketyearList = new ArrayList<String>(); 
 		
 		Calendar calnow = Calendar.getInstance();
@@ -331,8 +330,8 @@ public class AdminAnalysisController {
 	
 
 		
-		System.out.println("지정한 년도"+setPaymentDataList);
-		System.out.println("지정한 년도 티켓 값"+setPaymentTicketList);
+		System.out.println("吏��젙�븳 �뀈�룄"+setPaymentDataList);
+		System.out.println("吏��젙�븳 �뀈�룄 �떚耳� 媛�"+setPaymentTicketList);
 		Date selectYearStart;
 		Date selectYearEnd;
 		
@@ -352,7 +351,7 @@ public class AdminAnalysisController {
 			}
 		}
 		
-		System.out.println("지정한 년도 총액 = " + yearTotal);
+		System.out.println("吏��젙�븳 �뀈�룄 珥앹븸 = " + yearTotal);
 //		System.out.println(selectYearStart);
 //		System.out.println(selectYearEnd);
 		
