@@ -48,11 +48,9 @@
                          $("#kidBox").change(function(){
                              if($("#kidBox").is(":checked")){
                                 $('input[name=kidhidden]').attr('value','Y');
-//                                 ${selectProfile.kids = 'Y'};
                                 $(".profileEdit").append("<img class='kids2' src='http://yonom.duckdns.org/images/profile/kids.png'>");
                              }else{
                                 $('input[name=kidhidden]').attr('value','N');
-//                                 ${selectProfile.kids = 'N'};
                                 $(".kids2").remove();
                              }
                          });
@@ -77,7 +75,7 @@
             </div>
             <div class="mt-5" align="left">
                <a href="#" class="next"
-                  onclick="acyncMovePage3('http://localhost:8080/nowflix/updateProfileEdit.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }')">저장</a>
+                  onclick="acyncMovePage3('http://localhost:8080/nowflix/updateProfileEdit.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', kidhidden.value)">저장</a>
                <a href="#" class="cancel"
                   onclick="acyncMovePage2('http://localhost:8080/nowflix/profile.do')">취소</a>
                <a href="#" class="delete"

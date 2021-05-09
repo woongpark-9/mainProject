@@ -199,6 +199,8 @@
 	var actor = new Array();
 	var director = new Array();
 	var seq = new Array();
+	var summary = new Array();
+	var releasedate = new Array();
 
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
@@ -207,7 +209,9 @@
 		genre.push("${movieList.genre_name}");
 		actor.push("${movieList.actor_name}");
 		director.push("${movieList.director_name}");
+		summary.push("${movieList.summary}");
 		seq.push("${movieList.seq}");
+		releasedate.push("${movieList.movie_release_date}");
 		</c:forEach>
 	});
 
@@ -217,23 +221,27 @@
 		if (words != '') {
 			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
 					+ words
-					+ '</span><br><br></div><div class="col-md-11" align="center">';
+					+ '</span><br><br></div><div class="col-md-12 searchResult" align="center">';
 			for (var i = 0; i < title.length; i++) {
 				if (words != '') {
 					if (title[i].includes(words) || genre[i].includes(words)
 							|| actor[i].includes(words)
 							|| director[i].includes(words)) {
-						str += '<div class="searchList"><div class="searchList-items"><div class="col-md-2 searchPoster" id="searchPoster"><img class="searchImg" src="'
+						str += '<div class="col-md-2 searchPoster"><a class="video3" data-toggle="modal"'
+						 + 'data-target="#detailMovie"'
+						 + ' data-summary="' + summary[i]
+						 + '" data-title="' + title[i]
+						 + '" data-genre="' + genre[i]
+						 + '" data-actor="' + actor[i]
+						 + '" data-director="' + director[i]
+						 + '" data-releasedate="' + releasedate[i]
+						 + '" data-moviepath="http://yonom.duckdns.org/movie/' + path[i] + '/1080p.mp4"'
+						 + ' data-posterpath="http://yonom.duckdns.org/movie/' + path[i] + '/poster.png"'
+						 + 'data-webimage="http://yonom.duckdns.org/movie/' + path[i] + '/title.png">'
+						 + '<img class="searchImg" src="'
 	                     + 'http://yonom.duckdns.org/movie/'
 	                     + path[i] + '/poster.png'
-	                     + '" alt="" style="width:17vw; height:10vw;"></div>'
-								+ '<div id="caption2" class="caption2"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
-								+ '<a href="getPlayer.do?seq='
-								+ seq[i]
-								+ '&profile_id='
-								+ profile_id
-								+ '"><img src="http://yonom.duckdns.org/images/member/play-button.png" width="40px" height="40px"></a></div>'
-								+ '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div></div></div>';
+	                     + '" style="width:17vw; height:10vw;"></a></div>';
 					}
 				}
 			}
@@ -362,7 +370,7 @@
 
 				</div>
 			</div>
-			<div class="bbbb" align="center"></div>
+			<div class="bbbb"></div>
 			<div class="test" id="test">
 				<div class="banner">
 
@@ -413,7 +421,7 @@
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의취향저격베스트콘텐츠</div>
+						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }">
 								<div class="favorite-items">
@@ -449,8 +457,7 @@
 															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
 															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"<%--                                  data-cardimg ="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png" --%>
-                                    >
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
 															<img
 															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
 															width="30px" height="30px">

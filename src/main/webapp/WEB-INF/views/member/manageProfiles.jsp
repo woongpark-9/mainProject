@@ -29,7 +29,7 @@
 		<div class="row justify-content-center" align="center">
 		<c:forEach var="profile" items="${profile }" varStatus="i">
 			<div class="ml-3 mr-3 proImg">
-				<a href="#" class="profile" onclick="acyncMovePage5('http://localhost:8080/nowflix/profileEdit.do', ${profile.profile_id}, '${profile.profile_name }', '${profile.profile_img }', '${profile.kids }')">
+				<a href="#" class="profile" onclick="acyncMovePage4('http://localhost:8080/nowflix/profileEdit.do', ${profile.profile_id}, '${profile.profile_name }', '${profile.profile_img }', '${profile.kids }')">
 					<img class="img-responsive profileImg editPro" src="${profile.profile_img }">
 					<br>${profile.profile_name }
 					<i class="far fa-edit"></i>

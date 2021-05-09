@@ -24,7 +24,7 @@ body, html {
 	top: 0;
 	left: 0;
 	width: calc(100% - 100px);
-	padding: 10px 50px;
+	padding: 10px 0px 10px 50px;
 	/* 	background-color: rgb(20, 20, 20); */
 }
 
@@ -36,8 +36,6 @@ body, html {
 .bbbb {
 	position: absolute;
 	top: 8vw;
-	left: 0;
-	width: 100%;
 }
 
 .header {
@@ -510,29 +508,13 @@ button.profile-button {
 	transform:scale(1.3); 1.3 배로커짐  */
 }
 
-.searchList-items:hover > .searchPoster{
+.searchPoster:hover {
 	filter: brightness(50%);
-}
-
-
-.searchList-items:hover .caption2 {
-/* 	width: 400px; */
-/* 	height: 400px; */
-	opacity: 1;
-	/* transition: 2s;
-	transform:scale(1.3); 1.3 배로커짐  */
-}
-.searchList-items:hover > .caption2[i] {
-	display: block;
+	cursor: pointer;
 }
 .caption2 {
 	display: none;
 }
-
-.searchPoster {
-	filter: brightness(100%);
-}
-
 .romanceMovieList-item:hover .caption {
 /* 	width: 400px; */
 /* 	height: 400px; */
@@ -723,7 +705,6 @@ button.profile-button {
 
 .searchImg {
 	margin-bottom: 3vw;
-	padding-right: 2vw;
 }
 
 .alarm-list{
