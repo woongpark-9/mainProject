@@ -71,18 +71,38 @@
                            <th>${salesList.card_name }</th>
                            <c:forEach var="ticketList" items="${ticketList }">
                            <c:if test="${salesList.ticket_id eq ticketList.ticket_id }" >
-                           <input id="total" type="hidden" value="${ticketList.ticket_price }">
+                           	<input id="total" type="hidden" value="${ticketList.ticket_price }">
                            </c:if>
                            </c:forEach>
                            
                            <th class="align-middle">                                 
                                  <button type="button" class="btn btn-danger btn-sm" id="tid"
-                                    onclick="acyncCancelPayment('kakaoPayCancel.do')" data-toggle="" data-target="" value="${salesList.tid }">결제 취소</button>
+                                     data-toggle="modal" data-target="#cancle" data-tid="${salesList.tid }">결제 취소</button>
                            </th>
                         </tr>
                      </c:forEach>
                   </tbody>
                </table>
+               
+               <!-- delete modal -->
+				<div class="modal fade" id="cancle">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">결제 취소</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">해당 결제 내역을 정말 취소하시겠습니까?</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-success"
+									onclick="acyncCancelPayment('kakaoPayCancel.do')" value="예"
+									data-dismiss="modal">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">아니오</button>
+							</div>
+						</div>
+					</div>
+				</div>
 
                <!-- page -->
                   <nav>

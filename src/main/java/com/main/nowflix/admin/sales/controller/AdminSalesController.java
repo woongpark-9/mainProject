@@ -71,7 +71,7 @@ public class AdminSalesController {
 	    ticketList = ticketService.getTicketList(null);
 	      
 	    model.addAttribute("ticketList",ticketList);
-		model.addAttribute("salesList", salesList); // movieList 정보저장
+		model.addAttribute("salesList", salesList); // salesList 정보저장
 		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장
 		model.addAttribute("startPage", startPage); // startPage 정보저장
@@ -80,6 +80,16 @@ public class AdminSalesController {
 		model.addAttribute("searchKeyword", searchKeyword); // searchKeyword 정보저장
 		return "manage_sales";
 	}
+	
+	// 결제 취소 시 결제 상태 변경(수정)
+	@ResponseBody
+	@RequestMapping("/updateSalesStatus.mdo")
+	public int updateSalesStatus(AdminSalesVO vo) {
+		vo.setSales_status("REFUND");
+		int result = salesService.updateSalesStatus(vo);
+		return result;
+	}
+	
 	
 	//PDF 기능
 	@ResponseBody

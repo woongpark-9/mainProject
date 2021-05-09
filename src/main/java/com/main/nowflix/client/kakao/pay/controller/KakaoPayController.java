@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.main.nowflix.admin.sales.service.AdminSalesService;
+import com.main.nowflix.admin.sales.vo.AdminSalesVO;
 import com.main.nowflix.client.kakao.pay.service.KakaoPayService;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayApprovalVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayCancelVO;
@@ -127,19 +129,15 @@ public class KakaoPayController {
    
    @ResponseBody
    @PostMapping("/kakaoPayCancel.do")
-   public int kakaoPayCancel(Model model,String tid,String total) {
+   public int kakaoPayCancel(Model model,String tid,String total, AdminSalesVO vo) {
       System.out.println("결제 취소");
       System.out.println(tid);
       System.out.println(total);
       
       KakaoPayCancelVO data = new KakaoPayCancelVO();
    
-      data =   kakaopay.kakaoPayCancle(tid,total);
-   
-   
-      
+      data = kakaopay.kakaoPayCancle(tid,total);
+
       return 1;
-      
-   }
-   
+   } 
 }

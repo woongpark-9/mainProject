@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.main.nowflix.admin.movie.vo.AdminMovieVO;
 import com.main.nowflix.admin.sales.vo.AdminSalesVO;
 
 @Repository
@@ -38,5 +39,10 @@ public class AdminSalesDAO {
 	public List<AdminSalesVO> selectPaymentDataList(AdminSalesVO salseVO){
 		System.out.println("DAO 작동 ---> MyBatis로 selectPaymentDataList() 기능 처리");
 		return sqlSessionTemplate.selectList("AdminSalesDAO.selectPaymentDataList",salseVO);
+	}
+	
+	public int updateSalesStatus(AdminSalesVO vo) {
+		System.out.println("DAO 작동 ---> MyBatis로 updateSalesStatus() 기능 처리");
+		return sqlSessionTemplate.update("AdminSalesDAO.updateSalesStatus", vo);
 	}
 }

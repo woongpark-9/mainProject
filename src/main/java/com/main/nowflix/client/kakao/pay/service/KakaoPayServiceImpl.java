@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.main.nowflix.admin.sales.dao.AdminSalesDAO;
+import com.main.nowflix.admin.sales.vo.AdminSalesVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayApprovalVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayCancelVO;
 import com.main.nowflix.client.kakao.pay.vo.KakaoPayReadyVO;
@@ -21,7 +24,6 @@ import com.main.nowflix.client.kakao.pay.vo.KakaoPayReadyVO;
 @Service
 
 public class KakaoPayServiceImpl implements KakaoPayService {
-   
    
    // È£½ºÆ® url
     private static final String HOST = "https://kapi.kakao.com";
@@ -178,12 +180,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
             e.printStackTrace();
          }
              
-             return kakaoPayCancelVO;
-          
-    
-    
-    
-    }
-    
+         return kakaoPayCancelVO;
+    }  
 }
     

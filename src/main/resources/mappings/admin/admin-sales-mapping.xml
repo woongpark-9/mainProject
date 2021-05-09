@@ -17,7 +17,7 @@
       <result property="rownum" column="rownum" />
    </resultMap>
 
-<select id="getSalesList" parameterType="hashMap"
+	<select id="getSalesList" parameterType="hashMap"
       resultMap="salesResult">
       select (row_number() over()) AS rownum, sales_id, cid, tid, email, ticket_id, sales_status, payment_date,
       expiry_date, payment_method_type, card_name
@@ -36,6 +36,12 @@
       order by rownum desc limit #{row} offset
       #{startPoint}
    </select>
+   
+   <update id="updateSalesStatus" parameterType="adminsales">
+		update sales
+		set sales_status = #{sales_status}
+		where tid = #{tid}
+	</update>
 
    <select id="getTotalCount" parameterType="hashMap"
       resultType="int">

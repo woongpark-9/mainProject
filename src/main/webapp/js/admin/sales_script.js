@@ -19,11 +19,20 @@ function acyncSalesPdf(url){
    });
 }
 
+var cancleTid = "";
+$(document).ready(function() {
+	$('#cancle').on('show.bs.modal', function(event) {
+		cancleTid = $(event.relatedTarget).data('tid');
+		// alert(movieDeleteSeq);
+		// console.log(movieDeleteSeq);
+	});
+});
 
 //결제 취소
 function acyncCancelPayment(url) {
+
 	var form = {
-	   "tid" : document.getElementById("tid").value,
+	   "tid" : cancleTid,
 	   "total" : document.getElementById("total").value
 	};
 	$.ajax({
@@ -33,15 +42,35 @@ function acyncCancelPayment(url) {
 	   dataType : "json",
 	   success : function(data) {
 	      if (data == 1) {
-	         alert("해당 답변이 수정되었습니다.");
-	         // acyncRefreshPage();
-	          acyncMovePage('manage_inquiry.mdo');
+	    	  alert('결제취소완료');
+	    	  acynUpdateSalesStatus('updateSalesStatus.mdo', tid);
 	      } else {
-	         alert("[Error] 답변 수정 오류");
+	         alert("[Error] 결제 취소 오류");
 	      }
 	   },
 	   error : function() {
 	      alert("error");
 	   }
-	})
+	});
+}
+
+//결제 취소 시 결제 상태값 변경
+function acynUpdateSalesStatus(url, get_tid) {
+	$.ajax({
+	   url : url,
+	   type : "POST",
+	   data : get_tid,
+	   dataType : "json",
+	   success : function(data) {
+	      if (data == 1) {
+	    	  alert("해당 결제건이 취소되었습니다.");
+	    	  acyncMovePage('manage_sales.mdo');
+	      } else {
+	         alert("[Error] 결제 상태값 변경 오류");
+	      }
+	   },
+	   error : function() {
+	      alert("error");
+	   }
+	});
 }

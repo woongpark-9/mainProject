@@ -186,4 +186,10 @@ public class AdminSalesServiceImpl implements AdminSalesService {
 		List PaymentDataList = salesDAO.selectPaymentDataList(salesVO);
 		return PaymentDataList;
 	}
+
+	// 결제 취소시 결제 상태 변경
+	@Override
+	public int updateSalesStatus(AdminSalesVO vo) {
+		return salesDAO.updateSalesStatus(vo);
+	}
 }
