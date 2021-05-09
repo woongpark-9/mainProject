@@ -54,7 +54,10 @@ public class MovieController {
 		watch_id.setProfile_id(getpro.getProfile_id());
 		List<WatchVO> watchList = watchService.getWatchList(watch_id);
 		List<MovieVO> movieList = movieService.getMovieList(vo);
-//		ProfileVO profile = profileService.getProfile(member);
+		List<MovieVO> recentList = movieService.getRecentList(movieList, model);
+	      
+	    //메인페이지 메인 무비
+	    MovieVO mainMovie = movieService.getMainMovie(movieList, vo);
 		movieService.getSelectMovieList(vo, movieList, model, getpro.getGenre_name(), watchList);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<ProfileVO> profileList = profileService.getProfileList(getpro, member);
@@ -62,6 +65,8 @@ public class MovieController {
 		model.addAttribute("profileList", profileList);
 		model.addAttribute("member", member);
 		model.addAttribute("profile", getpro);
+		model.addAttribute("recentList", recentList);
+	    model.addAttribute("mainMovie", mainMovie);
 		return page;
 	}
 
@@ -93,7 +98,6 @@ public class MovieController {
 
 		model.addAttribute("movieList", movieService.getMovieList(vo)); // Model 정보저장
 		model.addAttribute("member", member);
-//	      model.addAttribute("addProfileVO", addProfileVO);
 		return "/views/member/favorite_genre"; // View 정보저장
 	}
 

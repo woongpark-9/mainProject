@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,7 @@
 <title>Nowflix</title>
 
 <script>
+	
 	$(function() {
 		$(".video1").click(
 				function() {
@@ -129,7 +131,20 @@
 	// 		$(".thevideo")[i].pause();
 	// 		$(".thevideo")[i].currentTime = 0;
 	// 	}
+	
+
+	
 	$(document).ready(function() {
+		$("#searchPoster").each(function(i, obj) {
+			alert("1");
+			$(this).on("mouseenter", function() {
+				startVideo(i);
+			});
+			$(".caption").on("mouseleave", function() {
+				stopVideo(i);
+			})
+		});
+		
 		$(".poster").each(function(i, obj) {
 			$(this).on("mouseenter", function() {
 				startVideo(i);
@@ -138,38 +153,32 @@
 				stopVideo(i);
 			})
 		});
-	});
+	});	
 
-	$(document).ready(function() {
-		$(".col-md-2 searchPoster").each(function(i, obj) {
-			$(this).on("mouseenter", function() {
-				startVideo(i);
-			});
-			$(".caption").on("mouseleave", function() {
-				stopVideo(i);
-			})
-		});
-	});
+
+	
 
 	function startVideo(i) {
-		$(".caption").css("display", "block");
+// 		$(".caption").css("display", "block");
+		$(".caption").show();
 		// 		$(".thevideo").css("display", "block");
 		//$(".thevideo")[i].play();
 	}
 
 	function stopVideo(i) {
-		$(".caption").css("display", "none");
+// 		$(".caption").css("display", "none");
+		$(".caption").hide();
 		//$(".thevideo")[i].pause();
 		//$(".thevideo")[i].currentTime = 0;
 	}
-
+	var profile_id = ${profile.profile_id};
 	var title = new Array();
 	var path = new Array();
 	var genre = new Array();
 	var actor = new Array();
 	var director = new Array();
 	var seq = new Array();
-	var profile_id = ${profile.profile_id };
+	
 	$(document).ready(function() {
 		<c:forEach items="${movieList}" var="movieList">
 		title.push("${movieList.title}");
@@ -187,23 +196,23 @@
 		if (words != '') {
 			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
 					+ words
-					+ '</span><br><br></div><div class="col-md-11 searchList" align="center">';
+					+ '</span><br><br></div><div class="col-md-11" align="center">';
 			for (var i = 0; i < title.length; i++) {
 				if (words != '') {
 					if (title[i].includes(words) || genre[i].includes(words)
 							|| actor[i].includes(words)
 							|| director[i].includes(words)) {
-						str += '<div class="col-md-2 searchPoster"><img class="searchImg" src="'
+						str += '<div class="searchList"><div class="searchList-items"><div class="col-md-2 searchPoster" id="searchPoster"><img class="searchImg" src="'
 	                     + 'http://yonom.duckdns.org/movie/'
 	                     + path[i] + '/poster.png'
 	                     + '" alt="" style="width:17vw; height:10vw;"></div>'
-								+ '<div id="caption" class="caption" style="display: none;"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
+								+ '<div id="caption2" class="caption2"><div class="preview"><div class="video"></div></div><div class="detail"><div class="detailFirst"><div class="play-button">'
 								+ '<a href="getPlayer.do?seq='
 								+ seq[i]
 								+ '&profile_id='
 								+ profile_id
 								+ '"><img src="http://yonom.duckdns.org/images/member/play-button.png" width="40px" height="40px"></a></div>'
-								+ '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div>';
+								+ '<div class="detail-button"><a href="#"> <img src="http://yonom.duckdns.org/images/member/plus-button.png" width="30px" height="30px"></a></div></div></div></div></div></div>';
 					}
 				}
 			}
@@ -225,14 +234,15 @@
 </script>
 </head>
 <body>
-	<c:set var="prefixAddr">http://nowflix.yonom.duckdns.org:1510/movie/</c:set>
+	<c:set var="prefixAddr">http://yonom.duckdns.org/movie/</c:set>
 
 
 	<div class="home">
 		<div class="test">
-			<video class="video1" id="video1" src="images/member/love.mp4"
-				poster="https://occ-0-2218-1009.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYlW4dC81I67OWWpvjybrMQfxgF-nMCuPzZb_K7RIYsRV1_QEuYtYJ2tuSelUR57nV_E-MsiNW8IxhEZtzXLCdTycBUN.webp?r=c49"
-				autoplay muted>
+			<video class="video1" id="video1"
+				src="${prefixAddr }${mainMovie.movie_path }/1080p.mp4"
+				poster="${prefixAdrr}${mainMovie.movie_path}/poster.png" autoplay
+				muted>
 			</video>
 		</div>
 		<div class="overlay">
@@ -277,12 +287,30 @@
 							<button class="bell-button">
 								<i class="fas fa-bell"></i>
 							</button>
-							<div class="dropdown-content">
-								<a href="#">연애의 참견</a> <a href="#">진격의 거인</a>
+							<div class="newlist-content"
+								style="overflow-x: hidden; height: 20em;">
+								<c:forEach var="recentList" items="${recentList }" varStatus="i">
+									<div class="alarm-list">
+										<a href="#">
+											<div class="alarm-flex">
+												<img
+													src="${prefixAddr }${recentList.movie_path }/poster.png"
+													style="width: 13em; margin-right: 1em; margin-left: 1em;">
+												<div class="alarm-summary">
+													<div class="new">신규 콘텐츠</div>
+													<div class="new">${recentList.title }</div>
+													<div class="new-two">${recentDate[i.index] }</div>
+
+												</div>
+											</div>
+										</a>
+
+
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
-
 					<!-- 프로필 드롭다운 부분 -->
 					<div class="menu-item">
 						<div class="dropdown">
@@ -299,8 +327,7 @@
 									</div>
 								</c:forEach>
 								<div class="profile-manage">
-									<a href="http://localhost:8080/nowflix/profile.do">프로필
-										관리</a>
+									<a href="http://localhost:8080/nowflix/profile.do">프로필 관리</a>
 								</div>
 								<div class="margin"></div>
 								<div class="profile-bottom">
@@ -319,12 +346,10 @@
 				<div class="banner">
 
 					<div class="title">
-						<img
-							src="https://occ-0-988-325.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABf2KuOLYvCA8ZctYlCbwe-wvuYjMhhxAWrl1ULZVkFm1q3Npbdcm6t0Kp6qPe-PZM3lLBYBqKL9LUxSz8vLAs-9CJHeVSYIpJnA7TwWt1_0G60764vxN2J9-DDv1eUsw5NACZkEjmju1YCkd3dbBjSauZfB1w_-7OOaQHF2--ocm.webp?r=94c">
+						<img src="${prefixAddr }${mainMovie.movie_path }/title.png">
 					</div>
-					<div class="badge">오늘 한국에서 콘텐츠 순위 7위</div>
-					<div class="description">"짝사랑 상대의 마음을 알 수 있다면 어떨까? 혼자 밤새워
-						고민하던 시대는 끝났다. ‘좋알람’ 앱을 켜고 그 사람의 반경 10m 안에 들어가라. 좋아하면 반드시 울린다."</div>
+					<div class="badge"></div>
+					<div class="description">${mainMovie.summary }</div>
 
 					<div class="buttons">
 						<button
@@ -367,7 +392,7 @@
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
+						<div class="title">${profile.profile_name }님의취향저격베스트콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }">
 								<div class="favorite-items">
@@ -413,7 +438,7 @@
 				<div class="category-list">
 					<div class="category">
 						<c:if test="${not empty watchMovieList}">
-							<div class="title">${profile.profile_name }님이시청 중인 콘텐츠</div>
+							<div class="title">${profile.profile_name }님이시청중인콘텐츠</div>
 							<div class="watch-list">
 								<c:forEach var="movieList" items="${watchMovieList }">
 									<div class="watch-items">

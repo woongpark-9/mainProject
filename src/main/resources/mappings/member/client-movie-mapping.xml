@@ -3,50 +3,51 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MovieDAO">
-   <resultMap type="mymovie" id="movieResult">
-      <id property="seq" column="seq" />
-      <result property="movie_path" column="movie_path" />
-      <result property="title" column="title" />
-      <result property="director" column="director" />
-      <result property="movie_runningtime" column="movie_runningtime" />
-      <result property="movie_release_date" column="movie_release_date" />
-      <result property="movie_rating" column="movie_rating" />
-      <result property="summary" column="summary" />
-      <result property="country" column="country" />
-      <result property="is_active" column="is_active" />
-      <result property="is_main" column="is_main" />
-      <result property="subtitle" column="subtitle" />
-      <result property="director_name" column="director_name" />
-      <result property="genre_name" column="genre_name" />
-      <result property="actor_name" column="actor_name" />
-   </resultMap>
-   <select id="getMovieList" resultMap="movieResult">
-      select * from movie
-   </select>
-   <select id="getMoive" resultType="mymovie">
-      SELECT * FROM movie WHERE
-      seq =#{seq}
-   </select>
+	<resultMap type="mymovie" id="movieResult">
+		<id property="seq" column="seq" />
+		<result property="movie_path" column="movie_path" />
+		<result property="title" column="title" />
+		<result property="director" column="director" />
+		<result property="movie_runningtime" column="movie_runningtime" />
+		<result property="movie_release_date" column="movie_release_date" />
+		<result property="movie_rating" column="movie_rating" />
+		<result property="summary" column="summary" />
+		<result property="country" column="country" />
+		<result property="is_active" column="is_active" />
+		<result property="is_main" column="is_main" />
+		<result property="subtitle" column="subtitle" />
+		<result property="director_name" column="director_name" />
+		<result property="genre_name" column="genre_name" />
+		<result property="actor_name" column="actor_name" />
+		<result property="regist_date" column="regist_date" />
+	</resultMap>
+	<select id="getMovieList" resultMap="movieResult">
+		select * from movie
+	</select>
+	<select id="getMoive" resultType="mymovie">
+		SELECT * FROM movie WHERE
+		seq =#{seq}
+	</select>
 
-   <select id="searchMovieList" resultMap="movieResult">
-      select * from movie where
-      title like '%'||#{title}||'%'
-   </select>
-   <!-- <insert id="insertBoard" parameterType="myboard"> INSERT INTO myboard 
-      (seq, title, writer, content) VALUES((select nvl(max(seq), 0)+1 from myboard), 
-      #{title}, #{writer}, #{content}) </insert> <update id="updateBoard" parameterType="myboard"> 
-      UPDATE myboard SET title=#{title}, content=#{content} WHERE seq = #{seq} 
-      </update> <delete id="deleteBoard" parameterType="myboard"> DELETE FROM myboard 
-      WHERE seq = #{seq} </delete> <select id="getBoard" resultType="myboard"> 
-      SELECT * FROM myboard WHERE seq=#{seq} </select> -->
-   <!-- <select id="getBoardList" resultMap="boardResult"> SELECT * FROM myboard 
-      WHERE title LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> -->
-   <!-- <select id="getBoardList_T" resultMap="boardResult"> SELECT * FROM 
-      myboard WHERE title LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> 
-      <select id="getBoardList_C" resultMap="boardResult"> SELECT * FROM myboard 
-      WHERE content LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> -->
-   <!-- <select id="getBoardList" resultMap="boardResult"> SELECT * FROM myboard 
-      WHERE 1=1 <if test="searchCondition=='TITLE'"> AND title LIKE '%'||#{searchKeyword}||'%' 
-      </if> <if test="searchCondition=='CONTENT'"> AND content LIKE '%'||#{searchKeyword}||'%' 
-      </if> ORDER BY seq DESC </select> -->
+	<select id="searchMovieList" resultMap="movieResult">
+		select * from movie where
+		title like '%'||#{title}||'%'
+	</select>
+	<!-- <insert id="insertBoard" parameterType="myboard"> INSERT INTO myboard 
+		(seq, title, writer, content) VALUES((select nvl(max(seq), 0)+1 from myboard), 
+		#{title}, #{writer}, #{content}) </insert> <update id="updateBoard" parameterType="myboard"> 
+		UPDATE myboard SET title=#{title}, content=#{content} WHERE seq = #{seq} 
+		</update> <delete id="deleteBoard" parameterType="myboard"> DELETE FROM myboard 
+		WHERE seq = #{seq} </delete> <select id="getBoard" resultType="myboard"> 
+		SELECT * FROM myboard WHERE seq=#{seq} </select> -->
+	<!-- <select id="getBoardList" resultMap="boardResult"> SELECT * FROM myboard 
+		WHERE title LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> -->
+	<!-- <select id="getBoardList_T" resultMap="boardResult"> SELECT * FROM 
+		myboard WHERE title LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> 
+		<select id="getBoardList_C" resultMap="boardResult"> SELECT * FROM myboard 
+		WHERE content LIKE '%'||#{searchKeyword}||'%' ORDER BY seq DESC </select> -->
+	<!-- <select id="getBoardList" resultMap="boardResult"> SELECT * FROM myboard 
+		WHERE 1=1 <if test="searchCondition=='TITLE'"> AND title LIKE '%'||#{searchKeyword}||'%' 
+		</if> <if test="searchCondition=='CONTENT'"> AND content LIKE '%'||#{searchKeyword}||'%' 
+		</if> ORDER BY seq DESC </select> -->
 </mapper>

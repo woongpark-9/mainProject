@@ -1,5 +1,7 @@
 package com.main.nowflix.client.movie.vo;
 
+import java.sql.Date;
+
 public class MovieVO {
 	private String movie_path;
 	private int seq;
@@ -16,6 +18,21 @@ public class MovieVO {
 	private String director_name;
 	private String genre_name;
 	private String actor_name;
+	private Date regist_date;
+	@Override
+	public String toString() {
+		return "MovieVO [movie_path=" + movie_path + ", seq=" + seq + ", title=" + title + ", director=" + director
+				+ ", movie_runningtime=" + movie_runningtime + ", movie_release_date=" + movie_release_date
+				+ ", movie_rating=" + movie_rating + ", summary=" + summary + ", country=" + country + ", is_active="
+				+ is_active + ", is_main=" + is_main + ", subtitle=" + subtitle + ", director_name=" + director_name
+				+ ", genre_name=" + genre_name + ", actor_name=" + actor_name + "]";
+	}
+	public Date getRegist_date() {
+		return regist_date;
+	}
+	public void setRegist_date(Date regist_date) {
+		this.regist_date = regist_date;
+	}
 	public String getMovie_path() {
 		return movie_path;
 	}

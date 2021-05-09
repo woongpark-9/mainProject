@@ -11,6 +11,8 @@ public interface MovieService {
 	List<MovieVO> getMovieList(MovieVO vo);
 	List<MovieVO> searchMovieList(MovieVO vo);
 	void getSelectMovieList(MovieVO vo,List<MovieVO> movieList,Model model,String getGenre_name,List<WatchVO> watchList);
+	List<MovieVO> getRecentList(List<MovieVO> movieList, Model model);
+	MovieVO getMainMovie(List<MovieVO> movieList, MovieVO movieVO);
 	
 }
 
