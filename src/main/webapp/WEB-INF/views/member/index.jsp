@@ -130,10 +130,9 @@ var _movieDetailSeq = "";
 	       
 	       $.ajax(ajaxOption).done(function(data){
 	           // Contents 영역 삭제
-	           $('.test').children().remove();
+	           $(".test").hide();
 	           // Contents 영역 교체
-	           $('#test').html(data);
-	           alert(profile_id);
+	           $('.bbbb').html(data);
 	       });
 	   }
 	   
@@ -336,21 +335,7 @@ var _movieDetailSeq = "";
 						<a href="#">홈</a>
 					</div>
 					<div class="nav-item">
-						<a href="#">TV프로그램</a>
-					</div>
-					<div class="nav-item">
-						<a href="#">영화</a>
-					</div>
-					<div class="nav-item">
-						<a href="#">NEW! 요즘 대세 영화</a>
-					</div>
-					<div class="nav-item">
-						<button class="pick-btn"
-							onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가
-							찜한 콘텐츠</button>
-					</div>
-					<div class="nav-item">
-						<a href="#">다시 보기 콘텐츠</a>
+						<a href="#" onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가 찜한 콘텐츠</a>
 					</div>
 				</div>
 				<div class="menu">
@@ -504,7 +489,7 @@ var _movieDetailSeq = "";
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의취향저격베스트 콘텐츠</div>
+						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }">
 								<div class="favorite-items">
@@ -529,8 +514,8 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">${movieList.seq }
-														<button type="button" class="video3" data-toggle="modal"
+													<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
 															data-target="#detailMovie"
 															data-detail="${movieList.seq }"
 															data-summary="${movieList.summary }"
@@ -543,12 +528,8 @@ var _movieDetailSeq = "";
 															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 															data-releasedate="${movieList.movie_release_date }"
 															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
-															<%--                                  data-cardimg ="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png" --%>
-
-															<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-																width="30px" height="30px">
-														</button>
+															<img src="http://yonom.duckdns.org/images/member/detail-button.png" width="30px" height="30px">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -565,7 +546,7 @@ var _movieDetailSeq = "";
 				<div class="category-list">
 					<div class="category">
 						<c:if test="${not empty watchMovieList}">
-							<div class="title">${profile.profile_name }님이시청중인콘텐츠</div>
+							<div class="title">${profile.profile_name }님이 시청중인 콘텐츠</div>
 							<div class="watch-list">
 								<c:forEach var="movieList" items="${watchMovieList }">
 									<div class="watch-items">
@@ -588,15 +569,6 @@ var _movieDetailSeq = "";
 											<div id="caption" class="caption" style="display: none;">
 												<div class="preview">
 													<div class=video>
-														<!-- 													<video id="thevideo" style="display: none;" -->
-														<!-- 														class="thevideo" -->
-														<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-														<!-- 														muted> -->
-														<!-- 														<source -->
-														<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-														<!-- 													</video> -->
-														<!-- 													<div class="thevideo" style="display: none;"> -->
-														<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
 													</div>
 												</div>
 
@@ -612,7 +584,7 @@ var _movieDetailSeq = "";
 														</div>
 														<div class="detail-button">
 															<a href="#"> <img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+																src="http://yonom.duckdns.org/images/member/detail-button.png"
 																width="30vw" height="auto">
 															</a>
 														</div>
@@ -669,7 +641,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -727,7 +699,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -787,7 +759,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -843,7 +815,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -899,7 +871,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -955,7 +927,7 @@ var _movieDetailSeq = "";
 													</div>
 													<div class="detail-button">
 														<a href="#"> <img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30vw" height="auto">
 														</a>
 													</div>
@@ -1022,6 +994,7 @@ var _movieDetailSeq = "";
 							<i class="fas fa-play"></i> 재생
 						</div>
 						<div class="modal-icon-position">
+							
 							<!-- 찜하기 버튼 -->
 							<button class="pickUpdate"
 								style="background: none; border-style: none"
@@ -1032,12 +1005,6 @@ var _movieDetailSeq = "";
 										style="width: 1em">
 								</div>
 							</button>
-							<div class="modal-thumbs-up-button">
-								<img src="images/member/iconmonstr-thumb-14-240 (1).png">
-							</div>
-							<div class="modal-thumbs-down-button">
-								<img src="images/member/iconmonstr-thumb-20-240.png">
-							</div>
 						</div>
 					</div>
 				</div>
