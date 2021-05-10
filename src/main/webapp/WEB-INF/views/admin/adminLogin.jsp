@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 
 <link type="text/css" rel="stylesheet" href="http://yonom.duckdns.org/css/member/reset.css">
 <link type="text/css" rel="stylesheet" href="css/admin/adminLogin.css">

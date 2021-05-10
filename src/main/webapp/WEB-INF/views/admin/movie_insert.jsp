@@ -131,7 +131,7 @@
 																		<label for="genre_name">장르</label> <select
 																			class="form-control" id="genre_name"
 																			name="genre_name" multiple data-live-search="true"
-																			data-size="5" title="선택해 주세요" data-width="330px"
+																			data-size="5" title="선택해 주세요" data-width="310px"
 																			data-max-options="3">
 																			<c:forEach var="genreList" items="${genreList }">
 																				<option value="${genreList.genre_name }">${genreList.genre_name }</option>
@@ -216,16 +216,16 @@
 																	<div>
 																		<label for="is_active">활성화 여부</label> <select
 																			class="form-control" id="is_active" name="is_active" title="선택해 주세요">
-																			<option value="1">비활성화</option>
-																			<option value="2">활성화</option>
+																			<option value="N">비활성화</option>
+																			<option value="Y">활성화</option>
 																		</select>
 																	</div>
 																	<br>
 																	<div>
 																		<label for="is_main">메인 지정 여부</label> <select
 																			class="form-control" id="is_main" name="is_main" title="선택해 주세요">
-																			<option value="1">NO</option>
-																			<option value="2">YES</option>
+																			<option value="N">NO</option>
+																			<option value="Y">YES</option>
 																		</select>
 																	</div>
 																	<br>
