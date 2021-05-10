@@ -291,8 +291,8 @@ var myChart = new Chart(ctx_ban, {
 var myChart = new Chart(ctx_ticket_use, {
     type: 'radar',
     data: {
-        labels: ["B_0011", "B_0013", "B_0016", "B_00112", 
-        	"P_0021" , "P_0023" , "P_0026" , "P_00212"],
+        labels: ["B_00101", "B_00103", "B_00106", "B_00112", 
+        	"P_00201" , "P_00203" , "P_00206" , "P_00212"],
         datasets: [{
 //             label: '# of Votes',
             data: [${age_count[20]},${age_count[21]},${age_count[22]},${age_count[23]}, 

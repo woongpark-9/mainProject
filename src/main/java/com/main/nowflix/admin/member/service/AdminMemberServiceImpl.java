@@ -263,13 +263,13 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		      int member_ban_y = 0;
 		      int member_ban_n = 0;
 		      
-		      int ticket_0011 = 0;
-		      int ticket_0013 = 0;
-		      int ticket_0016 = 0;
+		      int ticket_00101 = 0;
+		      int ticket_00103 = 0;
+		      int ticket_00106 = 0;
 		      int ticket_00112 = 0;
-		      int ticket_0021 = 0;
-		      int ticket_0023 = 0;
-		      int ticket_0026 = 0;
+		      int ticket_00201 = 0;
+		      int ticket_00203 = 0;
+		      int ticket_00206 = 0;
 		      int ticket_00212 = 0;
 		      
 		      int ticket_not = 0;
@@ -299,32 +299,32 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		            ticket_no_not++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0011")) {
-		            ticket_0011++;
+		         if(testVO.getTicket_id().equals("00101")) {
+		            ticket_00101++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0013")) {
-		            ticket_0013++;
+		         if(testVO.getTicket_id().equals("00103")) {
+		            ticket_00103++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0016")) {
-		            ticket_0016++;
+		         if(testVO.getTicket_id().equals("00106")) {
+		            ticket_00106++;
 		         }
 		         
 		         if(testVO.getTicket_id().equals("00112")) {
 		            ticket_00112++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0021")) {
-		            ticket_0021++;
+		         if(testVO.getTicket_id().equals("00201")) {
+		            ticket_00201++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0023")) {
-		            ticket_0023++;
+		         if(testVO.getTicket_id().equals("00203")) {
+		            ticket_00203++;
 		         }
 		         
-		         if(testVO.getTicket_id().equals("0026")) {
-		            ticket_0026++;
+		         if(testVO.getTicket_id().equals("00206")) {
+		            ticket_00206++;
 		         }
 		         
 		         if(testVO.getTicket_id().equals("00212")) {
@@ -359,7 +359,7 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		            nowflix_count++;
 		         }
 		         
-		         if(testVO.getGender().equals("G")) {
+		         if(testVO.getGender().equals("W")) {
 		            girl_count++;
 		         }
 		         
@@ -391,13 +391,13 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		         
 		      }
 		      
-		      System.out.println("tick_0011"+ticket_0011);
-		      System.out.println("ticket_0013"+ticket_0013);
-		      System.out.println("ticket_0016"+ticket_0016);
+		      System.out.println("tick_0011"+ticket_00101);
+		      System.out.println("ticket_0013"+ticket_00103);
+		      System.out.println("ticket_0016"+ticket_00106);
 		      System.out.println("ticket_00112"+ticket_00112);
-		      System.out.println("ticket_0021"+ticket_0021);
-		      System.out.println("ticket_0023"+ticket_0023);
-		      System.out.println("ticket_0026"+ticket_0026);
+		      System.out.println("ticket_0021"+ticket_00201);
+		      System.out.println("ticket_0023"+ticket_00203);
+		      System.out.println("ticket_0026"+ticket_00206);
 		      System.out.println("ticket_00212"+ticket_00212);
 		      
 		      
@@ -422,13 +422,13 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		      return_list.add((Integer)member_cert_y); //INDEX[18]
 		      return_list.add((Integer)member_cert_n); //INDEX[19]
 		      
-		      return_list.add((Integer)ticket_0011); //INDEX[20]
-		      return_list.add((Integer)ticket_0013); //INDEX[21]
-		      return_list.add((Integer)ticket_0016); //INDEX[22]
+		      return_list.add((Integer)ticket_00101); //INDEX[20]
+		      return_list.add((Integer)ticket_00103); //INDEX[21]
+		      return_list.add((Integer)ticket_00106); //INDEX[22]
 		      return_list.add((Integer)ticket_00112); //INDEX[23]
-		      return_list.add((Integer)ticket_0021); //INDEX[24]
-		      return_list.add((Integer)ticket_0023); //INDEX[25]
-		      return_list.add((Integer)ticket_0026); //INDEX[26]
+		      return_list.add((Integer)ticket_00201); //INDEX[24]
+		      return_list.add((Integer)ticket_00203); //INDEX[25]
+		      return_list.add((Integer)ticket_00206); //INDEX[26]
 		      return_list.add((Integer)ticket_00212); //INDEX[27]
 		      
 		      return_list.add((Integer)ticket_not); //INDEX[28]
