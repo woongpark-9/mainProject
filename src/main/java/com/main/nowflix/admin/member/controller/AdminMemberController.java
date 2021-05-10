@@ -243,7 +243,7 @@ public class AdminMemberController {
 
 		// Excel export contentType Setting ( 엑셀로 저장하고 엑셀을 xls로 지정합니다. )
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=MemberExcelFile.xls");
 
 		// Excel output Download (엑셀을 출력합니다_다운로드)
 		wb.write(response.getOutputStream());

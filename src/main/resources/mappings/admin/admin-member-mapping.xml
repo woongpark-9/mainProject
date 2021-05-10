@@ -58,7 +58,7 @@
 		select seq , email, nickname, age, gender, ticket_id,
 		cert, ban, join_date 
 		from member
-		order by seq;
+		order by seq desc;
 	</select>
 
 	<select id="getMemberModifyInfo" resultType="adminmember">

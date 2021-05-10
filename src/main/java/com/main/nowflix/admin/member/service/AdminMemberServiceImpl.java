@@ -137,7 +137,7 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 			PdfPTable table = new PdfPTable(9); // 4개의 셀을 가진 테이블 객체를 생성 (pdf파일에 나타날 테이블)
 //			table.setWidthPercentage(50);
 //			table.setWidths(new float[] { 8, 3 });
-			Chunk chunk = new Chunk("MOVIE_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
+			Chunk chunk = new Chunk("MEMBER_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
 			Paragraph ph = new Paragraph(chunk);
 			ph.setAlignment(Element.ALIGN_CENTER);
 			document.add(ph); // 문단을 만들어서 가운데 정렬 (타이틀의 이름을 가운데 정렬한다는 뜻)
