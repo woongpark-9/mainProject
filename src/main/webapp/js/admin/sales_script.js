@@ -16,6 +16,7 @@ function acyncCancelPayment(url) {
 		"tid" : cancelTid,
 		"total" : total
 	};
+	
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -37,10 +38,16 @@ function acyncCancelPayment(url) {
 
 // 결제 취소 시 결제 상태값 변경
 function acynUpdateSalesStatus(url, get_tid) {
+	alert(get_tid);
+	
+	var sendData = {
+			"tid" : get_tid
+		};
+	
 	$.ajax({
 		url : url,
 		type : "POST",
-		data : get_tid,
+		data : sendData,
 		dataType : "json",
 		success : function(data) {
 			if (data == 1) {

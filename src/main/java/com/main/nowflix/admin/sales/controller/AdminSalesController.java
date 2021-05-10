@@ -85,6 +85,7 @@ public class AdminSalesController {
 	@ResponseBody
 	@RequestMapping("/updateSalesStatus.mdo")
 	public int updateSalesStatus(AdminSalesVO vo) {
+		System.out.println(vo.getTid());
 		vo.setSales_status("REFUND");
 		int result = salesService.updateSalesStatus(vo);
 		return result;
