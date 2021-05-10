@@ -40,7 +40,7 @@ public class AdminTicketDAO {
    // TICKET MODIFY
    public int modifyTicket(AdminTicketVO ticketVO) {
       System.out.println("DAO작동 ---> MyBatis로 modifyticket() 기능 처리");
-      return sqlSessionTemplate.insert("AdminTicketDAO.modifyTicket", ticketVO);
+      return sqlSessionTemplate.update("AdminTicketDAO.modifyTicket", ticketVO);
    }
 
    // PDF,EXCEL 둘중하나 (주석고쳐야함)

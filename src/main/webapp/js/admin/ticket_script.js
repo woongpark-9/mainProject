@@ -4,6 +4,7 @@ var ticketModifyName = "";
 var ticketModifyperiod = "";
 var ticketModifyprice = "";
 var ticketModifystatus = "";
+var ticketModifySeq = "";
 
 
 $(document).ready(function() {
@@ -12,13 +13,15 @@ $(document).ready(function() {
 
    });
    
-    $('#modifyTicket').on('show.bs.modal', function(event) {
+    $('#modifyTicket').on('show.bs.modal', function(event) { 
          ticketModifyId = $(event.relatedTarget).data('modify_ticket_id');
          ticketModifyName = $(event.relatedTarget).data('modify_ticket_name');
          ticketModifyperiod = $(event.relatedTarget).data('modify_ticket_period');
          ticketModifyprice = $(event.relatedTarget).data('modify_ticket_price');
          ticketModifystatus = $(event.relatedTarget).data('modify_ticket_status');
-       
+         ticketModifySeq = $(event.relatedTarget).data('modify_ticket_seq');
+         
+         $('#mod_ticket_id').val(ticketModifyId);
          $('#mod_ticket_name').val(ticketModifyName);
          $('#mod_ticket_period').val(ticketModifyperiod);
          $('#mod_ticket_price').val(ticketModifyprice);
@@ -28,14 +31,16 @@ $(document).ready(function() {
 
 
 //티켓 추가 
-function acyncInsertTicket(url) {
-   var $form = $('#insertTicketForm').serialize();
-//   console.log(JSON.stringify($form));
-//   alert(JSON.stringify($form));
+function acyncInsertTicket(url) { //data : { "genre_name" : $('#ins_genre_name').val()},
    $.ajax({
       url : url,
       type : "POST",
-      data : $form,
+      data : { "ticket_id" : $('#ticket_id').val(),
+    	  		"ticket_name" : $('#ticket_name').val(),
+    	  		"ticket_price" : $('#ticket_price').val(),
+    	  		"ticket_period" : $('#ticket_period').val(),
+    	  		"ticket_status" : $('#ticket_status').val(),
+      },
       dataType : "json",
       success : function(data) {
          if (data == 1) {
@@ -47,6 +52,9 @@ function acyncInsertTicket(url) {
       },
       error : function() {
          alert("티켓 추가 오류");
+      },
+      complete : function() {
+    	  acyncMovePage('manage_ticket.mdo');
       }
    });
 }
@@ -54,7 +62,8 @@ function acyncInsertTicket(url) {
 //티켓 수정
 function acyncModifyTicket(url) {
    //var $form = $('#modifyDirectorForm').serialize();
-   var form = {"ticket_id" : ticketModifyId,
+   var form = {"seq" : ticketModifySeq,
+		   	"ticket_id" : $('#mod_ticket_id').val(),
             "ticket_name" : $('#mod_ticket_name').val(),
             "ticket_period" : $('#mod_ticket_period').val(),
             "ticket_price" : $('#mod_ticket_price').val(),
@@ -65,7 +74,6 @@ function acyncModifyTicket(url) {
    $.ajax({
       url : url,
       type : "POST",
-      //data : $form,
       data : form,
       dataType : "json",
       success : function(data) {
