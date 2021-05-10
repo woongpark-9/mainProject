@@ -110,13 +110,16 @@ public class AdminPolicyController {
 
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("이용약관");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
 
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(0, 5000);
+		sheet.setColumnWidth(1, 8000);
+		sheet.setColumnWidth(2, 10000);
+		sheet.setColumnWidth(3, 5000);
 
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
@@ -137,6 +140,7 @@ public class AdminPolicyController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
@@ -180,7 +184,7 @@ public class AdminPolicyController {
 
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=PolicyExcelFile.xls");
 
 		wb.write(response.getOutputStream());
 		wb.close();

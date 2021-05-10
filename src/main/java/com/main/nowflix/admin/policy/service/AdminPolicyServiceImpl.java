@@ -95,7 +95,7 @@ public class AdminPolicyServiceImpl implements AdminPolicyService {
             document.add(Chunk.NEWLINE);
             document.add(Chunk.NEWLINE); // 줄바꿈 (왜냐하면 타이틀에서 두줄을 내린후에 셀(테이블)이 나오기 때문)
  
-            PdfPCell cell1 = new PdfPCell(new Phrase("이용약관 아이디", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
+            PdfPCell cell1 = new PdfPCell(new Phrase("이용약관 번호", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
             cell1.setHorizontalAlignment(Element.ALIGN_CENTER); // 셀의 정렬방식을 지정한다. (가운데정렬)
  
             PdfPCell cell2 = new PdfPCell(new Phrase("이용약관 제목", font));
