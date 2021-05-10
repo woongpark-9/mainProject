@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PickMapper">
+	<resultMap type="pickVO" id="pickResult">
+		<id property="pick_id" column="pick_id" />
+		<result property="seq" column="seq" />
+		<result property="profile_id" column="profile_id" />
+		<result property="status" column="status" />	
+	</resultMap>
+	
+	<select id="getAllPick">
+	
+	</select>
+	
+	<select id="getPick" resultType="PickVO">
+		SELECT * FROM pick WHERE seq = #{seq} and profile_id = #{profile_id};
+	</select>
+		
+	<select id="insertPick">
+		INSERT INTO pick(seq, profile_id, status) values(#{seq}, #{profile_id}, #{status});
+	</select>
+		
+	<delete id="deletePick">
+		DELETE FROM pick WHERE seq = #{seq} and profile_id = #{profile_id};
+	</delete>
+	
+	<select id="getPickList" resultMap="pickResult">
+		SELECT * FROM pick where profile_id = #{profile_id};
+	</select>
+		
+</mapper>

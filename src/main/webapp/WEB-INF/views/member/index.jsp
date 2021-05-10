@@ -38,6 +38,12 @@
 <title>Nowflix</title>
 
 <script>
+var _movieDetailSeq = "";
+
+
+
+
+
 	$(function() {
 		$(".video1").click(
 				function() {
@@ -70,7 +76,9 @@
 			var posterpath = $(event.relatedTarget).data('posterpath');
 			var releasedate = $(event.relatedTarget).data('releasedate');
 			var webimage = $(event.relatedTarget).data('webimage');
-
+			var profile_id = $(event.relatedTarget).data('profile_id');
+            _movieDetailSeq = $(event.relatedTarget).data('detail');
+       	
 			// alert(title);
 			// console.log(title);
 			var modal = $(this);
@@ -89,6 +97,47 @@
 
 	});
 
+	var pick = "Y";
+	   function pickUpdate(profile_id){
+	      $.ajax({
+	         url: "pickUpdate.do" ,
+	         data: {"pick": pick, "profile_id" :  profile_id, "seq" : _movieDetailSeq},
+	         type: "POST",
+	         success: function(data){
+	            if(data == 'Y'){
+	                document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/check.png";
+	            }else{
+	               document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png";
+	            }
+	            
+	            alert(data)
+	         },
+	         
+	         error : function(){
+	            alert("에러")
+	         }
+	      });
+	   }
+	   
+	   
+	   function acyncMovePage5(url, profile_id) {
+	       // ajax option
+	       var ajaxOption = {
+	               url : url,
+	               data : {"profile_id" : profile_id},
+	               type : "POST",
+	       };
+	       
+	       $.ajax(ajaxOption).done(function(data){
+	           // Contents 영역 삭제
+	           $('.test').children().remove();
+	           // Contents 영역 교체
+	           $('#test').html(data);
+	           alert(profile_id);
+	       });
+	   }
+	   
+	
 	/* 	$(document).on("click", ".detailBtn", function(e) {
 		alert("상세정보 모달 오픈");
 
@@ -296,7 +345,9 @@
 						<a href="#">NEW! 요즘 대세 영화</a>
 					</div>
 					<div class="nav-item">
-						<a href="#">내가 찜한 콘텐츠</a>
+						<button class="pick-btn"
+							onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가
+							찜한 콘텐츠</button>
 					</div>
 					<div class="nav-item">
 						<a href="#">다시 보기 콘텐츠</a>
@@ -320,7 +371,19 @@
 								style="overflow-x: hidden; height: 20em;">
 								<c:forEach var="recentList" items="${recentList }" varStatus="i">
 									<div class="alarm-list">
-										<a href="#">
+										<a type="button" class="video3" data-toggle="modal"
+											style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+											data-target="#detailMovie"
+											data-summary="${recentList.summary }"
+											data-title="${recentList.title }"
+											data-genre="${recentList.genre_name }"
+											data-actor="${recentList.actor_name }"
+											data-director="${recentList.director_name }"
+											data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/1080p.mp4"
+											data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/poster.png"
+											data-releasedate="${recentList.movie_release_date }"
+											data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png">
+											>
 											<div class="alarm-flex">
 												<img
 													src="${prefixAddr }${recentList.movie_path }/poster.png"
@@ -381,17 +444,36 @@
 					<div class="description">${mainMovie.summary }</div>
 
 					<div class="buttons">
-						<button
-							style="background: 0 0; border: 0; border-radius: 4px; padding: 0;">
+						<a
+							href="getPlayer.do?seq=${mainMovie.seq }&profile_id=${profile.profile_id}"
+							style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none;">
+
 							<div class="white-button">
 								<i class="fas fa-play"></i> 재생
 							</div>
-						</button>
-						<button
-							style="background: 0 0; border: 0; border-radius: 4px; padding: 0;"
-							class="detailBtn" data-toggle="modal"
-							data-video="https://clienti.dk/media/1140/friheden-video.mp4"
-							data-target="#videoModal">
+						</a>
+
+
+
+						<!-- 							class="detailBtn" data-toggle="modal" -->
+						<!-- 							data-video="https://clienti.dk/media/1140/friheden-video.mp4" -->
+						<!-- 							data-target="#videoModal"> -->
+
+
+
+						<a type="button" class="video3" data-toggle="modal"
+							style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+							data-target="#detailMovie" data-summary="${mainMovie.summary }"
+							data-title="${mainMovie.title }"
+							data-genre="${mainMovie.genre_name }"
+							data-actor="${mainMovie.actor_name }"
+							data-director="${mainMovie.director_name }"
+							data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/1080p.mp4"
+							data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/poster.png"
+							data-releasedate="${mainMovie.movie_release_date }"
+							data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png">
+
+
 
 
 							<div class="gray-button">
@@ -399,7 +481,8 @@
 
 								<i class="far fa-info-circle"></i> 상세정보
 							</div>
-						</button>
+						</a>
+
 						<div class="extra">
 							<button aria-label="다시 재생" onclick="replay()"
 								class="color-supplementary hasIcon ltr-pjs1vp" type="button">
@@ -413,7 +496,7 @@
 									</div>
 								</div>
 							</button>
-							<div class="rating">15+</div>
+							<div class="rating">${mainMovie.movie_rating }+</div>
 						</div>
 					</div>
 
@@ -421,7 +504,7 @@
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
+						<div class="title">${profile.profile_name }님의취향저격베스트 콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }">
 								<div class="favorite-items">
@@ -446,22 +529,26 @@
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
+													<div class="detail-button">${movieList.seq }
+														<button type="button" class="video3" data-toggle="modal"
 															data-target="#detailMovie"
+															data-detail="${movieList.seq }"
 															data-summary="${movieList.summary }"
 															data-title="${movieList.title }"
 															data-genre="${movieList.genre_name }"
 															data-actor="${movieList.actor_name }"
 															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
 															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
 															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 															data-releasedate="${movieList.movie_release_date }"
 															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+															<%--                                  data-cardimg ="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png" --%>
+
 															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
-															width="30px" height="30px">
-														</a>
+																src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+																width="30px" height="30px">
+														</button>
 													</div>
 												</div>
 											</div>
@@ -935,9 +1022,16 @@
 							<i class="fas fa-play"></i> 재생
 						</div>
 						<div class="modal-icon-position">
-							<div class="modal-check-button">
-								<i class="fal fa-plus-circle"></i>
-							</div>
+							<!-- 찜하기 버튼 -->
+							<button class="pickUpdate"
+								style="background: none; border-style: none"
+								onclick="pickUpdate(${profile.profile_id})">
+								<div class="modal-check-button">
+									<img id="modal-check-button"
+										src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+										style="width: 1em">
+								</div>
+							</button>
 							<div class="modal-thumbs-up-button">
 								<img src="images/member/iconmonstr-thumb-14-240 (1).png">
 							</div>

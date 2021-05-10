@@ -16,8 +16,10 @@
 			type="com.main.nowflix.client.profile.vo.ProfileVO" alias="profileVO" />
 		<typeAlias type="com.main.nowflix.client.ticket.vo.TicketVO"
 			alias="ticketVO" />
-		<typeAlias type="com.main.nowflix.client.inquiry.vo.InquiryVO" alias="inquiryVO"/>
-		<typeAlias type="com.main.nowflix.client.faq.vo.FaqVO" alias="faqVO"/>
+		<typeAlias
+			type="com.main.nowflix.client.inquiry.vo.InquiryVO" alias="inquiryVO" />
+		<typeAlias type="com.main.nowflix.client.faq.vo.FaqVO"
+			alias="faqVO" />
 		<!-- admin -->
 
 
@@ -52,11 +54,14 @@
 			alias="adminnotice" />
 		<typeAlias type="com.main.nowflix.admin.faq.vo.AdminFaqVO"
 			alias="adminfaq" />
-		<typeAlias type="com.main.nowflix.admin.inquiry.vo.AdminInquiryVO"
+		<typeAlias
+			type="com.main.nowflix.admin.inquiry.vo.AdminInquiryVO"
 			alias="admininquiry" />
-		<typeAlias type="com.main.nowflix.admin.sales.vo.AdminSalesVO"
+		<typeAlias
+			type="com.main.nowflix.admin.sales.vo.AdminSalesVO"
 			alias="adminsales" />
-
+		<typeAlias type="com.main.nowflix.client.pick.vo.PickVO"
+			alias="pickVO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/member/memberMapper.xml"></mapper>
@@ -67,7 +72,7 @@
 		<mapper resource="mappings/member/salesMapper.xml"></mapper>
 		<mapper resource="mappings/member/watchMapper.xml"></mapper>
 		<mapper resource="mappings/member/inquiryMapper.xml"></mapper>
-
+		<mapper resource="mappings/member/pickMapper.xml"></mapper>
 		<mapper resource="mappings/admin/admin-movie-mapping.xml" />
 		<mapper resource="mappings/admin/admin-member-mapping.xml" />
 		<mapper resource="mappings/admin/admin-ticket-mapping.xml" />
