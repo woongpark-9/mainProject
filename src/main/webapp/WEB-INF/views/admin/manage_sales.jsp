@@ -22,11 +22,11 @@
 					</div>
 					<div class="row">
 						<div class="col-7">
-								<button type="button" class="btn btn-info btn-sm"
+							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#testpdf">PDF</button>
-						      	<button type="button" class="btn btn-info btn-sm"
+							<button type="button" class="btn btn-info btn-sm"
 								onclick="location.href='salesExcelDown.mdo'">EXCEL</button>
-								<div class="modal fade" id="testpdf">
+							<div class="modal fade" id="testpdf">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -41,10 +41,11 @@
 
 										<div class="modal-footer">
 											<input type="button" class="btn btn-success"
-												onclick="acyncSalesPdf('salesPdfDown.mdo')"
-												value="PDF저장" data-dismiss="modal">
+												onclick="acyncSalesPdf('salesPdfDown.mdo')" value="PDF저장"
+												data-dismiss="modal">
 											<button type="button" class="btn btn-danger"
-												data-dismiss="modal" onclick="acyncMovePage('manage_sales.mdo')">아니오</button>
+												data-dismiss="modal"
+												onclick="acyncMovePage('manage_sales.mdo')">아니오</button>
 										</div>
 									</div>
 								</div>
@@ -89,6 +90,11 @@
 							<tbody>
 								<c:forEach var="salesList" items="${salesList }">
 									<tr>
+										<c:forEach var="ticketList" items="${ticketList }">
+											<c:if test="${salesList.ticket_id eq ticketList.ticket_id }">
+												<c:set var="total" value="${ticketList.ticket_price }" />
+											</c:if>
+										</c:forEach>
 										<th>${salesList.rownum }</th>
 										<th>${salesList.email }</th>
 										<th>${salesList.ticket_id }</th>
@@ -97,12 +103,6 @@
 										<th>${salesList.payment_date }</th>
 										<th>${salesList.payment_method_type }</th>
 										<th>${salesList.card_name }</th>
-										<c:forEach var="ticketList" items="${ticketList }">
-											<c:if test="${salesList.ticket_id eq ticketList.ticket_id }">
-												<c:set var="total" value="${ticketList.ticket_price }" />
-											</c:if>
-										</c:forEach>
-
 										<th class="align-middle">
 											<button type="button" class="btn btn-danger btn-sm"
 												data-toggle="modal" data-target="#cancel"

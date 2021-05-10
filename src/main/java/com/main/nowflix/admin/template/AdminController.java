@@ -12,6 +12,7 @@ import com.main.nowflix.admin.inquiry.service.AdminInquiryService;
 import com.main.nowflix.admin.member.service.AdminMemberService;
 import com.main.nowflix.admin.movie.service.AdminMovieService;
 import com.main.nowflix.admin.sales.service.AdminSalesService;
+import com.main.nowflix.admin.ticket.service.AdminTicketService;
 
 
 @Controller
@@ -28,6 +29,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminSalesService salesService;
+	
+	@Autowired
+	private AdminTicketService ticketService;
 	
 	// 템플릿(메인) 페이지
 	@RequestMapping("/manage_template.mdo")
@@ -68,7 +72,9 @@ public class AdminController {
 		
 		model.addAttribute("memberList", memberService.getMemberList(map)); // memberList 정보저장		
 		model.addAttribute("salesList", salesService.getSalesList(map)); // salesList 정보저장
+		model.addAttribute("monthlySalesList", salesService.getMonthlySalesList()); // monthlySalesList 정보저장
 		model.addAttribute("movieList", movieService.getMovieList(map)); // movieList 정보저장
+		model.addAttribute("ticketList", ticketService.getTicketList(null)); // ticketList 정보저장
 		
 		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장

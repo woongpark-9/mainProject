@@ -125,12 +125,12 @@
 								onclick="acyncMovePage('manage_policy.mdo')"> <i
 									class="fas fa-file-signature text-white fa-lg mr-2"></i>이용약관
 							</a></li>
-<!-- 							<li class="nav-item"><a href="#" -->
-<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link" -->
-<!-- 								onclick="acyncMovePage('manage_screen.mdo')"> <i -->
-<!-- 									class="fas fa-tablet-alt text-white fa-lg mr-2"></i>화면 -->
-<!-- 							</a></li> -->
-							
+							<!-- 							<li class="nav-item"><a href="#" -->
+							<!-- 								class="nav-link text-white p-2 mb-2 sidebar-link" -->
+							<!-- 								onclick="acyncMovePage('manage_screen.mdo')"> <i -->
+							<!-- 									class="fas fa-tablet-alt text-white fa-lg mr-2"></i>화면 -->
+							<!-- 							</a></li> -->
+
 							<li class="nav-item"><a href="#"
 								class="nav-link text-white p-2 mb-2 sidebar-link"
 								onclick="acyncMovePage('manage_manager.mdo')"> <i
@@ -146,15 +146,13 @@
 							<div class="col-md-4">
 								<h4 class="text-light mb-0">&nbsp;Manager DashBoard</h4>
 							</div>
-							<div class="col-md-4">
-								
-							</div>
+							<div class="col-md-4"></div>
 							<div class="col-md-4">
 								<ul
 									class="navbar-nav d-flex justify-content-between align-items-center">
 									<!-- 									<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li> -->
-									<li><span class="text-white">${sessionScope.manager.manager_email} 님
-											반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+									<li><span class="text-white">${sessionScope.manager.manager_email}
+											님 반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
 									<li class="nav-item icon-parent"><c:if
 											test="${inquiryCount gt 0 }">
 											<div class="dropdown">
@@ -203,10 +201,11 @@
 									<h4 class="modal-title">관리자 로그아웃</h4>
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
-								<div class="modal-body">${sessionScope.manager.manager_email} 님 정말 로그아웃 하시겠습니까?</div>
+								<div class="modal-body">${sessionScope.manager.manager_email}
+									님 정말 로그아웃 하시겠습니까?</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-success" onclick="location.href='adminLogout.mdo'"
-										data-dismiss="modal">예</button>
+									<button type="button" class="btn btn-success"
+										onclick="location.href='adminLogout.mdo'" data-dismiss="modal">예</button>
 									<button type="button" class="btn btn-danger"
 										data-dismiss="modal">아니오</button>
 								</div>
@@ -287,7 +286,18 @@
 											<i class="fas fa-money-check-alt fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
 												<h5>월 매출</h5>
-												<h3>&#8361;&nbsp;27,195,000</h3>
+												<c:forEach var="monthlySalesList" items="${monthlySalesList }">
+													<c:forEach var="ticketList" items="${ticketList }">
+														<c:if
+															test="${monthlySalesList.ticket_id eq ticketList.ticket_id }">
+															<c:set var="ticket_price"
+																value="${ticketList.ticket_price }" />
+															<c:set var="monthlySales"
+																value="${monthlySales + ticket_price }" />
+														</c:if>
+													</c:forEach>													
+												</c:forEach>
+												<h3>&#8361;&nbsp;${monthlySales }</h3>
 											</div>
 										</div>
 
@@ -365,12 +375,13 @@
 											<th>#</th>
 											<th>회원 이메일</th>
 											<th>이용권</th>
+											<th>이용권 만료일</th>
 											<th>결제일</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="salesList" items="${salesList }">
-											<tr>
+											<tr>												
 												<th>${salesList.rownum }</th>
 												<th>${salesList.email }</th>
 												<th>${salesList.ticket_id }</th>
