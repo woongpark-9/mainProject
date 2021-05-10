@@ -34,7 +34,7 @@
 
 	opt_movie_rating.push(str_movie_rating);
 
-	var arr_actor_name = str_actor_name.split(','); // ','을 기준으로 나눠서 배열을 반환
+	var arr_actor_name = str_actor_name.split(','); 
 	for (a in arr_actor_name)
 		opt_actor_name.push(arr_actor_name[a]);
 
