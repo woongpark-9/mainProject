@@ -39,7 +39,7 @@ public class AdminFaqController {
 			@RequestParam(value = "searchCondition", required = false) String searchCondition,
 			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
 			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage) {
-		int row = 4;
+		int row = 8;
 		int startPoint = nowPage * row;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -117,7 +117,6 @@ public class AdminFaqController {
 		int rowNo = 0;
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
 		
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
@@ -139,6 +138,9 @@ public class AdminFaqController {
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
 		
+		// 데이터는 가운데 정렬합니다.
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
 		dataStyle.setBorderTop(BorderStyle.THIN);
@@ -146,6 +148,12 @@ public class AdminFaqController {
 		dataStyle.setBorderLeft(BorderStyle.THIN);
 		dataStyle.setBorderRight(BorderStyle.THIN);
 		dataStyle.setAlignment(HorizontalAlignment.CENTER);
+		
+		// 시트에 컬럼 1번 너비폭을 5000만큼 설정.
+		sheet.setColumnWidth(1, 4000);
+		sheet.setColumnWidth(2, 9000);
+		sheet.setColumnWidth(3, 12000);
+		sheet.setColumnWidth(4, 6000);
 		
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);
@@ -188,7 +196,7 @@ public class AdminFaqController {
 		
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=FaqExcelFile.xls");
 		
 		wb.write(response.getOutputStream());
 		wb.close();

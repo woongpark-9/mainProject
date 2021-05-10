@@ -65,6 +65,6 @@
    
    <!-- EXCEL , PDF를 나타내기 위함. -->
    <select id="selectBoardList" resultType="adminfaq">
-      select * from faq order by faq_id asc
+      select * from faq order by faq_id desc
    </select>
 </mapper>
