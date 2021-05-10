@@ -68,11 +68,12 @@ body {
 	height: 14px;
 	width: 16vw;
 	color: #8C8C8C;
-	font-size: 10px;
+	font-size: 0.6vw;
 	text-decoration: none;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-align: left;
 }
+
 
 .center_login_pw {
 	background-color: #333333;
@@ -101,7 +102,7 @@ body {
 	height: 14px;
 	width: 16vw;
 	color: #8C8C8C;
-	font-size: 10px;
+	font-size: 0.6vw;
 	text-decoration: none;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-align: left;

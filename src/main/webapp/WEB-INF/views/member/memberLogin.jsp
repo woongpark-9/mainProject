@@ -70,9 +70,9 @@ function checkPassword(email,pass){
 	<form name="form" action="login.do" method="post" onsubmit="return checkAll()" >
 		<div class="center_login_id">
 			<div class="center_login_id_label">
-				<label for="id">이메일 주소 또는 전화번호 </label><br>	
+				<label for="id" class="id_label">이메일</label><br>	
 			</div>
-			<input id="email" type="text" size="20" value="" name="email">
+			<input class="email" id="email" type="text" size="20" value="" name="email">
 		</div>
 		
 		<div class="center_login_pw">
