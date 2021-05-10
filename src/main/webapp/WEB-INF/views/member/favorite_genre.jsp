@@ -43,7 +43,7 @@
                <img alt="로고" src="images/member/LOGO.png">
             </div>
             <div class="logout">
-               <div class="button">로그아웃</div>
+               <a type="button" class="button" href="logout.do">로그아웃</a>
             </div>
          </div>
       </div>

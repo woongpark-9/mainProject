@@ -1,5 +1,7 @@
 package com.main.nowflix.client.sales.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public void insertSalesInfo(SalesVO vo) throws Exception {
 		dao.insertSalesInfo(vo);
+	}
+
+
+	@Override
+	public List<SalesVO> getSalesInfo(SalesVO vo) throws Exception {
+		return dao.getSalesInfo(vo);
 	}
 
 }

@@ -12,7 +12,7 @@
 	<div class="header">
 		<a title="홈" href="#"> <img
 			src="http://nowflix.yonom.duckdns.org:1510/images/logo/nowflix.png"
-			style="width: 119px;">
+			style="width: 8vw;">
 		</a>
 
 		<div class="user-info">

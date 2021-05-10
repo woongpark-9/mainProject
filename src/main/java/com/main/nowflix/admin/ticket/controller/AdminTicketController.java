@@ -60,6 +60,7 @@ public class AdminTicketController {
 	@ResponseBody
 	@RequestMapping("/ticketModify.mdo")
 	public int modifyGenre(AdminTicketVO ticketvo) {
+		System.out.println(ticketvo.getTicket_id());
 		int result = TicketService.modifyTicket(ticketvo); // Model 정보저장
 		return result;
 	}
@@ -142,23 +143,23 @@ public class AdminTicketController {
 
 		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("id");
+		cell.setCellValue("이용권ID");
 
 		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("name");
+		cell.setCellValue("이용권명");
 
 		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("period");
+		cell.setCellValue("기간");
 
 		cell = row.createCell(4);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("price");
+		cell.setCellValue("가격");
 
 		cell = row.createCell(5);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("status");
+		cell.setCellValue("활성화상태");
 
 		// 데이터 부분을 생성및 출력 합니다.
 		for (AdminTicketVO ticketvo : list) {
@@ -191,7 +192,7 @@ public class AdminTicketController {
 
 		// Excel export contentType Setting ( 엑셀로 저장하고 엑셀을 xls로 지정합니다. )
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=TicketExcelFile.xls");
 
 		// Excel output Download (엑셀을 출력합니다_다운로드)
 		wb.write(response.getOutputStream());

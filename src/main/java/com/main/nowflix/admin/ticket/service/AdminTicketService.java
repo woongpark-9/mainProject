@@ -18,7 +18,7 @@ public interface AdminTicketService {
    //수정 페이지
    AdminTicketVO getTicketModifyInfo(AdminTicketVO ticketvo); 
    
-   //수정
+   //티켓 수정
    int modifyTicket(AdminTicketVO ticketvo);
    
    //엑셀/pdf LIST 추출

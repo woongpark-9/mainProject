@@ -5,7 +5,8 @@ import java.util.Date;
 
 public class SalesVO {
 
-	private  SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
 	public SalesVO() {
 
 		// TODO Auto-generated constructor stub
@@ -16,7 +17,7 @@ public class SalesVO {
 
 		this.sales_id = sales_id;
 		this.cid = cid;
-		this.tid = tid; 
+		this.tid = tid;
 		this.email = email;
 		this.ticket_id = ticket_id;
 		this.sales_status = sales_status;
@@ -31,17 +32,16 @@ public class SalesVO {
 
 		this.sales_id = sales_id;
 		this.cid = cid;
-		this.tid = tid; 
+		this.tid = tid;
 		this.email = email;
 		this.ticket_id = ticket_id;
 		this.sales_status = sales_status;
 		this.payment_date = payment_date;
 		this.expiry_date = expiry_date;
 		this.payment_method_type = payment_method_type;
-	
+
 	}
-	
-	
+
 	private String sales_id;
 	private String cid;
 	private String tid;
@@ -131,6 +131,14 @@ public class SalesVO {
 
 	public void setCard_name(String card_name) {
 		this.card_name = card_name;
+	}
+
+	@Override
+	public String toString() {
+		return "SalesVO [format=" + format + ", sales_id=" + sales_id + ", cid=" + cid + ", tid=" + tid + ", email="
+				+ email + ", ticket_id=" + ticket_id + ", sales_status=" + sales_status + ", payment_date="
+				+ payment_date + ", expiry_date=" + expiry_date + ", payment_method_type=" + payment_method_type
+				+ ", card_name=" + card_name + "]";
 	}
 
 }

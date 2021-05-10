@@ -16,25 +16,25 @@
 
    <!-- Ticket List -->
    <select id="getTicketList" resultMap="ticketResult">
-      select (row_number() over()) as rownum, seq , ticket_id ,
-      ticket_name , ticket_period , ticket_price , ticket_status from ticket
+      select (row_number() over()) as rownum, seq, ticket_id,
+      ticket_name, ticket_period, ticket_price, ticket_status from ticket
       order by rownum;
    </select>
 
    <!-- Ticket insert -->
    <insert id="insertTicket" parameterType="adminticket">
       insert into
-      ticket(ticket_id , ticket_name , ticket_period , ticket_price ,
+      ticket(ticket_id, ticket_name, ticket_period, ticket_price,
       ticket_status)
 
-      values(#{ticket_id} , #{ticket_name} , #{ticket_period} , #{ticket_price} ,
+      values(#{ticket_id}, #{ticket_name}, #{ticket_period}, #{ticket_price},
       #{ticket_status})
    </insert>
 
    <!-- modify page -->
    <select id="getTicketModifyInfo" resultType="adminticket">
-      select seq ,
-      ticket_id, ticket_name , ticket_period , ticket_price , ticket_status
+      select seq,
+      ticket_id, ticket_name, ticket_period, ticket_price, ticket_status
       from ticket where
       seq = #{seq}
    </select>
@@ -42,12 +42,13 @@
    <!-- modify -->
    <update id="modifyTicket" parameterType="adminticket">
       update ticket
-      set ticket_name = #{ticket_name}, 
+      set 
+      ticket_id = #{ticket_id}, 
+      ticket_name = #{ticket_name}, 
       ticket_period = #{ticket_period},
       ticket_price = #{ticket_price},
-      ticket_status = #{ticket_status}
-      
-      where ticket_id = #{ticket_id}
+      ticket_status = #{ticket_status}   
+      where seq = #{seq}
    </update>
    
    <!-- Ticket Delete -->
@@ -59,10 +60,9 @@
 
    <!-- EXCEL , PDF를 나타내기 위함. -->
    <select id="selectBoardList" resultType="adminticket">
-      select seq
-      ,ticket_id,ticket_name,ticket_period
-      ,ticket_price,ticket_status from
-      ticket order by seq;
+      select seq, ticket_id, ticket_name, ticket_period ,ticket_price,ticket_status 
+      from ticket 
+      order by seq;
    </select>
 
 </mapper>

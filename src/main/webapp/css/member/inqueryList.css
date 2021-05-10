@@ -93,7 +93,7 @@ span {
 	font-size: 15px;
 }
 
-a {
+.NOWFLIX a {
 	color: red;
 	text-decoration: none;
 	background-color: transparent;
@@ -283,6 +283,9 @@ textarea {
 }
 .col-item-content {
     width: 25%;
+}
+.col-item-content a{
+    text-decoration: none;
 }
 .col-expirydate-content {
     width: 25%;

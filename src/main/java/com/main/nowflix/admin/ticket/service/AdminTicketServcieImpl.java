@@ -94,7 +94,7 @@ public class AdminTicketServcieImpl implements AdminTicketService {
          PdfPTable table = new PdfPTable(6); // 4개의 셀을 가진 테이블 객체를 생성 (pdf파일에 나타날 테이블)
 //         table.setWidthPercentage(50);
 //         table.setWidths(new float[] { 8, 3 });
-         Chunk chunk = new Chunk("MOVIE_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
+         Chunk chunk = new Chunk("TICKET_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
          Paragraph ph = new Paragraph(chunk);
          ph.setAlignment(Element.ALIGN_CENTER);
          document.add(ph); // 문단을 만들어서 가운데 정렬 (타이틀의 이름을 가운데 정렬한다는 뜻)
@@ -105,19 +105,19 @@ public class AdminTicketServcieImpl implements AdminTicketService {
          PdfPCell cell1 = new PdfPCell(new Phrase("seq", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
          cell1.setHorizontalAlignment(Element.ALIGN_CENTER); // 셀의 정렬방식을 지정한다. (가운데정렬)
 
-         PdfPCell cell2 = new PdfPCell(new Phrase("id", font));
+         PdfPCell cell2 = new PdfPCell(new Phrase("이용권ID", font));
          cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-         PdfPCell cell3 = new PdfPCell(new Phrase("name", font));
+         PdfPCell cell3 = new PdfPCell(new Phrase("이용권명", font));
          cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-         PdfPCell cell4 = new PdfPCell(new Phrase("period", font));
+         PdfPCell cell4 = new PdfPCell(new Phrase("기간", font));
          cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-         PdfPCell cell5 = new PdfPCell(new Phrase("price", font));
+         PdfPCell cell5 = new PdfPCell(new Phrase("가격", font));
          cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-         PdfPCell cell6 = new PdfPCell(new Phrase("status", font));
+         PdfPCell cell6 = new PdfPCell(new Phrase("활성화상태", font));
          cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
 
          table.addCell(cell1); // 그리고 테이블에 위에서 생성시킨 셀을 넣는다.

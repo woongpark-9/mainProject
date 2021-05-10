@@ -95,7 +95,8 @@
 												data-modify_ticket_name="${ticketList.ticket_name }"
 												data-modify_ticket_period="${ticketList.ticket_period }"
 												data-modify_ticket_price="${ticketList.ticket_price }"
-												data-modify_ticket_status="${ticketList.ticket_status }">수정</button>
+												data-modify_ticket_status="${ticketList.ticket_status }"
+												data-modify_ticket_seq="${ticketList.seq }">수정</button>
 											<button type="button" class="btn btn-danger btn-sm"
 												data-toggle="modal" data-target="#deleteTicket"
 												data-delseq="${ticketList.seq }">삭제</button></th>
@@ -147,7 +148,7 @@
 																	onclick="acyncInsertTicket('ticketInsert.mdo')"
 																	value="추가" data-dismiss="modal">
 																<button type="button" class="btn btn-danger"
-																	data-dismiss="modal">취소</button>
+																	data-dismiss="modal" onclick="acyncMovePage('manage_ticket.mdo')">취소</button>
 															</div>
 														</div>
 													</form>
@@ -186,33 +187,36 @@
 												</div>
 												<div class="modal-body">
 													<div class="form-group">
-
+														<label class="ticket_id">이용권ID</label>
+														<div>
+															<input type="text" class="form-control input-lg"
+																id="mod_ticket_id" name="ticket_id" value="">
+														</div>
+														<br>
 														<label class="ticket_name">이용권이름</label>
 														<div>
 															<input type="text" class="form-control input-lg"
 																id="mod_ticket_name" name="ticket_name" value="">
 														</div>
-
-														<br> <label class="ticket_period">기간</label>
+														<br> 
+														<label class="ticket_period">기간</label>
 														<div>
 															<input type="text" class="form-control input-lg"
 																id="mod_ticket_period" name="ticket_period" value="">
 														</div>
-
-														<br> <label class="ticket_price">가격</label>
+														<br> 
+														<label class="ticket_price">가격</label>
 														<div>
 															<input type="text" class="form-control input-lg"
 																id="mod_ticket_price" name="ticket_price" value="">
 														</div>
-
-														<br> <label class="ticket_status">활성화 여부</label>
+														<br> 
+														<label class="ticket_status">활성화 여부</label>
 														<div>
 															<input type="text" class="form-control input-lg"
 																id="mod_ticket_status" name="ticket_status" value="">
 														</div>
-
 														<br>
-
 														<div>
 															<button type="button" class="btn btn-success"
 																data-dismiss="modal"
