@@ -104,7 +104,7 @@ public class AdminSalesServiceImpl implements AdminSalesService {
             PdfPCell cell9 = new PdfPCell(new Phrase("payment_method_type", font));
             cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
             
-            PdfPCell cell10 = new PdfPCell(new Phrase("sales_status", font));
+            PdfPCell cell10 = new PdfPCell(new Phrase("card_name", font));
             cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
                     
             table.addCell(cell1); // 그리고 테이블에 위에서 생성시킨 셀을 넣는다.
@@ -150,7 +150,7 @@ public class AdminSalesServiceImpl implements AdminSalesService {
                 PdfPCell cellPayment_method_type = new PdfPCell(new Phrase("" + vo.getPayment_method_type(), font));
                 // Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
                 
-                PdfPCell cellSales_statuse = new PdfPCell(new Phrase("" + vo.getSales_status(), font));
+                PdfPCell cellSales_cardname = new PdfPCell(new Phrase("" + vo.getCard_name(), font));
                 // Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
                 
                 table.addCell(cellSales_id); // 셀의 데이터를 테이블에 저장한다. (장바구니안에 들어있는 갯수만큼 테이블이 만들어진다)
@@ -162,7 +162,7 @@ public class AdminSalesServiceImpl implements AdminSalesService {
                 table.addCell(cellPayment_date); 
                 table.addCell(cellExpiry_date);
                 table.addCell(cellPayment_method_type);
-                table.addCell(cellSales_statuse); 
+                table.addCell(cellSales_cardname); 
             }
             document.add(table); // 웹접근 객체에 table를 저장한다.
             document.close(); // 저장이 끝났으면 document객체를 닫는다.

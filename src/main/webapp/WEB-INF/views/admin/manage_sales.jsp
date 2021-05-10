@@ -22,8 +22,33 @@
 					</div>
 					<div class="row">
 						<div class="col-7">
-							<button type="button" class="btn btn-info btn-sm">EXCEL</button>
-							<button type="button" class="btn btn-info btn-sm">PDF</button>
+								<button type="button" class="btn btn-info btn-sm"
+								data-toggle="modal" data-target="#testpdf">PDF</button>
+						      	<button type="button" class="btn btn-info btn-sm"
+								onclick="location.href='salesExcelDown.mdo'">EXCEL</button>
+								<div class="modal fade" id="testpdf">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">PDF 경로 지정</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+
+										<div class="modal-body">
+											PDF파일 이름을 적어주세요 예)TEST <br> <input type="text"
+												class="form-control input-lg" id="newpdf" value="">
+										</div>
+
+										<div class="modal-footer">
+											<input type="button" class="btn btn-success"
+												onclick="acyncSalesPdf('salesPdfDown.mdo')"
+												value="PDF저장" data-dismiss="modal">
+											<button type="button" class="btn btn-danger"
+												data-dismiss="modal" onclick="acyncMovePage('manage_sales.mdo')">아니오</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<div class="col-5">

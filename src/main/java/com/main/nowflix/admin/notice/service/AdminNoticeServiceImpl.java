@@ -95,13 +95,13 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
             document.add(Chunk.NEWLINE);
             document.add(Chunk.NEWLINE); // 줄바꿈 (왜냐하면 타이틀에서 두줄을 내린후에 셀(테이블)이 나오기 때문)
  
-            PdfPCell cell1 = new PdfPCell(new Phrase("공지사항 번호", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
+            PdfPCell cell1 = new PdfPCell(new Phrase("번호", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
             cell1.setHorizontalAlignment(Element.ALIGN_CENTER); // 셀의 정렬방식을 지정한다. (가운데정렬)
  
-            PdfPCell cell2 = new PdfPCell(new Phrase("공지사항 제목", font));
+            PdfPCell cell2 = new PdfPCell(new Phrase("제목", font));
             cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
  
-            PdfPCell cell3 = new PdfPCell(new Phrase("공지사항 내용", font));
+            PdfPCell cell3 = new PdfPCell(new Phrase("내용", font));
             cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
             
             PdfPCell cell4 = new PdfPCell(new Phrase("등록일", font));

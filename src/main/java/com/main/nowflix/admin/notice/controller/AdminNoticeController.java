@@ -111,13 +111,16 @@ public class AdminNoticeController {
 		
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("공지사항");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(0, 3000);
+		sheet.setColumnWidth(1, 10000);
+		sheet.setColumnWidth(2, 10000);
+		sheet.setColumnWidth(3, 5000);
 		
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
@@ -138,6 +141,7 @@ public class AdminNoticeController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
@@ -151,13 +155,13 @@ public class AdminNoticeController {
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 번호");
+		cell.setCellValue("번호");
 		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 제목");
+		cell.setCellValue("제목");
 		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 내용");
+		cell.setCellValue("내용");
 		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("등록일");
@@ -181,7 +185,7 @@ public class AdminNoticeController {
 		
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=NoticeExcelFile.xls");
 		
 		wb.write(response.getOutputStream());
 		wb.close();

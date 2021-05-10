@@ -2,7 +2,6 @@ var cancelTid = "";
 var total = "";
 
 $(document).ready(function() {
-	
 	$('#cancel').on('show.bs.modal', function(event) {
 		cancelTid = $(event.relatedTarget).data('tid');
 		total = $(event.relatedTarget).data('total');		
@@ -11,12 +10,10 @@ $(document).ready(function() {
 
 // 결제 취소
 function acyncCancelPayment(url) {
-
 	var form = {
 		"tid" : cancelTid,
 		"total" : total
 	};
-	
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -38,12 +35,9 @@ function acyncCancelPayment(url) {
 
 // 결제 취소 시 결제 상태값 변경
 function acynUpdateSalesStatus(url, get_tid) {
-	alert(get_tid);
-	
 	var sendData = {
 			"tid" : get_tid
 		};
-	
 	$.ajax({
 		url : url,
 		type : "POST",

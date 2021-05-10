@@ -6,11 +6,9 @@ var ticketModifyprice = "";
 var ticketModifystatus = "";
 var ticketModifySeq = "";
 
-
 $(document).ready(function() {
    $('#deleteTicket').on('show.bs.modal', function(event) {
       ticketDeleteSeq = $(event.relatedTarget).data('delseq');
-
    });
    
     $('#modifyTicket').on('show.bs.modal', function(event) { 
@@ -29,9 +27,8 @@ $(document).ready(function() {
       });
 });
 
-
 //티켓 추가 
-function acyncInsertTicket(url) { //data : { "genre_name" : $('#ins_genre_name').val()},
+function acyncInsertTicket(url) { 
    $.ajax({
       url : url,
       type : "POST",
@@ -61,7 +58,6 @@ function acyncInsertTicket(url) { //data : { "genre_name" : $('#ins_genre_name')
 
 //티켓 수정
 function acyncModifyTicket(url) {
-   //var $form = $('#modifyDirectorForm').serialize();
    var form = {"seq" : ticketModifySeq,
 		   	"ticket_id" : $('#mod_ticket_id').val(),
             "ticket_name" : $('#mod_ticket_name').val(),
@@ -69,16 +65,12 @@ function acyncModifyTicket(url) {
             "ticket_price" : $('#mod_ticket_price').val(),
             "ticket_status" : $('#mod_ticket_status').val()
             }; 
-//   console.log(JSON.stringify(form));
-//   alert(JSON.stringify(form));
    $.ajax({
       url : url,
       type : "POST",
       data : form,
       dataType : "json",
       success : function(data) {
-//         console.log(JSON.stringify(data));
-//         alert(JSON.stringify(data));
          if (data == 1) {
             alert("해당 티켓 정보가 수정되었습니다.");  
             acyncMovePage('manage_ticket.mdo');
@@ -97,18 +89,14 @@ function acyncDeleteTicket(url) {
    var seq = {
       "seq" : ticketDeleteSeq
    };
-//   console.log(JSON.stringify(seq));
-//   alert(JSON.stringify(seq));
+
    $.ajax({
       url : url,
       type : "POST",
       data : seq,
       dataType : "json",
       success : function(data) {
-//         console.log(JSON.stringify(data));
-//         alert(JSON.stringify(data));
          if (data == 1) {
-
             alert("해당 티켓이 삭제되었습니다.");
             acyncMovePage('manage_ticket.mdo');
          } else {
@@ -121,7 +109,7 @@ function acyncDeleteTicket(url) {
    });
 }
 
-//Ticket PDF 이름값 저장을 하기 위한..
+//Ticket PDF 
 function acync_ticket_pdf(url) {
    $.ajax({
       url : url,

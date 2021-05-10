@@ -109,14 +109,23 @@ public class AdminSalesController {
 		
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("결제 내역");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
-		
+		sheet.setColumnWidth(0, 10000);
+		sheet.setColumnWidth(1, 5000);
+		sheet.setColumnWidth(2, 8000);
+		sheet.setColumnWidth(3, 7000);
+		sheet.setColumnWidth(4, 3000);
+		sheet.setColumnWidth(5, 4000);
+		sheet.setColumnWidth(6, 6000);
+		sheet.setColumnWidth(7, 6000);
+		sheet.setColumnWidth(8, 5000);
+		sheet.setColumnWidth(9, 5000);
+
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
 		// 가는 경계선을 가집니다.
@@ -136,6 +145,7 @@ public class AdminSalesController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
@@ -176,7 +186,7 @@ public class AdminSalesController {
 		cell.setCellValue("payment_method_type");
 		cell = row.createCell(9);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("sales_status");
+		cell.setCellValue("card_name");
 		
 	
 		// 데이터 부분 생성
@@ -194,29 +204,29 @@ public class AdminSalesController {
 			cell = row.createCell(3);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getEmail());
-			cell = row.createCell(3);
+			cell = row.createCell(4);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getTicket_id());
-			cell = row.createCell(3);
+			cell = row.createCell(5);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getSales_status());
-			cell = row.createCell(3);
+			cell = row.createCell(6);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getPayment_date());
-			cell = row.createCell(3);
+			cell = row.createCell(7);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getExpiry_date());
-			cell = row.createCell(3);
+			cell = row.createCell(8);
 			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getPayment_method_type());
-			cell = row.createCell(3);
+			cell = row.createCell(9);
 			cell.setCellStyle(dataStyle);
-			cell.setCellValue(vo.getSales_status());
+			cell.setCellValue(vo.getCard_name());
 		}
 		
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=SalesExcelFile.xls");
 		
 		wb.write(response.getOutputStream());
 		wb.close();
