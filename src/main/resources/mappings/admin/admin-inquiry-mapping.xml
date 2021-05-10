@@ -78,8 +78,16 @@
 	</update>
 
 	<!-- EXCEL , PDF를 나타내기 위함. -->
-	<select id="selectBoardList" resultType="admininquiry">
-		select * from inquiry
-		order by inquiry_id asc
+	<select id="selectBoardList" resultType="admininquiry">		
+		select (row_number() over()) AS rownum, inquiry_id, email,
+		inquiry_type, inquiry_title, inquiry_content,
+		reply_title, reply_content, inquiry_date, reply_date
+		from(
+		select inquiry_id, email,
+		inquiry_type, inquiry_title, inquiry_content,
+		reply_title, reply_content, inquiry_date, reply_date
+		from inquiry		
+		order by inquiry_id desc ) st
+		order by rownum desc
 	</select>
 </mapper>

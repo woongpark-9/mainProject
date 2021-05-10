@@ -15,6 +15,15 @@ public class AdminInquiryVO {
 	private Date inquiry_date;
 	private Date reply_date;
 	private String check_flag;
+	private int rownum;
+
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 
 	public int getInquiry_id() {
 		return inquiry_id;

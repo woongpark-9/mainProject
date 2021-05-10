@@ -123,8 +123,14 @@ public class AdminInquiryController {
 		int rowNo = 0;
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
-		
+		sheet.setColumnWidth(1, 4000);
+		sheet.setColumnWidth(2, 7000);
+		sheet.setColumnWidth(3, 9000);
+		sheet.setColumnWidth(4, 12000);
+		sheet.setColumnWidth(5, 4000);
+		sheet.setColumnWidth(6, 9000);
+		sheet.setColumnWidth(7, 12000);
+		sheet.setColumnWidth(8, 4000);
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
 		// 가는 경계선을 가집니다.
@@ -144,6 +150,7 @@ public class AdminInquiryController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
@@ -157,37 +164,67 @@ public class AdminInquiryController {
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 번호");
+		cell.setCellValue("#");
 		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 제목");
+		cell.setCellValue("카테고리");
 		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("공지사항 내용");
+		cell.setCellValue("고객 이메일");
 		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("등록일");
+		cell.setCellValue("문의 제목");
+		cell = row.createCell(4);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("문의 내용");
+		cell = row.createCell(5);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("문의 날짜");
+		cell = row.createCell(6);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("답변 제목");
+		cell = row.createCell(7);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("답변 내용");
+		cell = row.createCell(8);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("답변 날짜");
 	
 		// 데이터 부분 생성
 		for(AdminInquiryVO vo : list) {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(vo.getInquiry_id());
+			cell.setCellValue(vo.getRownum());
 			cell = row.createCell(1);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(vo.getInquiry_title());
+			cell.setCellValue(vo.getInquiry_type());
 			cell = row.createCell(2);
 			cell.setCellStyle(dataStyle);
-			cell.setCellValue(vo.getInquiry_content());
+			cell.setCellValue(vo.getEmail());
 			cell = row.createCell(3);
 			cell.setCellStyle(dataStyle);
+			cell.setCellValue(vo.getInquiry_title());
+			cell = row.createCell(4);
+			cell.setCellStyle(dataStyle);
 			cell.setCellValue(vo.getInquiry_content());
+			cell = row.createCell(5);
+			cell.setCellStyle(dataStyle);
+			cell.setCellValue(vo.getInquiry_date());
+			cell = row.createCell(6);
+			cell.setCellStyle(dataStyle);
+			cell.setCellValue(vo.getReply_title());
+			cell = row.createCell(7);
+			cell.setCellStyle(dataStyle);
+			cell.setCellValue(vo.getReply_content());
+			cell = row.createCell(8);
+			cell.setCellStyle(dataStyle);
+			cell.setCellValue(vo.getReply_date());
 		}
 		
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=InquiryExcelFile.xls");
 		
 		wb.write(response.getOutputStream());
 		wb.close();

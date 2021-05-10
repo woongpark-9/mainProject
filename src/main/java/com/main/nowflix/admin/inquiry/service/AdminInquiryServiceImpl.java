@@ -93,8 +93,8 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 
 			Font font = new Font(baseFont, 9); // 폰트의 사이즈를 12픽셀로 한다.
 
-			PdfPTable table = new PdfPTable(4); // 4개의 셀을 가진 테이블 객체를 생성 (pdf파일에 나타날 테이블)
-			Chunk chunk = new Chunk("Inquiry_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
+			PdfPTable table = new PdfPTable(9); // 4개의 셀을 가진 테이블 객체를 생성 (pdf파일에 나타날 테이블)
+			Chunk chunk = new Chunk("INQUIRY_INFO", font); // 타이틀 객체를 생성 (타이틀의 이름을 장바구니로 하고 위에 있는 font를 사용)
 			Paragraph ph = new Paragraph(chunk);
 			ph.setAlignment(Element.ALIGN_CENTER);
 			document.add(ph); // 문단을 만들어서 가운데 정렬 (타이틀의 이름을 가운데 정렬한다는 뜻)
@@ -102,42 +102,82 @@ public class AdminInquiryServiceImpl implements AdminInquiryService {
 			document.add(Chunk.NEWLINE);
 			document.add(Chunk.NEWLINE); // 줄바꿈 (왜냐하면 타이틀에서 두줄을 내린후에 셀(테이블)이 나오기 때문)
 
-			PdfPCell cell1 = new PdfPCell(new Phrase("문의 번호", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
+			PdfPCell cell1 = new PdfPCell(new Phrase("#", font)); // 셀의 이름과 폰트를 지정해서 셀을 생성한다.
 			cell1.setHorizontalAlignment(Element.ALIGN_CENTER); // 셀의 정렬방식을 지정한다. (가운데정렬)
 
-			PdfPCell cell2 = new PdfPCell(new Phrase("문의 제목", font));
+			PdfPCell cell2 = new PdfPCell(new Phrase("카테고리", font));
 			cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-			PdfPCell cell3 = new PdfPCell(new Phrase("문의 내용", font));
+			PdfPCell cell3 = new PdfPCell(new Phrase("고객 이메일", font));
 			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-			PdfPCell cell4 = new PdfPCell(new Phrase("등록일", font));
-			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			PdfPCell cell4 = new PdfPCell(new Phrase("문의 제목", font));
+			cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			PdfPCell cell5 = new PdfPCell(new Phrase("문의 내용", font));
+			cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			PdfPCell cell6 = new PdfPCell(new Phrase("문의 날짜", font));
+			cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			PdfPCell cell7 = new PdfPCell(new Phrase("답변 제목", font));
+			cell7.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			PdfPCell cell8 = new PdfPCell(new Phrase("답변 내용", font));
+			cell8.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			PdfPCell cell9 = new PdfPCell(new Phrase("답변 날짜", font));
+			cell9.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 			table.addCell(cell1); // 그리고 테이블에 위에서 생성시킨 셀을 넣는다.
 			table.addCell(cell2);
 			table.addCell(cell3);
 			table.addCell(cell4);
+			table.addCell(cell5);
+			table.addCell(cell6);
+			table.addCell(cell7);
+			table.addCell(cell8);
+			table.addCell(cell9);
 
 			List<AdminInquiryVO> list = inquiryService.selectBoardList();
 			for (int i = 0; i < list.size(); i++) {
 				AdminInquiryVO vo = list.get(i); // 레코드에 값들을 꺼내서 dto에 저장
-				PdfPCell cellId = new PdfPCell(new Phrase("" + vo.getInquiry_id(), font)); // 반복문을 사용해서 상품정보를 하나씩 //
-																							// 출력해서 셀에 넣고 테이블에// 저장한다.
+				PdfPCell cellRownum = new PdfPCell(new Phrase("" + vo.getRownum(), font)); 
+				// 반복문을 사용해서 상품정보를 하나씩 //																// 출력해서 셀에 넣고 테이블에// 저장한다.
 
-				PdfPCell cellTitle = new PdfPCell(new Phrase("" + vo.getInquiry_title(), font));
+				PdfPCell cellInqType = new PdfPCell(new Phrase("" + vo.getInquiry_type(), font));
 				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
 
-				PdfPCell cellContent = new PdfPCell(new Phrase("" + vo.getInquiry_content(), font));
+				PdfPCell cellEmail = new PdfPCell(new Phrase("" + vo.getEmail(), font));
 				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
 
-				PdfPCell cellRegdate = new PdfPCell(new Phrase("" + vo.getInquiry_content(), font));
+				PdfPCell cellInqTitle = new PdfPCell(new Phrase("" + vo.getInquiry_title(), font));
+				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
+				
+				PdfPCell cellInqContent = new PdfPCell(new Phrase("" + vo.getInquiry_content(), font));
+				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
+				
+				PdfPCell cellInqDate = new PdfPCell(new Phrase("" + vo.getInquiry_date(), font));
+				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
+				
+				PdfPCell cellReplyTitle = new PdfPCell(new Phrase("" + vo.getReply_title(), font));
+				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
+				
+				PdfPCell cellReplyContent = new PdfPCell(new Phrase("" + vo.getReply_content(), font));
+				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
+				
+				PdfPCell cellReplyDate = new PdfPCell(new Phrase("" + vo.getReply_date(), font));
 				// Phrase타입은 숫자형(int형 같은타입)으로 하면 에러가 발생되기 때문에 dto앞에 공백("")주어서 String타입으로 변경한다.
 
-				table.addCell(cellId); // 셀의 데이터를 테이블에 저장한다. (장바구니안에 들어있는 갯수만큼 테이블이 만들어진다)
-				table.addCell(cellTitle);
-				table.addCell(cellContent);
-				table.addCell(cellRegdate);
+				table.addCell(cellRownum); // 셀의 데이터를 테이블에 저장한다. (장바구니안에 들어있는 갯수만큼 테이블이 만들어진다)
+				table.addCell(cellInqType);
+				table.addCell(cellEmail);
+				table.addCell(cellInqTitle);
+				table.addCell(cellInqContent);
+				table.addCell(cellInqDate);
+				table.addCell(cellReplyTitle);
+				table.addCell(cellReplyContent);
+				table.addCell(cellReplyDate);
 			}
 			document.add(table); // 웹접근 객체에 table를 저장한다.
 			document.close(); // 저장이 끝났으면 document객체를 닫는다.
