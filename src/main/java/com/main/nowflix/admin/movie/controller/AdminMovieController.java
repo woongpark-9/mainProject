@@ -110,7 +110,6 @@ public class AdminMovieController {
 		model.addAttribute("directorList", directorService.getDirectorListWithoutPaging(directorVO));
 		model.addAttribute("actorList", actorService.getActorListWithoutPaging(actorVO));
 		model.addAttribute("genreList", genreService.getGenreList(null));
-		System.out.println(movieService.getMovieModifyInfo(vo));
 		return "movie_insert";
 	}
 
@@ -135,7 +134,6 @@ public class AdminMovieController {
 	@RequestMapping("/movieDetail.mdo")
 	public String getMovieDetail(AdminMovieVO vo, Model model) {
 		model.addAttribute("movieDetail", movieService.getMovieDetail(vo));
-		System.out.println(model.getAttribute("movieDetail").toString());
 		return "manage_movie";
 	}
 
@@ -143,7 +141,6 @@ public class AdminMovieController {
 	@ResponseBody
 	@RequestMapping("/moviePdfDown.mdo") // View에서 맵핑 url 주소
 	public int list(HttpServletRequest request, @RequestParam String newpdf) throws Exception {
-
 		int result = movieService.createPdf(newpdf); // createPdf()메소드에서 pdf파일이 생성되었는지 결과가 result에 담긴다.
 		return result;
 	}
@@ -181,12 +178,21 @@ public class AdminMovieController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
-
+		// 데이터는 가운데 정렬합니다.
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		
+		// 시트에 컬럼 1번 너비폭을 5000만큼 설정.
+		sheet.setColumnWidth(1, 9000);
+		sheet.setColumnWidth(2, 5200);
+		sheet.setColumnWidth(3, 12000);
+		sheet.setColumnWidth(4, 9000);
+		
+		
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
-		cell.setCellValue("seq");
+		cell.setCellValue("#");
 		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("제목");
@@ -211,7 +217,7 @@ public class AdminMovieController {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(vo.getSeq());
+			cell.setCellValue(vo.getRownum());
 			cell = row.createCell(1);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(vo.getTitle());
@@ -226,10 +232,10 @@ public class AdminMovieController {
 			cell.setCellValue(vo.getGenre_name());
 			cell = row.createCell(5);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(vo.getMovie_runningtime());
+			cell.setCellValue(vo.getMovie_runningtime()+"분");
 			cell = row.createCell(6);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(vo.getMovie_release_date());
+			cell.setCellValue(vo.getMovie_release_date()+"년");
 		}
 
 		// 엑셀 출력

@@ -97,11 +97,6 @@ public class AdminController {
 		return "manage_cs";
 	}
 
-//	@RequestMapping("/manage_sales.mdo")
-//	public String getSales() {
-//
-//		return "manage_sales";
-//	}
 
 	@RequestMapping("/manage_screen.mdo")
 	public String getScreen() {
@@ -109,9 +104,4 @@ public class AdminController {
 		return "manage_screen";
 	}
 
-	@RequestMapping("/member_insert.mdo")
-	public String getMemberInsert() {
-
-		return "member_insert";
-	}
 }

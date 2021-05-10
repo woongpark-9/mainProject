@@ -11,35 +11,27 @@
 	var opt_ticket_id = [];
 	var opt_cert = [];
 	var opt_ban = [];
-	
 
 	var str_gender = '${memberModifyInfo.gender }';
 	var str_ticket_id = '${memberModifyInfo.ticket_id }';
 	var str_cert = '${memberModifyInfo.cert }';
 	var str_ban = '${memberModifyInfo.ban }';
-	
+
 	opt_gender.push(str_gender);
 	opt_ticket_id.push(str_ticket_id);
 	opt_cert.push(str_cert);
 	opt_ban.push(str_ban);
-	
 
 	$(document).ready(function() {
 		$('#gender').selectpicker('val', opt_gender);
-	});
-
-	$(document).ready(function() {
+		
 		$('#ticket_id').selectpicker('val', opt_ticket_id);
-	});
-
-	$(document).ready(function() {
+		
 		$('#cert').selectpicker('val', opt_cert);
-	});
-
-	$(document).ready(function() {
+		
 		$('#ban').selectpicker('val', opt_ban);
 	});
-	
+
 </script>
 </head>
 <body>
@@ -96,14 +88,7 @@
 
 																	</div>
 																	<br>
-																	<div>
-																		<label for="gender">성별</label> <select
-																			class="form-control" id="gender" name="gender">
-																			<option value="남자">남자</option>
-																			<option value="여자">여자</option>
-																		</select>
-																	</div>
-																	<br>
+
 																</div>
 															</div>
 
@@ -117,18 +102,28 @@
 															<div class="d-flex">
 																<div class="text-left text-secondary">
 																	<div>
+																		<label for="gender">성별</label> <select
+																			class="form-control" id="gender" name="gender"
+																			title="선택해 주세요">
+																			<option value="남자">남자</option>
+																			<option value="여자">여자</option>
+																		</select>
+																	</div>
+																	<br>
+																	<div>
 																		<label for="ticket_id">이용권</label> <select
-																			class="form-control" id="ticket_id"
-																			name="ticket_id">
-																			<option value="30">30일</option>
-																			<option value="60">60일</option>
-																			<option value="90">90일</option>
+																			class="form-control" id="ticket_id" name="ticket_id"
+																			title="선택해 주세요">
+																			<c:forEach var="ticketList" items="${ticketList }">
+																				<option value="${ticketList.ticket_id }">${ticketList.ticket_name } ${ticketList.ticket_period }일권</option>
+																			</c:forEach>
 																		</select>
 																	</div>
 																	<br>
 																	<div>
 																		<label for="cert">본인인증</label> <select
-																			class="form-control" id="cert" name="cert">
+																			class="form-control" id="cert" name="cert"
+																			title="선택해 주세요">
 																			<option value="Y">Yes</option>
 																			<option value="N">No</option>
 																		</select>
@@ -136,17 +131,18 @@
 																	<br>
 																	<div>
 																		<label for="ban">계정상태</label> <select
-																			class="form-control" id="ban" name="ban">
+																			class="form-control" id="ban" name="ban"
+																			title="선택해 주세요">
 																			<option value="N">비활성화</option>
 																			<option value="Y">활성화</option>
 																		</select>
 																	</div>
-																	<br>
-																	<div>
-																		<label for="join_date">가입일</label> <input type="text"
-																			class="form-control" id="join_date" name="join_date"
-																			value="${memberModifyInfo.join_date }">
-																	</div>
+																	<!-- 																	<br> -->
+																	<!-- 																	<div> -->
+																	<!-- 																		<label for="join_date">가입일</label> <input type="text" -->
+																	<!-- 																			class="form-control" id="join_date" name="join_date" -->
+																	<%-- 																			value="${memberModifyInfo.join_date }"> --%>
+																	<!-- 																	</div> -->
 																	<br>
 																	<div>
 																		<c:if test="${memberModifyInfo == null}">
@@ -161,8 +157,8 @@
 																			onclick="acyncMovePage('manage_member.mdo')">뒤로가기</button>
 																	</div>
 																</div>
-																
-																
+
+
 															</div>
 
 														</div>

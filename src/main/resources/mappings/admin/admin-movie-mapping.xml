@@ -113,9 +113,14 @@
 
 	<!-- EXCEL , PDF를 나타내기 위함. -->
 	<select id="selectBoardList" resultType="adminmovie">
+		select (row_number() over()) AS rownum, seq, title, director_name, actor_name, genre_name, movie_runningtime,
+		movie_release_date
+		from(
 		select seq, title, director_name, actor_name, genre_name, movie_runningtime,
 		movie_release_date
-		from movie order by seq desc
+		from movie		
+		order by seq) st
+		order by rownum desc
 	</select>
 
 	<!-- DASHBOARD에 회원수를 나타내기 위함. -->

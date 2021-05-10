@@ -53,23 +53,11 @@
 		</if>
 	</select>
 
-
-
-	<!-- <select id="get_all_member_count" resultType="int"> -->
-	<!-- select count(*) from member -->
-	<!-- </select> -->
-
-	<!-- <select id="getdashboardMemberList" resultMap="memberResult"> -->
-	<!-- select (row_number() over()) AS rownum ,email,nickname,age,gender,ticket_id,cert,ban,join_date 
-		from member order by rownum; -->
-	<!-- </select> -->
-
-
-
 	<!-- EXCEL , PDF를 나타내기 위함. -->
 	<select id="selectBoardList" resultType="adminmember">
-		select seq
-		,email,nickname,age,gender,ticket_id,cert,ban,join_date from member
+		select seq , email, nickname, age, gender, ticket_id,
+		cert, ban, join_date 
+		from member
 		order by seq;
 	</select>
 
@@ -84,7 +72,7 @@
 		insert into
 		member(email,nickname, age, gender, ticket_id, cert, ban,join_date)
 		values(#{email}, #{nickname}, #{age}, #{gender}, #{ticket_id},
-		#{cert}, #{ban}, #{join_date})
+		#{cert}, #{ban}, current_timestamp)
 	</insert>
 
 	<update id="modifyMember" parameterType="adminmember">
@@ -97,9 +85,7 @@
 		ticket_id =
 		#{ticket_id},
 		cert = #{cert},
-		ban = #{ban},
-		join_date =
-		#{join_date}
+		ban = #{ban}		
 		where seq = #{seq}
 	</update>
 

@@ -167,7 +167,7 @@
 																		<label for="movie_rating">연령 제한</label> <select
 																			class="form-control" id="movie_rating"
 																			name="movie_rating" title="선택해 주세요">
-																			<option value="전체">전체 관람가</option>
+																			<option value="All">전체 관람가</option>
 																			<option value="12">12세 이상 관람가</option>
 																			<option value="15">15세 이상 관람가</option>
 																			<option value="19">19세 이상 관람가</option>
@@ -182,6 +182,14 @@
 																			<option value="미국">미국</option>
 																			<option value="영국">영국</option>
 																			<option value="일본">일본</option>
+																			<option value="프랑스">프랑스</option>
+																			<option value="중국">중국</option>
+																			<option value="캐나다">캐나다</option>
+																			<option value="대만">대만</option>
+																			<option value="스페인">스페인</option>
+																			<option value="오스트레일리아">오스트레일리아</option>
+																			<option value="인도">인도</option>
+																			<option value="러시아">러시아</option>
 																		</select>
 																	</div>
 																	<br>
