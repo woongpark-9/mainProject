@@ -5,8 +5,7 @@
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="css/member/index.css">
+<link rel="stylesheet" href="css/member/index.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -38,7 +37,7 @@
 	}
 </script>
 </head>
-<body style="word-break: keepall;">
+<body style="word-break: keepall; background-color: #212529;">
 	<header class="showcase"
 		style="background: url('http://yonom.duckdns.org/images/member/backcopy.jpg') no-repeat center center/cover;">
 		<div class="showcase-top">
