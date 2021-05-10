@@ -122,10 +122,13 @@ public class AdminGenreController {
 
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("장르");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
+		
+		sheet.setColumnWidth(0, 3000);
+		sheet.setColumnWidth(1, 3000);
 
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
@@ -146,6 +149,7 @@ public class AdminGenreController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);

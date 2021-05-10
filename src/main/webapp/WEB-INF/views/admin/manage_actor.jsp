@@ -139,12 +139,12 @@
 															<label class="control-label">배우명</label>
 															<div>
 																<input type="text" class="form-control input-lg"
-																	id="ins_actor_name" value="${actorList.actor_name }">
+																	id="ins_actor_name">
 															</div>
 															<br> <label class="control-label">생년월일</label>
 															<div>
 																<input type="text" class="form-control input-lg"
-																	id="ins_actor_birth" value="${actorList.actor_birth }">
+																	id="ins_actor_birth">
 															</div>
 															<br>
 															<div>

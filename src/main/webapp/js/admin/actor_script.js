@@ -2,8 +2,7 @@ var actorId = "";
 var actorName="";
 var actorBirth="";
 
-$(document).ready(function() {   
-   
+$(document).ready(function() {     
    $('#modifyActor').on('show.bs.modal', function(event) {
       actorId = $(event.relatedTarget).data('modid');
       actorName = $(event.relatedTarget).data('aname');
@@ -19,8 +18,6 @@ $(document).ready(function() {
 //      alert(actorId);
 //      console.log(actorId);
    });
-   
-   
 });
 
 //배우 삭제
@@ -73,8 +70,6 @@ function acyncInsertActor(url) {
          alert("error");
       },
       complete : function() {
-    	  $('#mod_actor_name').val("");
-          $('#mod_actor_birth').val("");
     	  acyncMovePage('manage_actor.mdo');
       }
    });
@@ -82,7 +77,6 @@ function acyncInsertActor(url) {
 
 // 배우 수정
 function acyncModifyActor(url) {
-//   var $form = $('#insertActorForm').serialize();
 //   console.log(JSON.stringify($form));
 //   alert(JSON.stringify($form));
    var data = {"actor_id" : actorId, 

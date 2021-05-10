@@ -129,7 +129,7 @@ public class AdminActorController {
 
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("배우");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
@@ -138,7 +138,10 @@ public class AdminActorController {
 		CellStyle headStyle = wb.createCellStyle();
 		CreationHelper creationHelper = wb.getCreationHelper();
 		// 가는 경계선을 가집니다.
-		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(0, 5000);
+		sheet.setColumnWidth(1, 8000);
+		sheet.setColumnWidth(2, 5000);
+		
 		headStyle.setBorderTop(BorderStyle.THIN);
 		headStyle.setBorderBottom(BorderStyle.THIN);
 		headStyle.setBorderLeft(BorderStyle.THIN);
@@ -155,6 +158,8 @@ public class AdminActorController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-dd-mm"));
 		dataStyle.setBorderTop(BorderStyle.THIN);

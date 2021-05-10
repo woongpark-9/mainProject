@@ -117,12 +117,14 @@ public class AdminDirectorController {
 		
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("감독");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
+		sheet.setColumnWidth(0, 3000);
+		sheet.setColumnWidth(1, 6000);
 		sheet.setColumnWidth(2, 3000);
 		
 		// 테이블 헤더용 스타일
@@ -144,9 +146,10 @@ public class AdminDirectorController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 		
 		CellStyle dataStyle = wb.createCellStyle();
-		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-dd-mm"));
+		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
 		dataStyle.setBorderTop(BorderStyle.THIN);
 		dataStyle.setBorderBottom(BorderStyle.THIN);
 		dataStyle.setBorderLeft(BorderStyle.THIN);
@@ -181,7 +184,7 @@ public class AdminDirectorController {
 		
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=DirectorExcelFile.xls");
 		
 		wb.write(response.getOutputStream());
 		wb.close();

@@ -34,7 +34,6 @@ function acyncDeleteGenre(url) {
 //         console.log(JSON.stringify(data));
 //         alert(JSON.stringify(data));
          if (data == 1) {
-
             alert("해당 장르가 삭제되었습니다.");
             acyncMovePage('manage_genre.mdo');
          } else {
@@ -49,7 +48,6 @@ function acyncDeleteGenre(url) {
 
 // 장르 추가
 function acyncInsertGenre(url) {
-   //var $form = $('#insertGenreForm').serialize();
    //console.log(JSON.stringify($form));
    //alert(JSON.stringify($form));
    $.ajax({
@@ -75,7 +73,6 @@ function acyncInsertGenre(url) {
 
 // 장르 수정
 function acyncModifyGenre(url) {
-//   var $form = $('#insertGenreForm').serialize();
 //   console.log(JSON.stringify($form));
 //   alert(JSON.stringify($form));
    var data = {"genre_id":genreId, 
@@ -105,28 +102,6 @@ function acyncModifyGenre(url) {
       }
    });
 }
-
-//// 장르 수정 데이터 불러오기
-//function acyncModifyGenrePage(url, seq) {
-//   var seq = {
-//      "seq" : seq
-//   }
-//   $.ajax({
-//      url : url,
-//      type : "POST",
-//      data : seq,
-//      success : function(data) {
-//         $('#bodyContents').children().remove();
-//         $('#bodyContents').html(data);
-//      },
-//      error : function() {
-//         console.log("장르 수정 데이터 불러오기 실패")
-//         alert("장르 수정 데이터 불러오기 실패")
-//         // console.log(JSON.stringify(data));
-//         // alert(JSON.stringify(data));
-//      }
-//   });
-//}
 
 // PDF 이름값 저장을 하기 위한..
 function acyncGenrePdf(url) {

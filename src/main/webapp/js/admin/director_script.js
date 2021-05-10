@@ -30,8 +30,8 @@ function acyncDeleteDirector(url) {
       data : id,
       dataType : "json",
       success : function(data) {
-         console.log(JSON.stringify(data));
-         alert(JSON.stringify(data));
+         //console.log(JSON.stringify(data));
+         //alert(JSON.stringify(data));
          if (data == 1) {
             alert("해당 감독이 삭제되었습니다.");  
             acyncMovePage('manage_director.mdo');
@@ -47,7 +47,6 @@ function acyncDeleteDirector(url) {
 
 //감독 수정
 function acyncModifyDirector(url) {
-   //var $form = $('#modifyDirectorForm').serialize();
    var form = {"director_id" : directorModifyId,
             "director_name" : document.getElementById('modifyDirectorNameInput').value,
             "director_birthdate" : document.getElementById('modifyDirectorBirthDateInput').value
