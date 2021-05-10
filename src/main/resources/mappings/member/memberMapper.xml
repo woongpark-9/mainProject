@@ -45,7 +45,7 @@
 		, #{gender}
 		, #{cert}
 	
-		, #{join_date}
+		, current_timestamp
 		, #{kakao}
 		, #{naver}
 
@@ -155,7 +155,7 @@
 		, #{cert}
 	
 
-		, #{join_date}
+		,  current_timestamp
 
 		, #{kakao}
 		, #{naver}

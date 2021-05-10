@@ -1,5 +1,7 @@
 package com.main.nowflix.client.sales.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,5 +20,10 @@ public class SalesDAO {
 		System.out.println("dao insertSalesInfo 실행");
 		sql.insert("salesMapper.insertSalesInfo", vo);
 		
+	}
+	
+	public List<SalesVO> getSalesInfo(SalesVO vo){
+		System.out.println("dao getSalesInfo 실행");
+		return sql.selectList("salesMapper.getSalesInfo", vo);
 	}
 }

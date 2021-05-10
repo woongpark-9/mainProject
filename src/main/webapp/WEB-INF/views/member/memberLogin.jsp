@@ -12,12 +12,12 @@
 
 //유효성 검사 메서드
 function checkAll() {
-   if(!checkEmail()){
-      return false;
-   }else if(!checkPassword(form.email.value,form.pass.value)){
-      return false;
-   }
-   return true;
+	if(!checkEmail()){
+		return false;
+	}else if(!checkPassword(form.email.value,form.pass.value)){
+		return false;
+	}
+	return true;
 }
 //공백확인 메서드
 function checkExistData(value, dataName) {
@@ -30,23 +30,28 @@ function checkExistData(value, dataName) {
 
 
 function checkEmail(){
-   
-   if(document.getElementById("email").value.length <= 0){
-      alert("이메일을 입력해주세요!");
-      return false;
-   }
-   return true;
+	
+	if(document.getElementById("email").value.length <= 0){
+		alert("이메일을 입력해주세요!");
+		return false;
+	}
+	return true;
 }
 function checkPassword(email,pass){
-   //비밀번호가 입력되었는지 확인하기
-   if(!checkExistData(pass,"비밀번호를")){
-      return false;
-   }else if(document.getElementById("pass").value.length <=0){
-      alert("비밀번호를 입력해주세요!");
-      return false;
-   }
-   return true;
+	//비밀번호가 입력되었는지 확인하기
+	if(!checkExistData(pass,"비밀번호를")){
+		return false;
+	}else if(document.getElementById("pass").value.length <=0){
+		alert("비밀번호를 입력해주세요!");
+		return false;
+	}
+	return true;
 }
+
+
+
+
+
 
 
 </script>
@@ -62,19 +67,19 @@ function checkPassword(email,pass){
 		<div class="center_login_text_div">
 			<p>로그인<p>
 		</div>
-		<form action="login.do" method="post" >
+	<form name="form" action="login.do" method="post" onsubmit="return checkAll()" >
 		<div class="center_login_id">
 			<div class="center_login_id_label">
 				<label for="id">이메일 주소 또는 전화번호 </label><br>	
 			</div>
-			<input type="text" size="20" value="" name="email">
+			<input id="email" type="text" size="20" value="" name="email">
 		</div>
 		
 		<div class="center_login_pw">
 			<div class="center_login_pw_label">
 				<label for="pw">비밀번호 </label><br>	
 			</div>
-			<input type="password" size="20" value="" name="pass">
+			<input id="pass" type="password" size="20" value="" name="pass">
 		</div>
 		
 		<div class="center_login_button">

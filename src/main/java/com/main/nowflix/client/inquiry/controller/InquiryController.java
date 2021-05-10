@@ -80,22 +80,18 @@ public class InquiryController {
 	}
 
 	@RequestMapping(value = "inquiryDetail.do")
-	public String inquiryDetail(InquiryVO vo, MemberVO member, Model model, HttpSession session) throws Exception {
+	public String inquiryDetail(InquiryVO vo, MemberVO member, Model model, HttpSession session,String inquiry_id) throws Exception {
 		member = (MemberVO) session.getAttribute("member");
 		List<InquiryVO> inquiryList = (List) session.getAttribute("inquiryList");
 		List<InquiryVO> inquiryDetailList = new ArrayList<InquiryVO>();
 
 		System.out.println(inquiryList.get(0).getEmail());
 		for (int i = 0; i < inquiryList.size(); i++) {
-			if (inquiryList.get(i).getEmail().equals(member.getEmail())
-					&& inquiryList.get(i).getInquiry_title().equals(vo.getInquiry_title())) {
+			if (inquiryList.get(i).getInquiry_id() == Integer.parseInt(inquiry_id)) {
 				inquiryDetailList.add(inquiryList.get(i));
 			}
 		}
 
-		for (InquiryVO in : inquiryList) {
-			System.out.println(in.getManager_email());
-		}
 		model.addAttribute("inquiryDetailList", inquiryDetailList);
 		model.addAttribute("member", member);
 		return "/views/member/inquirydetail";

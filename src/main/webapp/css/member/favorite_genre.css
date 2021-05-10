@@ -54,6 +54,7 @@ body{
 
 .button{
 	display: inline-block;
+	text-decoration: none;
 	background: red;
 	color: white;
 	padding: 0.5rem 1.2rem;

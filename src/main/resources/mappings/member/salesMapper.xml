@@ -20,6 +20,14 @@
 		
 	</resultMap>
 	
+	<!-- 결제정보 조회 -->
+	
+	<select id="getSalesInfo" resultMap="salesResult">
+	
+		SELECT * FROM SALES WHERE EMAIL=#{email}
+	
+	</select>
+	
 	
 	<!-- 결제정보 입력  -->
 	

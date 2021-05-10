@@ -360,9 +360,9 @@
 								</div>
 								<div class="margin"></div>
 								<div class="profile-bottom">
-									<a href="#">계정</a> <a
+									<a href="getSettings.do">계정</a> <a
 										href="getInquiryList.do?email=${profile.email }">고객센터</a> <a
-										href="#">Nowflix에서 로그아웃하기</a>
+										href="logout.do">Nowflix에서 로그아웃하기</a>
 								</div>
 							</div>
 						</div>

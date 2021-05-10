@@ -13,7 +13,7 @@
 	<div class="header">
 		<a title="홈" href="#"> <img
 			src="http://nowflix.yonom.duckdns.org:1510/images/logo/nowflix.png"
-			style="width: 119px;">
+			style="width: 8vw;">
 		</a>
 
 		<div class="user-info">
@@ -63,7 +63,7 @@
 	 					<c:forEach var="inquiryList" items="${inquiryList }">
 	 					<li class="sales-table-content">
 	 					<div class="col-date-content">${inquiryList.inquiry_type }</div>
-	 					<div class="col-item-content"><a href="inquiryDetail.do?inquiry_title=${inquiryList.inquiry_title}">${inquiryList.inquiry_title }</a></div>
+	 					<div class="col-item-content"><a href="inquiryDetail.do?inquiry_id=${inquiryList.inquiry_id }">${inquiryList.inquiry_title }</a></div>
 	 					<div class="col-expirydate-content">${inquiryList.inquiry_date }</div>
 	 					<div class="col-paymenttype-content">${inquiryList.reply_date }</div>
 	 				

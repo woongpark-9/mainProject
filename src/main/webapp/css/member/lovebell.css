@@ -337,7 +337,9 @@ button.profile-button {
 }
 
 .poster img {
-	border-radius: 0.2vw;
+
+	border-top-left-radius: 0.2vw;
+border-top-right-radius: 0.2vw;
 	width: 15.2vw;
 	height: 8.2vw	;
 }
@@ -650,6 +652,17 @@ button.profile-button {
 	position: absolute;
 	top: 3.3vw;
 	left: 12vw;
+	   background: none;
+   border: none;
+   outline: none;
+	cursor: pointer;
+}
+.detail-button:focus {
+	
+	   background: none;
+   border: none;
+   outline: none;
+	
 }
 
 .detail {

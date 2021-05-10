@@ -22,6 +22,8 @@ import com.main.nowflix.client.login.auth.SNSLogin;
 import com.main.nowflix.client.login.auth.SnsValue;
 import com.main.nowflix.client.member.service.MemberService;
 import com.main.nowflix.client.member.vo.MemberVO;
+import com.main.nowflix.client.sales.service.SalesService;
+import com.main.nowflix.client.sales.vo.SalesVO;
 import com.main.nowflix.client.ticket.service.TicketService;
 import com.main.nowflix.client.ticket.vo.TicketVO;
 import com.main.nowflix.util.SHA256;
@@ -39,6 +41,9 @@ public class MemberController  {
 	@Autowired
 	private SnsValue naverSns;
 
+	@Autowired
+	SalesService salesService;
+	
 	
 	//암호화기능사용 BCryptPasswordEncoder
 	@Autowired
@@ -295,6 +300,51 @@ public class MemberController  {
 			model.addAttribute("ticketList", ticketList);
 			model.addAttribute("recommendTicketList", recommendTicketList);
 			return "/views/member/select_ticket_step2";
+		}
+		
+		
+		@RequestMapping(value="/getSettings.do")
+		public String getSettings(SalesVO vo , HttpSession session,MemberVO member,Model model) throws Exception {
+			member = (MemberVO)session.getAttribute("member");
+			vo.setEmail(member.getEmail());
+			String ticketText = "";
+			String ticketType = "";
+			List<SalesVO> salesList = salesService.getSalesInfo(vo);
+			System.out.println(salesList.get(0).toString());
+			if(salesList.get(0).getTicket_id().equals("00101")) {
+				ticketText = "베이직 1개월";
+				ticketType = "베이직";
+			}else if(salesList.get(0).getTicket_id().equals("00103")) {
+				ticketText = "베이직 3개월";
+				ticketType = "베이직";
+			}else if(salesList.get(0).getTicket_id().equals("00106")) {
+				ticketText = "베이직 6개월";
+				ticketType = "베이직";
+			}else if(salesList.get(0).getTicket_id().equals("00112")) {
+				ticketText = "베이직 12개월";
+				ticketType = "베이직";
+			}else if(salesList.get(0).getTicket_id().equals("00201")) {
+				ticketText = "프리미엄 1개월";
+				ticketType = "프리미엄";
+			}else if(salesList.get(0).getTicket_id().equals("00203")) {
+				ticketText = "프리미엄 3개월";
+				ticketType = "프리미엄";
+			}else if(salesList.get(0).getTicket_id().equals("00206")) {
+				ticketText = "프리미엄 6개월";
+				ticketType = "프리미엄";
+			}else if(salesList.get(0).getTicket_id().equals("00212")) {
+				ticketText = "프리미엄 12개월";
+				ticketType = "프리미엄";
+			}
+			
+			
+			
+			model.addAttribute("salesList",salesList);
+			model.addAttribute("ticketText",ticketText);
+			model.addAttribute("ticketType",ticketType);
+			
+			
+			return "/views/member/settings";
 		}
 	
 		

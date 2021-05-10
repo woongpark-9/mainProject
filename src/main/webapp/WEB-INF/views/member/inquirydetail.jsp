@@ -13,7 +13,7 @@
 	<div class="header">
 		<a title="홈" href="#"> <img
 			src="http://nowflix.yonom.duckdns.org:1510/images/logo/nowflix.png"
-			style="width: 119px;">
+			style="width: 8vw;">
 		</a>
 
 		<div class="user-info">
@@ -24,8 +24,9 @@
 					style="width: 15px;">
 			<button class="dropdown-togle" aria-haspopup="true"></button>
 			<div class="dropdown-content">
-				<a href="#">문의등록</a>
-				<a href="#">문의내역</a>
+				<a href="getInsertInquiry.do">문의등록</a>
+				<a href="getInquiryList.do">문의내역</a>
+				<a href="getInquiryFAQ.do">자주묻는질문</a>
 			</div>
 			
 			</div>
@@ -61,10 +62,10 @@
 	 					</li>
 	 				</ul>
 	 				
-	 					<c:if test="${not empty inquiryDetailList.manager_email }">
+	 					<c:if test="${not empty inquiryDetailList.reply_date }">
 	 					<ul class="sales-table">
 	 					<li class="sales-table-header">
-	 					<div class="col-date">${inquiryDetailList.manager_email }</div>
+	 					<div class="col-date">${inquiryDetailList.reply_title }</div>
 	 					<div class="col-item">${inquiryDetailList.reply_content }</div>
 	 						</li>
 	 						</ul>
@@ -84,24 +85,24 @@
 	 			
 	 		
 	 		</div>
-	 		<div class="comment-fields " style="display: block;">
+<!-- 	 		<div class="comment-fields " style="display: block;"> -->
             
+<!-- 			<form action="insertReply.do" method="post"> -->
+<!--             <textarea name="" id="request_comment_body" placeholder="" rows="7" aria-required="true" aria-label="답장 추가"></textarea> -->
 
-            <textarea name="" id="request_comment_body" placeholder="" rows="7" aria-required="true" aria-label="답장 추가"></textarea>
-
-            <div class="comment-attachments">
-
-
+<!--             <div class="comment-attachments"> -->
 
 
 
-<ul id="request-attachments-pool" class="upload-pool" data-uploads="[]" data-template="upload-template"></ul>
 
 
-            </div>
-                <input type="submit" name="commit" value="제출" class="button button-large" disabled="">
-          </div>
-      
+<!-- <ul id="request-attachments-pool" class="upload-pool" data-uploads="[]" data-template="upload-template"></ul> -->
+
+
+<!--             </div> -->
+<!--                 <input type="submit" name="commit" value="제출" class="button button-large" disabled=""> -->
+<!--       </form> -->
+<!--           </div> -->
 	 		
 	 	</div>
 

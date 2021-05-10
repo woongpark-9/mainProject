@@ -31,9 +31,9 @@ controlsContainer.style.opacity = '0';
 privious.style.opacity = '0';
 
 watchedBar.style.width = '0px';
-pauseButton.style.display = 'none';
+pauseButton.style.display='';
+playButton.style.display = 'none';
 minimizeButton.style.display = 'none';
-
 function goBack(){
 	window.history.back();
 }
