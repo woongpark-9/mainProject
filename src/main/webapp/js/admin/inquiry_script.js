@@ -102,8 +102,7 @@ function acyncModifyInquiry(url) {
 		"inquiry_id" : inquiryModifyId,
 		"inquiry_type" : document.getElementById('modifyInquiryTypeInput').value,
 		"inquiry_title" : document.getElementById('modifyInquiryTitleInput').value,
-		"inquiry_content" : document
-				.getElementById('modifyInquiryContentInput').value,
+		"inquiry_content" : document.getElementById('modifyInquiryContentInput').value,
 		"reply_title" : document.getElementById('modifyReplyTitleInput').value,
 		"reply_content" : document.getElementById('modifyReplyContentInput').value,
 		"check_flag" : '1'

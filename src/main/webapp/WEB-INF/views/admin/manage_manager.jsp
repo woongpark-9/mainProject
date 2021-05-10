@@ -10,6 +10,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>관리자 관리</title>
 <%@ include file="header.jsp"%>
+<script type="text/javascript">
+
+</script>
 </head>
 
 <body>
@@ -100,7 +103,7 @@
 												data-toggle="modal" data-target="#modifyManager"
 												data-modifyid="${managerList.manager_id }"
 												data-modifyemail="${managerList.manager_email }"
-												data-modifypass="${managerList.manager_pass}"
+												data-modifypass="${managerList.manager_pass }"
 												data-modifytype="${managerList.manager_type }">수정</button>
 											<button type="button" class="btn btn-danger btn-sm"
 												data-toggle="modal" data-target="#deleteManager"
@@ -139,7 +142,7 @@
 											
 											<div>
 												<label for="manager_type">등급</label>
-												<select class="form-control"
+												<select class="form-control modifyManagerTypeInput"
 													id="modifyManagerTypeInput" name="manager_type" title="등급">
 													<option value="일반 관리자">일반 관리자</option>
 													<option value="최고 관리자">최고 관리자</option>
@@ -203,9 +206,9 @@
 												<br> 
 												<div>
 													<label for="manager_type">등급</label>
-													<select class="form-control" id="manager_type" name="manager_type" title="등급">
+													<select class="form-control" name="manager_type" title="등급">
 														<option value="일반 관리자">일반 관리자</option>
-														<option value="최고 관리자 ">최고 관리자</option>
+														<option value="최고 관리자">최고 관리자</option>
 													</select>
 												</div>
 												<br>
