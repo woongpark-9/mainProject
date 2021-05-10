@@ -70,7 +70,7 @@ public class AdminManagerController {
 		List<AdminManagerVO> managerList;
 		managerList = managerService.getManagerList(map);
 
-		model.addAttribute("managerList", managerList); // movieList 정보저장
+		model.addAttribute("managerList", managerList); // managerList 정보저장
 		model.addAttribute("nowPage", nowPage); // nowPage 정보저장
 		model.addAttribute("totalPage", totalPage); // totalPage 정보저장
 		model.addAttribute("searchCondition", searchCondition); // searchCondition 정보저장
@@ -141,13 +141,16 @@ public class AdminManagerController {
 
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("게시판");
+		Sheet sheet = wb.createSheet("관리자");
 		Row row = null;
 		Cell cell = null;
 		int rowNo = 0;
 
 		CreationHelper creationHelper = wb.getCreationHelper();
-		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(0, 6000);
+		sheet.setColumnWidth(1, 7000);
+		sheet.setColumnWidth(2, 6000);
+		sheet.setColumnWidth(3, 6000);
 
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
@@ -168,7 +171,8 @@ public class AdminManagerController {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
-
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		
 		CellStyle dataStyle = wb.createCellStyle();
 		dataStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-mm-dd"));
 		dataStyle.setBorderTop(BorderStyle.THIN);
@@ -211,7 +215,7 @@ public class AdminManagerController {
 
 		// 엑셀 출력
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=MovieExcelFile.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=ManagerExcelFile.xls");
 
 		wb.write(response.getOutputStream());
 		wb.close();

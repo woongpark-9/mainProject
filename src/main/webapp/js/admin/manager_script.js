@@ -9,9 +9,10 @@ $(document).ready(function() {
       var managerModifyEmail = $(event.relatedTarget).data('modifyemail');
       var managerModifyPass = $(event.relatedTarget).data('modifypass');
       var managerModifyType = $(event.relatedTarget).data('modifytype');
+      alert(managerModifyType);
       $('.modifyManagerEmailInput').val(managerModifyEmail);
       $('.modifyManagerPassInput').val(managerModifyPass);
-      $('.modifyManagerTypeInput').val(managerModifyType);
+      $(event.currentTarget).find('select[name="manager_type"]').val(managerModifyType);
    });
 });
 
@@ -25,7 +26,7 @@ function acyncDeleteManager(url) {
       dataType : "json",
       success : function(data) {
          if (data == 1) {
-            alert("해당 관리자이 삭제되었습니다.");  
+            alert("해당 관리자가 삭제되었습니다.");  
             acyncMovePage('manage_manager.mdo');
          } else {
             alert("[Error] 관리자 삭제 오류");

@@ -11,6 +11,7 @@
 <title>관리자 관리</title>
 <%@ include file="header.jsp"%>
 </head>
+
 <body>
 	<section>
 		<div class="container-fluid">
@@ -109,7 +110,55 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<!-- modal -->
+						<!-- modify modal -->
+						<div class="modal fade" id="modifyManager">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">관리자 수정</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											
+											<div>
+												<label for="manager_email">이메일</label>
+													<input type="text"
+													class="form-control input-lg modifyManagerEmailInput"
+													id="modifyManagerEmailInput" name="manager_email">
+											</div>
+											<br> 
+											
+											<div>
+												<label for="manager_pass">패스워드</label>
+													<input type="password"
+														class="form-control input-lg modifyManagerPassInput"
+														id="modifyManagerPassInput" name="manager_pass">
+											</div>
+											<br> 
+											
+											<div>
+												<label for="manager_type">등급</label>
+												<select class="form-control"
+													id="modifyManagerTypeInput" name="manager_type" title="등급">
+													<option value="일반 관리자">일반 관리자</option>
+													<option value="최고 관리자">최고 관리자</option>
+												</select>
+											</div>
+											<br>
+											<div>
+												<button type="button" class="btn btn-success"
+													data-dismiss="modal"
+													onclick="acyncModifyManager('managerModify.mdo')">수정</button>
+												<button type="button" class="btn btn-danger"
+													data-dismiss="modal">취소</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- delete modal -->
 						<div class="modal fade" id="deleteManager">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -128,7 +177,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- modal -->
+						<!-- insert modal -->
 						<div class="modal fade" id="insertManager">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -139,19 +188,22 @@
 									<div class="modal-body">
 										<form name="insertManagerForm" id="insertManagerForm">
 											<div class="form-group">
-												<label class="manager_email">이메일</label>
+												
 												<div>
+													<label for="manager_email">이메일</label>
 													<input type="text" class="form-control input-lg"
 														name="manager_email">
 												</div>
-												<br> <label class="manager_pass">패스워드</label>
+												<br> 
 												<div>
+													<label for="manager_pass">패스워드</label>
 													<input type="password" class="form-control input-lg"
 														name="manager_pass">
 												</div>
-												<br> <label class="manager_type">등급</label>
+												<br> 
 												<div>
-													<select class="form-control" name="manager_type">
+													<label for="manager_type">등급</label>
+													<select class="form-control" id="manager_type" name="manager_type" title="등급">
 														<option value="일반 관리자">일반 관리자</option>
 														<option value="최고 관리자 ">최고 관리자</option>
 													</select>
@@ -172,49 +224,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- modal -->
-						<div class="modal fade" id="modifyManager">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">관리자 수정</h4>
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-											<label class="manager_email">이메일</label>
-											<div>
-												<input type="text"
-													class="form-control input-lg modifyManagerEmailInput"
-													id="modifyManagerEmailInput" name="manager_email">
-											</div>
-											<br> <label class="manager_pass">패스워드</label>
-											<div>
-												<input type="password"
-													class="form-control input-lg modifyManagerPassInput"
-													id="modifyManagerPassInput" name="manager_pass">
-											</div>
-											<br> <label class="manager_type">등급</label>
-											<div>
-												<select class="form-control modifyManagerTypeInput"
-													id="modifyManagerTypeInput" name="manager_type">
-													<option value="일반 관리자">일반 관리자</option>
-													<option value="최고 관리자">최고 관리자</option>
-												</select>
-											</div>
-											<br>
-											<div>
-												<button type="button" class="btn btn-success"
-													data-dismiss="modal"
-													onclick="acyncModifyManager('managerModify.mdo')">수정</button>
-												<button type="button" class="btn btn-danger"
-													data-dismiss="modal">취소</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<!-- page -->
 						<nav>
 							<ul class="pagination justify-content-center">
