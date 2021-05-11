@@ -79,7 +79,6 @@ var _movieDetailSeq = "";
 			var profile_id = $(event.relatedTarget).data('profile_id');
             _movieDetailSeq = $(event.relatedTarget).data('detail');
             var check = $(event.relatedTarget).data('check');
-            alert(check);
 			// alert(title);
 			// console.log(title);
 			var modal = $(this);
@@ -94,7 +93,7 @@ var _movieDetailSeq = "";
 			modal.find('.modal-releasedate').text(releasedate);
 			modal.find('.modal-webimage').attr('src', webimage);
 			modal.find('.morelikethis-section').text(title + " 상세정보");
-			modal.find('.modal-check-button').attr('src', check);
+			modal.find('#modal-check-button').attr('src', check);
 		});
 
 	});
@@ -523,7 +522,7 @@ var _movieDetailSeq = "";
 														<c:out value="movieList : ${movieList.seq}" />
 														<c:out value="pickList : ${pickList.seq}" />
 														<c:choose>
-															<c:when test="${movieList.seq eq  pickList.seq}">
+															<c:when test="${ movieList.seq == pickList.seq}">
 																<c:set var="check"
 																	value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
 															</c:when>
