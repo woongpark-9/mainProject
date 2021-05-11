@@ -18,7 +18,7 @@ public class sendMail {
 	public static void mailCheck(String mail) {
 		String email = mail;
 		
-		String host = "http://ec2-18-221-64-44.us-east-2.compute.amazonaws.com:8080/nowflix/";
+		String host = "http://ec2-18-221-64-44.us-east-2.compute.amazonaws.com/nowflix/";
 		String from = "nowflixHero@gmail.com";
 		String to = email;
 		String subject = "Nowflix Email ¿Œ¡ı";
