@@ -142,7 +142,7 @@ function checkPassword(email,pass){
 					placeholder="이름(2자 이상)">
 					 <input name="email" id="email" class="center_div_id"
 					type="email" size="30" value="${emailtext }"
-					placeholder="아이디  (example@google.com)" disabled> 
+					placeholder="아이디  (example@google.com)" > 
 					<input id="emailCheck" type="hidden" value="N">
 					<input id="pass" name="pass" class="center_div_password" type="password" size="30" value=""
 					placeholder="영문 대소문자와 숫자 4~12">

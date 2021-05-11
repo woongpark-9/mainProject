@@ -28,7 +28,7 @@
 
 				} else if (data == 0) {
 					$("#idCheck").attr("value", "Y");
-					alert("사용가능한 아이디입니다");
+				
 					var emailtext = document.getElementById('email').value;
 					location.href = "register.do?email=" + emailtext;
 				}
