@@ -48,7 +48,7 @@
 						<div class="bottom-border pb-3" align="center">
 							<img src="images/admin/profile.jpg" alt="" width="50"
 								class="rounded-circle mr-2"> <a href="#"
-								class="text-white">admin</a>
+								class="text-white">${sessionScope.manager.manager_type}</a>
 						</div>
 						<ul class="navbar-nav flex-column mt-4">
 							<!-- 							<li class="nav-item"><a href="#" -->
