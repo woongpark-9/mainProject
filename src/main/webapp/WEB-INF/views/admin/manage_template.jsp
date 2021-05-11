@@ -235,8 +235,10 @@
 										<div class="d-flex justify-content-between">
 											<i class="fas fa-video fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
-												<h5>등록된 영화 수</h5>
-												<h3>총 ${movieCount}편</h3>
+												<div class="text-right">
+													<h5>등록된 영화 수</h5>
+													<h3>총 ${movieCount}편</h3>
+												</div>
 											</div>
 										</div>
 
@@ -253,8 +255,10 @@
 										<div class="d-flex justify-content-between">
 											<i class="fas fa-user fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
-												<h5>가입된 회원 수</h5>
-												<h3>총 ${memberCount}명</h3>
+												<div class="text-right">
+													<h5>가입된 회원 수</h5>
+													<h3>총 ${memberCount}명</h3>
+												</div>
 											</div>
 										</div>
 
@@ -271,8 +275,10 @@
 										<div class="d-flex justify-content-between">
 											<i class="fas fa-chalkboard fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
-												<h5>문의 건수</h5>
-												<h3>총 ${inquiryAllCount}건</h3>
+												<div class="text-right">
+													<h5>문의 건수</h5>
+													<h3>총 ${inquiryAllCount}건</h3>
+												</div>
 											</div>
 										</div>
 
@@ -289,7 +295,9 @@
 										<div class="d-flex justify-content-between">
 											<i class="fas fa-money-check-alt fa-3x text-waring"></i>
 											<div class="text-left text-secondary">
+												<div class="text-right">
 												<h5>월 매출</h5>
+												</div>
 												<c:forEach var="monthlySalesList" items="${monthlySalesList }">
 													<c:forEach var="ticketList" items="${ticketList }">
 														<c:if
@@ -301,7 +309,7 @@
 														</c:if>
 													</c:forEach>													
 												</c:forEach>
-												<h3>&#8361;&nbsp;${monthlySales }</h3>
+												<h3>&#8361;&nbsp;${monthlySales } 원</h3>
 											</div>
 										</div>
 
