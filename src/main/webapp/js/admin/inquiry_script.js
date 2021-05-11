@@ -114,7 +114,7 @@ function acyncModifyInquiry(url) {
 		dataType : "json",
 		success : function(data) {
 			if (data == 1) {
-				alert("해당 답변이 수정되었습니다.");
+				alert("해당 답변이 등록되었습니다.");
 				// acyncRefreshPage();
 				 acyncMovePage('manage_inquiry.mdo');
 			} else {
