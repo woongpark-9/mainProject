@@ -25,7 +25,7 @@
 <script src="script.js"></script>
 <title>Nowflix</title>
 </head>
-<title>Insert title here</title>
+
 </head>
 
  
@@ -47,14 +47,14 @@
 			<div class="ml-3 mr-3" style="font-size: 2vw; color: grey;">
 				<br>
 				이제 Nowflix를 자유롭게 이용하세요! <br>
-				결제 내역을 Email로 보내드렸습니다.
+				
 			</div>
 		</div>
 		<div class="text-center mt-5" style="font-size: 1vw; color:grey;">
     		<a href="" class="col-mb-4 mt-6 editProfile">
     		<img class="img-responsive img-rounded" src="http://yonom.duckdns.org/images/logo/nowflix.png"><br>
     		<br><br>
-    		5초 후에 메인페이지로 이동합니다.
+    		5초 후에 장르선택 페이지로 이동합니다.
     		</a>
 		</div>
 	</div>

@@ -79,6 +79,7 @@ var _movieDetailSeq = "";
 			var profile_id = $(event.relatedTarget).data('profile_id');
             _movieDetailSeq = $(event.relatedTarget).data('detail');
             var check = $(event.relatedTarget).data('check');
+            var href= $(event.relatedTarget).data('href');
 			// alert(title);
 			// console.log(title);
 			var modal = $(this);
@@ -94,6 +95,7 @@ var _movieDetailSeq = "";
 			modal.find('.modal-webimage').attr('src', webimage);
 			modal.find('.morelikethis-section').text(title + " 상세정보");
 			modal.find('#modal-check-button').attr('src', check);
+			modal.find('.modal-href').attr('href',href);
 		});
 
 	});
@@ -327,7 +329,7 @@ var _movieDetailSeq = "";
 			<div class="header">
 				<!-- 	<div class="logo">NEFLIX</div> -->
 				<a
-					href="http://localhost:8080/nowflix/index.do?profile_id=${profile.profile_id }"><img
+					href="index.do?profile_id=${profile.profile_id }"><img
 					class="logo" src="http://yonom.duckdns.org/images/logo/nowflix.png"
 					style="width: 92px; margin-top: 10px;"></a>
 
@@ -337,7 +339,7 @@ var _movieDetailSeq = "";
 					</div>
 					<div class="nav-item">
 						<a href="#"
-							onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가
+							onclick="acyncMovePage5('pick.do', ${profile.profile_id})">내가
 							찜한 콘텐츠</a>
 					</div>
 				</div>
@@ -371,8 +373,9 @@ var _movieDetailSeq = "";
 											data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/1080p.mp4"
 											data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/poster.png"
 											data-releasedate="${recentList.movie_release_date }"
-											data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png">
-											>
+											data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png"
+												data-href="getPlayer.do?seq=${recentList.seq }&profile_id=${profile.profile_id}">
+											
 											<div class="alarm-flex">
 												<img
 													src="${prefixAddr }${recentList.movie_path }/poster.png"
@@ -406,7 +409,7 @@ var _movieDetailSeq = "";
 									</div>
 								</c:forEach>
 								<div class="profile-manage">
-									<a href="http://localhost:8080/nowflix/profile.do">프로필 관리</a>
+									<a href="profile.do">프로필 관리</a>
 								</div>
 								<div class="margin"></div>
 								<div class="profile-bottom">
@@ -458,8 +461,8 @@ var _movieDetailSeq = "";
 							data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/1080p.mp4"
 							data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/poster.png"
 							data-releasedate="${mainMovie.movie_release_date }"
-							data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png">
-
+							data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png"
+								data-href="getPlayer.do?seq=${mainMovie.seq }&profile_id=${profile.profile_id}">
 
 
 
@@ -545,7 +548,9 @@ var _movieDetailSeq = "";
 															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
 															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
 															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
 															width="30px" height="30px">
@@ -598,12 +603,27 @@ var _movieDetailSeq = "";
 																width="40vw" height="auto">
 															</a>
 														</div>
-														<div class="detail-button">
-															<a href="#"> <img
-																src="http://yonom.duckdns.org/images/member/detail-button.png"
-																width="30vw" height="auto">
-															</a>
-														</div>
+															<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
+															width="30px" height="30px">
+														</a>
+													</div>
 													</div>
 												</div>
 											</div>
@@ -655,10 +675,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -713,10 +748,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -773,10 +823,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -819,10 +884,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -865,10 +945,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -921,10 +1016,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
-													<div class="detail-button">
-														<a href="#"> <img
+														<div class="detail-button">
+														<a type="button" class="video3" data-toggle="modal"
+															data-target="#detailMovie"
+															data-detail="${movieList.seq }" data-check="${check }"
+															data-summary="${movieList.summary }"
+															data-title="${movieList.title }"
+															data-genre="${movieList.genre_name }"
+															data-actor="${movieList.actor_name }"
+															data-director="${movieList.director_name }"
+															data-profile_id="${profile.profile_id }"
+															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+															data-releasedate="${movieList.movie_release_date }"
+															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
+															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+															
+															<img
 															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30vw" height="auto">
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -986,9 +1096,11 @@ var _movieDetailSeq = "";
 					<!-- 							<div class="modal-progress-text">총 55분 중 2분</div></span> -->
 					<!-- 					</div> -->
 					<div class="modal-icon">
-						<div class="modal-white-button">
-							<i class="fas fa-play"></i> 재생
-						</div>
+						<a class="modal-href" href="" style="text-decoration:none;">
+							<div class="modal-white-button">
+								<i class="fas fa-play"></i> 재생
+							</div>
+						</a>
 						<div class="modal-icon-position">
 
 							<!-- 찜하기 버튼 -->

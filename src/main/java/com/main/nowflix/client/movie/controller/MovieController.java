@@ -70,7 +70,7 @@ public class MovieController {
 		MovieVO mainMovie = movieService.getMainMovie(movieList, vo);
 		movieService.getSelectMovieList(vo, movieList, model, getpro.getGenre_name(), watchList);
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		List<ProfileVO> profileList = profileService.getProfileList(getpro, member);
+		List<ProfileVO> profileList = profileService.getProfileList(getpro, member,session);
 
 		List<PickVO> pickList = new ArrayList<PickVO>();
 		pickList = pickService.getPickList(getpro);

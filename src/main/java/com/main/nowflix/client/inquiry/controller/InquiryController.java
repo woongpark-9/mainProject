@@ -57,9 +57,22 @@ public class InquiryController {
 
 		member = (MemberVO) session.getAttribute("member");
 		List<FaqVO> faqList = faqService.getFaqList(vo);
-
+		List<FaqVO> registList = new ArrayList<FaqVO>();
+		List<FaqVO> payList = new ArrayList<FaqVO>();
+		
+		for(int i=0; i<faqList.size(); i++) {
+			if(faqList.get(i).getFaq_category().equals("회원가입")) {
+				registList.add(faqList.get(i));
+			}
+			if(faqList.get(i).getFaq_category().equals("결제")) {
+				payList.add(faqList.get(i));
+			}
+		}
+		
+		
 		model.addAttribute("member", member);
-		model.addAttribute("faqList", faqList);
+		model.addAttribute("registList", registList);
+		model.addAttribute("payList",payList);
 		return "/views/member/inquiry_faq";
 	}
 

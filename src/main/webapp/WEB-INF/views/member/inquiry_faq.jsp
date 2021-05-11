@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,7 @@
 				<a href="getInsertInquiry.do">문의등록</a>
 				<a href="getInquiryList.do">문의내역</a>
 				<a href="getInquiryFAQ.do">자주묻는질문</a>
+				<a href="logout.do">로그아웃</a>
 			</div>
 			
 			</div>
@@ -48,11 +50,31 @@
 		<div class="container">
 			<h1>FAQ</h1>
 			
-			<div id="main-content" class="section-tree">
-				<section class="section">
-					<div class="section-tree-title"><a>로그인/계정관리</a></div>
-					<ul class="article-list"></ul>
+			<div id="main-content" class="section-tree" style="display:flex; ">
+			
+				<section class="section" style="display:flex; margin-right:10vw;">
+					<div class="section-tree-title" style=" margin-right:10vw;">
+				
+					<a>${registList[0].faq_category }</a>
+				
+					<c:forEach var="faqList" items="${registList }" >
+					<div class="article-list">${faqList.faq_title }${faqList.faq_content }</div>
+					</c:forEach>
+					
+					</div>
+							<div class="section-tree-title">
+				
+					<a>${payList[0].faq_category }</a>
+				
+					<c:forEach var="faqList" items="${payList }" >
+					<div class="article-list">${faqList.faq_title }${faqList.faq_content }</div>
+					</c:forEach>
+					
+					</div>
 				</section>
+			
+					
+				
 			</div>
 				<footer class="footer">
 					<a title="홈" href="#">Nowflix, Inc</a>

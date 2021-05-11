@@ -23,9 +23,10 @@
 					style="width: 15px;">
 			<button class="dropdown-togle" aria-haspopup="true"></button>
 			<div class="dropdown-content">
-				<a href="getInsertInquiry.do">문의등록</a>
+		<a href="getInsertInquiry.do">문의등록</a>
 				<a href="getInquiryList.do">문의내역</a>
 				<a href="getInquiryFAQ.do">자주묻는질문</a>
+				<a href="logout.do">로그아웃</a>
 			</div>
 			
 			</div>

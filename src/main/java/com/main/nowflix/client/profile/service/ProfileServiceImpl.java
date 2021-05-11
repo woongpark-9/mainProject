@@ -2,13 +2,17 @@ package com.main.nowflix.client.profile.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.profile.dao.ProfileDAO;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 
+@SessionAttributes("member")
 @Service("profileServiceImpl")
 public class ProfileServiceImpl implements ProfileService {
 
@@ -16,8 +20,9 @@ public class ProfileServiceImpl implements ProfileService {
 	private ProfileDAO profileDAO;
 
 	@Override
-	public List<ProfileVO> getProfileList(ProfileVO profileVO, MemberVO memberVO) throws Exception {
+	public List<ProfileVO> getProfileList(ProfileVO profileVO, MemberVO memberVO,HttpSession session) throws Exception {
 		System.out.println("profileServiceImpl getProfileList¿€µø");
+		memberVO = (MemberVO) session.getAttribute("member");
 		profileVO.setEmail(memberVO.getEmail());
 		return profileDAO.getProfileList(profileVO);
 	}

@@ -29,7 +29,7 @@ public class ProfileController {
 	public String profile(HttpSession session, Model model, ProfileVO vo) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 
-		model.addAttribute("profile", service.getProfileList(vo, member));
+		model.addAttribute("profile", service.getProfileList(vo, member,session));
 		model.addAttribute("member",member);
 		return "/views/member/profile";
 	}
@@ -65,7 +65,7 @@ public class ProfileController {
 	@RequestMapping(value = "/manageProfiles.do")
 	public String manageProfiles(HttpSession session, Model model, ProfileVO vo) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		model.addAttribute("profile", service.getProfileList(vo, member));
+		model.addAttribute("profile", service.getProfileList(vo, member,session));
 		return "/views/member/manageProfiles";
 	}
 
@@ -73,7 +73,7 @@ public class ProfileController {
 	public String updateProfile(HttpSession session, Model model, ProfileVO vo) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		service.updateProfile(vo);
-		model.addAttribute("profile", service.getProfileList(vo, member));
+		model.addAttribute("profile", service.getProfileList(vo, member,session));
 		return "/views/member/profile";
 	}
 
@@ -91,7 +91,7 @@ public class ProfileController {
 			vo.setKids("N");
 		}
 		service.updateProfileEdit(vo);
-		model.addAttribute("profile", service.getProfileList(vo, member));
+		model.addAttribute("profile", service.getProfileList(vo, member,session));
 		return "/views/member/profile";
 	}
 

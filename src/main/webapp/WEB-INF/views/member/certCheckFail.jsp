@@ -34,7 +34,7 @@
 				인증을 완료하셔야 서비스 이용이 가능합니다.
 				<br>
 				<br>
-				혹시 이메일을 받지 못하셨나요? <a href="http://localhost:8080/nowflix/reSend.do?email=${member.email}" class="col-mb-4 mt-6 resend">다시 보내기</a>
+				혹시 이메일을 받지 못하셨나요? <a href="reSend.do?email=${member.email}" class="col-mb-4 mt-6 resend">다시 보내기</a>
 				<br>
 				<br>
 			</div>

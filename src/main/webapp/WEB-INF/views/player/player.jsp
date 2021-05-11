@@ -25,11 +25,11 @@
 	<div class="video-container" >
 
 		<div class="previous-page">
-			<button class="previous-page-btn" onclick="goBack();" >
+			<a class="previous-page-btn" href="index.do?profile_id=${watch.profile_id }" >
 				<img alt="이전버튼"
 					src="http://yonom.duckdns.org/images/player/previous-button.png"
 					style="width: 30px; height: 45px; ">
-			</button>
+			</a>
 		</div>
 		
 		<video id="video-aa" src="${prefixAddr }${movie.movie_path }/1080p.mp4" autoplay></video>
