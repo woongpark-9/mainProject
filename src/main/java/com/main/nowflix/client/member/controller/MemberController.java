@@ -180,9 +180,9 @@ public class MemberController  {
 		return result;
 	}
 	// 장르선택
-	@RequestMapping(value="/don.do")
+	@RequestMapping(value="/index.jsp")
 	public String don() {
-		return "/views/member/favorite_genre";
+		return "redirect:/";
 	}
 	// 확인을 위한것 나중에 삭제 티켓구매 1단계
 	@RequestMapping(value="/selectTicket.do")

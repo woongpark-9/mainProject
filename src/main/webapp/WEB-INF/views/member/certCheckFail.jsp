@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div class="text-center mt-5" style="font-size: 1vw; color:grey;">
-    		<a href="http://localhost:8080/nowflix/index.jsp" class="col-mb-4 mt-6 editProfile">
+    		<a href="index.jsp" class="col-mb-4 mt-6 editProfile">
     		<img class="img-responsive img-rounded" src="http://yonom.duckdns.org/images/logo/nowflix.png"><br>
     		메인 페이지로 가기
     		</a>
