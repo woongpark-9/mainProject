@@ -12,7 +12,7 @@
             style="height: 65%; width: 100%; padding: 0px;">
             <div class="proImg" style="height: 100%; width: 30%;">
                <a href="#" class="profileEdit"
-                  onclick="acyncMovePage3('http://localhost:8080/nowflix/selectProfileImg.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', '${selectProfile.kids}')">
+                  onclick="acyncMovePage3('selectProfileImg.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', '${selectProfile.kids}')">
                   <img class="img-responsive img-rounded profileImg"
                   src="${selectProfile.profile_img }"> <c:if
                      test="${selectProfile.kids  == 'Y'}">
@@ -75,11 +75,11 @@
             </div>
             <div class="mt-5" align="left">
                <a href="#" class="next"
-                  onclick="acyncMovePage3('http://localhost:8080/nowflix/updateProfileEdit.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', kidhidden.value)">저장</a>
+                  onclick="acyncMovePage3('updateProfileEdit.do', ${selectProfile.profile_id}, editname.value, '${selectProfile.profile_img }', kidhidden.value)">저장</a>
                <a href="#" class="cancel"
-                  onclick="acyncMovePage2('http://localhost:8080/nowflix/profile.do')">취소</a>
+                  onclick="acyncMovePage2('profile.do')">취소</a>
                <a href="#" class="delete"
-                  onclick="acyncMovePage4('http://localhost:8080/nowflix/deleteProfile.do', ${selectProfile.profile_id})">삭제</a>
+                  onclick="acyncMovePage4('deleteProfile.do', ${selectProfile.profile_id})">삭제</a>
             </div>
          </div>
       </div>

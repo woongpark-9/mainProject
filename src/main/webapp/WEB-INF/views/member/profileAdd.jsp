@@ -32,7 +32,7 @@
    <br>
    <div align="center">
       <input type="submit" class="next" value="다음">
-      <a href="#" class="cancel" onclick="acyncMovePage('http://localhost:8080/nowflix/profile.do')">취소</a>
+      <a href="#" class="cancel" onclick="acyncMovePage('profile.do')">취소</a>
       
    </div>
    </form>

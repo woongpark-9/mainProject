@@ -58,7 +58,7 @@ public class KakaoLoginController {
       MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
       params.add("grant_type", "authorization_code");
       params.add("client_id", "6282ec2ffbb4c314d17b7d5478824418");
-      params.add("redirect_uri", "http://localhost:8080/nowflix/kakaoController.do");
+      params.add("redirect_uri", "ec2-18-221-64-44.us-east-2.compute.amazonaws.com:8080/nowflix/kakaoController.do");
       params.add("code", code);
       // 바디와 헤더를 가진 엔티티생성
       HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest =

@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="refresh" content="5; url=http://localhost:8080/nowflix/index.jsp">
+<meta http-equiv="refresh" content="5; url=index.jsp">
 <link rel="stylesheet" href="http://yonom.duckdns.org/css/emailCheck/style.css">
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="text-center mt-5" style="font-size: 1vw; color:grey;">
-    		<a href="http://localhost:8080/nowflix/index.jsp" class="col-mb-4 mt-6 editProfile">
+    		<a href="index.jsp" class="col-mb-4 mt-6 editProfile">
     		<img class="img-responsive img-rounded" src="http://yonom.duckdns.org/images/logo/nowflix.png"><br>
     		메인 페이지로 가기<br><br>
     		5초 후에 메인페이지로 이동합니다.

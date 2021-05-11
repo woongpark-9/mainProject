@@ -42,7 +42,7 @@
 		</c:forEach>
 		<c:if test="${fn:length(profile) <= 4}" >
 			<div class="ml-3 mr-3">
-				<a href="#" class="profile" onclick="acyncMovePage('http://localhost:8080/nowflix/profileAdd.do')">
+				<a href="#" class="profile" onclick="acyncMovePage('profileAdd.do')">
 					<img class="img-responsive addProfileImg" src="http://yonom.duckdns.org/images/profile/add3.png">
 					<br>프로필 추가
 				</a>
@@ -50,7 +50,7 @@
 		</c:if>	
 		</div>
 		<div class="text-center mt-5">
-    		<a href="#" class="col-mb-4 mt-6 editProfile" onclick="acyncMovePage('http://localhost:8080/nowflix/manageProfiles.do')">프로필 관리</a>
+    		<a href="#" class="col-mb-4 mt-6 editProfile" onclick="acyncMovePage('manageProfiles.do')">프로필 관리</a>
 		</div>
 	</div>
 </body>

@@ -34,7 +34,7 @@
 					var tag = '';
 					for (i=0; i<profileImgList.length; i++) {
 						imgSrc = 'http://yonom.duckdns.org/images/profile/' + profileImgList[i];
-						url = 'http://localhost:8080/nowflix/profileImgSelect.do';
+						url = 'profileImgSelect.do';
 						id = ${profile.profile_id};
 						name = '${profile.profile_name}';
 						kids = '${profile.kids}';

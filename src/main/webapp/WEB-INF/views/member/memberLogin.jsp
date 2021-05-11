@@ -96,23 +96,13 @@ function checkPassword(email,pass){
 		</div>
 		
 		
-		
-<!-- 		<div class="center_login_button_naver"> -->
-<%-- 			<a href ="${naver_url }"><img src="http://yonom.duckdns.org/images/member/naverLogin.PNG" alt="네이버로그인" style="width:314px;  height:58px; margin-left: 70px; margin-bottom: 10px;" ></a> --%>
-<!-- 		</div> -->
-		
-<!-- 		<div class="center_login_button_kakao"> -->
-<!-- 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418 -->
-<!-- &redirect_uri=http://localhost:8080/nowflix/kakaoController.do -->
-<!-- &response_type=code"><img src="http://yonom.duckdns.org/images/member/kakao_login_large_narrow.png" style="width:314px; height:64px; margin-left: 70px; margin-bottom: 10px;"></a> -->
-<!-- 		</div> -->
-		
+
 		<ul class="list">
 			<li class="naver">
 			<a href ="${naver_url }"><span>네이버 로그인</span></a>
 			</li>
 			<li class="kakao">
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418&redirect_uri=http://localhost:8080/nowflix/kakaoController.do&response_type=code"><span>카카오 로그인</span></a>
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418&redirect_uri=http://ec2-18-221-64-44.us-east-2.compute.amazonaws.com:8080/nowflix/kakaoController.do&response_type=code"><span>카카오 로그인</span></a>
 			</li>
 		</ul>
 		</form>
