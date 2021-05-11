@@ -13,21 +13,8 @@
 
 <body>
 <script>
-var now = new Date(); //현재 날짜 및 시간 
-console.log(now);
-var year = now.getFullYear();//연도
-console.log("년도 : ",year);
-var month = now.getMonth() + 1; //월
-console.log("월" , month);
-var date = now.getDate(); //일
-console.log("일" , date);
-var hours = now.getHours(); //시간
-console.log("시간" ,hours);
-var minutes = now.getMinutes();	// 분
-console.log("분 : ", minutes);
-var seconds = now.getSeconds();	// 초
-console.log("초 : ", seconds);
-var teststatus;
+
+
 
 
 //기본적인 장르에 대한 데이터 
@@ -64,7 +51,7 @@ var myChart_1 = new Chart(ctx_myChart_line_genre_char_line, {
         responsive: true,
         title: {
             display: true,
-            text: '영화 전체 장르(통계)'
+            text: '장르별 (통계)'
         },
         tooltips: {
             mode: 'index',
@@ -104,7 +91,7 @@ $("#change_btn_doughnut").on("click", function() {
 	    options: {
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '장르별 (통계)'
 // 	            position: 'top',
 // 	            fontSize: 25,
 // 	            fontColor: '#000'
@@ -151,7 +138,7 @@ $("#change_btn_pie").on("click", function() {
 	    options: {
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '장르별 (통계)'
 // 	            position: 'top',
 // 	            fontSize: 25,
 // 	            fontColor: '#000'
@@ -199,7 +186,7 @@ $("#change_btn_line").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '장르별 (통계)'
 	        },   
 	        tooltips: {
 	            mode: 'index',
@@ -245,7 +232,7 @@ $("#change_btn_radar").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '장르별 (통계)'
 	        },   
 	        
 	        tooltips: {
@@ -290,7 +277,7 @@ $("#change_btn_bar").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '장르별 (통계)'
 	        },   
 	        tooltips: {
 	            mode: 'index',
@@ -402,7 +389,7 @@ $("#change_btn_doughnut_release").on("click", function() {
 	    options: {
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '영화 출시일(통계)'
 // 	            position: 'top',
 // 	            fontSize: 25,
 // 	            fontColor: '#000'
@@ -652,10 +639,10 @@ var myChart3 = new Chart(ctx_movie_rating_chart, {
     options: {
         title: {
             display: true,
-            text: '영화 관람등급 분포도'+'(총'+${setMovieRating[4]}+'영화)',
+            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
             position: 'top',
-//             fontSize: 10,
-            fontColor: '#000'
+//          	fontSize: 10,
+//             fontColor: '#000'
         },
         plugins: {
             labels: [
@@ -699,7 +686,7 @@ $("#change_btn_doughnut_rating").on("click", function() {
 	    options: {
 	        title: {
 	            display: true,
-	            text: '영화 전체 장르(통계)'
+	            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
 // 	            position: 'top',
 // 	            fontSize: 25,
 // 	            fontColor: '#000'
@@ -746,7 +733,7 @@ $("#change_btn_pie_rating").on("click", function() {
 	    options: {
 	        title: {
 	            display: true,
-	            text: '영화 출시일(통계)'
+	            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
 // 	            position: 'top',
 // 	            fontSize: 25,
 // 	            fontColor: '#000'
@@ -795,7 +782,7 @@ $("#change_btn_line_rating").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 출시일(통계)'
+	            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
 	        },   
 	        tooltips: {
 	            mode: 'index',
@@ -838,7 +825,7 @@ $("#change_btn_rader_rating").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 출시일(통계)'
+	            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
 	        },   
 	        
 	        tooltips: {
@@ -883,7 +870,7 @@ $("#change_btn_bar_rating").on("click", function() {
 	        responsive: true,
 	        title: {
 	            display: true,
-	            text: '영화 출시일(통계)'
+	            text: '영화 관람등급(통계)'+'(총'+${setMovieRating[4]}+'영화)',
 	        },   
 	        tooltips: {
 	            mode: 'index',
@@ -943,7 +930,20 @@ $(function() {
 
         // 병합했던 셀에 이미지 추가 (엑셀 파일 열면 위치 이동가능)
         worksheet.addImage(imageId, 'A3:H35');
-
+        var now = new Date(); //현재 날짜 및 시간 
+        var year = now.getFullYear();//연도
+        console.log("년도 : ",year);
+        var month = now.getMonth() + 1; //월
+        console.log("월" , month);
+        var date = now.getDate(); //일
+        console.log("일" , date);
+        var hours = now.getHours(); //시간
+        console.log("시간" ,hours);
+        var minutes = now.getMinutes();	// 분
+        console.log("분 : ", minutes);
+        var seconds = now.getSeconds();	// 초
+        console.log("초 : ", seconds);
+        var teststatus;
         // 파일 다운로드
         workbook.xlsx.writeBuffer().then(function (movie_genre_data_chart_data) {
             let blob = new Blob([movie_genre_data_chart_data], {type: "application/vnd.ms-excel;charset=utf-8"});
@@ -985,7 +985,20 @@ $(function() {
 
         // 병합했던 셀에 이미지 추가 (엑셀 파일 열면 위치 이동가능)
         worksheet.addImage(imageId, 'A3:H35');
-
+        var now = new Date(); //현재 날짜 및 시간 
+        var year = now.getFullYear();//연도
+        console.log("년도 : ",year);
+        var month = now.getMonth() + 1; //월
+        console.log("월" , month);
+        var date = now.getDate(); //일
+        console.log("일" , date);
+        var hours = now.getHours(); //시간
+        console.log("시간" ,hours);
+        var minutes = now.getMinutes();	// 분
+        console.log("분 : ", minutes);
+        var seconds = now.getSeconds();	// 초
+        console.log("초 : ", seconds);
+        var teststatus;
         // 파일 다운로드
         workbook.xlsx.writeBuffer().then(function (movie_release_date_chart_data) {
             let blob = new Blob([movie_release_date_chart_data], {type: "application/vnd.ms-excel;charset=utf-8"});
@@ -1036,7 +1049,23 @@ $(function() {
 
         // 병합했던 셀에 이미지 추가 (엑셀 파일 열면 위치 이동가능)
         worksheet.addImage(imageId, 'A3:H35');
-
+        
+        var now = new Date(); //현재 날짜 및 시간 
+        var year = now.getFullYear();//연도
+        console.log("년도 : ",year);
+        var month = now.getMonth() + 1; //월
+        console.log("월" , month);
+        var date = now.getDate(); //일
+        console.log("일" , date);
+        var hours = now.getHours(); //시간
+        console.log("시간" ,hours);
+        var minutes = now.getMinutes();	// 분
+        console.log("분 : ", minutes);
+        var seconds = now.getSeconds();	// 초
+        console.log("초 : ", seconds);
+        var teststatus;
+        
+        
         // 파일 다운로드
         workbook.xlsx.writeBuffer().then(function (movie_rating_chart_data) {
             let blob = new Blob([movie_rating_chart_data], {type: "application/vnd.ms-excel;charset=utf-8"});

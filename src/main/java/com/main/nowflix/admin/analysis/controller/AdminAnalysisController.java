@@ -311,7 +311,7 @@ public class AdminAnalysisController {
 		Calendar calnow = Calendar.getInstance();
 		int yearnow = calnow.get(Calendar.YEAR);
 
-		for(int i = 2018; i < yearnow+1; i++) {
+		for(int i = 2010; i < yearnow+1; i++) {
 			String strnow = String.valueOf(i);
 			ticketyearList.add(strnow);
 		}

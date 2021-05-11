@@ -416,10 +416,6 @@ $("#btn1").on("click", function() {
 						</div>
 						<div class="row">
 							<div class="col-7">
-								<button type="button" class="btn btn-primary btn-sm"
-									onclick="<canvas id="testingChart" width="400" height="400"></canvas>">+new</button>
-
-
 								<div style="width: 400px" class="line_1">
 									<canvas id="man_girl_chart" width="400" height="400"></canvas>
 									<canvas id="kakao_naver_nowflix_chart" width="400" height="400"></canvas>

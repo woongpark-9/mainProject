@@ -70,10 +70,10 @@ th, td {
 													<div class="text-left">
 
 														<div class="text-right">
-															<h5>총 매출</h5>
-														</div>
+															<h5>전체 매출</h5>
+														</div> 
 														<div class="text-right">
-															<h3>&#8361;&nbsp;${totalMoney} 원</h3>
+															<h3>&#8361;&nbsp;${totalMoney}원</h3>
 														</div>
 													</div>
 												</div>
@@ -97,7 +97,7 @@ th, td {
 													<div class="text-left">
 														<c:if test="${empty yearStartEndAdd}">
 															<div class="text-right">
-																<h5>매출</h5>
+																<h5>선택 매출(년/월/일)</h5>
 															</div>
 														</c:if>
 
@@ -136,8 +136,8 @@ th, td {
 													<i class="fas fa-money-check-alt fa-3x text-waring"></i>
 													<div class="text-left">
 														<div class="text-right">
-															<h3>총 매출 = &#8361;&nbsp;${totalMoney} 원</h3>
-															<h3>지정 매출 = &#8361;&nbsp;${yearTotal} 원</h3>
+															<h4>전체 매출 = &#8361;&nbsp;${totalMoney} 원</h4>
+															<h4>선택 매출(년/월/일) = &#8361;&nbsp;${yearTotal} 원</h4>
 														</div>
 													</div>
 												</div>
