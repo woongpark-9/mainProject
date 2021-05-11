@@ -18,6 +18,7 @@ import com.main.nowflix.client.member.vo.MemberVO;
 import com.main.nowflix.client.movie.service.MovieService;
 import com.main.nowflix.client.movie.vo.MovieVO;
 import com.main.nowflix.client.pick.service.PickService;
+import com.main.nowflix.client.pick.vo.PickVO;
 import com.main.nowflix.client.profile.service.ProfileService;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 import com.main.nowflix.client.watch.service.WatchService;
@@ -35,7 +36,7 @@ public class MovieController {
 
 	@Autowired
 	private WatchService watchService;
-	
+
 	@Autowired
 	private PickService pickService;
 
@@ -60,21 +61,28 @@ public class MovieController {
 		watch_id.setProfile_id(getpro.getProfile_id());
 		List<WatchVO> watchList = watchService.getWatchList(watch_id);
 		List<MovieVO> movieList = movieService.getMovieList(vo);
-		if(movieService.getRecentList(movieList, model) != null) {
-	         List<MovieVO> recentList = movieService.getRecentList(movieList, model); 
-	         model.addAttribute("recentList", recentList);
-	    }
-	      
-	    //메인페이지 메인 무비
-	    MovieVO mainMovie = movieService.getMainMovie(movieList, vo);
+		if (movieService.getRecentList(movieList, model) != null) {
+			List<MovieVO> recentList = movieService.getRecentList(movieList, model);
+			model.addAttribute("recentList", recentList);
+		}
+
+		// 메인페이지 메인 무비
+		MovieVO mainMovie = movieService.getMainMovie(movieList, vo);
 		movieService.getSelectMovieList(vo, movieList, model, getpro.getGenre_name(), watchList);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<ProfileVO> profileList = profileService.getProfileList(getpro, member);
 
+		List<PickVO> pickList = new ArrayList<PickVO>();
+		pickList = pickService.getPickList(getpro);
+		for (int i = 0; i < pickList.size(); i++) {
+			System.out.println(pickList.get(i).toString());
+		}
+
+		model.addAttribute("pickList", pickList);
 		model.addAttribute("profileList", profileList);
 		model.addAttribute("member", member);
 		model.addAttribute("profile", getpro);
-	    model.addAttribute("mainMovie", mainMovie);
+		model.addAttribute("mainMovie", mainMovie);
 		return page;
 	}
 
@@ -108,35 +116,33 @@ public class MovieController {
 		model.addAttribute("member", member);
 		return "/views/member/favorite_genre"; // View 정보저장
 	}
-	
-	
+
 	@ResponseBody
-	   @RequestMapping("/pickUpdate.do")
-	   public String pickUpdate(ProfileVO ProfileVO, MovieVO movieVO, HttpServletRequest request) {
-	      System.out.println("pickUpdate.do 실행");
-	      System.out.println("픽업데이트 점 두" +request.getParameter("pick"));
-	      System.out.println("픽업데이트 점 두" +request.getParameter("profile_id"));
-	      System.out.println("픽업데이트 점 두" +request.getParameter("seq"));
-	      System.out.println(movieVO);
-	      String pick = request.getParameter("pick");
-	      String profile_id = request.getParameter("profile_id");
-	      String seq = request.getParameter("seq");
-	      
-	      
-	      return pickService.setPick(seq, profile_id, pick );
-	   }
-	   
-	   @RequestMapping("/pick.do")
-	   public String getPickMovieList(ProfileVO profileVO, Model model, MovieVO movieVO) {
-	      
-	      System.out.println("pick.do의 profileVO" + profileVO.toString());
-	      
-	      List<MovieVO> pickMovieList = new ArrayList<MovieVO>();
-	      pickMovieList =   pickService.getPickMovieList(profileVO, movieVO);
-	   
-	      model.addAttribute("pickMovieList", pickMovieList);
-	      
-	      return "/views/member/pick";
-	   }
+	@RequestMapping("/pickUpdate.do")
+	public String pickUpdate(ProfileVO ProfileVO, MovieVO movieVO, HttpServletRequest request) {
+		System.out.println("pickUpdate.do 실행");
+		System.out.println("픽업데이트 점 두" + request.getParameter("pick"));
+		System.out.println("픽업데이트 점 두" + request.getParameter("profile_id"));
+		System.out.println("픽업데이트 점 두" + request.getParameter("seq"));
+		System.out.println(movieVO);
+		String pick = request.getParameter("pick");
+		String profile_id = request.getParameter("profile_id");
+		String seq = request.getParameter("seq");
+
+		return pickService.setPick(seq, profile_id, pick);
+	}
+
+	@RequestMapping("/pick.do")
+	public String getPickMovieList(ProfileVO profileVO, Model model, MovieVO movieVO) {
+
+		System.out.println("pick.do의 profileVO" + profileVO.toString());
+
+		List<MovieVO> pickMovieList = new ArrayList<MovieVO>();
+		pickMovieList = pickService.getPickMovieList(profileVO, movieVO);
+
+		model.addAttribute("pickMovieList", pickMovieList);
+
+		return "/views/member/pick";
+	}
 
 }

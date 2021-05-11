@@ -78,7 +78,8 @@ var _movieDetailSeq = "";
 			var webimage = $(event.relatedTarget).data('webimage');
 			var profile_id = $(event.relatedTarget).data('profile_id');
             _movieDetailSeq = $(event.relatedTarget).data('detail');
-       	
+            var check = $(event.relatedTarget).data('check');
+            alert(check);
 			// alert(title);
 			// console.log(title);
 			var modal = $(this);
@@ -93,6 +94,7 @@ var _movieDetailSeq = "";
 			modal.find('.modal-releasedate').text(releasedate);
 			modal.find('.modal-webimage').attr('src', webimage);
 			modal.find('.morelikethis-section').text(title + " 상세정보");
+			modal.find('.modal-check-button').attr('src', check);
 		});
 
 	});
@@ -105,9 +107,9 @@ var _movieDetailSeq = "";
 	         type: "POST",
 	         success: function(data){
 	            if(data == 'Y'){
-	                document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/check.png";
+// 	                document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/check.png";
 	            }else{
-	               document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png";
+// 	               document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png";
 	            }
 	            
 	            alert(data)
@@ -335,7 +337,9 @@ var _movieDetailSeq = "";
 						<a href="#">홈</a>
 					</div>
 					<div class="nav-item">
-						<a href="#" onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가 찜한 콘텐츠</a>
+						<a href="#"
+							onclick="acyncMovePage5('http://localhost:8080/nowflix/pick.do', ${profile.profile_id})">내가
+							찜한 콘텐츠</a>
 					</div>
 				</div>
 				<div class="menu">
@@ -354,7 +358,7 @@ var _movieDetailSeq = "";
 							</button>
 							<div class="newlist-content"
 								style="overflow-x: hidden; height: 20em;">
-								<c:if test = " ${recentList } ne null">
+
 								<c:forEach var="recentList" items="${recentList }" varStatus="i">
 									<div class="alarm-list">
 										<a type="button" class="video3" data-toggle="modal"
@@ -382,11 +386,8 @@ var _movieDetailSeq = "";
 												</div>
 											</div>
 										</a>
-
-
 									</div>
 								</c:forEach>
-								</c:if>
 							</div>
 						</div>
 					</div>
@@ -491,9 +492,10 @@ var _movieDetailSeq = "";
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의 취향저격 베스트 콘텐츠</div>
+						<div class="title">${profile.profile_name }님의취향저격베스트콘텐츠</div>
 						<div class="favorite-list">
-							<c:forEach var="movieList" items="${favoriteMovieList }">
+							<c:forEach var="movieList" items="${favoriteMovieList }"
+								varStatus="i">
 								<div class="favorite-items">
 									<div class="favoriteMovieList-item">
 
@@ -516,10 +518,25 @@ var _movieDetailSeq = "";
 															width="40vw" height="auto">
 														</a>
 													</div>
+													<c:forEach var="pickList" items="${ pickList}"
+														varStatus="j">
+														<c:out value="movieList : ${movieList.seq}" />
+														<c:out value="pickList : ${pickList.seq}" />
+														<c:choose>
+															<c:when test="${movieList.seq eq  pickList.seq}">
+																<c:set var="check"
+																	value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+															</c:when>
+															<c:otherwise>
+																<c:set var="check"
+																	value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 													<div class="detail-button">
 														<a type="button" class="video3" data-toggle="modal"
 															data-target="#detailMovie"
-															data-detail="${movieList.seq }"
+															data-detail="${movieList.seq }" data-check="${check }"
 															data-summary="${movieList.summary }"
 															data-title="${movieList.title }"
 															data-genre="${movieList.genre_name }"
@@ -530,7 +547,9 @@ var _movieDetailSeq = "";
 															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
 															data-releasedate="${movieList.movie_release_date }"
 															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
-															<img src="http://yonom.duckdns.org/images/member/detail-button.png" width="30px" height="30px">
+															<img
+															src="http://yonom.duckdns.org/images/member/detail-button.png"
+															width="30px" height="30px">
 														</a>
 													</div>
 												</div>
@@ -538,17 +557,14 @@ var _movieDetailSeq = "";
 										</div>
 									</div>
 								</div>
-
 							</c:forEach>
 						</div>
-
 					</div>
-
 				</div>
 				<div class="category-list">
 					<div class="category">
 						<c:if test="${not empty watchMovieList}">
-							<div class="title">${profile.profile_name }님이 시청중인 콘텐츠</div>
+							<div class="title">${profile.profile_name }님이시청중인콘텐츠</div>
 							<div class="watch-list">
 								<c:forEach var="movieList" items="${watchMovieList }">
 									<div class="watch-items">
@@ -570,8 +586,7 @@ var _movieDetailSeq = "";
 											</div>
 											<div id="caption" class="caption" style="display: none;">
 												<div class="preview">
-													<div class=video>
-													</div>
+													<div class=video></div>
 												</div>
 
 												<div class="detail">
@@ -792,8 +807,7 @@ var _movieDetailSeq = "";
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
-												<div class=video>
-												</div>
+												<div class=video></div>
 											</div>
 
 											<div class="detail">
@@ -839,8 +853,7 @@ var _movieDetailSeq = "";
 										</div>
 										<div id="caption" class="caption" style="display: none;">
 											<div class="preview">
-												<div class=video>
-												</div>
+												<div class=video></div>
 											</div>
 
 											<div class="detail">
@@ -978,9 +991,11 @@ var _movieDetailSeq = "";
 							<i class="fas fa-play"></i> 재생
 						</div>
 						<div class="modal-icon-position">
-							
+
 							<!-- 찜하기 버튼 -->
-							<button class="pickUpdate" style="background: none; border-style: none;" onclick="pickUpdate(${profile.profile_id})">
+							<button class="pickUpdate"
+								style="background: none; border-style: none;"
+								onclick="pickUpdate(${profile.profile_id})">
 								<div class="modal-check-button">
 									<img id="modal-check-button"
 										src="http://yonom.duckdns.org/images/member/plus-button.png"

@@ -13,10 +13,10 @@ import com.main.nowflix.client.pick.vo.PickVO;
 import com.main.nowflix.client.profile.vo.ProfileVO;
 
 @Service
-public class PickServiceImpl implements PickService{
+public class PickServiceImpl implements PickService {
 	@Autowired
 	private PickDAO pickDAO;
-	
+
 	@Autowired
 	private MovieDAO movieDAO;
 
@@ -24,45 +24,57 @@ public class PickServiceImpl implements PickService{
 	public String setPick(String seq, String profile_id, String pick) {
 		PickVO pickVO = new PickVO(Integer.parseInt(seq), Integer.parseInt(profile_id), pick);
 		String status = "";
-		
-		if(pickDAO.getPick(pickVO) == null ) {
+
+		if (pickDAO.getPick(pickVO) == null) {
 			pickDAO.insertPick(pickVO);
 			status = "Y";
-		}else {
+		} else {
 			pickDAO.deletePick(pickVO);
 			status = "N";
 		}
-		
-		
+
 		System.out.println("pickVO" + pickVO);
-		
+
 		return status;
-		
+
 	}
 
 	@Override
 	public List<MovieVO> getPickMovieList(ProfileVO profileVO, MovieVO movieVO) {
 		List<MovieVO> movieList = new ArrayList<MovieVO>();
 		movieList = movieDAO.getMovieList(movieVO); // 무비리스트는 가져온다
-		
+
 		List<MovieVO> pickMovieList = new ArrayList<MovieVO>();
-		
-		
+
 		PickVO pickVO = new PickVO(profileVO.getProfile_id());
-	
-		
+
 		List<PickVO> pickList = new ArrayList<PickVO>();
-		pickList = pickDAO.getPickList(pickVO); //프로파일 id가 ? 인 픽업리스트를 가져온다.
-		
-		for(int i=0; i < movieList.size(); i++) {
-			for(int j=0; j < pickList.size(); j++) {
-				if(movieList.get(i).getSeq() == pickList.get(j).getSeq()) {
+		pickList = pickDAO.getPickList(pickVO); // 프로파일 id가 ? 인 픽업리스트를 가져온다.
+
+		for (int i = 0; i < movieList.size(); i++) {
+			for (int j = 0; j < pickList.size(); j++) {
+				if (movieList.get(i).getSeq() == pickList.get(j).getSeq()) {
 					pickMovieList.add(movieList.get(i));
-				
+
 				}
 			}
 		}
 		return pickMovieList;
+	}
+
+	@Override
+	public List<PickVO> getPickList(ProfileVO profileVO) {
+		List<PickVO> pickList = new ArrayList<PickVO>();
+		PickVO pickVO = new PickVO(profileVO.getProfile_id());
+
+		pickList = pickDAO.getPickList(pickVO);
+
+//	      System.out.println("서비스임플 getPickList");
+//	      for(int i=0; i<pickList.size(); i++) {
+//	         System.out.println(pickList.get(i).toString());
+//	      }
+
+		return pickList;
 	}
 
 }
