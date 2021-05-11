@@ -45,7 +45,7 @@ public class KakaoLoginController {
    
    
    
-   @RequestMapping("/nowflix/kakaoController.do")
+   @RequestMapping("/kakaoController.do")
    public String kakaoCallback(String code,Model model,HttpSession session,HttpServletResponse resp) throws Exception  { // 
       String page = "";
       //POST방식으로 요청할때 사용하는 라이브러리 key=value데이터를 요청 (카카오로 요청)

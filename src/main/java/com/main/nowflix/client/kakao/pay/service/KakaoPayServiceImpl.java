@@ -69,9 +69,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
         params.add("quantity", "1");
         params.add("total_amount", total_amount);
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/nowflix/kakaoPaySuccess.do");
-        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel.do");
-        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail.do");
+        params.add("approval_url", "http://ec2-3-141-23-230.us-east-2.compute.amazonaws.com/nowflix/kakaoPaySuccess.do");
+        params.add("cancel_url", "http://ec2-3-141-23-230.us-east-2.compute.amazonaws.com/kakaoPayCancel.do");
+        params.add("fail_url", "http://ec2-3-141-23-230.us-east-2.compute.amazonaws.com/kakaoPaySuccessFail.do");
       
         
         //바디와 헤더 합치기

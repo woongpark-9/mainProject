@@ -67,7 +67,7 @@
 	</bean>
 	<bean id="naverRedirectUrl" class="java.lang.String">
 		<constructor-arg
-			value="http://localhost:8080/nowflix/callbackNaver.do" />
+			value="http://ec2-3-141-23-230.us-east-2.compute.amazonaws.com/nowflix/callbackNaver.do" />
 	</bean>
 
 	<bean id="naverSns" class="com.main.nowflix.client.login.auth.SnsValue">
