@@ -102,7 +102,7 @@ function checkPassword(email,pass){
 			<a href ="${naver_url }"><span>네이버 로그인</span></a>
 			</li>
 			<li class="kakao">
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418&redirect_uri=http://ec2-18-221-64-44.us-east-2.compute.amazonaws.com:8080/nowflix/kakaoController.do&response_type=code"><span>카카오 로그인</span></a>
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=6282ec2ffbb4c314d17b7d5478824418&redirect_uri=http://ec2-3-141-23-230.us-east-2.compute.amazonaws.com/nowflix/kakaoController.do&response_type=code"><span>카카오 로그인</span></a>
 			</li>
 		</ul>
 		</form>
