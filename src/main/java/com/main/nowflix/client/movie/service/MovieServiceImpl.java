@@ -166,7 +166,6 @@ public class MovieServiceImpl implements MovieService {
 			}
 		}
 
-		System.out.println(recentDate.get(0));
 		model.addAttribute("recentDate", recentDate);
 
 		return recentList;

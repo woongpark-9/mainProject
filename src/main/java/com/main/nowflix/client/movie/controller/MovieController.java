@@ -60,7 +60,10 @@ public class MovieController {
 		watch_id.setProfile_id(getpro.getProfile_id());
 		List<WatchVO> watchList = watchService.getWatchList(watch_id);
 		List<MovieVO> movieList = movieService.getMovieList(vo);
-		List<MovieVO> recentList = movieService.getRecentList(movieList, model);
+		if(movieService.getRecentList(movieList, model) != null) {
+	         List<MovieVO> recentList = movieService.getRecentList(movieList, model); 
+	         model.addAttribute("recentList", recentList);
+	    }
 	      
 	    //메인페이지 메인 무비
 	    MovieVO mainMovie = movieService.getMainMovie(movieList, vo);
@@ -71,7 +74,6 @@ public class MovieController {
 		model.addAttribute("profileList", profileList);
 		model.addAttribute("member", member);
 		model.addAttribute("profile", getpro);
-		model.addAttribute("recentList", recentList);
 	    model.addAttribute("mainMovie", mainMovie);
 		return page;
 	}

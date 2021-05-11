@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Nowflix</title>
 
 <link type="text/css" rel="stylesheet" href="css/member/reset.css">
 <link type="text/css" rel="stylesheet" href="css/member/memberLogin.css">

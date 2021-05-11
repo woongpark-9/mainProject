@@ -327,7 +327,7 @@ var _movieDetailSeq = "";
 				<!-- 	<div class="logo">NEFLIX</div> -->
 				<a
 					href="http://localhost:8080/nowflix/index.do?profile_id=${profile.profile_id }"><img
-					class="logo" src="images/member/로고.png"
+					class="logo" src="http://yonom.duckdns.org/images/logo/nowflix.png"
 					style="width: 92px; margin-top: 10px;"></a>
 
 				<div class="nav">
@@ -354,6 +354,7 @@ var _movieDetailSeq = "";
 							</button>
 							<div class="newlist-content"
 								style="overflow-x: hidden; height: 20em;">
+								<c:if test = " ${recentList } ne null">
 								<c:forEach var="recentList" items="${recentList }" varStatus="i">
 									<div class="alarm-list">
 										<a type="button" class="video3" data-toggle="modal"
@@ -385,6 +386,7 @@ var _movieDetailSeq = "";
 
 									</div>
 								</c:forEach>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -996,12 +998,10 @@ var _movieDetailSeq = "";
 						<div class="modal-icon-position">
 							
 							<!-- 찜하기 버튼 -->
-							<button class="pickUpdate"
-								style="background: none; border-style: none"
-								onclick="pickUpdate(${profile.profile_id})">
+							<button class="pickUpdate" style="background: none; border-style: none;" onclick="pickUpdate(${profile.profile_id})">
 								<div class="modal-check-button">
 									<img id="modal-check-button"
-										src="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png"
+										src="http://yonom.duckdns.org/images/member/plus-button.png"
 										style="width: 1em">
 								</div>
 							</button>
