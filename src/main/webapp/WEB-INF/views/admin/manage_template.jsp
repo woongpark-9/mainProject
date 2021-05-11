@@ -281,7 +281,7 @@
 
 									</div>
 									<div class="card-footer text-secondary">
-										<a href="#" onclick="acyncMovePage('manage_cs.mdo')"><i
+										<a href="#" onclick="acyncMovePage('manage_inquiry.mdo')"><i
 											class="fas fa-arrow-circle-right mr-3"></i><span>자세히</span></a>
 									</div>
 								</div>
