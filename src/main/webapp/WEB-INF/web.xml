@@ -22,11 +22,11 @@
 		<param-value>
 			classpath:applicationContext.xml
 			classpath:client-security.xml
-			
+
 			<!-- 아래처럼 추가적으로 사용할 컨텍스트를 등록하면 됩니다. /WEB-INF/spring/commonContext.xml -->
 		</param-value>
-		
-		
+
+
 	</context-param>
 	<listener>
 		<listener-class>
@@ -41,9 +41,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				
+
 				/WEB-INF/config/clientContext/client-servlet.xml
-				
+
 				<!-- 아래처럼 각 팀원들이 만들 컨텍스트를 등록하면 됩니다. /WEB-INF/spring/customContext/indexContext.xml -->
 			</param-value>
 
@@ -73,4 +73,8 @@
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.mdo</url-pattern>
 	</servlet-mapping>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/login.do</location>
+	</error-page>
 </web-app>
