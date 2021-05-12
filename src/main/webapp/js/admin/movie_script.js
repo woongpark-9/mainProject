@@ -244,7 +244,7 @@ function acyncpdf(url) {
 			}
 		},
 		error : function() {
-			alert("PDF 저장 실패 했습니다.");
+			alert("[Error] PDF 저장 실패");
 		}
 	});
 }
