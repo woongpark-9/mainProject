@@ -37,280 +37,304 @@
 <link rel="stylesheet" href="css/member/detail.css" />
 <title>Nowflix</title>
 
+
 <script>
 var _movieDetailSeq = "";
 
 
+   $(function() {
+      $(".video1").click(
+            function() {
+               document.querySelector('video1').load();
+               console.log('안녕하세요')
+               var theModal = $(this).data("target"), videoSRC = $(this)
+                     .attr("data-video"), videoSRCauto = videoSRC + "";
+               $(theModal + ' source').attr('src', videoSRCauto);
+               $(theModal + ' button.close').click(function() {
+                  console.log('몰라요')
+                  $(theModal + ' source').attr('src', videoSRC);
+               });
+            });
+   });
 
-
-
-	$(function() {
-		$(".video1").click(
-				function() {
-					document.querySelector('video1').load();
-					console.log('안녕하세요')
-					var theModal = $(this).data("target"), videoSRC = $(this)
-							.attr("data-video"), videoSRCauto = videoSRC + "";
-					$(theModal + ' source').attr('src', videoSRCauto);
-					$(theModal + ' button.close').click(function() {
-						console.log('몰라요')
-						$(theModal + ' source').attr('src', videoSRC);
-					});
-				});
-	});
-
-	var movieDeleteSeq = "";
-	$(document).ready(function() {
-		$('#deleteMovie').on('show.bs.modal', function(event) {
-			movieDeleteSeq = $(event.relatedTarget).data('delseq');
-			// alert(movieDeleteSeq);
-			// console.log(movieDeleteSeq);
-		});
-		$('#detailMovie').on('show.bs.modal', function(event) {
-			var title = $(event.relatedTarget).data('title');
-			var summary = $(event.relatedTarget).data('summary');
-			var actor = $(event.relatedTarget).data('actor');
-			var director = $(event.relatedTarget).data('director');
-			var genre = $(event.relatedTarget).data('genre');
-			var moviepath = $(event.relatedTarget).data('moviepath');
-			var posterpath = $(event.relatedTarget).data('posterpath');
-			var releasedate = $(event.relatedTarget).data('releasedate');
-			var webimage = $(event.relatedTarget).data('webimage');
-			var profile_id = $(event.relatedTarget).data('profile_id');
+   var movieDeleteSeq = "";
+   $(document).ready(function() {
+      $('#deleteMovie').on('show.bs.modal', function(event) {
+         movieDeleteSeq = $(event.relatedTarget).data('delseq');
+         // alert(movieDeleteSeq);
+         // console.log(movieDeleteSeq);
+      });
+      $('#detailMovie').on('show.bs.modal', function(event) {
+          var title = $(event.relatedTarget).data('title');
+            var summary = $(event.relatedTarget).data('summary');
+            var actor = $(event.relatedTarget).data('actor');
+            var director = $(event.relatedTarget).data('director');
+            var genre = $(event.relatedTarget).data('genre');
+            var moviepath = $(event.relatedTarget).data('moviepath');
+            var posterpath = $(event.relatedTarget).data('posterpath');
+            var releasedate = $(event.relatedTarget).data('releasedate');
+            var webimage = $(event.relatedTarget).data('webimage');
+            var profile_id = $(event.relatedTarget).data('profile_id');
             _movieDetailSeq = $(event.relatedTarget).data('detail');
             var check = $(event.relatedTarget).data('check');
-            var href= $(event.relatedTarget).data('href');
-			// alert(title);
-			// console.log(title);
-			var modal = $(this);
-			modal.find('.modal-videoMetadata').text(title);
-			modal.find('.modal-description').text(summary);
-			modal.find('.modal-actor').text(actor);
-			modal.find('.modal-director').text(director);
-			modal.find('.modal-genre').text(genre);
-			modal.find('.modal-video').attr('src', moviepath);
-			modal.find('.modal-video').attr('poster', posterpath);
-			modal.find('.modal-poster').attr('src', posterpath);
-			modal.find('.modal-releasedate').text(releasedate);
-			modal.find('.modal-webimage').attr('src', webimage);
-			modal.find('.morelikethis-section').text(title + " 상세정보");
-			modal.find('#modal-check-button').attr('src', check);
-			modal.find('.modal-href').attr('href',href);
-		});
+//             alert(check);
+            // console.log(title);
+            var modal = $(this);
+            modal.find('.modal-videoMetadata').text(title);
+            modal.find('.modal-description').text(summary);
+            modal.find('.modal-actor').text(actor);
+            modal.find('.modal-director').text(director);
+            modal.find('.modal-genre').text(genre);
+            modal.find('.modal-video').attr('src', moviepath);
+            modal.find('.modal-video').attr('poster', posterpath);
+            modal.find('.modal-poster').attr('src', posterpath);
+            modal.find('.modal-releasedate').text(releasedate);
+            modal.find('.modal-webimage').attr('src', webimage);
+            modal.find('.morelikethis-section').text(title + " 상세정보");
+            modal.find('#modal-check-button').attr('src', check);
+      });
 
-	});
+   });
 
-	var pick = "Y";
-	   function pickUpdate(profile_id){
-	      $.ajax({
-	         url: "pickUpdate.do" ,
-	         data: {"pick": pick, "profile_id" :  profile_id, "seq" : _movieDetailSeq},
-	         type: "POST",
-	         success: function(data){
-	            if(data == 'Y'){
-// 	                document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/check.png";
-	            }else{
-// 	               document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png";
-	            }
-	            
-	            alert(data)
-	         },
-	         
-	         error : function(){
-	            alert("에러")
-	         }
-	      });
-	   }
-	   
-	   
-	   function acyncMovePage5(url, profile_id) {
-	       // ajax option
-	       var ajaxOption = {
-	               url : url,
-	               data : {"profile_id" : profile_id},
-	               type : "POST",
-	       };
-	       
-	       $.ajax(ajaxOption).done(function(data){
-	           // Contents 영역 삭제
-	           $(".test").hide();
-	           // Contents 영역 교체
-	           $('.bbbb').html(data);
-	       });
-	   }
-	   
-	
-	/* 	$(document).on("click", ".detailBtn", function(e) {
-		alert("상세정보 모달 오픈");
+      var pick = "Y";
+      var result1 = ""
+         function pickUpdate(profile_id){
+            $.ajax({
+               url: "pickUpdate.do" ,
+               data: {"pick": pick, "profile_id" :  profile_id, "seq" : _movieDetailSeq},
+               type: "POST",
+               success: function(data){
+                  if(data == 'Y'){
+                     $(document).ready(function() {                     
+                        $('#detailMovie').on('show.bs.modal', function(event) {     
+                          
+              
+                           var check = $(event.relatedTarget).data('check');
+                           
+                           // alert(title);
+                           // console.log(title);
+                           var modal = $(this);                        
+                           modal.find('#modal-check-button').attr('src', check);
+                          
+                        });
+                     });
+                     result1 = '찜한 목록에 추가되었습니다.';
+//                      $("#modal-check-button").hide();
+//                      $('#modal-check-button').html(data);
+//                       document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/check.png";
+                  }else{
+                     $(document).ready(function() {                     
+                        $('#detailMovie').on('show.bs.modal', function(event) {    
 
-		$('#videoModal').modal('show');
-	}); */
+                         
+                           var check = $(event.relatedTarget).data('check');
+                           // alert(title);
+                           // console.log(title);
+                           var modal = $(this);                        
+                           modal.find('#modal-check-button').attr('src', check);
+                        });
+                     });
+                     result1 = '찜한 목록에서 삭제되었습니다.';
+//                      document.getElementById("modal-check-button").src ="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png";
+                  }
+                  alert(result1);
+               },
+               
+               error : function(){
+                  alert("에러")
+               }
+            });
+         }
+      
+      
+      function acyncMovePage5(url, profile_id) {
+          // ajax option
+          var ajaxOption = {
+                  url : url,
+                  data : {"profile_id" : profile_id},
+                  type : "POST",
+          };
+          
+          $.ajax(ajaxOption).done(function(data){
+              // Contents 영역 삭제
+              $(".test").hide();
+              // Contents 영역 교체
+              $('.bbbb').html(data);
+          });
+      }
+      
+   
+   /*    $(document).on("click", ".detailBtn", function(e) {
+      alert("상세정보 모달 오픈");
 
-	$(document).ready(function() {
-		$("#button").click(function() {
-			if (more_content.style.display == 'none') {
-				$("#more_content").show("flex");
-				document.getElementById("img").src = "images/member/up.png";
+      $('#videoModal').modal('show');
+   }); */
 
-			} else {
-				$("#more_content").hide("flex");
-				document.getElementById("img").src = "images/member/more.png";
-			}
-		});
+   $(document).ready(function() {
+      $("#button").click(function() {
+         if (more_content.style.display == 'none') {
+            $("#more_content").show("flex");
+            document.getElementById("img").src = "images/member/up.png";
 
-	});
+         } else {
+            $("#more_content").hide("flex");
+            document.getElementById("img").src = "images/member/more.png";
+         }
+      });
 
-	$(document).ready(function() {
-		$("#button2").click(function() {
-			if (morelikethis.style.display == 'none') {
-				$('#morelikethis').css('display', 'flex');
-				document.getElementById("img2").src = "images/member/up.png";
+   });
 
-			} else {
-				$("#morelikethis").hide("flex");
-				document.getElementById("img2").src = "images/member/more.png";
-			}
-		});
+   $(document).ready(function() {
+      $("#button2").click(function() {
+         if (morelikethis.style.display == 'none') {
+            $('#morelikethis').css('display', 'flex');
+            document.getElementById("img2").src = "images/member/up.png";
 
-	});
+         } else {
+            $("#morelikethis").hide("flex");
+            document.getElementById("img2").src = "images/member/more.png";
+         }
+      });
 
-	/* 	$(document).ready(function() {
-	 $(".poster").mouseenter(function() {
-	 console.log(2);
-	 //			$("#caption").show();
-	 //			$("#video").show();
-	 $("#caption").css("display", "block");
-	 $("#video").css("display", "block");
-	 $("#video").get(0).play();
-	 console.log($(".preview").get(1));
-	 });
+   });
 
-	 $(".caption").mouseleave(function() {
-	 $("#caption").css("display", "none");
-	 $("#video").get(0).pause();
-	 $("#video").get(0).currentTime = 0;
-	 //$("#video").get.pause();
-	 //$("#video").get.currentTime = 0;
+   /*    $(document).ready(function() {
+    $(".poster").mouseenter(function() {
+    console.log(2);
+    //         $("#caption").show();
+    //         $("#video").show();
+    $("#caption").css("display", "block");
+    $("#video").css("display", "block");
+    $("#video").get(0).play();
+    console.log($(".preview").get(1));
+    });
 
-	 //	$("#video").css("display", "none");
-	 });
+    $(".caption").mouseleave(function() {
+    $("#caption").css("display", "none");
+    $("#video").get(0).pause();
+    $("#video").get(0).currentTime = 0;
+    //$("#video").get.pause();
+    //$("#video").get.currentTime = 0;
 
-	 }); */
+    //   $("#video").css("display", "none");
+    });
 
-	// 	$(document).ready(function() {
-	// 		$(".poster").each(function(i, obj) {
-	// 			$(this).on("mouseenter", function() {
-	// 				startVideo(i);
-	// 			});
-	// 			$(".caption").on("mouseleave", function() {
-	// 				stopVideo(i);
-	// 			})
-	// 		});
-	// 	});
-	// 	function startVideo(i) {
-	// 		$(".caption").css("display", "block");
-	// 		$(".thevideo").css("display", "block");
-	// 		$(".thevideo")[i].play();
-	// 	}
-	// 	function stopVideo(i) {
-	// 		$(".caption").css("display", "none");
-	// 		$(".thevideo")[i].pause();
-	// 		$(".thevideo")[i].currentTime = 0;
-	// 	}
-	$(document).ready(function() {
+    }); */
+
+   //    $(document).ready(function() {
+   //       $(".poster").each(function(i, obj) {
+   //          $(this).on("mouseenter", function() {
+   //             startVideo(i);
+   //          });
+   //          $(".caption").on("mouseleave", function() {
+   //             stopVideo(i);
+   //          })
+   //       });
+   //    });
+   //    function startVideo(i) {
+   //       $(".caption").css("display", "block");
+   //       $(".thevideo").css("display", "block");
+   //       $(".thevideo")[i].play();
+   //    }
+   //    function stopVideo(i) {
+   //       $(".caption").css("display", "none");
+   //       $(".thevideo")[i].pause();
+   //       $(".thevideo")[i].currentTime = 0;
+   //    }
+   $(document).ready(function() {
 
 
-		$(".poster").each(function(i, obj) {
-			$(this).on("mouseenter", function() {
-				startVideo(i);
-			});
-			$(".caption").on("mouseleave", function() {
-				stopVideo(i);
-			})
-		});
-	});
+      $(".poster").each(function(i, obj) {
+         $(this).on("mouseenter", function() {
+            startVideo(i);
+         });
+         $(".caption").on("mouseleave", function() {
+            stopVideo(i);
+         })
+      });
+   });
 
-	function startVideo(i) {
-		// 		$(".caption").css("display", "block");
-		$(".caption").show();
-		// 		$(".thevideo").css("display", "block");
-		//$(".thevideo")[i].play();
-	}
+   function startVideo(i) {
+      //       $(".caption").css("display", "block");
+      $(".caption").show();
+      //       $(".thevideo").css("display", "block");
+      //$(".thevideo")[i].play();
+   }
 
-	function stopVideo(i) {
-		// 		$(".caption").css("display", "none");
-		$(".caption").hide();
-		//$(".thevideo")[i].pause();
-		//$(".thevideo")[i].currentTime = 0;
-	}
-	var profile_id = ${profile.profile_id};
-	var title = new Array();
-	var path = new Array();
-	var genre = new Array();
-	var actor = new Array();
-	var director = new Array();
-	var seq = new Array();
-	var summary = new Array();
-	var releasedate = new Array();
+   function stopVideo(i) {
+      //       $(".caption").css("display", "none");
+      $(".caption").hide();
+      //$(".thevideo")[i].pause();
+      //$(".thevideo")[i].currentTime = 0;
+   }
+   var profile_id = ${profile.profile_id};
+   var title = new Array();
+   var path = new Array();
+   var genre = new Array();
+   var actor = new Array();
+   var director = new Array();
+   var seq = new Array();
+   var summary = new Array();
+   var releasedate = new Array();
 
-	$(document).ready(function() {
-		<c:forEach items="${movieList}" var="movieList">
-		title.push("${movieList.title}");
-		path.push("${movieList.movie_path}");
-		genre.push("${movieList.genre_name}");
-		actor.push("${movieList.actor_name}");
-		director.push("${movieList.director_name}");
-		summary.push("${movieList.summary}");
-		seq.push("${movieList.seq}");
-		releasedate.push("${movieList.movie_release_date}");
-		</c:forEach>
-	});
+   $(document).ready(function() {
+      <c:forEach items="${movieList}" var="movieList">
+      title.push("${movieList.title}");
+      path.push("${movieList.movie_path}");
+      genre.push("${movieList.genre_name}");
+      actor.push("${movieList.actor_name}");
+      director.push("${movieList.director_name}");
+      summary.push("${movieList.summary}");
+      seq.push("${movieList.seq}");
+      releasedate.push("${movieList.movie_release_date}");
+      </c:forEach>
+   });
 
-	function startSuggest() {
-		var words = $("#search-txt").val();
-		var str = '';
-		if (words != '') {
-			str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
-					+ words
-					+ '</span><br><br></div><div class="col-md-12 searchResult" align="center">';
-			for (var i = 0; i < title.length; i++) {
-				if (words != '') {
-					if (title[i].includes(words) || genre[i].includes(words)
-							|| actor[i].includes(words)
-							|| director[i].includes(words)) {
-						str += '<div class="col-md-2 searchPoster"><a class="video3" data-toggle="modal"'
-						 + 'data-target="#detailMovie"'
-						 + ' data-summary="' + summary[i]
-						 + '" data-title="' + title[i]
-						 + '" data-genre="' + genre[i]
-						 + '" data-actor="' + actor[i]
-						 + '" data-director="' + director[i]
-						 + '" data-releasedate="' + releasedate[i]
-						 + '" data-moviepath="http://yonom.duckdns.org/movie/' + path[i] + '/1080p.mp4"'
-						 + ' data-posterpath="http://yonom.duckdns.org/movie/' + path[i] + '/poster.png"'
-						 + 'data-webimage="http://yonom.duckdns.org/movie/' + path[i] + '/title.png">'
-						 + '<img class="searchImg" src="'
-	                     + 'http://yonom.duckdns.org/movie/'
-	                     + path[i] + '/poster.png'
-	                     + '" style="width:17vw; height:10vw;"></a></div>';
-					}
-				}
-			}
+   function startSuggest() {
+      var words = $("#search-txt").val();
+      var str = '';
+      if (words != '') {
+         str += '<div class="searchResult">다음과 관련된 콘텐츠: <span class="searchRes">'
+               + words
+               + '</span><br><br></div><div class="col-md-12 searchResult" align="center">';
+         for (var i = 0; i < title.length; i++) {
+            if (words != '') {
+               if (title[i].includes(words) || genre[i].includes(words)
+                     || actor[i].includes(words)
+                     || director[i].includes(words)) {
+                  str += '<div class="col-md-2 searchPoster"><a class="video3" data-toggle="modal"'
+                   + 'data-target="#detailMovie"'
+                   + ' data-summary="' + summary[i]
+                   + '" data-title="' + title[i]
+                   + '" data-genre="' + genre[i]
+                   + '" data-actor="' + actor[i]
+                   + '" data-director="' + director[i]
+                   + '" data-releasedate="' + releasedate[i]
+                   + '" data-moviepath="http://yonom.duckdns.org/movie/' + path[i] + '/1080p.mp4"'
+                   + ' data-posterpath="http://yonom.duckdns.org/movie/' + path[i] + '/poster.png"'
+                   + 'data-webimage="http://yonom.duckdns.org/movie/' + path[i] + '/title.png">'
+                   + '<img class="searchImg" src="'
+                        + 'http://yonom.duckdns.org/movie/'
+                        + path[i] + '/poster.png'
+                        + '" style="width:17vw; height:10vw;"></a></div>';
+               }
+            }
+         }
 
-			str += "</div>";
+         str += "</div>";
 
-			//	          $(".test").css("display","none");
-			//	          $(".bbbb").html(str);
+         //             $(".test").css("display","none");
+         //             $(".bbbb").html(str);
 
-			$(".test").hide();
-			$(".bbbb").html(str);
-		} else {
-			//	          $(".test").css("display","");
-			//	          $('.bbbb').children().remove();
-			$(".test").show();
-			$('.bbbb').children().remove();
-		}
-	}
+         $(".test").hide();
+         $(".bbbb").html(str);
+      } else {
+         //             $(".test").css("display","");
+         //             $('.bbbb').children().remove();
+         $(".test").show();
+         $('.bbbb').children().remove();
+      }
+   }
 </script>
 </head>
 <body>
@@ -360,36 +384,71 @@ var _movieDetailSeq = "";
 							<div class="newlist-content"
 								style="overflow-x: hidden; height: 20em;">
 
-								<c:forEach var="recentList" items="${recentList }" varStatus="i">
-									<div class="alarm-list">
-										<a type="button" class="video3" data-toggle="modal"
-											style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
-											data-target="#detailMovie"
-											data-summary="${recentList.summary }"
-											data-title="${recentList.title }"
-											data-genre="${recentList.genre_name }"
-											data-actor="${recentList.actor_name }"
-											data-director="${recentList.director_name }"
-											data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/1080p.mp4"
-											data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/poster.png"
-											data-releasedate="${recentList.movie_release_date }"
-											data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png"
-												data-href="getPlayer.do?seq=${recentList.seq }&profile_id=${profile.profile_id}">
-											
-											<div class="alarm-flex">
-												<img
-													src="${prefixAddr }${recentList.movie_path }/poster.png"
-													style="width: 13em; margin-right: 1em; margin-left: 1em;">
-												<div class="alarm-summary">
-													<div class="new">신규 콘텐츠</div>
-													<div class="new">${recentList.title }</div>
-													<div class="new-two">${recentDate[i.index] }</div>
+								<c:if test="${fn:length(recentList)  > 0}">
+                        <c:forEach var="recentList" items="${recentList }" varStatus="i">
 
-												</div>
-											</div>
-										</a>
-									</div>
-								</c:forEach>
+                           <div class="alarm-list">
+                              <c:if test="${fn:length(pickList)  > 0 }">
+                                 <c:forEach var="pickList1" items="${pickList}" varStatus="j">
+                                    <c:set var="pickList_real"
+                                       value="${pickList_real} ${pickList1.seq }" />
+                                    <c:choose>
+                                       <c:when
+                                          test="${fn:contains(pickList_real, recentList.seq)}">
+                                          <c:set var="check"
+                                             value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                       </c:when>
+                                       <c:otherwise>
+                                          <c:set var="check"
+                                             value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                       </c:otherwise>
+                                    </c:choose>
+                                    <a type="button" class="video3" data-toggle="modal"
+                                       style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+                                       data-target="#detailMovie" data-detail="${recentList.seq}"
+                                       data-check="${check }"
+                                       data-summary="${recentList.summary }"
+                                       data-title="${recentList.title }"
+                                       data-genre="${recentList.genre_name }"
+                                       data-actor="${recentList.actor_name }"
+                                       data-director="${recentList.director_name }"
+                                       data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/1080p.mp4"
+                                       data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/poster.png"
+                                       data-releasedate="${recentList.movie_release_date }"
+                                       data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png"
+                                       data-href="getPlayer.do?seq=${recentList.seq }&profile_id=${profile.profile_id}">
+                                 </c:forEach>
+                              </c:if>
+                              <c:if test="${fn:length(pickList)  == 0}">
+                                 <a type="button" class="video3" data-toggle="modal"
+                                    style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+                                    data-target="#detailMovie" data-detail="${recentList.seq}"
+                                    data-summary="${recentList.summary }"
+                                    data-title="${recentList.title }"
+                                    data-genre="${recentList.genre_name }"
+                                    data-actor="${recentList.actor_name }"
+                                    data-director="${recentList.director_name }"
+                                    data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/1080p.mp4"
+                                    data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/poster.png"
+                                    data-releasedate="${recentList.movie_release_date }"
+                                    data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${recentList.movie_path }/title.png"
+                                    data-href="getPlayer.do?seq=${recentList.seq }&profile_id=${profile.profile_id}">
+                              </c:if>
+
+                              <div class="alarm-flex">
+                                 <img src="${prefixAddr }${recentList.movie_path }/poster.png"
+                                    style="width: 13em; margin-right: 1em; margin-left: 1em;">
+                                 <div class="alarm-summary">
+                                    <div class="new">신규 콘텐츠</div>
+                                    <div class="new">${recentList.title }</div>
+                                    <div class="new-two">${recentDate[i.index] }</div>
+
+                                 </div>
+                              </div>
+                              </a>
+                           </div>
+                        </c:forEach>
+                        </c:if>
 							</div>
 						</div>
 					</div>
@@ -451,27 +510,61 @@ var _movieDetailSeq = "";
 
 
 
-						<a type="button" class="video3" data-toggle="modal"
-							style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
-							data-target="#detailMovie" data-summary="${mainMovie.summary }"
-							data-title="${mainMovie.title }"
-							data-genre="${mainMovie.genre_name }"
-							data-actor="${mainMovie.actor_name }"
-							data-director="${mainMovie.director_name }"
-							data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/1080p.mp4"
-							data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/poster.png"
-							data-releasedate="${mainMovie.movie_release_date }"
-							data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png"
-								data-href="getPlayer.do?seq=${mainMovie.seq }&profile_id=${profile.profile_id}">
+						<c:if test="${fn:length(pickList)  > 0 }">
+                     <c:forEach var="pickList1" items="${pickList}" varStatus="j">
+                        <c:set var="pickList_real"
+                           value="${pickList_real} ${pickList1.seq }" />
+                        <c:choose>
+                           <c:when test="${fn:contains(pickList_real, mainMovie.seq)}">
+                              <c:set var="check"
+                                 value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                           </c:when>
+                           <c:otherwise>
+                              <c:set var="check"
+                                 value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                           </c:otherwise>
+                        </c:choose>
+                        <a type="button" class="video3" data-toggle="modal"
+                           style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+                           data-target="#detailMovie" data-summary="${mainMovie.summary }"
+                           data-check="${check }" data-title="${mainMovie.title }"
+                           data-detail="${mainMovie.seq }"
+                           data-genre="${mainMovie.genre_name }"
+                           data-actor="${mainMovie.actor_name }"
+                           data-director="${mainMovie.director_name }"
+                           data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/1080p.mp4"
+                           data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/poster.png"
+                           data-releasedate="${mainMovie.movie_release_date }"
+                           data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png"
+                           data-href="getPlayer.do?seq=${mainMovie.seq }&profile_id=${profile.profile_id}">
+                     </c:forEach>
+                     <div class="gray-button">
+                        <i class="far fa-info-circle"></i> 상세정보
+                     </div>
+                     </a>
+                  </c:if>
 
 
+                  <c:if test="${fn:length(pickList)  == 0}">
+                     <a type="button" class="video3" data-toggle="modal"
+                        style="background: 0 0; border: 0; border-radius: 4px; padding: 0; text-decoration: none; cursor: pointer;"
+                        data-target="#detailMovie" data-summary="${mainMovie.summary }"
+                        data-detail="${mainMovie.seq }" data-title="${mainMovie.title }"
+                        data-genre="${mainMovie.genre_name }"
+                        data-actor="${mainMovie.actor_name }"
+                        data-director="${mainMovie.director_name }"
+                        data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/1080p.mp4"
+                        data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/poster.png"
+                        data-releasedate="${mainMovie.movie_release_date }"
+                        data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${mainMovie.movie_path }/title.png"
+                        data-href="getPlayer.do?seq=${mainMovie.seq }&profile_id=${profile.profile_id}">
 
-							<div class="gray-button">
 
-
-								<i class="far fa-info-circle"></i> 상세정보
-							</div>
-						</a>
+                        <div class="gray-button">
+                           <i class="far fa-info-circle"></i> 상세정보
+                        </div>
+                     </a>
+                  </c:if>
 
 						<div class="extra">
 							<button aria-label="다시 재생" onclick="replay()"
@@ -496,73 +589,97 @@ var _movieDetailSeq = "";
 
 						<div class="title">${profile.profile_name }&nbsp;님의&nbsp;취향저격&nbsp;베스트&nbsp;콘텐츠</div>
 						<div class="favorite-list">
-							<c:forEach var="movieList" items="${favoriteMovieList }"
-								varStatus="i">
-								<div class="favorite-items">
-									<div class="favoriteMovieList-item">
+                     <c:forEach var="movieList" items="${favoriteMovieList }"
+                        varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video></div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-													<c:forEach var="pickList" items="${ pickList}"
-														varStatus="j">
-														<c:out value="movieList : ${movieList.seq}" />
-														<c:out value="pickList : ${pickList.seq}" />
-														<c:choose>
-															<c:when test="${ movieList.seq == pickList.seq}">
-																<c:set var="check"
-																	value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
-															</c:when>
-															<c:otherwise>
-																<c:set var="check"
-																	value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-													<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
+
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 					</div>
 				</div>
 				<div class="category-list">
@@ -570,68 +687,97 @@ var _movieDetailSeq = "";
 						<c:if test="${not empty watchMovieList}">
 							<div class="title">${profile.profile_name }&nbsp;님이&nbsp;시청중인&nbsp;콘텐츠</div>
 							<div class="watch-list">
-								<c:forEach var="movieList" items="${watchMovieList }">
-									<div class="watch-items">
-										<div class="watchMovieList-item">
-											<div class="poster">
-												<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-													alt="">
+                        <c:forEach var="movieList" items="${watchMovieList }"
+                           varStatus="i">
+                           <div class="favorite-items">
+                              <div class="favoriteMovieList-item">
 
-												<c:forEach var="watchList" items="${watchList }">
-													<c:if test="${movieList.seq eq watchList.movie_id}">
-														<div class="progress">
-															<span class="progress-bar"> <span
-																role="presentation" class="progress-completed"
-																style="width: ${(watchList.view_point + 0.0) / (watchList.duration + 0.0) * 100}%;"></span>
-															</span>
-														</div>
-													</c:if>
-												</c:forEach>
-											</div>
-											<div id="caption" class="caption" style="display: none;">
-												<div class="preview">
-													<div class=video></div>
-												</div>
+                                 <div class="poster">
+                                    <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                       alt="">
+                                 </div>
+                                 <div id="caption" class="caption" style="display: none;">
+                                    <div class="preview">
+                                       <div class=video></div>
+                                    </div>
 
-												<div class="detail">
-													<div class="detailFirst">
-														<div class="play-button">
-															<a
-																href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-																<img
-																src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-																width="40vw" height="auto">
-															</a>
-														</div>
-															<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+                                    <div class="detail">
+                                       <div class="detailFirst">
+                                          <div class="play-button">
+                                             <a
+                                                href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                                <img
+                                                src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                                width="40vw" height="auto">
+                                             </a>
+                                          </div>
+                                          <c:if test="${fn:length(pickList)  > 0 }">
+                                             <c:forEach var="pickList1" items="${pickList}"
+                                                varStatus="j">
+                                                <c:set var="pickList_real"
+                                                   value="${pickList_real} ${pickList1.seq }" />
+                                                <c:choose>
+                                                   <c:when
+                                                      test="${fn:contains(pickList_real, movieList.seq)}">
+                                                      <c:set var="check"
+                                                         value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                      <c:set var="check"
+                                                         value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                   </c:otherwise>
+                                                </c:choose>
 
-								</c:forEach>
-							</div>
+                                                <div class="detail-button">
+                                                   <a type="button" class="video3" data-toggle="modal"
+                                                      data-target="#detailMovie"
+                                                      data-detail="${movieList.seq }" data-check="${check }"
+                                                      data-summary="${movieList.summary }"
+                                                      data-title="${movieList.title }"
+                                                      data-genre="${movieList.genre_name }"
+                                                      data-actor="${movieList.actor_name }"
+                                                      data-director="${movieList.director_name }"
+                                                      data-profile_id="${profile.profile_id }"
+                                                      data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                      data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                      data-releasedate="${movieList.movie_release_date }"
+                                                      data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                      <img
+                                                      src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                      width="30px" height="30px">
+                                                   </a>
+                                                </div>
+                                             </c:forEach>
+
+                                          </c:if>
+                                          <c:if test="${fn:length(pickList)  == 0}">
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:if>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </c:forEach>
+                     </div>
 						</c:if>
 					</div>
 
@@ -642,68 +788,96 @@ var _movieDetailSeq = "";
 
 						<div class="title">미국 영화</div>
 						<div class="usa-list">
-							<c:forEach var="movieList" items="${usaMovieList }">
-								<div class="usa-items">
-									<div class="usaMovieList-item">
+                     <c:forEach var="movieList" items="${usaMovieList }" varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video>
-													<!-- 													<video id="thevideo" style="display: none;" -->
-													<!-- 														class="thevideo" -->
-													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-													<!-- 														muted> -->
-													<!-- 														<source -->
-													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-													<!-- 													</video> -->
-													<!-- 													<div class="thevideo" style="display: none;"> -->
-													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
-												</div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
 
-							</c:forEach>
-						</div>
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 
 					</div>
 
@@ -715,68 +889,97 @@ var _movieDetailSeq = "";
 
 						<div class="title">애니메이션 영화</div>
 						<div class="ani-list">
-							<c:forEach var="movieList" items="${animationList }">
-								<div class="ani-items">
-									<div class="aniMovieList-item">
+                     <c:forEach var="movieList" items="${animationList }"
+                        varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video>
-													<!-- 													<video id="thevideo" style="display: none;" -->
-													<!-- 														class="thevideo" -->
-													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-													<!-- 														muted> -->
-													<!-- 														<source -->
-													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-													<!-- 													</video> -->
-													<!-- 													<div class="thevideo" style="display: none;"> -->
-													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
-												</div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
 
-							</c:forEach>
-						</div>
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 
 					</div>
 
@@ -791,67 +994,97 @@ var _movieDetailSeq = "";
 
 						<div class="title">한국 영화</div>
 						<div class="korea-list">
-							<c:forEach var="movieList" items="${koreaMovieList }">
-								<div class="korea-items">
-									<div class="koreaMovieList-item">
+                     <c:forEach var="movieList" items="${koreaMovieList }"
+                        varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video>
-													<!-- 													<video id="thevideo" style="display: none;" -->
-													<!-- 														class="thevideo" -->
-													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-													<!-- 														muted> -->
-													<!-- 														<source -->
-													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-													<!-- 													</video> -->
-													<!-- 													<div class="thevideo" style="display: none;"> -->
-													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
-												</div>
-											</div>
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-							</c:forEach>
-						</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
+
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 
 					</div>
 
@@ -861,58 +1094,96 @@ var _movieDetailSeq = "";
 
 						<div class="title">SF·미래 영화</div>
 						<div class="sf-list">
-							<c:forEach var="movieList" items="${sfMovieList }">
-								<div class="sf-items">
-									<div class="sfMovieList-item">
+                     <c:forEach var="movieList" items="${sfMovieList }" varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video></div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
 
-							</c:forEach>
-						</div>
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 
 					</div>
 
@@ -922,58 +1193,97 @@ var _movieDetailSeq = "";
 
 						<div class="title">로맨스 영화</div>
 						<div class="romance-list">
-							<c:forEach var="movieList" items="${romanceMovieList }">
-								<div class="romance-items">
-									<div class="romanceMovieList-item">
+                     <c:forEach var="movieList" items="${romanceMovieList }"
+                        varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video></div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
 
-							</c:forEach>
-						</div>
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
+
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
 
 					</div>
 
@@ -983,69 +1293,98 @@ var _movieDetailSeq = "";
 
 						<div class="title">액션 영화</div>
 						<div class="action-list">
-							<c:forEach var="movieList" items="${actionMovieList }">
-								<div class="action-items">
-									<div class="actionMovieList-item">
+                     <c:forEach var="movieList" items="${actionMovieList }"
+                        varStatus="i">
+                        <div class="favorite-items">
+                           <div class="favoriteMovieList-item">
 
-										<div class="poster">
-											<img src="${prefixAddr }${movieList.movie_path }/poster.png"
-												alt="">
-										</div>
-										<div id="caption" class="caption" style="display: none;">
-											<div class="preview">
-												<div class=video>
-													<!-- 													<video id="thevideo" style="display: none;" -->
-													<!-- 														class="thevideo" -->
-													<%-- 														poster="${prefixAddr }${movieList.movie_path }/poster.png" --%>
-													<!-- 														muted> -->
-													<!-- 														<source -->
-													<%-- 															src="${prefixAddr }${movieList.movie_path }/1080p.mp4"> --%>
-													<!-- 													</video> -->
-													<!-- 													<div class="thevideo" style="display: none;"> -->
-													<%-- 													<img src="${prefixAddr }${movieList.movie_path }/poster.png" ></div> --%>
-												</div>
-											</div>
+                              <div class="poster">
+                                 <img src="${prefixAddr }${movieList.movie_path }/poster.png"
+                                    alt="">
+                              </div>
+                              <div id="caption" class="caption" style="display: none;">
+                                 <div class="preview">
+                                    <div class=video></div>
+                                 </div>
 
-											<div class="detail">
-												<div class="detailFirst">
-													<div class="play-button">
-														<a
-															href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															<img
-															src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
-															width="40vw" height="auto">
-														</a>
-													</div>
-														<div class="detail-button">
-														<a type="button" class="video3" data-toggle="modal"
-															data-target="#detailMovie"
-															data-detail="${movieList.seq }" data-check="${check }"
-															data-summary="${movieList.summary }"
-															data-title="${movieList.title }"
-															data-genre="${movieList.genre_name }"
-															data-actor="${movieList.actor_name }"
-															data-director="${movieList.director_name }"
-															data-profile_id="${profile.profile_id }"
-															data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
-															data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
-															data-releasedate="${movieList.movie_release_date }"
-															data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png"
-															data-href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
-															
-															<img
-															src="http://yonom.duckdns.org/images/member/detail-button.png"
-															width="30px" height="30px">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+                                 <div class="detail">
+                                    <div class="detailFirst">
+                                       <div class="play-button">
+                                          <a
+                                             href="getPlayer.do?seq=${movieList.seq }&profile_id=${profile.profile_id}">
+                                             <img
+                                             src="http://nowflix.yonom.duckdns.org:1510/images/member/play-button.png"
+                                             width="40vw" height="auto">
+                                          </a>
+                                       </div>
+                                       <c:if test="${fn:length(pickList)  > 0 }">
+                                          <c:forEach var="pickList1" items="${pickList}"
+                                             varStatus="j">
+                                             <c:set var="pickList_real"
+                                                value="${pickList_real} ${pickList1.seq }" />
+                                             <c:choose>
+                                                <c:when
+                                                   test="${fn:contains(pickList_real, movieList.seq)}">
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/check.png" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <c:set var="check"
+                                                      value="http://nowflix.yonom.duckdns.org:1510/images/member/plus-button.png" />
+                                                </c:otherwise>
+                                             </c:choose>
 
-							</c:forEach>
+                                             <div class="detail-button">
+                                                <a type="button" class="video3" data-toggle="modal"
+                                                   data-target="#detailMovie"
+                                                   data-detail="${movieList.seq }" data-check="${check }"
+                                                   data-summary="${movieList.summary }"
+                                                   data-title="${movieList.title }"
+                                                   data-genre="${movieList.genre_name }"
+                                                   data-actor="${movieList.actor_name }"
+                                                   data-director="${movieList.director_name }"
+                                                   data-profile_id="${profile.profile_id }"
+                                                   data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                   data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                   data-releasedate="${movieList.movie_release_date }"
+                                                   data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                   <img
+                                                   src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                   width="30px" height="30px">
+                                                </a>
+                                             </div>
+                                          </c:forEach>
 
-						</div>
+                                       </c:if>
+                                       <c:if test="${fn:length(pickList)  == 0}">
+                                          <div class="detail-button">
+                                             <a type="button" class="video3" data-toggle="modal"
+                                                data-target="#detailMovie"
+                                                data-detail="${movieList.seq }"
+                                                data-summary="${movieList.summary }"
+                                                data-title="${movieList.title }"
+                                                data-genre="${movieList.genre_name }"
+                                                data-actor="${movieList.actor_name }"
+                                                data-director="${movieList.director_name }"
+                                                data-profile_id="${profile.profile_id }"
+                                                data-moviepath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/1080p.mp4"
+                                                data-posterpath="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/poster.png"
+                                                data-releasedate="${movieList.movie_release_date }"
+                                                data-webimage="http://nowflix.yonom.duckdns.org:1510/movie/${movieList.movie_path }/title.png">
+                                                <img
+                                                src="http://yonom.duckdns.org/images/member/detail-button.png"
+                                                width="30px" height="30px">
+                                             </a>
+                                          </div>
+                                       </c:if>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+
+                  </div>
 
 					</div>
 				</div>
