@@ -100,7 +100,7 @@ public class AdminMovieServiceImpl implements AdminMovieService {
 
 			document.open(); // 웹페이지에 접근하는 객체를 연다
 
-			BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H,
+			BaseFont baseFont = BaseFont.createFont("http://yonom.duckdns.org/MALGUN.TTF", BaseFont.IDENTITY_H,
 					BaseFont.EMBEDDED);
 			// pdf가 기본적으로 한글처리가 안되기 때문에 한글폰트 처리를 따로 해주어야 한다.
 			// createFont메소드에 사용할 폰트의 경로 (malgun.ttf)파일의 경로를 지정해준다.
