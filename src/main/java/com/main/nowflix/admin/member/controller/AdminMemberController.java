@@ -46,7 +46,7 @@ public class AdminMemberController {
 			@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
 			@RequestParam(value = "nowPage", defaultValue = "0") int nowPage) {
 
-		int row = 5;
+		int row = 12;
 		int startPoint = nowPage * row;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
