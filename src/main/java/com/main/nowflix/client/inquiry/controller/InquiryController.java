@@ -17,6 +17,7 @@ import com.main.nowflix.client.inquiry.service.InquiryService;
 import com.main.nowflix.client.inquiry.vo.InquiryVO;
 import com.main.nowflix.client.member.service.MemberService;
 import com.main.nowflix.client.member.vo.MemberVO;
+import com.main.nowflix.client.profile.vo.ProfileVO;
 
 @SessionAttributes("member")
 @Controller
@@ -38,7 +39,7 @@ public class InquiryController {
 //	}
 
 	@RequestMapping(value = "/getInquiryList.do")
-	public String getInquiryList(InquiryVO vo, Model model, MemberVO member, HttpSession session) throws Exception {
+	public String getInquiryList(InquiryVO vo, Model model, MemberVO member, HttpSession session,ProfileVO profile) throws Exception {
 		member = (MemberVO) session.getAttribute("member");
 		vo.setEmail(member.getEmail());
 		System.out.println("inquiry" + vo.getEmail());
@@ -46,14 +47,15 @@ public class InquiryController {
 		for (InquiryVO v : inquiryList) {
 			System.out.println(v.getInquiry_id());
 		}
-		model.addAttribute("member", member);
+		
+		model.addAttribute("profile", profile);
 		model.addAttribute("inquiryList", inquiryList);
 		session.setAttribute("inquiryList", inquiryList);
 		return "/views/member/inquiryList";
 	}
 
 	@RequestMapping(value = "/getInquiryFAQ.do")
-	public String getInquiryFAQ(FaqVO vo, MemberVO member, Model model, HttpSession session) throws Exception {
+	public String getInquiryFAQ(FaqVO vo, MemberVO member, Model model, HttpSession session,ProfileVO profile) throws Exception {
 
 		member = (MemberVO) session.getAttribute("member");
 		List<FaqVO> faqList = faqService.getFaqList(vo);
@@ -69,7 +71,7 @@ public class InquiryController {
 			}
 		}
 		
-		
+		model.addAttribute("profile", profile);
 		model.addAttribute("member", member);
 		model.addAttribute("registList", registList);
 		model.addAttribute("payList",payList);
@@ -77,23 +79,24 @@ public class InquiryController {
 	}
 
 	@RequestMapping(value = "/getInsertInquiry.do")
-	public String getInsertInquiry(InquiryVO vo, MemberVO member, Model model, HttpSession session) {
+	public String getInsertInquiry(InquiryVO vo, MemberVO member, Model model, HttpSession session,ProfileVO profile) {
 		member = (MemberVO) session.getAttribute("member");
-
+		model.addAttribute("profile", profile);
 		model.addAttribute("member", member);
 		return "views/member/insertInquiry";
 	}
 
 	@RequestMapping(value = "insertInquiry.do")
-	public String insertInquiry(InquiryVO vo, MemberVO member, Model model, HttpSession session) throws Exception {
+	public String insertInquiry(InquiryVO vo, MemberVO member, Model model, HttpSession session,ProfileVO profile) throws Exception {
 		member = (MemberVO) session.getAttribute("member");
+		model.addAttribute("profile", profile);
 		model.addAttribute("member", member);
 		inquiryService.insertInquiry(vo);
 		return "redirect:/getInquiryList.do";
 	}
 
 	@RequestMapping(value = "inquiryDetail.do")
-	public String inquiryDetail(InquiryVO vo, MemberVO member, Model model, HttpSession session,String inquiry_id) throws Exception {
+	public String inquiryDetail(InquiryVO vo, MemberVO member, Model model, HttpSession session,String inquiry_id,ProfileVO profile) throws Exception {
 		member = (MemberVO) session.getAttribute("member");
 		List<InquiryVO> inquiryList = (List) session.getAttribute("inquiryList");
 		List<InquiryVO> inquiryDetailList = new ArrayList<InquiryVO>();
@@ -104,7 +107,7 @@ public class InquiryController {
 				inquiryDetailList.add(inquiryList.get(i));
 			}
 		}
-
+		model.addAttribute("profile", profile);
 		model.addAttribute("inquiryDetailList", inquiryDetailList);
 		model.addAttribute("member", member);
 		return "/views/member/inquirydetail";

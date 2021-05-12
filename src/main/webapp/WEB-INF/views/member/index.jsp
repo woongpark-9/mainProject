@@ -414,7 +414,7 @@ var _movieDetailSeq = "";
 								<div class="margin"></div>
 								<div class="profile-bottom">
 									<a href="getSettings.do">계정</a> <a
-										href="getInquiryList.do?email=${profile.email }">고객센터</a> <a
+										href="getInquiryList.do?email=${profile.email }&profile_id=${profile.profile_id}">고객센터</a> <a
 										href="logout.do">Nowflix에서 로그아웃하기</a>
 								</div>
 							</div>
@@ -494,7 +494,7 @@ var _movieDetailSeq = "";
 				<div class="category-list">
 					<div class="category">
 
-						<div class="title">${profile.profile_name }님의취향저격베스트콘텐츠</div>
+						<div class="title">${profile.profile_name }&nbsp;님의&nbsp;취향저격&nbsp;베스트&nbsp;콘텐츠</div>
 						<div class="favorite-list">
 							<c:forEach var="movieList" items="${favoriteMovieList }"
 								varStatus="i">
@@ -568,7 +568,7 @@ var _movieDetailSeq = "";
 				<div class="category-list">
 					<div class="category">
 						<c:if test="${not empty watchMovieList}">
-							<div class="title">${profile.profile_name }님이시청중인콘텐츠</div>
+							<div class="title">${profile.profile_name }&nbsp;님이&nbsp;시청중인&nbsp;콘텐츠</div>
 							<div class="watch-list">
 								<c:forEach var="movieList" items="${watchMovieList }">
 									<div class="watch-items">

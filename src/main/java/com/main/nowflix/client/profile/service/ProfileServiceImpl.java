@@ -22,7 +22,7 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public List<ProfileVO> getProfileList(ProfileVO profileVO, MemberVO memberVO,HttpSession session) throws Exception {
 		System.out.println("profileServiceImpl getProfileList¿€µø");
-		memberVO = (MemberVO) session.getAttribute("member");
+//		memberVO = (MemberVO) session.getAttribute("member");
 		profileVO.setEmail(memberVO.getEmail());
 		return profileDAO.getProfileList(profileVO);
 	}

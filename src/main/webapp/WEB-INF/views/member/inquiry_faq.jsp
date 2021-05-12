@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/member/faq.css">
 <body>
 	<div class="header">
-		<a title="홈" href="#"> <img
+		<a title="홈" href="index.do?profile_id=${profile.profile_id }"> <img
 			src="http://nowflix.yonom.duckdns.org:1510/images/logo/nowflix.png"
 			style="width: 8vw;">
 		</a>
@@ -24,9 +24,9 @@
 					style="width: 15px;">
 			<button class="dropdown-togle" aria-haspopup="true"></button>
 			<div class="dropdown-content">
-				<a href="getInsertInquiry.do">문의등록</a>
-				<a href="getInquiryList.do">문의내역</a>
-				<a href="getInquiryFAQ.do">자주묻는질문</a>
+					<a href="getInsertInquiry.do?profile_id=${profile.profile_id}">문의등록</a>
+				<a href="getInquiryList.do?profile_id=${profile.profile_id}">문의내역</a>
+				<a href="getInquiryFAQ.do?profile_id=${profile.profile_id}">자주묻는질문</a>
 				<a href="logout.do">로그아웃</a>
 			</div>
 			
